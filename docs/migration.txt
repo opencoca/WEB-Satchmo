@@ -1,0 +1,39 @@
+Satchmo Migrations and Upgrades
+===============================
+
+The latest list of backwards incompatible changes can always be found here-
+http://bitbucket.org/chris1610/satchmo/wiki/BackwardsIncompatibleChanges
+
+The ideal way to migrate would be to dump all of your existing store data, remove all of your old tables, synch the new models and reload the data.
+If this process is not practical, then follow the individual steps outlined below.
+
+Always remember to do a complete backup of your store before attempting to migrate.  Additionally, we recommend that you test the migration
+on a test server before attempting on a production server.
+
+Using South
+-----------
+
+The very latest version of Satchmo includes migration files for `South <http://south.aeracode.org/>`_.
+Initially, they will only include changes for the migration from 0.9 -> 0.9.1 but we will also continue to use
+South for future migrations.
+
+The basic workflow for executing migrations is:
+
+    - Add south to INSTALLED_APPS
+    - Install history table::
+       
+        python manage.py syncdb
+           
+    - "Fake" the initial migration::
+    
+        python manage.py migrate <satchmo_app> --fake 0001_initial
+
+    - See list of migrations::
+        
+        python manage.py migrate --list
+    
+    - Run the migrations::
+    
+        python manage.py migrate <satchmo_app> --db-dry-run # db untouched
+        python manage.py migrate <satchmo_app>
+    
