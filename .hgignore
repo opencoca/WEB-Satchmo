@@ -1,0 +1,23 @@
+syntax: glob
+build
+.build
+.project
+.pydevproject
+*.orig
+*.rej
+*~
+*.o
+*.pyo
+*.pyc
+_private
+*_local.py
+_LOCAL_FLAG
+_DEVELOPMENT_FLAG
+_temp
+test.db
+dist
+build
+*.egg-info
+*_85x85_*
+*_84x84_*
+\#*\#
