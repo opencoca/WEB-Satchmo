@@ -215,3 +215,35 @@ def notify_callback(request):
     for cart in Cart.objects.filter(customer=order.contact):
         cart.empty()
     return HttpResponse()
+    
+
+def success(request):
+    """
+    The order has been succesfully processed.
+    We clear out the cart but let the payment processing get called by IPN
+    """
+    try:
+        order = Order.objects.from_request(request)
+    except Order.DoesNotExist:
+        return bad_or_missing(request, _('Your order has already been processed.'))
+
+    # Added to track total sold for each product
+    for item in order.orderitem_set.all():
+        product = item.product
+        product.total_sold += item.quantity
+        product.items_in_stock -= item.quantity
+        product.save()
+
+    # Clean up cart now, the rest of the order will be cleaned on paypal IPN
+    for cart in Cart.objects.filter(customer=order.contact):
+        cart.empty()
+
+    del request.session['orderID']
+    context = RequestContext(request, {'order': order})
+    return render_to_response('shop/checkout/success.html', context)
+
+success = never_cache(success)
+
+
+
+
