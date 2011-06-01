@@ -25,6 +25,7 @@ from satchmo_store.shop.models import Order, Cart
 from satchmo_store.shop.satchmo_settings import get_satchmo_setting
 from satchmo_utils.dynamic import lookup_url, lookup_template
 from django.views.decorators.csrf import csrf_exempt  
+from satchmo_utils.views import bad_or_missing
 
 import logging
 try:
@@ -234,11 +235,14 @@ def success(request):
         product.items_in_stock -= item.quantity
         product.save()
 
+    log.warning('El contacto es %s' % order.contact)
     # Clean up cart now, the rest of the order will be cleaned on paypal IPN
     for cart in Cart.objects.filter(customer=order.contact):
+        log.warning('Procesando item cart %s' % cart.pk)
         cart.empty()
 
     del request.session['orderID']
+    log.warning(request.session)
     context = RequestContext(request, {'order': order})
     return render_to_response('shop/checkout/success.html', context)
 
