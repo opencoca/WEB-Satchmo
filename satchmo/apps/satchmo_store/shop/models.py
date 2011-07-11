@@ -616,6 +616,23 @@ class OrderManager(models.Manager):
             pass
         return False
 
+class OrderVariable(models.Model):
+    order = models.ForeignKey("Order", related_name="variables")
+    key = models.SlugField(_('key'), )
+    value = models.CharField(_('value'), max_length=100)
+
+    class Meta:
+        ordering=('key',)
+        verbose_name = _("Order variable")
+        verbose_name_plural = _("Order variables")
+
+    def __unicode__(self):
+        if len(self.value)>10:
+            v = self.value[:10] + '...'
+        else:
+            v = self.value
+        return u"OrderVariable: %s=%s" % (self.key, v)
+
 class Order(models.Model):
     """
     Orders contain a copy of all the information at the time the order was
@@ -1356,23 +1373,6 @@ class OrderPendingPayment(OrderPaymentBase):
 
 class OrderPaymentFailure(OrderPaymentBase):
     order = models.ForeignKey(Order, null=True, blank=True, related_name='paymentfailures')
-
-class OrderVariable(models.Model):
-    order = models.ForeignKey(Order, related_name="variables")
-    key = models.SlugField(_('key'), )
-    value = models.CharField(_('value'), max_length=100)
-
-    class Meta:
-        ordering=('key',)
-        verbose_name = _("Order variable")
-        verbose_name_plural = _("Order variables")
-
-    def __unicode__(self):
-        if len(self.value)>10:
-            v = self.value[:10] + '...'
-        else:
-            v = self.value
-        return u"OrderVariable: %s=%s" % (self.key, v)
 
 class OrderTaxDetail(models.Model):
     """A tax line item"""
