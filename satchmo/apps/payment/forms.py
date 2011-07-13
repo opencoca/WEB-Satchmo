@@ -478,7 +478,7 @@ class CreditPayShipForm(SimplePayShipForm):
                     log.debug('Payment module capture/release success for %s', self.order)
             else:
                 log.debug('Payment module %s cannot do credit authorizations, ignoring AUTH_EARLY setting.',
-                    self.paymentmodule.MODULE.KEY.value)
+                    self.paymentmodule.MODULE.value)
         return data
 
 
