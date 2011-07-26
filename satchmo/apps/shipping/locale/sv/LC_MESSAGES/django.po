@@ -360,7 +360,7 @@ msgid "Min Price"
 msgstr "Minimipris"
 
 #: modules/tiered/models.py:214
-msgid "The minumum price for this tier to apply"
+msgid "The minimum price for this tier to apply"
 msgstr ""
 
 #: modules/tiered/models.py:217 modules/tieredquantity/models.py:213
