@@ -30,9 +30,9 @@ except ImportError:
 log = logging.getLogger('shop.views.cart')
 
 
-def _json_response(data, error=False, template="shop/json.html"):
-    response = HttpResponse(loader.render_to_string(template,
-        {'json':mark_safe(simplejson.dumps(data))}), mimetype='application/javascript')
+def _json_response(data, error=False, **kwargs):
+    response = HttpResponse( simplejson.dumps( data ),
+                            mimetype = 'application/json')
 
     if error:
         response.status_code = 400
@@ -195,13 +195,17 @@ def add(request, id=0, redirect_to='satchmo_cart'):
     satchmo_cart_changed.send(cart, cart=cart, request=request)
 
     if request.is_ajax():
-        data = {}
-        data['id'] = product.id
-        data['name'] = product.translated_name()
-        data['cart_count'] = str(round_decimal(cart.numItems, 2))
-        data['cart_total'] = str(cart.total)
-        # Legacy result, for now
-        data['results'] = _("Success")
+        data = {
+            'id': product.id,
+            'name': product.translated_name(),
+            'item_id': added_item.id,
+            'item_qty': str(round_decimal(quantity, 2)),
+            'item_price': str(added_item.line_total) or "0.00",
+            'cart_count': str(round_decimal(cart.numItems, 2)),
+            'cart_total': str(cart.total),
+            # Legacy result, for now
+            'results': _("Success"),
+        }
         log.debug('CART AJAX: %s', data)
 
         return _json_response(data)
@@ -209,11 +213,11 @@ def add(request, id=0, redirect_to='satchmo_cart'):
         url = urlresolvers.reverse(redirect_to)
         return HttpResponseRedirect(url)
 
-def add_ajax(request, id=0, template="shop/json.html"):
+def add_ajax(request, id=0, **kwargs):
     # Allow for legacy apps to still use this url
     if not request.META.has_key('HTTP_X_REQUESTED_WITH'):
         request.META['HTTP_X_REQUESTED_WITH'] = 'XMLHttpRequest'
-
+    log.warning('satchmo_cart_add_ajax is deprecated, use satchmo_cart_add')
     return add(request, id)
 
 def add_multiple(request, redirect_to='satchmo_cart', products=None, template="shop/multiple_product_form.html"):
@@ -276,6 +280,7 @@ def remove_ajax(request, template="shop/json.html"):
     if not request.META.has_key('HTTP_X_REQUESTED_WITH'):
         request.META['HTTP_X_REQUESTED_WITH'] = 'XMLHttpRequest'
 
+    log.warning('satchmo_cart_remove_ajax is deprecated, use satchmo_cart_remove')
     return remove(request)
 
 def set_quantity(request):

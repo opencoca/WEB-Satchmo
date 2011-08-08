@@ -9120,7 +9120,7 @@
     </object>
     <object pk="697" model="l10n.adminarea">
         <field to="l10n.country" name="country" rel="ManyToOneRel">54</field>
-        <field type="CharField" name="name">Côte dʼIvoire (general)</field>
+        <field type="CharField" name="name">Côte d'Ivoire (general)</field>
         <field type="CharField" name="abbrev"></field>
         <field type="BooleanField" name="active">1</field>
     </object>
@@ -11760,7 +11760,7 @@
     </object>
     <object pk="556" model="l10n.adminarea">
         <field to="l10n.country" name="country" rel="ManyToOneRel">17</field>
-        <field type="CharField" name="name">Governorʼs Harbour</field>
+        <field type="CharField" name="name">Governor's Harbour</field>
         <field type="CharField" name="abbrev"></field>
         <field type="BooleanField" name="active">1</field>
     </object>
@@ -11904,7 +11904,7 @@
     </object>
     <object pk="1864" model="l10n.adminarea">
         <field to="l10n.country" name="country" rel="ManyToOneRel">94</field>
-        <field type="CharField" name="name">GrandʼAnse</field>
+        <field type="CharField" name="name">Grand'Anse</field>
         <field type="CharField" name="abbrev"></field>
         <field type="BooleanField" name="active">1</field>
     </object>
@@ -16434,7 +16434,7 @@
     </object>
     <object pk="790" model="l10n.adminarea">
         <field to="l10n.country" name="country" rel="ManyToOneRel">44</field>
-        <field type="CharField" name="name">Libertador General Bernardo OʼHiggins</field>
+        <field type="CharField" name="name">Libertador General Bernardo O'Higgins</field>
         <field type="CharField" name="abbrev"></field>
         <field type="BooleanField" name="active">1</field>
     </object>
@@ -18720,7 +18720,7 @@
     </object>
     <object pk="2466" model="l10n.adminarea">
         <field to="l10n.country" name="country" rel="ManyToOneRel">123</field>
-        <field type="CharField" name="name">Mohaleʼs Hoek</field>
+        <field type="CharField" name="name">Mohale's Hoek</field>
         <field type="CharField" name="abbrev"></field>
         <field type="BooleanField" name="active">1</field>
     </object>
@@ -24060,7 +24060,7 @@
     </object>
     <object pk="492" model="l10n.adminarea">
         <field to="l10n.country" name="country" rel="ManyToOneRel">25</field>
-        <field type="CharField" name="name">Saint Georgeʼs</field>
+        <field type="CharField" name="name">Saint George's</field>
         <field type="CharField" name="abbrev"></field>
         <field type="BooleanField" name="active">1</field>
     </object>
@@ -25710,7 +25710,7 @@
     </object>
     <object pk="494" model="l10n.adminarea">
         <field to="l10n.country" name="country" rel="ManyToOneRel">25</field>
-        <field type="CharField" name="name">Smithʼs</field>
+        <field type="CharField" name="name">Smith's</field>
         <field type="CharField" name="abbrev"></field>
         <field type="BooleanField" name="active">1</field>
     </object>

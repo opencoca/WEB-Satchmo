@@ -4,6 +4,7 @@ v0.1.1
 '''
 
 # Note, make sure you use decimal math everywhere!
+import re
 from decimal import Decimal
 from django.core.cache import cache
 from django.template import loader, Context
@@ -83,7 +84,9 @@ class Shipper(BaseShipper):
           returning an actual date
         '''
 
-        if str(self.delivery_days) <> '1':
+        if not str(self.delivery_days).isdigit():
+            return self.delivery_days
+        elif str(self.delivery_days) <> '1':
             return _('%s business days' % self.delivery_days)
         else:
             return _('%s business day' % self.delivery_days)
@@ -187,15 +190,21 @@ class Shipper(BaseShipper):
                     #YYYY-MM-DD
                     delivery_date = rate.find('.//deliveryDate').text
                     shipping_date = rate.find('.//shippingDate').text
-                    self.delivery_days = datetime.date(
-                                            int(delivery_date[:4]),
-                                            int(delivery_date[5:7]),
-                                            int(delivery_date[8:])) - \
-                                         datetime.date(
-                                            int(shipping_date[:4]),
-                                            int(shipping_date[5:7]),
-                                            int(shipping_date[8:]))
-                    self.delivery_days = self.delivery_days.days
+                    #check if deliveryDate is date or message
+                    datePattern = re.compile(r'\d{4}-\d{2}-\d{2}')
+                    isDate = datePattern.match(delivery_date)
+                    if isDate:
+                        self.delivery_days = datetime.date(
+                                                int(delivery_date[:4]),
+                                                int(delivery_date[5:7]),
+                                                int(delivery_date[8:])) - \
+                                             datetime.date(
+                                                int(shipping_date[:4]),
+                                                int(shipping_date[5:7]),
+                                                int(shipping_date[8:]))
+                        self.delivery_days = self.delivery_days.days
+                    else:
+                        self.delivery_days = delivery_date
                     self.is_valid = True
                     self._calculated = True
 
