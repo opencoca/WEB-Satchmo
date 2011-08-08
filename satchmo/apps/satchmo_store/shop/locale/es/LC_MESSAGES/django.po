@@ -9,7 +9,7 @@ msgstr ""
 "Project-Id-Version: Satchmo 0.5-pre\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2011-06-12 08:28+0000\n"
-"PO-Revision-Date: 2011-08-07 15:53\n"
+"PO-Revision-Date: 2011-08-08 06:15\n"
 "Last-Translator: Andrea  de la Huerta <info@metamorfosys.de>\n"
 "Language-Team: Spanish <satchmo-users@googlegroups.com>\n"
 "MIME-Version: 1.0\n"
@@ -1128,7 +1128,7 @@ msgid ""
 " charged %(order_total)s."
 msgstr ""
 "Se cargará un total de %(order_total)s a su tarjeta "
-"%(credit_card_type) con terminación %(credit_card_number)s."
+"%(credit_card_type)s con terminación %(credit_card_number)s."
 
 #: templates/shop/email/order_complete.txt:16
 #, python-format

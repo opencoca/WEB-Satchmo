@@ -9,7 +9,7 @@ msgstr ""
 "Project-Id-Version: Satchmo 0.5-pre\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2011-06-12 08:29+0000\n"
-"PO-Revision-Date: 2011-08-08 04:52\n"
+"PO-Revision-Date: 2011-08-08 06:18\n"
 "Last-Translator: Andrea  de la Huerta <info@metamorfosys.de>\n"
 "Language-Team: Spanish <satchmo-users@googlegroups.com>\n"
 "MIME-Version: 1.0\n"
@@ -827,8 +827,8 @@ msgid ""
 "You are about to use Gift certificate #%(giftcode)s which has "
 "%(certbalance)s total available to pay for your order."
 msgstr ""
-"Usted está a punto de usar el certificado de regalo #%(giftcode)s  que"
-" tiene un total de %(certbalance)s  disponible para pagar su pedido."
+"Usted está a punto de usar el certificado de regalo #%(giftcode)s que "
+"tiene un total de %(certbalance)s disponible para pagar su pedido."
 
 #: modules/giftcertificate/templates/shop/checkout/confirm.html:22
 msgid ""
@@ -850,8 +850,8 @@ msgid ""
 "About to use your gift certificate: %(giftcode)s, which has a balance "
 "of %(balance)s."
 msgstr ""
-"Está utilizando su certificado de regalo: %(giftcode)s , que tiene un "
-"saldo de %(balance)s ."
+"Está utilizando su certificado de regalo: %(giftcode)s, que tiene un "
+"saldo de %(balance)s."
 
 #: modules/giftcertificate/templates/shop/checkout/giftcertificate/confirm.html:23
 msgid "About to use INVALID gift certificate"
@@ -1451,7 +1451,7 @@ msgstr ""
 #: templates/shop/checkout/sermepa/confirm.html:17
 #: templates/shop/checkout/sermepa/confirm.html:42
 msgid "Purchase Items"
-msgstr "Artículos del pedido"
+msgstr "Comprar artículos"
 
 #: templates/shop/checkout/base_pay_ship.html:19
 #: templates/shop/checkout/form.html:22
@@ -1512,8 +1512,8 @@ msgid ""
 "Your %(credit_card_type)s card ending in %(credit_card_number)s will be"
 " charged %(order_total)s."
 msgstr ""
-"Se cargará un total de %(order_total)s a su tarjeta "
-"%(credit_card_type)s con la terminación %(credit_card_number)s."
+"Ihre %(credit_card_type)s Karte mit der Endung %(credit_card_number)s "
+"wird mit %(order_total)s belastet."
 
 #: templates/shop/checkout/confirm.html:22
 #: templates/shop/checkout/purchaseorder/confirm.html:15
