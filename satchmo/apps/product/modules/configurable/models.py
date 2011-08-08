@@ -419,11 +419,18 @@ class ProductVariation(models.Model):
 
         pvs = ProductVariation.objects.filter(parent=self.parent)
         pvs = pvs.exclude(product=self.product)
-        for option in self.options.all():
-            pvs = pvs.filter(options__option_group__id=option.option_group_id, 
-                options__value=option.value)
-        if pvs.count():
-            return # Don't allow duplicates
+        
+        for pv in pvs:
+            if pv.unique_option_ids == self.unique_option_ids:
+                return
+        # TODO: The following code snippet was introduced as an optimization in commit 2229
+        # see ticket #1312 for details.
+        # Unfortunately it is not working, see ticket #1318
+        #for option in self.options.all():
+        #    pvs = pvs.filter(options__option_group__id=option.option_group_id, 
+        #        options__value=option.value)
+        #if pvs.count():
+        #    return # Don't allow duplicates
 
         if not self.product.name:
             # will force calculation of default name

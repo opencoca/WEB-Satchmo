@@ -371,7 +371,7 @@ msgid "Min Price"
 msgstr "Prezzo Minimo"
 
 #: modules/tiered/models.py:214
-msgid "The minumum price for this tier to apply"
+msgid "The minimum price for this tier to apply"
 msgstr "Il minor prezzo da applicare a questo livello"
 
 # translated = "Importazione da file di fissaggio:"

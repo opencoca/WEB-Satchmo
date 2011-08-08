@@ -353,8 +353,8 @@ msgstr "Envío escalonado"
 msgid "Min Price"
 msgstr "Precio mínimo"
 
-#: modules/tiered/models.py:217
-msgid "The minumum price for this tier to apply"
+#: modules/tiered/models.py:214
+msgid "The minimum price for this tier to apply"
 msgstr "El precio mínimo para aplicar este nivel"
 
 #: modules/tiered/models.py:220 modules/tieredquantity/models.py:213
