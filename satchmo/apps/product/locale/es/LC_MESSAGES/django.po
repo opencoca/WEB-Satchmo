@@ -9,7 +9,7 @@ msgstr ""
 "Project-Id-Version: Satchmo 0.5-pre\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2011-06-12 08:29+0000\n"
-"PO-Revision-Date: 2011-08-07 23:19\n"
+"PO-Revision-Date: 2011-08-08 05:36\n"
 "Last-Translator: Andrea  de la Huerta <info@metamorfosys.de>\n"
 "Language-Team: Spanish <satchmo-users@googlegroups.com>\n"
 "MIME-Version: 1.0\n"
@@ -218,7 +218,7 @@ msgstr "Formato de archivo desconocido: %s"
 #: forms.py:374
 #, python-format
 msgid "Added %(count)i objects from %(filename)s"
-msgstr "Añadido %(cuenta)i objetos de %(filename)s "
+msgstr "Se agregaron %(count)i objetos de %(filename)s "
 
 #: forms.py:379
 #, python-format
