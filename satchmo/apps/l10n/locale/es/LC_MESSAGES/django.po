@@ -9,7 +9,7 @@ msgstr ""
 "Project-Id-Version: Satchmo 0.5-pre\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2011-06-12 08:28+0000\n"
-"PO-Revision-Date: 2011-08-08 00:52\n"
+"PO-Revision-Date: 2011-08-12 19:31\n"
 "Last-Translator: Andrea  de la Huerta <info@metamorfosys.de>\n"
 "Language-Team: Spanish <satchmo-users@googlegroups.com>\n"
 "MIME-Version: 1.0\n"
@@ -20,17 +20,17 @@ msgstr ""
 
 #: admin.py:15 admin.py:24
 msgid "1 country was"
-msgstr "Un país era"
+msgstr "Un país fue"
 
 #: admin.py:17 admin.py:26
 #, python-format
 msgid "%s countries were"
-msgstr "%s países eran"
+msgstr "%s países fueron"
 
 #: admin.py:18
 #, python-format
 msgid "%s successfully marked as active"
-msgstr "%s marcado con éxito como activo"
+msgstr "%s marcado(s) con éxito como activo(s)"
 
 #: admin.py:19
 msgid "Mark selected countries as active"
@@ -39,7 +39,7 @@ msgstr "Marcar los países seleccionados como activos"
 #: admin.py:27
 #, python-format
 msgid "%s successfully marked as inactive"
-msgstr "%s marcado con éxito como inactivo"
+msgstr "%s marcado(s) con éxito como inactivo(s)"
 
 #: admin.py:28
 msgid "Mark selected countries as inactive"
@@ -199,7 +199,7 @@ msgstr "Nombre oficial (MAY)"
 
 #: models.py:55
 msgid "Country name"
-msgstr "nombre del país"
+msgstr "Nombre del país"
 
 #: models.py:56
 msgid "ISO alpha-3"
@@ -227,11 +227,11 @@ msgstr "País"
 
 #: models.py:64
 msgid "Countries"
-msgstr "países"
+msgstr "Países"
 
 #: models.py:76
 msgid "Admin Area name"
-msgstr "nombre de la zona administrativa"
+msgstr "Nombre del Área Administrativa"
 
 #: models.py:77
 msgid "Postal Abbreviation"
