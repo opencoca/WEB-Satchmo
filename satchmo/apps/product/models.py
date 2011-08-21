@@ -1232,7 +1232,8 @@ class ProductPriceLookupManager(models.Manager):
                 price=price,
                 quantity=qty,
                 discountable=product.is_discountable,
-                items_in_stock=product.items_in_stock)
+                items_in_stock=product.items_in_stock,
+		productimage_set=product.productimage_set)
             obj.save()
             objs.append(obj)
         return objs
@@ -1316,6 +1317,16 @@ class ProductPriceLookup(models.Model):
         return Product.objects.get(slug=self.productslug)
 
     product = property(fget=_product)
+
+    def _productimage_set(self):
+	try:
+    		return ProductImage.objects.filter(product=self.product)
+	except ProductImage.DoesNotExist:
+    		return None
+	except Product.DoesNotExist:
+		return None
+
+    productimage_set = property(fget=_productimage_set)
 
     def _dynamic_price(self):
         """Get the current price as modified by all listeners."""

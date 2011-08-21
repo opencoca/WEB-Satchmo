@@ -100,6 +100,9 @@ def productvariation_details(product, include_tax, user, create=False):
                 if use_discount:
                     detail['TAXED_SALE'] = {}
 
+	    if detl.productimage_set:
+	            detail['ADDITIONAL_IMAGES'] = [u"%s" % prodimg.picture for prodimg in detl.productimage_set.all()]
+
             details[key] = detail
 
         qtykey = "%d" % detl.quantity
