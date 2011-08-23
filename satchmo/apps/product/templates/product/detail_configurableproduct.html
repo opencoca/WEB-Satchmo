@@ -24,6 +24,10 @@ $(function() {
     satchmo.update_price();
     $('.priced').change(function() { satchmo.update_price() });
 });
+
+// generate thumbnails for all alternate images
+satchmo.thumbnails = new Array();
+{{ details|js_thumbnail_array:"width=280,height=280" }}
 </script>
 {% endblock %}
 
@@ -35,10 +39,12 @@ $(function() {
 	<span id="price">{{ product|discount_price:sale|currency }}</span>
 	{% endspaceless %}</h3>
 
+<span id="product_images">
 {% for pic in product.productimage_set.all %}
     {% thumbnail pic.picture 280x280 as image %}
     <img src="{{ image }}" width="{{ image.width }}" height="{{ image.height }}" />
 {% endfor %}
+</span>
 
 {% with product.translated_attributes as atts %}{% if atts %}
 <p class="productattributes">
