@@ -20,6 +20,7 @@ from satchmo_store.shop.models import Cart, CartItem, NullCart, NullCartItem
 from satchmo_store.shop.signals import satchmo_cart_changed, satchmo_cart_add_complete, satchmo_cart_details_query, satchmo_cart_view
 from satchmo_utils.numbers import RoundedDecimalError, round_decimal
 from satchmo_utils.views import bad_or_missing
+from l10n.utils import moneyfmt
 import logging
 
 try:
@@ -200,9 +201,9 @@ def add(request, id=0, redirect_to='satchmo_cart'):
             'name': product.translated_name(),
             'item_id': added_item.id,
             'item_qty': str(round_decimal(quantity, 2)),
-            'item_price': str(added_item.line_total) or "0.00",
+            'item_price': unicode(moneyfmt(added_item.line_total)) or "0.00",
             'cart_count': str(round_decimal(cart.numItems, 2)),
-            'cart_total': str(cart.total),
+            'cart_total': unicode(moneyfmt(cart.total)),
             # Legacy result, for now
             'results': _("Success"),
         }
@@ -262,7 +263,7 @@ def remove(request):
             return _json_response({'errors': errors, 'results': _("Error")}, True)
         else:
             return _json_response({
-                'cart_total': str(cart.total),
+                'cart_total': unicode(moneyfmt(cart.total)),
                 'cart_count': str(cart.numItems),
                 'item_id': cartitem.id,
                 'results': success, # Legacy
@@ -302,8 +303,8 @@ def set_quantity(request):
             return _json_response({
                 'item_id': cartitem.id,
                 'item_qty': str(cartitem.quantity) or "0",
-                'item_price': str(cartitem.line_total) or "0.00",
-                'cart_total': str(cart.total) or "0.00",
+                'item_price': unicode(moneyfmt(cartitem.line_total)) or "0.00",
+                'cart_total': unicode(moneyfmt(cart.total)) or "0.00",
                 'cart_count': str(cart.numItems) or '0',
             })
 
