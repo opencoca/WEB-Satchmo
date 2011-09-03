@@ -22,6 +22,7 @@ New Features
 - New template tag product_featured_list
 - New config option to allow users to create their username instead of automatically generating
 - Satchmo check now does a more thorough job of checking your environment for issues
+- Product variation images can be shown when the user selects the product
 
 Translations
 ------------
@@ -132,5 +133,5 @@ Active Products
 +++++++++++++++
 Previously, category.active_products() would not consistently return the correct product variations. In `rev 2168 <https://bitbucket.org/chris1610/satchmo/changeset/318f7eb41140>`_
 this was fixed but had the unintended side effect of returning all the product variations in the default templates. In order to maintain
-consistency, the default variation display value is now False. The only people that will notice the issue is those that customized
+consistency, the default variation display value is now False. The only people that will notice the issue are those that customized
 the variation display in the category page.
