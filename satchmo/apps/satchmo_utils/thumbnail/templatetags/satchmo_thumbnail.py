@@ -13,26 +13,26 @@ register = template.Library()
 ## FILTERS ##
 
 def js_thumbnail_array(details, args=''):
-	"""
-	Returns a set of javascript statements adding the thumbnails to the array.
-	This is needed to continue to allow the store to specify the output size
-	in the template, rather than hard coded.
-	"""
-    	ret = ''
+    """
+    Returns a set of javascript statements adding the thumbnails to the array.
+    This is needed to continue to allow the store to specify the output size
+    in the template, rather than hard coded.
+    """
+    ret = ''
 
-	for k,v in details.iteritems():
-		try:
-			for kv,vv in v.iteritems():
-				if type(vv) is dict:
-					# never get an ADDITIONAL_IMAGES field here
-					pass
-				else:
-					if kv == u'ADDITIONAL_IMAGES':
-						ret = ret + 'satchmo.thumbnails["' + vv[0] + '"] = "' + thumbnail(settings.MEDIA_URL + vv[0], args) + '";\n'
-		except Exception, e:
-			pass
+    for k,v in details.iteritems():
+        try:
+            for kv,vv in v.iteritems():
+                if type(vv) is dict:
+                    # never get an ADDITIONAL_IMAGES field here
+                    pass
+                else:
+                    if kv == u'ADDITIONAL_IMAGES':
+                        ret = ret + 'satchmo.thumbnails["' + vv[0] + '"] = "' + thumbnail(settings.MEDIA_URL + vv[0], args) + '";\n'
+        except Exception, e:
+            pass
 
-	return mark_safe(ret)
+    return mark_safe(ret)
 
 #
 
