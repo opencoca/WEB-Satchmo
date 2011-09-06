@@ -237,6 +237,9 @@ class PaymentContactInfoForm(PaymentMethodForm, ContactInfoForm):
             cart = kwargs.get('cart', None)
             if not cart:
                 cart = Cart.objects.from_request(request)
+            if not cart.customer:
+                cart.customer = contact
+                cart.save()
             self.order = get_or_create_order(request, cart, contact, self.cleaned_data)
             form_postsave.send(PaymentContactInfoForm, form=self)
             return contactid

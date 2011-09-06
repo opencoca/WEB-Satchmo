@@ -1,5 +1,5 @@
 {% extends "admin/base.html" %}
-{% load i18n satchmo_util %}
+{% load i18n satchmo_util adminmedia %}
 
 {% block extrahead %}
 {% blackbird_logging %}
@@ -30,6 +30,9 @@
 #content-related .module h2 .status { font-style: italic; }
 div.tabular .vCurrencyField { width: 70%; }
 </style>
+<script type="text/javascript"> 
+window.__admin_media_prefix__ = "/media/";
+</script>
 {% endblock %}
 
 {% block title %}{{ title|escape }} | {{ shop_name }} {% trans 'Site Administration' %}{% endblock %}
