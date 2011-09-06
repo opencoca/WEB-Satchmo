@@ -3,19 +3,19 @@
 # Copyright (C) 2008 Satchmo Project
 # This file is distributed under the same license as the Satchmo package.
 # Christian Hoeppner <hoeppner@gmail.com>, 2007.
-# 
+#
 msgid ""
 msgstr ""
 "Project-Id-Version: Satchmo 0.5-pre\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2011-06-12 08:28+0000\n"
+"POT-Creation-Date: 2011-09-06 07:21+0000\n"
 "PO-Revision-Date: 2011-08-08 00:44\n"
 "Last-Translator: Andrea  de la Huerta <info@metamorfosys.de>\n"
 "Language-Team: Spanish <satchmo-users@googlegroups.com>\n"
+"Language: es\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"Language: es\n"
 "X-Translated-Using: django-rosetta 0.6.1\n"
 
 #: config.py:7
@@ -29,8 +29,8 @@ msgstr "Módulo de impuestos activo"
 #: config.py:11
 msgid "Select a module, save and reload to set any module-specific settings."
 msgstr ""
-"Seleccione un módulo, guárdelo y recargue la página para poder "
-"configurar los ajustes específicos del módulo."
+"Seleccione un módulo, guárdelo y recargue la página para poder configurar "
+"los ajustes específicos del módulo."
 
 #: config.py:13
 msgid "No Tax"
@@ -43,8 +43,7 @@ msgstr "Mostrar con IVA incluido"
 #: config.py:20
 msgid "If yes, then all products and the cart will display with tax included."
 msgstr ""
-"Si es así, todos los productos y el carro se mostrarán con IVA "
-"incluido."
+"Si es así, todos los productos y el carro se mostrarán con IVA incluido."
 
 #: config.py:26
 msgid "New products are automatically made taxable"
@@ -132,8 +131,8 @@ msgstr "Registros de CP+5 necesitan una alta y una baja para ambas partes."
 #, fuzzy
 msgid "Address rocord needs: low, high, street, city, zip, zip+4"
 msgstr ""
-"El registro de dirección necesita: bajo, alto, calle, ciudad, código "
-"postal, código postal 4"
+"El registro de dirección necesita: bajo, alto, calle, ciudad, código postal, "
+"código postal 4"
 
 #: modules/us_sst/config.py:7
 #, fuzzy
@@ -329,187 +328,150 @@ msgid "FIPS Special 2 code"
 msgstr "FIPS Especial 2 del código"
 
 #: modules/us_sst/models.py:247
-#, fuzzy
 msgid "FIPS Special 2 type"
 msgstr ""
 
 #: modules/us_sst/models.py:248
-#, fuzzy
 msgid "FIPS Special 3 code"
 msgstr ""
 
 #: modules/us_sst/models.py:249
-#, fuzzy
 msgid "FIPS Special 3 type"
 msgstr ""
 
 #: modules/us_sst/models.py:250
-#, fuzzy
 msgid "FIPS Special 4 code"
 msgstr ""
 
 #: modules/us_sst/models.py:251
-#, fuzzy
 msgid "FIPS Special 4 type"
 msgstr ""
 
 #: modules/us_sst/models.py:252
-#, fuzzy
 msgid "FIPS Special 5 code"
 msgstr ""
 
 #: modules/us_sst/models.py:253
-#, fuzzy
 msgid "FIPS Special 5 type"
 msgstr ""
 
 #: modules/us_sst/models.py:254
-#, fuzzy
 msgid "FIPS Special 6 code"
 msgstr ""
 
 #: modules/us_sst/models.py:255
-#, fuzzy
 msgid "FIPS Special 6 type"
 msgstr ""
 
 #: modules/us_sst/models.py:256
-#, fuzzy
 msgid "FIPS Special 7 code"
 msgstr ""
 
 #: modules/us_sst/models.py:257
-#, fuzzy
 msgid "FIPS Special 7 type"
 msgstr ""
 
 #: modules/us_sst/models.py:258
-#, fuzzy
 msgid "FIPS Special 8 code"
 msgstr ""
 
 #: modules/us_sst/models.py:259
-#, fuzzy
 msgid "FIPS Special 8 type"
 msgstr ""
 
 #: modules/us_sst/models.py:260
-#, fuzzy
 msgid "FIPS Special 9 code"
 msgstr ""
 
 #: modules/us_sst/models.py:261
-#, fuzzy
 msgid "FIPS Special 9 type"
 msgstr ""
 
 #: modules/us_sst/models.py:262
-#, fuzzy
 msgid "FIPS Special 10 code"
 msgstr ""
 
 #: modules/us_sst/models.py:263
-#, fuzzy
 msgid "FIPS Special 10 type"
 msgstr ""
 
 #: modules/us_sst/models.py:264
-#, fuzzy
 msgid "FIPS Special 11 code"
 msgstr ""
 
 #: modules/us_sst/models.py:265
-#, fuzzy
 msgid "FIPS Special 11 type"
 msgstr ""
 
 #: modules/us_sst/models.py:266
-#, fuzzy
 msgid "FIPS Special 12 code"
 msgstr ""
 
 #: modules/us_sst/models.py:267
-#, fuzzy
 msgid "FIPS Special 12 type"
 msgstr ""
 
 #: modules/us_sst/models.py:268
-#, fuzzy
 msgid "FIPS Special 13 code"
 msgstr ""
 
 #: modules/us_sst/models.py:269
-#, fuzzy
 msgid "FIPS Special 13 type"
 msgstr ""
 
 #: modules/us_sst/models.py:270
-#, fuzzy
 msgid "FIPS Special 14 code"
 msgstr ""
 
 #: modules/us_sst/models.py:271
-#, fuzzy
 msgid "FIPS Special 14 type"
 msgstr ""
 
 #: modules/us_sst/models.py:272
-#, fuzzy
 msgid "FIPS Special 15 code"
 msgstr ""
 
 #: modules/us_sst/models.py:273
-#, fuzzy
 msgid "FIPS Special 15 type"
 msgstr ""
 
 #: modules/us_sst/models.py:274
-#, fuzzy
 msgid "FIPS Special 16 code"
 msgstr ""
 
 #: modules/us_sst/models.py:275
-#, fuzzy
 msgid "FIPS Special 16 type"
 msgstr ""
 
 #: modules/us_sst/models.py:276
-#, fuzzy
 msgid "FIPS Special 17 code"
 msgstr ""
 
 #: modules/us_sst/models.py:277
-#, fuzzy
 msgid "FIPS Special 17 type"
 msgstr ""
 
 #: modules/us_sst/models.py:278
-#, fuzzy
 msgid "FIPS Special 18 code"
 msgstr ""
 
 #: modules/us_sst/models.py:279
-#, fuzzy
 msgid "FIPS Special 18 type"
 msgstr ""
 
 #: modules/us_sst/models.py:280
-#, fuzzy
 msgid "FIPS Special 19 code"
 msgstr ""
 
 #: modules/us_sst/models.py:281
-#, fuzzy
 msgid "FIPS Special 19 type"
 msgstr ""
 
 #: modules/us_sst/models.py:282
-#, fuzzy
 msgid "FIPS Special 20 code"
 msgstr ""
 
 #: modules/us_sst/models.py:283
-#, fuzzy
 msgid "FIPS Special 20 type"
 msgstr ""
 
