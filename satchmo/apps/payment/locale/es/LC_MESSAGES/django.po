@@ -3,19 +3,19 @@
 # Copyright (C) 2008 Satchmo Project
 # This file is distributed under the same license as the Satchmo package.
 # Christian Hoeppner <hoeppner@gmail.com>, 2007.
-# 
+#
 msgid ""
 msgstr ""
 "Project-Id-Version: Satchmo 0.5-pre\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2011-09-06 07:21+0000\n"
+"POT-Creation-Date: 2011-09-06 13:21+0000\n"
 "PO-Revision-Date: 2011-09-06 10:46\n"
 "Last-Translator: Andrea  de la Huerta <info@metamorfosys.de>\n"
 "Language-Team: Spanish <satchmo-users@googlegroups.com>\n"
+"Language: es\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"Language: es\n"
 "X-Translated-Using: django-rosetta 0.6.1\n"
 
 #: config.py:11
@@ -28,23 +28,22 @@ msgstr "Clave de acceso de Cron"
 
 #: config.py:17
 msgid ""
-"Enter an authentication passkey to secure your recurring billing cron "
-"url."
+"Enter an authentication passkey to secure your recurring billing cron url."
 msgstr ""
-"Introduzca una clave de acceso para incrementar la seguridad de la URL"
-" del cron de facturación recurrente."
+"Introduzca una clave de acceso para incrementar la seguridad de la URL del "
+"cron de facturación recurrente."
 
 #: config.py:24
 msgid "Allow URL Access to Cron for subscription rebills"
 msgstr ""
-"Permitir el acceso a la URL del cron para facturaciones recurrentes "
-"(para suscripciones)"
+"Permitir el acceso a la URL del cron para facturaciones recurrentes (para "
+"suscripciones)"
 
 #: config.py:25
 msgid "Do you want to allow remote url calls for subscription billing?"
 msgstr ""
-"¿Desea permitir acceso remoto a la URL de facturación recurrente para "
-"las suscripciones?"
+"¿Desea permitir acceso remoto a la URL de facturación recurrente para las "
+"suscripciones?"
 
 #: config.py:32 modules/authorizenet/config.py:34
 #: modules/autosuccess/config.py:11 modules/cod/config.py:14
@@ -58,11 +57,11 @@ msgstr "Aceptar pagos reales"
 
 #: config.py:33
 msgid ""
-"False if you want to be in test mode.  This is the master switch, turn "
-"it off to force all payments into test mode."
+"False if you want to be in test mode.  This is the master switch, turn it "
+"off to force all payments into test mode."
 msgstr ""
-"Falso si quiere estar en modo de prueba. Éste es el interruptor "
-"principal, apáguelo para utilizar todos los pagos en modo de prueba."
+"Falso si quiere estar en modo de prueba. Éste es el interruptor principal, "
+"apáguelo para utilizar todos los pagos en modo de prueba."
 
 #: config.py:40
 msgid "Email owner?"
@@ -71,8 +70,8 @@ msgstr "¿Mandar correo al propietario?"
 #: config.py:41
 msgid "True if you want to email the owner on order"
 msgstr ""
-"Verdadero si desea enviar un correo electrónico al propietario al "
-"realizar un pedido"
+"Verdadero si desea enviar un correo electrónico al propietario al realizar "
+"un pedido"
 
 #: config.py:48
 msgid "Extra order emails?"
@@ -80,11 +79,11 @@ msgstr "¿Mandar correo a direcciones adicionales?"
 
 #: config.py:50
 msgid ""
-"Put all email addresses you want to email in addition to the owner when"
-" an order is placed."
+"Put all email addresses you want to email in addition to the owner when an "
+"order is placed."
 msgstr ""
-"Direcciones de correo electrónico adicionales a las que se enviará un "
-"correo al realizar un pedido."
+"Direcciones de correo electrónico adicionales a las que se enviará un correo "
+"al realizar un pedido."
 
 #: config.py:58 modules/dummy/config.py:59
 msgid "Early AUTH"
@@ -93,18 +92,18 @@ msgstr "AUTH temprano"
 #: config.py:59
 msgid ""
 "Where possible, Authenticate on the card entry page.  This causes an "
-"immediate $.01 AUTH and release, allowing errors with the card to show "
-"on the card entry page instead of on the confirmation page.  Note that "
-"this is only supported for payment modules that can do Authorizations."
-"  It will be silently ignored for any other processors."
+"immediate $.01 AUTH and release, allowing errors with the card to show on "
+"the card entry page instead of on the confirmation page.  Note that this is "
+"only supported for payment modules that can do Authorizations.  It will be "
+"silently ignored for any other processors."
 msgstr ""
-"Si es posible, realizar la autenticación en la página de entrada del "
-"pedido. Esto implica una AUTH inmediata de la tarjeta (realizada por "
-"$.01) y se libera la misma, lo cual permite mostrar cualquier error de"
-" autenticación al llenar los datos de la tarjeta (en la página de "
-"entrada) en lugar de la página en donde se confirma y finaliza el "
-"pedido. Nota: esto sólo es soportado por módulos de pago que puedan "
-"realizar AUTHs. Se ignorará en el resto de los módulos. "
+"Si es posible, realizar la autenticación en la página de entrada del pedido. "
+"Esto implica una AUTH inmediata de la tarjeta (realizada por $.01) y se "
+"libera la misma, lo cual permite mostrar cualquier error de autenticación al "
+"llenar los datos de la tarjeta (en la página de entrada) en lugar de la "
+"página en donde se confirma y finaliza el pedido. Nota: esto sólo es "
+"soportado por módulos de pago que puedan realizar AUTHs. Se ignorará en el "
+"resto de los módulos. "
 
 #: config.py:64
 msgid "Country match required?"
@@ -112,11 +111,11 @@ msgstr "¿Se requiere que coincida el país?"
 
 #: config.py:65
 msgid ""
-"If True, then customers may not have different countries for shipping "
-"and billing."
+"If True, then customers may not have different countries for shipping and "
+"billing."
 msgstr ""
-"Si es así, los clientes no pueden tener diferentes países de envío y "
-"de facturación."
+"Si es así, los clientes no pueden tener diferentes países de envío y de "
+"facturación."
 
 #: config.py:70
 msgid "Minimum Order"
@@ -138,11 +137,10 @@ msgid ""
 "compliance, this is required unless you have your database server on a "
 "separate server not connected to the internet."
 msgstr ""
-"Si es falso, entonces la tarjeta de crédito nunca se guardará en el "
-"disco. Para el cumplimiento de PCI, es necesario que esta opción esté "
-"inactiva por razones de seguridad, a menos la base de datos se "
-"encuentre en un servidor independiente que no esté conectado al "
-"Internet."
+"Si es falso, entonces la tarjeta de crédito nunca se guardará en el disco. "
+"Para el cumplimiento de PCI, es necesario que esta opción esté inactiva por "
+"razones de seguridad, a menos la base de datos se encuentre en un servidor "
+"independiente que no esté conectado al Internet."
 
 #: config.py:82
 msgid "Number of years to display for CC expiration"
@@ -150,12 +148,11 @@ msgstr "Número de años a mostrar para la caducidad de la tarj. de crédito"
 
 #: config.py:83
 msgid ""
-"Number of years that will be added to today's year for the CC "
-"expiration drop down"
+"Number of years that will be added to today's year for the CC expiration "
+"drop down"
 msgstr ""
 "Número de años que se añadirá al año actual para mostrar en el campo "
-"desplegable donde se selecciona el vencimiento de la tarjeta de "
-"crédito"
+"desplegable donde se selecciona el vencimiento de la tarjeta de crédito"
 
 #: config.py:88
 msgid "Use discounts"
@@ -164,8 +161,7 @@ msgstr "Usar descuentos"
 #: config.py:89
 msgid "If disabled, customers will not be asked for any discount codes."
 msgstr ""
-"Si está desactivado, no se pedirá a los clientes los códigos de "
-"descuento."
+"Si está desactivado, no se pedirá a los clientes los códigos de descuento."
 
 #: forms.py:102
 msgid "Discount"
@@ -337,15 +333,15 @@ msgstr "Mandar solicitudes a una URL de prueba"
 
 #: modules/authorizenet/config.py:35
 msgid ""
-"False if you want to submit to the test urls.  NOTE: If you are "
-"testing, then you can use the cc# 4222222222222 to force a bad credit "
-"card response.  If you use that number and a ccv of 222, that will "
-"force a bad ccv response from authorize.net"
+"False if you want to submit to the test urls.  NOTE: If you are testing, "
+"then you can use the cc# 4222222222222 to force a bad credit card response.  "
+"If you use that number and a ccv of 222, that will force a bad ccv response "
+"from authorize.net"
 msgstr ""
-"Falso si desea mandar las solicitudes a una URL de prueba. NOTA: Si "
-"está de prueba, entonces puede utilizar el # de tarjeta 4222222222222 "
-"para forzar una respuesta errónea. Si se utiliza ese número y un CCV "
-"de 222, authorize.net regresará una respuesta de error de ccv"
+"Falso si desea mandar las solicitudes a una URL de prueba. NOTA: Si está de "
+"prueba, entonces puede utilizar el # de tarjeta 4222222222222 para forzar "
+"una respuesta errónea. Si se utiliza ese número y un CCV de 222, authorize."
+"net regresará una respuesta de error de ccv"
 
 #: modules/authorizenet/config.py:40
 msgid "Force a test post?"
@@ -353,11 +349,11 @@ msgstr "¿Mandar solicitud de prueba?"
 
 #: modules/authorizenet/config.py:41
 msgid ""
-"True if you want to submit to the live url using a test flag, which "
-"won't be accepted."
+"True if you want to submit to the live url using a test flag, which won't be "
+"accepted."
 msgstr ""
-"Verdadero si desea mandar la solicitud a la url en vivo con un "
-"indicador de prueba, para que la solicitud de pago no sea aceptada."
+"Verdadero si desea mandar la solicitud a la url en vivo con un indicador de "
+"prueba, para que la solicitud de pago no sea aceptada."
 
 #: modules/authorizenet/config.py:46 modules/autosuccess/config.py:17
 #: modules/cod/config.py:21 modules/cybersource/config.py:34
@@ -385,8 +381,7 @@ msgstr "Clave del módulo"
 #: modules/sermepa/config.py:34 modules/trustcommerce/config.py:47
 msgid "English name for this group on the checkout screens"
 msgstr ""
-"Nombre en inglés para este grupo en las páginas de la pasarela de "
-"compra."
+"Nombre en inglés para este grupo en las páginas de la pasarela de compra."
 
 #: modules/authorizenet/config.py:60 modules/autosuccess/config.py:31
 #: modules/cod/config.py:35 modules/cybersource/config.py:48
@@ -404,8 +399,7 @@ msgstr "Esto se transferirá al la aplicación de traducción"
 #: modules/purchaseorder/config.py:35 modules/sagepay/config.py:100
 #: modules/sermepa/config.py:41 modules/trustcommerce/config.py:53
 msgid ""
-"The url base used for constructing urlpatterns which will use this "
-"module"
+"The url base used for constructing urlpatterns which will use this module"
 msgstr "La URL base utilizada para construir las URLs que usará este módulo"
 
 #: modules/authorizenet/config.py:69 modules/cybersource/config.py:63
@@ -428,11 +422,11 @@ msgstr "¿Capturar el pago inmediatamente?"
 
 #: modules/authorizenet/config.py:91 modules/dummy/config.py:55
 msgid ""
-"IMPORTANT: If false, a capture attempt will be made when the order is "
-"marked as shipped.\""
+"IMPORTANT: If false, a capture attempt will be made when the order is marked "
+"as shipped.\""
 msgstr ""
-"IMPORTANTE: Si es falso, se hará un intento de captura cuando el "
-"pedido sea marcado como enviado."
+"IMPORTANTE: Si es falso, se hará un intento de captura cuando el pedido sea "
+"marcado como enviado."
 
 #: modules/authorizenet/config.py:95 modules/autosuccess/config.py:40
 #: modules/cod/config.py:44 modules/cybersource/config.py:83
@@ -458,12 +452,11 @@ msgstr "¿Habilitar el ARB?"
 
 #: modules/authorizenet/config.py:105
 msgid ""
-"Enable ARB processing for setting up subscriptions.  You must have this"
-" enabled in your Authorize account for it to work."
+"Enable ARB processing for setting up subscriptions.  You must have this "
+"enabled in your Authorize account for it to work."
 msgstr ""
-"Permitir el procesamiento de ARB para la creación de suscripciones. "
-"Debe tenerlo habilitado en su cuenta autorizada para que pueda "
-"funcionar."
+"Permitir el procesamiento de ARB para la creación de suscripciones. Debe "
+"tenerlo habilitado en su cuenta autorizada para que pueda funcionar."
 
 #: modules/authorizenet/config.py:110
 msgid "Submit to URL (ARB)"
@@ -480,8 +473,7 @@ msgstr "Mandar solicitudes da pago a la URL de prueba (ARB)"
 #: modules/authorizenet/config.py:119
 msgid "This is the address to submit test transactions for ARB."
 msgstr ""
-"Esta es la dirección para enviar las transacciones de prueba para la "
-"ARB."
+"Esta es la dirección para enviar las transacciones de prueba para la ARB."
 
 #: modules/authorizenet/processor.py:37 modules/authorizenet/processor.py:87
 #: modules/cybersource/processor.py:109 modules/sagepay/processor.py:138
@@ -552,10 +544,10 @@ msgid ""
 "Authenticate on the card entry page, causes an immediate $.01 AUTH and "
 "release, allowing errors with the card to show on the card entry page."
 msgstr ""
-"Autenticarse en la página donde se llenan los datos de la tarjeta. "
-"Esto provoca un AUTH inmediato (de $ 0.01) y la liberación del mismo, "
-"lo que permite mostrar si hay errores con la tarjeta inmediatamente "
-"después de haber llenado y mandado los datos de la misma."
+"Autenticarse en la página donde se llenan los datos de la tarjeta. Esto "
+"provoca un AUTH inmediato (de $ 0.01) y la liberación del mismo, lo que "
+"permite mostrar si hay errores con la tarjeta inmediatamente después de "
+"haber llenado y mandado los datos de la misma."
 
 #: modules/dummy/processor.py:36
 msgid "Bad CCV - order declined"
@@ -575,12 +567,12 @@ msgstr "Conjunto de caracteres"
 
 #: modules/giftcertificate/config.py:12
 msgid ""
-"The characters allowable in randomly-generated certficate codes.  No "
-"vowels means no unfortunate words."
+"The characters allowable in randomly-generated certficate codes.  No vowels "
+"means no unfortunate words."
 msgstr ""
-"Los caracteres permitidos al generar al azar los códigos de "
-"certificados. Mientras menos vocales menor es el riesgo de que se "
-"generen palabras no deseadas."
+"Los caracteres permitidos al generar al azar los códigos de certificados. "
+"Mientras menos vocales menor es el riesgo de que se generen palabras no "
+"deseadas."
 
 #: modules/giftcertificate/config.py:22
 msgid "Code format"
@@ -591,8 +583,8 @@ msgid ""
 "Enter the format for your cert code.  Use a '^' for the location of a "
 "randomly generated character."
 msgstr ""
-"Introduzca el formato para los códigos de los certificados. Use un '^'"
-" para la ubicación de un carácter generado al azar."
+"Introduzca el formato para los códigos de los certificados. Use un '^' para "
+"la ubicación de un carácter generado al azar."
 
 #: modules/giftcertificate/forms.py:9
 msgid "Code"
@@ -829,18 +821,18 @@ msgid ""
 "You are about to use Gift certificate #%(giftcode)s which has "
 "%(certbalance)s total available to pay for your order."
 msgstr ""
-"Usted está a punto de usar el certificado de regalo #%(giftcode)s que "
-"tiene un total de %(certbalance)s disponible para pagar su pedido."
+"Usted está a punto de usar el certificado de regalo #%(giftcode)s que tiene "
+"un total de %(certbalance)s disponible para pagar su pedido."
 
 #: modules/giftcertificate/templates/shop/checkout/confirm.html:22
 msgid ""
-"If there isn't enough remaining to pay for the whole order, you'll be "
-"able to select another form of payment for the balance after you use "
-"this gift certificate."
+"If there isn't enough remaining to pay for the whole order, you'll be able "
+"to select another form of payment for the balance after you use this gift "
+"certificate."
 msgstr ""
-"Si no hay suficiente saldo para pagar por todo el pedido, podrá "
-"seleccionar otra forma de pago por el saldo restante después de usar "
-"este certificado de regalo."
+"Si no hay suficiente saldo para pagar por todo el pedido, podrá seleccionar "
+"otra forma de pago por el saldo restante después de usar este certificado de "
+"regalo."
 
 #: modules/giftcertificate/templates/shop/checkout/giftcertificate/confirm.html:6
 msgid "Please Note:"
@@ -849,11 +841,11 @@ msgstr "Tenga en cuenta:"
 #: modules/giftcertificate/templates/shop/checkout/giftcertificate/confirm.html:19
 #, python-format
 msgid ""
-"About to use your gift certificate: %(giftcode)s, which has a balance "
-"of %(balance)s."
+"About to use your gift certificate: %(giftcode)s, which has a balance of "
+"%(balance)s."
 msgstr ""
-"Está utilizando su certificado de regalo: %(giftcode)s, que tiene un "
-"saldo de %(balance)s."
+"Está utilizando su certificado de regalo: %(giftcode)s, que tiene un saldo "
+"de %(balance)s."
 
 #: modules/giftcertificate/templates/shop/checkout/giftcertificate/confirm.html:23
 msgid "About to use INVALID gift certificate"
@@ -879,11 +871,11 @@ msgstr "Plantilla XML"
 
 #: modules/google/config.py:16
 msgid ""
-"The XML template to use when submitting to Google. Probably you should "
-"not change this."
+"The XML template to use when submitting to Google. Probably you should not "
+"change this."
 msgstr ""
-"La plantilla XML que se utilizará al enviar a Google. Probablemente no"
-" debería cambiar esto."
+"La plantilla XML que se utilizará al enviar a Google. Probablemente no "
+"debería cambiar esto."
 
 #: modules/google/config.py:22
 msgid "Currency code for Google Checkout transactions."
@@ -994,13 +986,12 @@ msgstr "URL de regreso"
 
 #: modules/paypal/config.py:43
 msgid ""
-"Where Paypal will return the customer after the purchase is complete.  "
-"This can be a named url and defaults to the standard checkout success."
+"Where Paypal will return the customer after the purchase is complete.  This "
+"can be a named url and defaults to the standard checkout success."
 msgstr ""
-"La URL a donde Paypal redireccionará al cliente después de haber "
-"completado la venta. Se puede especificar una URL o en su defecto (si "
-"se deja en blanco) es la URL de la página de éxito al finalizar la "
-"venta."
+"La URL a donde Paypal redireccionará al cliente después de haber completado "
+"la venta. Se puede especificar una URL o en su defecto (si se deja en "
+"blanco) es la URL de la página de éxito al finalizar la venta."
 
 #: modules/paypal/views.py:53 modules/sermepa/views.py:71 views/confirm.py:212
 msgid "Your order is no longer valid."
@@ -1056,16 +1047,15 @@ msgstr "¿Saltarse el envío de la transacción?"
 
 #: modules/sagepay/config.py:32
 msgid ""
-"For testing only, this will skip actually posting to Sage Pay servers."
-"  This is because their servers restrict IPs of posting servers, even "
-"for tests.  If you are developing on a desktop, you'll have to enable "
-"this."
+"For testing only, this will skip actually posting to Sage Pay servers.  This "
+"is because their servers restrict IPs of posting servers, even for tests.  "
+"If you are developing on a desktop, you'll have to enable this."
 msgstr ""
-"Solo para probar. Esto evitará mandar una solicitud a los servidores "
-"de Sage Pay. Esto es necesario ya que sus servidores restringen las "
-"IPs de los servidores que mandan la solicitud. Si Ud. está tratando de"
-" mandar una solicitud de prueba desde su PC, tendrá que activar "
-"probablemente esta opción."
+"Solo para probar. Esto evitará mandar una solicitud a los servidores de Sage "
+"Pay. Esto es necesario ya que sus servidores restringen las IPs de los "
+"servidores que mandan la solicitud. Si Ud. está tratando de mandar una "
+"solicitud de prueba desde su PC, tendrá que activar probablemente esta "
+"opción."
 
 #: modules/sagepay/config.py:37
 msgid "Payment Capture"
@@ -1074,12 +1064,12 @@ msgstr "Captura de pago"
 #: modules/sagepay/config.py:38
 msgid ""
 "This can be \"Payment\" which captures immediately, or \"Deferred\".  Note "
-"that you can only use the latter if you set option on your Sage pay "
-"account first."
+"that you can only use the latter if you set option on your Sage pay account "
+"first."
 msgstr ""
-"Esto puede ser \"Pago\", que se captura de inmediato, o \"Diferido\". "
-"Tenga en cuenta que sólo se puede utilizar este último si se establece"
-" de antemano esta opción en la cuenta de Sage."
+"Esto puede ser \"Pago\", que se captura de inmediato, o \"Diferido\". Tenga "
+"en cuenta que sólo se puede utilizar este último si se establece de antemano "
+"esta opción en la cuenta de Sage."
 
 #: modules/sagepay/config.py:82
 msgid "Your Vendor Name"
@@ -1087,11 +1077,11 @@ msgstr "Su Nombre de proveedor"
 
 #: modules/sagepay/config.py:84
 msgid ""
-"This is used for Live and Test transactions.  Make sure to add your "
-"server IP address to VSP, or it won't work."
+"This is used for Live and Test transactions.  Make sure to add your server "
+"IP address to VSP, or it won't work."
 msgstr ""
-"Esto se utiliza para transacciones reales y de prueba. Asegúrese de "
-"añadir su dirección de IP del servidor de VSP, o no funcionará."
+"Esto se utiliza para transacciones reales y de prueba. Asegúrese de añadir "
+"su dirección de IP del servidor de VSP, o no funcionará."
 
 #: modules/sagepay/config.py:88
 msgid "Simulator Vendor Name"
@@ -1099,14 +1089,13 @@ msgstr "Nombre de proveedor simulado"
 
 #: modules/sagepay/config.py:90
 msgid ""
-"This is used for Live and Test transactions.  Make sure to activate the"
-" VSP Simulator (you have to directly request it) and add your server IP"
-" address to the VSP Simulator, or it won't work."
+"This is used for Live and Test transactions.  Make sure to activate the VSP "
+"Simulator (you have to directly request it) and add your server IP address "
+"to the VSP Simulator, or it won't work."
 msgstr ""
-"Esto se utiliza para transacciones reales y de prueba. Asegúrese de "
-"activar el simulador de VSP (hay que solicitarlo directamente) y "
-"añadir su dirección de IP del servidor al simulador de VSP, o no "
-"funcionará."
+"Esto se utiliza para transacciones reales y de prueba. Asegúrese de activar "
+"el simulador de VSP (hay que solicitarlo directamente) y añadir su dirección "
+"de IP del servidor al simulador de VSP, o no funcionará."
 
 #: modules/sagepay/config.py:95
 msgid "Currency code for Sage Pay transactions."
@@ -1115,8 +1104,7 @@ msgstr "Código de moneda para las transacciones de pago Sage."
 #: modules/sagepay/forms.py:82
 msgid "You must provide a starting month when using this type of card."
 msgstr ""
-"Usted debe especificar un mes a iniciar para utilizar este tipo de "
-"tarjeta."
+"Usted debe especificar un mes a iniciar para utilizar este tipo de tarjeta."
 
 #: modules/sagepay/forms.py:88 modules/sagepay/forms.py:101
 msgid "This must be a number"
@@ -1129,14 +1117,13 @@ msgstr "Fuera de rango, debe ser de 1 a 12"
 #: modules/sagepay/forms.py:95
 msgid "You must provide a starting year when using this type of card."
 msgstr ""
-"Usted debe especificar el año de inicio para utilizar este tipo de "
-"tarjeta."
+"Usted debe especificar el año de inicio para utilizar este tipo de tarjeta."
 
 #: modules/sagepay/forms.py:108
 msgid "You must provide an issue number when using this type of card."
 msgstr ""
-"Usted debe proporcionar un número de emisión para utilizar este tipo "
-"de tarjeta."
+"Usted debe proporcionar un número de emisión para utilizar este tipo de "
+"tarjeta."
 
 #: modules/sagepay/processor.py:153
 msgid "TESTING MODE"
@@ -1156,11 +1143,10 @@ msgstr "Transacción 3D Secure expirada. Por favor, inténtelo de nuevo."
 
 #: modules/sagepay/views.py:58
 msgid ""
-"3D Secure transaction was not approved by payment gateway. Please "
-"contact us."
+"3D Secure transaction was not approved by payment gateway. Please contact us."
 msgstr ""
-"La transacción 3D Secure no fue aprobada por el gateway. Por favor, "
-"póngase en contacto con nosotros."
+"La transacción 3D Secure no fue aprobada por el gateway. Por favor, póngase "
+"en contacto con nosotros."
 
 #: modules/sermepa/config.py:17
 msgid "SERMEPA (ServiRed) Payment Module Settings"
@@ -1200,11 +1186,10 @@ msgstr "Título comercial"
 
 #: modules/sermepa/config.py:77
 msgid ""
-"Description of your shop which will be visible on payment confirmation "
-"screen"
+"Description of your shop which will be visible on payment confirmation screen"
 msgstr ""
-"Descripción de su tienda, que será visible en la pantalla de "
-"confirmación del pago"
+"Descripción de su tienda, que será visible en la pantalla de confirmación "
+"del pago"
 
 #: modules/sermepa/config.py:85
 msgid "Signature code"
@@ -1221,8 +1206,8 @@ msgstr "Código de firma de prueba"
 #: modules/sermepa/config.py:93
 msgid "Your secret code used to sign transaction data in test payments"
 msgstr ""
-"Su código secreto, utilizado para firmar los datos de transacciones en"
-" los pagos de prueba"
+"Su código secreto, utilizado para firmar los datos de transacciones en los "
+"pagos de prueba"
 
 #: modules/sermepa/config.py:99
 msgid "Extended signature calculation"
@@ -1230,15 +1215,13 @@ msgstr "Cálculo extendido de la firma"
 
 #: modules/sermepa/config.py:100
 msgid ""
-"Consult your Sermepa documentation to know the differences between "
-"normal and extended signature calculation, and ask your provider which "
-"type of signature expects you to use. If possible, use extended "
-"signature."
+"Consult your Sermepa documentation to know the differences between normal "
+"and extended signature calculation, and ask your provider which type of "
+"signature expects you to use. If possible, use extended signature."
 msgstr ""
-"Consulte la documentación de Sermepa para conocer las diferencias "
-"entre el cálculo de firma normal y el extendido, y pregunte a su "
-"proveedor qué tipo de firma espera que usted use. Si es posible, "
-"utilice la firma extendida."
+"Consulte la documentación de Sermepa para conocer las diferencias entre el "
+"cálculo de firma normal y el extendido, y pregunte a su proveedor qué tipo "
+"de firma espera que usted use. Si es posible, utilice la firma extendida."
 
 #: modules/sermepa/config.py:108
 msgid "Terminal number"
@@ -1271,8 +1254,7 @@ msgstr "URL de redireccionamiento "
 #: modules/sermepa/config.py:142
 msgid "Callback URL for on-line notifications about payment progress"
 msgstr ""
-"URL para mostrar las notificaciones en línea sobre el progreso del "
-"pago"
+"URL para mostrar las notificaciones en línea sobre el progreso del pago"
 
 #: modules/sermepa/config.py:149
 msgid "OK URL"
@@ -1281,8 +1263,7 @@ msgstr "URL de éxito"
 #: modules/sermepa/config.py:150
 msgid "URL for customer to return after successful payment"
 msgstr ""
-"URL para redireccionar al cliente tras haber realizado un pago con "
-"éxito"
+"URL para redireccionar al cliente tras haber realizado un pago con éxito"
 
 #: modules/sermepa/config.py:157
 msgid "Failure URL"
@@ -1437,14 +1418,14 @@ msgid ""
 "The following error was returned while trying to process your payment. "
 "Please correct and resubmit."
 msgstr ""
-"Ha ocurrido un error al intentar procesar su pago. Por favor corríjalo"
-" y reenvíe el formulario."
+"Ha ocurrido un error al intentar procesar su pago. Por favor corríjalo y "
+"reenvíe el formulario."
 
 #: templates/shop/checkout/base_confirm.html:25
 msgid "Please validate the following information, then submit your order."
 msgstr ""
-"Por favor, valide la siguiente información, después vuelva a enviar el"
-" pedido."
+"Por favor, valide la siguiente información, después vuelva a enviar el "
+"pedido."
 
 #: templates/shop/checkout/base_confirm.html:41
 #: templates/shop/checkout/google/confirm.html:17
@@ -1458,8 +1439,7 @@ msgstr "Comprar artículos"
 #: templates/shop/checkout/base_pay_ship.html:19
 #: templates/shop/checkout/form.html:22
 msgid ""
-"Please complete the following information in order to submit your "
-"order."
+"Please complete the following information in order to submit your order."
 msgstr "Por favor, complete la siguiente información para enviar su pedido."
 
 #: templates/shop/checkout/base_pay_ship.html:22
@@ -1487,11 +1467,11 @@ msgstr "No hay artículos para enviar en este pedido."
 
 #: templates/shop/checkout/base_pay_ship.html:66
 msgid ""
-"No valid shipping method is available. Please verify that your address "
-"is correct."
+"No valid shipping method is available. Please verify that your address is "
+"correct."
 msgstr ""
-"No hay ninguna forma de envío válida disponible. Por favor, verifique "
-"que su dirección sea correcta."
+"No hay ninguna forma de envío válida disponible. Por favor, verifique que su "
+"dirección sea correcta."
 
 #: templates/shop/checkout/base_pay_ship.html:68
 msgid "Confirm"
@@ -1501,21 +1481,21 @@ msgstr "Confirmar"
 #: templates/shop/checkout/cod/confirm.html:6
 #: templates/shop/checkout/sagepay/confirm.html:6
 msgid ""
-"The following error was returned while trying to process your card.  "
-"Please correct and resubmit"
+"The following error was returned while trying to process your card.  Please "
+"correct and resubmit"
 msgstr ""
-"El siguiente error ocurrió al intentar procesar los datos de su "
-"tarjeta. Por favor, corríjalo y vuelva a intentarlo"
+"El siguiente error ocurrió al intentar procesar los datos de su tarjeta. Por "
+"favor, corríjalo y vuelva a intentarlo"
 
 #: templates/shop/checkout/confirm.html:20
 #: templates/shop/checkout/sagepay/confirm.html:19
 #, python-format
 msgid ""
-"Your %(credit_card_type)s card ending in %(credit_card_number)s will be"
-" charged %(order_total)s."
+"Your %(credit_card_type)s card ending in %(credit_card_number)s will be "
+"charged %(order_total)s."
 msgstr ""
-"Se cargará un total de %(order_total)s a su tarjeta "
-"%(credit_card_type)s con terminación %(credit_card_number)s."
+"Se cargará un total de %(order_total)s a su tarjeta %(credit_card_type)s con "
+"terminación %(credit_card_number)s."
 
 #: templates/shop/checkout/confirm.html:22
 #: templates/shop/checkout/purchaseorder/confirm.html:15
@@ -1525,11 +1505,11 @@ msgstr "Este pedido se cargará a su cuenta con un total de %(order_total)s ."
 
 #: templates/shop/checkout/empty_cart.html:12
 msgid ""
-"Your cart is empty. Please add some items to your cart, then complete "
-"the checkout process."
+"Your cart is empty. Please add some items to your cart, then complete the "
+"checkout process."
 msgstr ""
-"Su cesta de compras está vacía. Por favor, añada primero los artículos"
-" a la cesta y luego finalice la venta."
+"Su cesta de compras está vacía. Por favor, añada primero los artículos a la "
+"cesta y luego finalice la venta."
 
 #: templates/shop/checkout/failure.html:11
 msgid "Failed payment"
@@ -1550,16 +1530,15 @@ msgstr "ir a la cesta"
 #: templates/shop/checkout/failure.html:13
 msgid "and check out again, using other payment method."
 msgstr ""
-"y comenzar la pasarela de compra de nuevo, utilizando otro método de "
-"pago."
+"y comenzar la pasarela de compra de nuevo, utilizando otro método de pago."
 
 #: templates/shop/checkout/form.html:33
 msgid ""
-"If you already have an account, you can login now to fill in most of "
-"the information below."
+"If you already have an account, you can login now to fill in most of the "
+"information below."
 msgstr ""
-"Si ya tiene una cuenta, puede iniciar sesión ahora para completar la "
-"mayor parte de la información a continuación."
+"Si ya tiene una cuenta, puede iniciar sesión ahora para completar la mayor "
+"parte de la información a continuación."
 
 #: templates/shop/checkout/form.html:34
 msgid "This is just a convenience, no account is required!"
@@ -1631,11 +1610,11 @@ msgstr "¡Gracias por su pedido!"
 
 #: templates/shop/checkout/success.html:14
 msgid ""
-"Please print out this page as a receipt.  You will also receive an "
-"email with this information."
+"Please print out this page as a receipt.  You will also receive an email "
+"with this information."
 msgstr ""
-"Por favor imprima esta página como un recibo. También recibirá un "
-"correo electrónico con esta información."
+"Por favor imprima esta página como un recibo. También recibirá un correo "
+"electrónico con esta información."
 
 #: templates/shop/checkout/cod/confirm.html:17
 #, python-format
@@ -1703,8 +1682,8 @@ msgstr "Orden #%(order_id)s "
 
 #: views/balance.py:72 views/balance.py:97
 msgid ""
-"The orderitem you have requested doesn't exist, or you don't have "
-"access to it."
+"The orderitem you have requested doesn't exist, or you don't have access to "
+"it."
 msgstr "El producto que ha solicitado no existe, o no tiene acceso a él."
 
 #: views/balance.py:87
@@ -1718,17 +1697,17 @@ msgstr "Pedido enviado correctamente"
 #: views/confirm.py:232
 #, python-format
 msgid ""
-"There are not enough %(prod)s in stock to complete your order. Please "
-"modify your order."
+"There are not enough %(prod)s in stock to complete your order. Please modify "
+"your order."
 msgstr ""
-"No hay suficientes %(prod)s disponibles para completar su pedido. Por "
-"favor, modifique su pedido."
+"No hay suficientes %(prod)s disponibles para completar su pedido. Por favor, "
+"modifique su pedido."
 
 #: views/confirm.py:234
 #, python-format
 msgid ""
-"The following products %(prod)s are no longer available. Please modify "
-"your order."
+"The following products %(prod)s are no longer available. Please modify your "
+"order."
 msgstr ""
 "Los siguientes productos %(prod)s ya no están disponibles. Por favor, "
 "modifique su pedido."

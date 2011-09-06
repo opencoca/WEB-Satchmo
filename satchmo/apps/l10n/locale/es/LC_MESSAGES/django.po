@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Satchmo 0.5-pre\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2011-09-06 07:21+0000\n"
+"POT-Creation-Date: 2011-09-06 13:21+0000\n"
 "PO-Revision-Date: 2011-08-12 19:31\n"
 "Last-Translator: Andrea  de la Huerta <info@metamorfosys.de>\n"
 "Language-Team: Spanish <satchmo-users@googlegroups.com>\n"
@@ -264,4 +264,3 @@ msgstr "Código postal inválido en Canadá"
 #: validators/uspostcode.py:10
 msgid "Invalid ZIP code"
 msgstr "Código postal inválido"
-
