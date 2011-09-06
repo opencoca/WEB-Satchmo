@@ -1670,34 +1670,3 @@ msgstr "No se encuentra ninguna carga de archivos"
 msgid "The product you have requested is not a Configurable Product."
 msgstr "El producto que ha solicitado no es un producto configurable."
 
-#~ msgid "Product Variation"
-#~ msgstr "Imágen del producto"
-
-#~ msgid "Custom Order Product"
-#~ msgstr "Producto Canónico"
-
-#~ msgid "Disconts"
-#~ msgstr "Promociones"
-
-#~ msgid "Used for URLs"
-#~ msgstr "Usado para URLs"
-
-#~ msgid "The order they will be displayed on the screen"
-#~ msgstr "El órden en el que aparecerán en pantalla"
-
-#~ msgid ""
-#~ "This is a short, descriptive name of the shirt that will be used in the"
-#~ " URL link to this item"
-#~ msgstr "Un nombre corto y descriptivo que será usado en la URL del producto"
-
-#~ msgid "Create Sub Items"
-#~ msgstr "Crear objectos derivados"
-
-#~ msgid "Create new sub-items"
-#~ msgstr "Crear nuevo objeto derivado"
-
-#~ msgid "Leave blank to delete"
-#~ msgstr "Dejar en blanco para borrar"
-
-#~ msgid "Display Order"
-#~ msgstr "Órden mostrado"
