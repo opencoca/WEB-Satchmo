@@ -350,6 +350,8 @@ Prerequisites
 
   - You must have a merchant id assigned by Canada Post to  use the module in production environment. Visit
     http://www.canadapost.ca/business/default-e.asp for more information.
+    
+  - You must fill out the "Home > Shop > Store Configurations" information and most specifically the postal/zip code.
 
 Notes
 
