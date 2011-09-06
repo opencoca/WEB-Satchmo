@@ -25,6 +25,7 @@ from satchmo_store.shop.models import Order, Cart
 from satchmo_store.shop.satchmo_settings import get_satchmo_setting
 from satchmo_utils.dynamic import lookup_url, lookup_template
 from django.views.decorators.csrf import csrf_exempt  
+from satchmo_utils.views import bad_or_missing
 
 import logging
 try:
@@ -215,3 +216,38 @@ def notify_callback(request):
     for cart in Cart.objects.filter(customer=order.contact):
         cart.empty()
     return HttpResponse()
+    
+
+def success(request):
+    """
+    The order has been succesfully processed.
+    We clear out the cart but let the payment processing get called by IPN
+    """
+    try:
+        order = Order.objects.from_request(request)
+    except Order.DoesNotExist:
+        return bad_or_missing(request, _('Your order has already been processed.'))
+
+    # Added to track total sold for each product
+    for item in order.orderitem_set.all():
+        product = item.product
+        product.total_sold += item.quantity
+        product.items_in_stock -= item.quantity
+        product.save()
+
+    log.warning('El contacto es %s' % order.contact)
+    # Clean up cart now, the rest of the order will be cleaned on paypal IPN
+    for cart in Cart.objects.filter(customer=order.contact):
+        log.warning('Procesando item cart %s' % cart.pk)
+        cart.empty()
+
+    del request.session['orderID']
+    log.warning(request.session)
+    context = RequestContext(request, {'order': order})
+    return render_to_response('shop/checkout/success.html', context)
+
+success = never_cache(success)
+
+
+
+
