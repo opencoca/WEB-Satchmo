@@ -896,7 +896,7 @@ msgstr "Estimado(a) %(first_name)s %(last_name)s,"
 #: templates/registration/welcome.txt:3
 #, python-format
 msgid "Thank you for signing up with %(shop_name)s."
-msgstr "Gracias por registrarse en %(shop_name)s ."
+msgstr "Gracias por registrarse en %(shop_name)s."
 
 #: templates/registration/welcome.txt:5
 msgid "Your new username is this email address, and you can login at"
@@ -912,104 +912,3 @@ msgstr "Saludos"
 msgid "Store Management"
 msgstr "La Administración"
 
-#~ msgid "---Please Select---"
-#~ msgstr "--- Seleccione ---"
-
-#~ msgid "Shipping Address"
-#~ msgstr "Dirección de Envío"
-
-#~ msgid "E-mail address"
-#~ msgstr "Dirección de Facturación"
-
-#~ msgid "Quantity"
-#~ msgstr "Cantidad"
-
-#~ msgid "Customer"
-#~ msgstr "Cliente"
-
-#~ msgid "Distributor"
-#~ msgstr "Distribuidor"
-
-#~ msgid "Company"
-#~ msgstr "Empresa"
-
-#~ msgid "Government"
-#~ msgstr "Gobierno"
-
-#~ msgid "Non-profit"
-#~ msgstr "ONG"
-
-#~ msgid "Manufacturer"
-#~ msgstr "Fabricante"
-
-#~ msgid "In-person"
-#~ msgstr "En Persona"
-
-#~ msgid "Online"
-#~ msgstr "Internet"
-
-#~ msgid "In Person"
-#~ msgstr "En Persona"
-
-#~ msgid "Show"
-#~ msgstr "Mostrar"
-
-#~ msgid "Temp"
-#~ msgstr "Temporal"
-
-#~ msgid "Pending"
-#~ msgstr "Pendiente"
-
-#~ msgid "In Process"
-#~ msgstr "En Proceso"
-
-#~ msgid "Cash"
-#~ msgstr "Efectivo"
-
-#~ msgid "Credit Card"
-#~ msgstr "Tarjeta de Crédito"
-
-#~ msgid "Check"
-#~ msgstr "Cheque"
-
-#~ msgid "Sub total"
-#~ msgstr "Subtotal"
-
-#~ msgid "Payment"
-#~ msgstr "Pago"
-
-#~ msgid "Payment method"
-#~ msgstr "Método de Pago"
-
-#~ msgid "Shipping Models"
-#~ msgstr "Modelos de Envío"
-
-#~ msgid "Time Stamp"
-#~ msgstr "Fecha y Hora"
-
-#~ msgid "This is automatically set"
-#~ msgstr "Ésto se rellenará automáticamente"
-
-#~ msgid "Totals"
-#~ msgstr "Totales"
-
-#~ msgid "Product Order"
-#~ msgstr "Pedido de Producto"
-
-#~ msgid "Product Orders"
-#~ msgstr "Pedidos de Producto"
-
-#~ msgid "Unit price"
-#~ msgstr "Precio Unitario"
-
-#~ msgid "Line item price"
-#~ msgstr "Precio de la Línea"
-
-#~ msgid "Order Line Items"
-#~ msgstr "Líneas de Pedido"
-
-#~ msgid "Order Status"
-#~ msgstr "Estado de Pedido"
-
-#~ msgid "Order statuses"
-#~ msgstr "Estados de Pedido"

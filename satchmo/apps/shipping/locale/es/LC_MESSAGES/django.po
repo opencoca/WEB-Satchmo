@@ -1,15 +1,15 @@
-#
+# 
 msgid ""
 msgstr ""
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2011-09-06 07:21+0000\n"
-"PO-Revision-Date: 2011-08-08 00:35\n"
+"PO-Revision-Date: 2011-09-06 10:45\n"
 "Last-Translator: Andrea  de la Huerta <info@metamorfosys.de>\n"
 "Language-Team: Spanish <satchmo-users@googlegroups.com>\n"
-"Language: es\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
+"Language: es\n"
 "X-Translated-Using: django-rosetta 0.6.1\n"
 
 #: config.py:7
@@ -25,8 +25,8 @@ msgid ""
 "Select the active shipping modules, save and reload to set any module-"
 "specific shipping settings."
 msgstr ""
-"Seleccione los módulos de transporte activos, grabe y recargue la página "
-"para configurar los módulos específicos de envío."
+"Seleccione los módulos de transporte activos, grabe y recargue la "
+"página para configurar los módulos específicos de envío."
 
 #: config.py:14
 msgid "Per piece"
@@ -39,7 +39,8 @@ msgstr "¿Ocultar único?"
 #: config.py:22
 msgid "Hide shipping form fields if there is only one choice available?"
 msgstr ""
-"¿Ocultar campos del formulario de envío, si sólo hay una opción disponible?"
+"¿Ocultar campos del formulario de envío, si sólo hay una opción "
+"disponible?"
 
 #: config.py:26
 msgid "No"
@@ -55,7 +56,7 @@ msgstr "Mostrar sólo la descripción"
 
 #: config.py:34
 msgid "Download PDFs from admin page"
-msgstr ""
+msgstr "Descargar PDFs desde el admin"
 
 #: config.py:42
 msgid "Select least expensive by default?"
@@ -115,12 +116,12 @@ msgstr "Tiempo de entrega"
 
 #: modules/canadapost/config.py:83
 msgid ""
-"Turn around time in hours. If declared here, this "
-"parameter                     will overwrite the one defined in the "
-"merchant's profile"
+"Turn around time in hours. If declared here, this parameter"
+"                     will overwrite the one defined in the merchant's "
+"profile"
 msgstr ""
-"Tiempo de entrega en horas. Si se declara aquí, este parámetro sobrescribe "
-"el definido en el perfil del comerciante"
+"Tiempo de entrega en horas. Si se declara aquí, este parámetro "
+"sobrescribe el definido en el perfil del comerciante"
 
 #: modules/canadapost/config.py:89 modules/fedex/config.py:94
 #: modules/ups/config.py:112 modules/usps/config.py:99
@@ -129,11 +130,11 @@ msgstr "Logs detallados"
 
 #: modules/canadapost/config.py:90
 msgid ""
-"Send the entire request and response to the log - for debugging help when "
-"setting up Canada Post."
+"Send the entire request and response to the log - for debugging help "
+"when setting up Canada Post."
 msgstr ""
-"Enviar la solicitud y la respuesta completas al log - para asistir en la "
-"depuración a la hora de establecer la conexión con Canada Post."
+"Enviar la solicitud y la respuesta completas al log - para asistir en "
+"la depuración a la hora de establecer la conexión con Canada Post."
 
 #: modules/canadapost/shipper.py:63
 #, python-format
@@ -221,19 +222,19 @@ msgstr "¿Caja individual?"
 
 #: modules/fedex/config.py:89 modules/ups/config.py:72
 msgid ""
-"Use just one box and ship by weight?  If no then every item will be sent in "
-"its own box."
+"Use just one box and ship by weight?  If no then every item will be "
+"sent in its own box."
 msgstr ""
 "¿Utilizar sólo una caja y enviar por peso? Si no, entonces todos los "
 "artículos serán enviados en su propia caja."
 
 #: modules/fedex/config.py:95
 msgid ""
-"Send the entire request and response to the log - for debugging help when "
-"setting up FedEx."
+"Send the entire request and response to the log - for debugging help "
+"when setting up FedEx."
 msgstr ""
-"Enviar la solicitud y la respuesta completas al log - para asistir en la "
-"depuración a la hora de establecer conexión con FedEx."
+"Enviar la solicitud y la respuesta completas al log - para asistir en "
+"la depuración a la hora de establecer conexión con FedEx."
 
 #: modules/fedex/shipper.py:70
 #, python-format
@@ -509,11 +510,11 @@ msgstr "Contraseña de usuario proporcionada por el sitio de UPS."
 
 #: modules/ups/config.py:41
 msgid ""
-"UPS Shipping Choices Available to customers. These are valid domestic codes "
-"only."
+"UPS Shipping Choices Available to customers. These are valid domestic "
+"codes only."
 msgstr ""
-"Opciones de envío disponibles para los clientes de UPS. Códigos válidos sólo "
-"en territorio nacional."
+"Opciones de envío disponibles para los clientes de UPS. Códigos "
+"válidos sólo en territorio nacional."
 
 #: modules/ups/config.py:55 modules/usps/config.py:29
 msgid "Handling Fee"
@@ -522,7 +523,8 @@ msgstr "Cargos por manejo de envío"
 #: modules/ups/config.py:56
 msgid "The cost of packaging and getting the package off"
 msgstr ""
-"El precio del embalaje y hacer llegar el paquete a la oficina de correos"
+"El precio del embalaje y hacer llegar el paquete a la oficina de "
+"correos"
 
 #: modules/ups/config.py:77
 msgid "Time in Transit?"
@@ -530,11 +532,11 @@ msgstr "¿El tiempo de tránsito?"
 
 #: modules/ups/config.py:78
 msgid ""
-"Use the UPS Time In Transit API? It is slower but delivery dates are more "
-"accurate."
+"Use the UPS Time In Transit API? It is slower but delivery dates are "
+"more accurate."
 msgstr ""
-"Utilizar la API de UPS para determinar el tiempo de tránsito? Es más lento, "
-"pero las fechas de entrega son más precisas."
+"Utilizar la API de UPS para determinar el tiempo de tránsito? Es más "
+"lento, pero las fechas de entrega son más precisas."
 
 #: modules/ups/config.py:83
 msgid "UPS Pickup option."
@@ -546,11 +548,11 @@ msgstr "Acceso al servidor de producción de UPS"
 
 #: modules/ups/config.py:113
 msgid ""
-"Send the entire request and response to the log - for debugging help when "
-"setting up UPS."
+"Send the entire request and response to the log - for debugging help "
+"when setting up UPS."
 msgstr ""
-"Enviar la solicitud y la respuesta de la transacción al log - para asistir "
-"en la depuración a la hora de establecer conexión con UPS."
+"Enviar la solicitud y la respuesta de la transacción al log - para "
+"asistir en la depuración a la hora de establecer conexión con UPS."
 
 #: modules/ups/shipper.py:83
 #, python-format
@@ -584,7 +586,8 @@ msgstr "Contraseña proporcionada por el sitio de USPS."
 #: modules/usps/config.py:30
 msgid "The cost of packaging and taking order to post office"
 msgstr ""
-"El precio del embalaje y hacer llegar el pedido a la oficina de correos"
+"El precio del embalaje y hacer llegar el pedido a la oficina de "
+"correos"
 
 #: modules/usps/config.py:35
 msgid "USPS Shipping Choices Available to customers."
@@ -600,11 +603,11 @@ msgstr "Enviar a una URL de prueba"
 
 #: modules/usps/config.py:100
 msgid ""
-"Send the entire request and response to the log - for debugging help when "
-"setting up USPS."
+"Send the entire request and response to the log - for debugging help "
+"when setting up USPS."
 msgstr ""
-"Enviar la solicitud y la respuesta de la transacción al log - para asistir "
-"en la depuración a la hora de establecer conexión con USPS."
+"Enviar la solicitud y la respuesta de la transacción al log - para "
+"asistir en la depuración a la hora de establecer conexión con USPS."
 
 #: modules/usps/shipper.py:129
 #, python-format

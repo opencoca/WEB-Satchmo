@@ -485,17 +485,3 @@ msgstr "Límite de impuestos"
 msgid "Tax Boundries"
 msgstr "Límites de impuestos"
 
-#~ msgid "Title"
-#~ msgstr "Título"
-
-#~ msgid "Displayed title of this tax"
-#~ msgstr "Título mostrado de éste impuesto"
-
-#~ msgid "Description"
-#~ msgstr "Descripción"
-
-#~ msgid "Description of products that would be taxed"
-#~ msgstr "Descripción de los productos que conllevarían impuestos"
-
-#~ msgid "tax class"
-#~ msgstr "Tipo de impuesto"
