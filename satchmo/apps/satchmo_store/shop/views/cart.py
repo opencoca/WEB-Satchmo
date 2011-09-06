@@ -98,7 +98,7 @@ def _set_quantity(request, force_delete=False):
             stock = cartitem.product.items_in_stock
             log.debug('checking stock quantity.  Have %d, need %d', stock, qty)
             if stock < qty:
-                return (False, cart, cartitem, _("Unfortunately we only have %d '%s' in stock.") % (stock, cartitem.product.translated_name()))
+                return (False, cart, cartitem, _("Unfortunately we only have %(stock)d '%(cartitem_name)s' in stock.") % {'stock': stock, 'cartitem_name': cartitem.product.translated_name()})
 
         cartitem.quantity = round_decimal(qty, places=cartplaces)
         cartitem.save()
