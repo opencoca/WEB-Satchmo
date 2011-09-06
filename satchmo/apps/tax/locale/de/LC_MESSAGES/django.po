@@ -7,10 +7,11 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2010-02-28 19:51-0600\n"
+"POT-Creation-Date: 2011-09-06 07:20+0000\n"
 "PO-Revision-Date: 2010-03-01 16:59+0100\n"
 "Last-Translator: Martin Bornhold <mb@bo-tech.de>\n"
 "Language-Team: \n"
+"Language: \n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
@@ -63,20 +64,20 @@ msgstr "Wird nur genutzt, wenn Steuern auf Basis von Adressen berechnet wird."
 msgid "You must choose a zone or a country."
 msgstr "Sie müssen eine Zone oder ein Land wählen."
 
-#: modules/area/config.py:6
+#: modules/area/config.py:5
 msgid "By Country/Area"
 msgstr "Nach Land/Gebiet"
 
-#: modules/area/config.py:12 modules/percent/config.py:19
+#: modules/area/config.py:11 modules/percent/config.py:19
 msgid "Tax Shipping?"
 msgstr "Steuer auf Lieferkosten?"
 
-#: modules/area/config.py:21 modules/us_sst/config.py:21
+#: modules/area/config.py:20 modules/us_sst/config.py:23
 #, fuzzy
 msgid "TaxClass for shipping"
 msgstr "Steuer auf Lieferkosten?"
 
-#: modules/area/config.py:22 modules/us_sst/config.py:22
+#: modules/area/config.py:21 modules/us_sst/config.py:24
 msgid "Select a TaxClass that should be applied for shipments."
 msgstr ""
 
@@ -128,11 +129,11 @@ msgstr ""
 msgid "Address rocord needs: low, high, street, city, zip, zip+4"
 msgstr ""
 
-#: modules/us_sst/config.py:5
+#: modules/us_sst/config.py:7
 msgid "USA: Streamlined Sales Tax"
 msgstr ""
 
-#: modules/us_sst/config.py:12
+#: modules/us_sst/config.py:14
 msgid "Tax Shipping in ANY jurisdiction?"
 msgstr ""
 

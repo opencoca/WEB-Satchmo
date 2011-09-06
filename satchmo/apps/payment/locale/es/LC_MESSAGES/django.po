@@ -8,8 +8,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Satchmo 0.5-pre\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2011-06-12 08:29+0000\n"
-"PO-Revision-Date: 2011-08-08 06:18\n"
+"POT-Creation-Date: 2011-09-06 07:21+0000\n"
+"PO-Revision-Date: 2011-09-06 10:46\n"
 "Last-Translator: Andrea  de la Huerta <info@metamorfosys.de>\n"
 "Language-Team: Spanish <satchmo-users@googlegroups.com>\n"
 "MIME-Version: 1.0\n"
@@ -20,7 +20,7 @@ msgstr ""
 
 #: config.py:11
 msgid "Payment Settings"
-msgstr "Condiciones de Pago"
+msgstr "Ajustes de Forma de Pago"
 
 #: config.py:16
 msgid "Cron Passkey"
@@ -66,7 +66,7 @@ msgstr ""
 
 #: config.py:40
 msgid "Email owner?"
-msgstr "¿Mandar correo electrónico al propietario?"
+msgstr "¿Mandar correo al propietario?"
 
 #: config.py:41
 msgid "True if you want to email the owner on order"
@@ -124,7 +124,9 @@ msgstr "Pedido mínimo"
 
 #: config.py:71
 msgid "The minimum cart total before checkout is allowed."
-msgstr "El total de compra mínima antes de que se permita finalizar la compra."
+msgstr ""
+"El total de compra mínima para poder entrar a la pasarela de compra y "
+"finalizar el pedido."
 
 #: config.py:76
 msgid "Save Credit Card Numbers"
@@ -219,7 +221,7 @@ msgstr "términos y condiciones"
 #: listeners.py:21
 #, python-format
 msgid "Do you accept the %(terms_link)s?"
-msgstr "¿Acepta los %(TERMS_LINK)s ?"
+msgstr "¿Acepta los %(terms_link)s?"
 
 #: models.py:29
 msgid "Description"
@@ -267,11 +269,11 @@ msgstr "Tarjeta de crédito cifrada"
 
 #: models.py:53
 msgid "Expiration Month"
-msgstr "Mes de Caducidad"
+msgstr "Mes de vencimiento"
 
 #: models.py:54
 msgid "Expiration Year"
-msgstr "Año de Caducidad"
+msgstr "Año de vencimiento"
 
 #: models.py:55
 msgid "card_holder Name"
@@ -638,7 +640,7 @@ msgstr "Correo electrónico"
 
 #: modules/giftcertificate/models.py:43
 msgid "Starting Balance"
-msgstr "Balance inicial"
+msgstr "Saldo inicial"
 
 #: modules/giftcertificate/models.py:98
 #: modules/giftcertificate/templates/giftcertificate/_order_summary.html:7
@@ -709,7 +711,7 @@ msgstr "Para: %(recipient)s "
 #: modules/giftcertificate/templates/giftcertificate/_order_summary.html:15
 #, python-format
 msgid "Starting Balance: %(start_balance)s"
-msgstr "Balance inicial: %(start_balance)s "
+msgstr "Saldo inicial: %(start_balance)s "
 
 #: modules/giftcertificate/templates/giftcertificate/_order_summary.html:19
 #, python-format
@@ -1512,8 +1514,8 @@ msgid ""
 "Your %(credit_card_type)s card ending in %(credit_card_number)s will be"
 " charged %(order_total)s."
 msgstr ""
-"Ihre %(credit_card_type)s Karte mit der Endung %(credit_card_number)s "
-"wird mit %(order_total)s belastet."
+"Se cargará un total de %(order_total)s a su tarjeta "
+"%(credit_card_type)s con terminación %(credit_card_number)s."
 
 #: templates/shop/checkout/confirm.html:22
 #: templates/shop/checkout/purchaseorder/confirm.html:15
@@ -1589,7 +1591,7 @@ msgstr "Nombre"
 
 #: templates/shop/checkout/form.html:63
 msgid "Last name"
-msgstr "Apellido"
+msgstr "Apellido(s)"
 
 #: templates/shop/checkout/form.html:66
 msgid "Phone number"
@@ -1652,6 +1654,15 @@ msgstr "Pago rápido a través de Google"
 msgid "Your payment will be processed through PayPal."
 msgstr "Su pago será procesado a través de PayPal."
 
+#: templates/shop/checkout/paypal/confirm.html:58
+#, python-format
+msgid "Remaining Balance for order %(order_id)s"
+msgstr "Saldo restante del pedido %(order_id)s"
+
+#: templates/shop/checkout/paypal/confirm.html:73
+msgid "Shipping for free items"
+msgstr "Envío de artículos gratis"
+
 #: templates/shop/checkout/purchaseorder/pay_ship.html:9
 msgid "Purchase Order #"
 msgstr "Orden de Compra #"
@@ -1679,6 +1690,16 @@ msgstr "Autenticar"
 #: templates/shop/checkout/sermepa/confirm.html:11
 msgid "Your payment will be processed through Sermepa."
 msgstr "Su pago será procesado a través de Sermepa."
+
+#: templates/shop/checkout/sermepa/confirm.html:32
+#, python-format
+msgid "Remaining Balance for order #%(order_id)s"
+msgstr "Saldo restante del pedido #%(order_id)s"
+
+#: templates/shop/checkout/sermepa/confirm.html:34
+#, python-format
+msgid "Order #%(order_id)s"
+msgstr "Orden #%(order_id)s "
 
 #: views/balance.py:72 views/balance.py:97
 msgid ""
@@ -1727,9 +1748,3 @@ msgstr "Pedido de renovación de la suscripción enviado con éxito"
 #: views/payship.py:23
 msgid "Please Select"
 msgstr "Seleccionar"
-
-#~ msgid "Visa"
-#~ msgstr "Visa"
-
-#~ msgid "Mastercard"
-#~ msgstr "Mastercard"

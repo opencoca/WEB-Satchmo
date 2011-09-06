@@ -7,10 +7,11 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2010-02-28 19:51-0600\n"
+"POT-Creation-Date: 2011-09-06 07:20+0000\n"
 "PO-Revision-Date: 2010-03-01 16:59+0100\n"
 "Last-Translator: Martin Bornhold <mb@bo-tech.de>\n"
 "Language-Team: \n"
+"Language: \n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
@@ -23,14 +24,6 @@ msgstr ""
 #: numbers.py:35
 msgid "Please enter a positive number"
 msgstr "Bitte geben Sie eine positive Zahl ein"
-
-#: validators.py:5
-msgid "Please enter one and only one of those fields."
-msgstr ""
-
-#: validators.py:15
-msgid "These fields can not be the same."
-msgstr ""
 
 #: views.py:103
 msgid "Card type does not match card number."
@@ -64,7 +57,7 @@ msgstr "Produktbilder umbenennen?"
 msgid "Automatically rename product images on upload?"
 msgstr "Produktbilder automatisch umbenennen beim Hochladen?"
 
-#: thumbnail/widgets.py:21
+#: thumbnail/widgets.py:20
 msgid "Change:"
 msgstr "Ändern:"
 
