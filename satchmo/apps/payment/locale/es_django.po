@@ -9,7 +9,7 @@ msgstr ""
 "Project-Id-Version: Satchmo 0.5-pre\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2011-06-12 08:29+0000\n"
-"PO-Revision-Date: 2011-08-08 06:18\n"
+"PO-Revision-Date: 2011-08-08 05:30\n"
 "Last-Translator: Andrea  de la Huerta <info@metamorfosys.de>\n"
 "Language-Team: Spanish <satchmo-users@googlegroups.com>\n"
 "MIME-Version: 1.0\n"
@@ -1451,7 +1451,7 @@ msgstr ""
 #: templates/shop/checkout/sermepa/confirm.html:17
 #: templates/shop/checkout/sermepa/confirm.html:42
 msgid "Purchase Items"
-msgstr "Comprar artículos"
+msgstr "Artículos del pedido"
 
 #: templates/shop/checkout/base_pay_ship.html:19
 #: templates/shop/checkout/form.html:22
