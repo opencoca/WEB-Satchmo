@@ -3,19 +3,19 @@
 # Copyright (C) 2008 Satchmo Project
 # This file is distributed under the same license as the Satchmo package.
 # Christian Hoeppner <hoeppner@gmail.com>, 2007.
-# 
+#
 msgid ""
 msgstr ""
 "Project-Id-Version: Satchmo 0.5-pre\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2011-06-12 08:28+0000\n"
+"POT-Creation-Date: 2011-09-06 07:21+0000\n"
 "PO-Revision-Date: 2011-08-08 02:53\n"
 "Last-Translator: Andrea  de la Huerta <info@metamorfosys.de>\n"
 "Language-Team: Spanish <satchmo-users@googlegroups.com>\n"
+"Language: es\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"Language: es\n"
 "X-Translated-Using: django-rosetta 0.6.1\n"
 
 #: config.py:9
@@ -24,11 +24,11 @@ msgstr "Sólo los usuarios autentificados pueden finalizar una venta"
 
 #: config.py:10
 msgid ""
-"Users will be required to authenticate (and create an account if "
-"neccessary) before checkout."
+"Users will be required to authenticate (and create an account if neccessary) "
+"before checkout."
 msgstr ""
-"Se requerirá a los usuarios que se autentifiquen (y creen una cuenta "
-"si es necesario) antes de comprar."
+"Se requerirá a los usuarios que se autentifiquen (y creen una cuenta si es "
+"necesario) antes de comprar."
 
 #: config.py:18
 msgid "Required billing data"
@@ -36,16 +36,16 @@ msgstr "Datos necesarios de facturación"
 
 #: config.py:20
 msgid ""
-"Users may be required to provide some set of billing address. Other "
-"fields are optional. You may shorten the checkout process here, but be "
-"careful, as this may leave you orders with almost no customer data! "
-"Some payment modules may override this setting."
+"Users may be required to provide some set of billing address. Other fields "
+"are optional. You may shorten the checkout process here, but be careful, as "
+"this may leave you orders with almost no customer data! Some payment modules "
+"may override this setting."
 msgstr ""
-"Se puede requerir a los usuarios que proporcionen algunos de los datos"
-" de facturación. Otros campos son opcionales. Puede acortar el proceso"
-" de compra aquí, ¡pero tenga cuidado, ya que esto puede resultar en "
-"pedidos con muy datos del cliente insuficientes! Algunos módulos de "
-"pago pueden anular esta opción."
+"Se puede requerir a los usuarios que proporcionen algunos de los datos de "
+"facturación. Otros campos son opcionales. Puede acortar el proceso de compra "
+"aquí, ¡pero tenga cuidado, ya que esto puede resultar en pedidos con muy "
+"datos del cliente insuficientes! Algunos módulos de pago pueden anular esta "
+"opción."
 
 #: config.py:26 config.py:69 forms.py:36 models.py:151
 msgid "Email"
@@ -126,11 +126,11 @@ msgstr "Verificación de cuenta"
 
 #: config.py:66
 msgid ""
-"Select the style of account verification.  'Immediate' means no "
-"verification needed."
+"Select the style of account verification.  'Immediate' means no verification "
+"needed."
 msgstr ""
-"Seleccione el estilo de verificación de la cuenta. «Inmediato» "
-"significa que la verificación no es necesaria."
+"Seleccione el estilo de verificación de la cuenta. «Inmediato» significa que "
+"la verificación no es necesaria."
 
 #: config.py:68
 msgid "Immediate"
@@ -142,11 +142,11 @@ msgstr "Registro con Apodo"
 
 #: config.py:75
 msgid ""
-"If checked a user will be able to fill in an individual Nickname-"
-"Username at Account-Registration"
+"If checked a user will be able to fill in an individual Nickname-Username at "
+"Account-Registration"
 msgstr ""
-"Si se selecciona, el usuario podrá seleccionar un nickname a la hora "
-"de registrarse."
+"Si se selecciona, el usuario podrá seleccionar un nickname a la hora de "
+"registrarse."
 
 #: config.py:82
 msgid "Days to verify account"
@@ -484,8 +484,8 @@ msgstr[1] "Por favor corrija los errores siguientes."
 #: templates/contact/login_signup_address.html:51
 msgid "Sign me up for Email Updates about new products and special offers!"
 msgstr ""
-"¡Quiero recibir noticias sobre nuevos productos y ofertas especiales "
-"por correo electrónico!"
+"¡Quiero recibir noticias sobre nuevos productos y ofertas especiales por "
+"correo electrónico!"
 
 #: templates/contact/login_signup.html:53
 #: templates/contact/login_signup_address.html:65
@@ -606,8 +606,7 @@ msgstr "Historial de pedidos"
 
 #: templates/contact/view_profile.html:41
 msgid ""
-"Sorry, the user you've logged in as doesn't have any contact "
-"information."
+"Sorry, the user you've logged in as doesn't have any contact information."
 msgstr ""
 "Lo sentimos, el usuario que el que ha iniciado la sesión no posee "
 "información de contacto."
@@ -643,38 +642,38 @@ msgstr ""
 #: templates/registration/activate.html:21
 #, python-format
 msgid ""
-"Either your activation link was incorrect, or the activation key for "
-"your account has expired. Activation keys are only valid for "
-"%(expiration_days)s days after registration."
+"Either your activation link was incorrect, or the activation key for your "
+"account has expired. Activation keys are only valid for %(expiration_days)s "
+"days after registration."
 msgstr ""
 "Puede ser que su enlace de activación fue incorrecta, o la clave de "
-"activación de su cuenta ha caducado. Las llaves de activación sólo son"
-" válidas por %(expiration_days)s días después del registro."
+"activación de su cuenta ha caducado. Las llaves de activación sólo son "
+"válidas por %(expiration_days)s días después del registro."
 
 #: templates/registration/activation_email.txt:1
 #, python-format
 msgid ""
-"Someone, hopefully you, signed up for a new account at %(site)s using "
-"this email address. If it was you, and you'd like to activate and use "
-"your account, click the link below or copy and paste it into your web "
-"browser's address bar."
+"Someone, hopefully you, signed up for a new account at %(site)s using this "
+"email address. If it was you, and you'd like to activate and use your "
+"account, click the link below or copy and paste it into your web browser's "
+"address bar."
 msgstr ""
-"Alguien ha abierto una nueva cuenta en %(site)s  utilizando esta "
-"dirección de correo electrónico. Si fue usted, y le gustaría activar y"
-" utilizar su cuenta, pulse en el enlace de abajo o copie y pegue el "
-"mismo en la barra de direcciones de su navegador."
+"Alguien ha abierto una nueva cuenta en %(site)s  utilizando esta dirección "
+"de correo electrónico. Si fue usted, y le gustaría activar y utilizar su "
+"cuenta, pulse en el enlace de abajo o copie y pegue el mismo en la barra de "
+"direcciones de su navegador."
 
 #: templates/registration/activation_email.txt:5
 #, python-format
 msgid ""
-"If you didn't request this, you don't need to do anything; you won't "
-"receive any more email from us, and the account will expire "
-"automatically in %(expiration_days)s days."
+"If you didn't request this, you don't need to do anything; you won't receive "
+"any more email from us, and the account will expire automatically in "
+"%(expiration_days)s days."
 msgstr ""
-"Si usted no solicitó esta apertura de cuenta, no es necesario hacer "
-"nada al respecto, simplemente ignore este correo y no recibirá más "
-"correos electrónicos de nosotros y la cuenta caducará automáticamente "
-"en %(expiration_days)s días."
+"Si usted no solicitó esta apertura de cuenta, no es necesario hacer nada al "
+"respecto, simplemente ignore este correo y no recibirá más correos "
+"electrónicos de nosotros y la cuenta caducará automáticamente en "
+"%(expiration_days)s días."
 
 #: templates/registration/login.html:19
 msgid "Password"
@@ -718,11 +717,11 @@ msgstr "Cambiar contraseña"
 
 #: templates/registration/password_change_form.html:13
 msgid ""
-"For the sake of security, please enter your old password, and then "
-"enter your new password twice."
+"For the sake of security, please enter your old password, and then enter "
+"your new password twice."
 msgstr ""
-"Por seguridad, introduzca por favor su contraseña antigua y, a "
-"continuación, introduzca su nueva contraseña dos veces."
+"Por seguridad, introduzca por favor su contraseña antigua y, a continuación, "
+"introduzca su nueva contraseña dos veces."
 
 #: templates/registration/password_change_form.html:20
 msgid "Old password"
@@ -743,8 +742,8 @@ msgstr "Cambiar la contraseña"
 #: templates/registration/password_reset.txt:2
 msgid "You're receiving this e-mail because you requested a password reset"
 msgstr ""
-"Usted ha recibido este correo electrónico porque solicitó un cambio de"
-" contraseña"
+"Usted ha recibido este correo electrónico porque solicitó un cambio de "
+"contraseña"
 
 #: templates/registration/password_reset.txt:3
 #, python-format
@@ -775,8 +774,8 @@ msgstr "Cambio de contraseña completado"
 #: templates/registration/password_reset_complete.html:12
 msgid "Your password has been set.  You may go ahead and log in now."
 msgstr ""
-"Su contraseña se ha establecido. Usted puede seguir adelante e iniciar"
-" sesión ahora."
+"Su contraseña se ha establecido. Usted puede seguir adelante e iniciar "
+"sesión ahora."
 
 #: templates/registration/password_reset_complete.html:14
 msgid "Log in"
@@ -812,12 +811,11 @@ msgstr "Cambio de contraseña sin éxito"
 
 #: templates/registration/password_reset_confirm.html:32
 msgid ""
-"The password reset link was invalid, possibly because it has already "
-"been used.  Please request a new password reset."
+"The password reset link was invalid, possibly because it has already been "
+"used.  Please request a new password reset."
 msgstr ""
-"El enlace para el cambio de contraseña no es válido, posiblemente "
-"debido a que ya se ha utilizado. Por favor, solicite un cambio de "
-"contraseña de nuevo."
+"El enlace para el cambio de contraseña no es válido, posiblemente debido a "
+"que ya se ha utilizado. Por favor, solicite un cambio de contraseña de nuevo."
 
 #: templates/registration/password_reset_done.html:10
 msgid "Password reset successful"
@@ -828,9 +826,8 @@ msgid ""
 "We've e-mailed a new password to the e-mail address you submitted. You "
 "should receive it shortly."
 msgstr ""
-"Hemos enviado una nueva contraseña a la dirección de correo "
-"electrónico especificada. El correo electrónico deberá llegar en "
-"breve."
+"Hemos enviado una nueva contraseña a la dirección de correo electrónico "
+"especificada. El correo electrónico deberá llegar en breve."
 
 #: templates/registration/password_reset_form.html:10
 msgid "Reset your password"
@@ -838,17 +835,17 @@ msgstr "Restablecer su contraseña"
 
 #: templates/registration/password_reset_form.html:12
 msgid ""
-"Forgotten your password? Enter your e-mail address below, and we'll "
-"send a new password to you."
+"Forgotten your password? Enter your e-mail address below, and we'll send a "
+"new password to you."
 msgstr ""
-"¿Olvidó su contraseña? Ingrese su dirección de correo y le enviaremos "
-"una nueva contraseña."
+"¿Olvidó su contraseña? Ingrese su dirección de correo y le enviaremos una "
+"nueva contraseña."
 
 #: templates/registration/password_reset_form.html:20
 msgid "Be sure to enter the same e-mail address you used to register."
 msgstr ""
-"Asegúrese de introducir la misma dirección de correo electrónico que "
-"utilizó para registrarse."
+"Asegúrese de introducir la misma dirección de correo electrónico que utilizó "
+"para registrarse."
 
 #: templates/registration/password_reset_form.html:21
 msgid "Reset password"
@@ -865,11 +862,11 @@ msgstr "Gracias por registrarse."
 
 #: templates/registration/registration_complete.html:14
 msgid ""
-"An activation link has been sent to the email address you supplied, "
-"along with instructions for activating your account."
+"An activation link has been sent to the email address you supplied, along "
+"with instructions for activating your account."
 msgstr ""
-"Un enlace de activación ha sido enviado a la dirección de correo "
-"electrónico indicada junto con instrucciones para activar tu cuenta."
+"Un enlace de activación ha sido enviado a la dirección de correo electrónico "
+"indicada junto con instrucciones para activar tu cuenta."
 
 #: templates/registration/registration_form.html:6
 msgid "Registration"
