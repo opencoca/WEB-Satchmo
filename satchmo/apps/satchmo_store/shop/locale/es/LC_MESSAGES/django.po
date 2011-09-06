@@ -3,19 +3,19 @@
 # Copyright (C) 2008 Satchmo Project
 # This file is distributed under the same license as the Satchmo package.
 # Christian Hoeppner <hoeppner@gmail.com>, 2007.
-# 
+#
 msgid ""
 msgstr ""
 "Project-Id-Version: Satchmo 0.5-pre\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2011-06-12 08:28+0000\n"
-"PO-Revision-Date: 2011-08-08 06:15\n"
+"POT-Creation-Date: 2011-09-06 07:21+0000\n"
+"PO-Revision-Date: 2011-09-05 23:34\n"
 "Last-Translator: Andrea  de la Huerta <info@metamorfosys.de>\n"
 "Language-Team: Spanish <satchmo-users@googlegroups.com>\n"
+"Language: es\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"Language: es\n"
 "X-Translated-Using: django-rosetta 0.6.1\n"
 
 #: admin.py:22
@@ -26,7 +26,7 @@ msgstr "Contacto"
 msgid "Shipping Countries"
 msgstr "Países de envío"
 
-#: admin.py:73 models.py:648 templates/shop/_order_details.html:37
+#: admin.py:73 models.py:671 templates/shop/_order_details.html:37
 #: templates/shop/_order_tracking_details.html:22
 #: templates/shop/email/_order_detail.txt:29
 msgid "Shipping Method"
@@ -63,11 +63,10 @@ msgstr "Estado requerido?"
 
 #: config.py:37
 msgid ""
-"Require a state during registration/checkout for countries that have "
-"states?"
+"Require a state during registration/checkout for countries that have states?"
 msgstr ""
-"Requerir un estado durante el registro/pago y envío para aquellos "
-"países que tienen estados?"
+"Requerir un estado durante el registro/pago y envío para aquellos países que "
+"tienen estados?"
 
 #: config.py:43
 msgid "Show Site Field?"
@@ -75,11 +74,11 @@ msgstr "Mostrar campo del sitio?"
 
 #: config.py:44
 msgid ""
-"Should the Site field be displayed in the admin lists? A server restart"
-" is required for this to take effect."
+"Should the Site field be displayed in the admin lists? A server restart is "
+"required for this to take effect."
 msgstr ""
-"Mostrar campo del sitio en las listas de administración? El servidor "
-"debe reiniciarse para que esto surta efecto."
+"Mostrar campo del sitio en las listas de administración? El servidor debe "
+"reiniciarse para que esto surta efecto."
 
 #: config.py:50
 msgid "Cart Quantity Rounding Factor"
@@ -87,12 +86,11 @@ msgstr "Factor de redondeo para las cantidades en la cesta"
 
 #: config.py:51
 msgid ""
-"What to round cart adds/deletes by, a '1' here means to round up to a "
-"whole number.  Must be -1 to 1."
+"What to round cart adds/deletes by, a '1' here means to round up to a whole "
+"number.  Must be -1 to 1."
 msgstr ""
-"¿Cómo redondear al agregar/eliminiar artículos a la cesta. Un '1' "
-"significa redondear a un número entero. Los números entre -1 a 1 son "
-"válidos."
+"¿Cómo redondear al agregar/eliminiar artículos a la cesta. Un '1' significa "
+"redondear a un número entero. Los números entre -1 a 1 son válidos."
 
 #: config.py:58
 msgid "Cart Quantity Decimal Places"
@@ -100,11 +98,11 @@ msgstr "Número de decimales a usar en la cesta de compras"
 
 #: config.py:59
 msgid ""
-"How many places to assume for cart quantities, use 0 unless you are "
-"selling products in fractional quantities."
+"How many places to assume for cart quantities, use 0 unless you are selling "
+"products in fractional quantities."
 msgstr ""
-"¿Cuántas decimales se deben asumir para las cantidades en la cesta? "
-"Use 0 a menos que se vendan productos en cantidades fraccionarias."
+"¿Cuántas decimales se deben asumir para las cantidades en la cesta? Use 0 a "
+"menos que se vendan productos en cantidades fraccionarias."
 
 #: config.py:66
 msgid "Persistent Cart: Check for old cart?"
@@ -120,11 +118,11 @@ msgstr "Cesta persistentes: Sobrescribe la cesta actual?"
 
 #: config.py:75
 msgid ""
-"If you have a persistent cart: Should you merge the carts even if the "
-"user has created a new one?"
+"If you have a persistent cart: Should you merge the carts even if the user "
+"has created a new one?"
 msgstr ""
-"Si usted tiene una cesta persistente: Combinar las cestas, incluso si "
-"el usuario ya ha creado una nueva?"
+"Si usted tiene una cesta persistente: Combinar las cestas, incluso si el "
+"usuario ya ha creado una nueva?"
 
 #: config.py:82
 msgid "Send HTML Email?"
@@ -133,8 +131,7 @@ msgstr "Enviar correo HTML?"
 #: config.py:83
 msgid "Should HTML emails be used when sending notifications?"
 msgstr ""
-"¿Utilizar correos electrónicos en formato HTML al enviar las "
-"notificaciones?"
+"¿Utilizar correos electrónicos en formato HTML al enviar las notificaciones?"
 
 #: config.py:90
 msgid "Use Cart Price Breaks?"
@@ -142,8 +139,8 @@ msgstr "¿Utilizar precios escalonados?"
 
 #: config.py:91
 msgid ""
-"Use the total number or cart or order items to determine quantities for"
-" discount pricing."
+"Use the total number or cart or order items to determine quantities for "
+"discount pricing."
 msgstr ""
 "Utilizar el número total de artículos en la cesta o el pedido para "
 "determinar descuentos en el precio."
@@ -165,8 +162,8 @@ msgid ""
 "Use the old-style, urchin javascript?.  This is not needed unless your "
 "analytics account hasn't been updated yet."
 msgstr ""
-"Utilizar el estilo viejo, urchin, de Javascript?. Esto no es necesario"
-" a menos que su cuenta de Google Analytics no se haya actualizado aún."
+"Utilizar el estilo viejo, urchin, de Javascript?. Esto no es necesario a "
+"menos que su cuenta de Google Analytics no se haya actualizado aún."
 
 #: config.py:119
 msgid "Analytics Code"
@@ -194,7 +191,7 @@ msgstr "Solamente hay %(amount)i '%(product)s' en existencia."
 msgid "Test Store"
 msgstr "Tienda de prueba"
 
-#: models.py:77 models.py:278 models.py:618
+#: models.py:77 models.py:284 models.py:641
 msgid "Site"
 msgstr "Sitio"
 
@@ -202,7 +199,7 @@ msgstr "Sitio"
 msgid "Store Name"
 msgstr "Nombre de la Tienda"
 
-#: models.py:79 models.py:279 models.py:1375
+#: models.py:79 models.py:285 models.py:1381
 #: templates/shop/pdf/invoice.rml:130 templates/shop/pdf/packing-slip.rml:124
 msgid "Description"
 msgstr "Descripción"
@@ -212,24 +209,24 @@ msgstr "Descripción"
 msgid "Email"
 msgstr "Correo"
 
-#: models.py:81 models.py:82 models.py:621 models.py:622 models.py:628
-#: models.py:629
+#: models.py:81 models.py:82 models.py:644 models.py:645 models.py:651
+#: models.py:652
 msgid "Street"
 msgstr "Calle"
 
-#: models.py:83 models.py:623 models.py:630
+#: models.py:83 models.py:646 models.py:653
 msgid "City"
 msgstr "Ciudad"
 
-#: models.py:84 models.py:624 models.py:631
+#: models.py:84 models.py:647 models.py:654
 msgid "State"
 msgstr "Estado"
 
-#: models.py:85 models.py:625 models.py:632
+#: models.py:85 models.py:648 models.py:655
 msgid "Zip Code"
 msgstr "Código Postal"
 
-#: models.py:86 models.py:626 models.py:633
+#: models.py:86 models.py:649 models.py:656
 msgid "Country"
 msgstr "País"
 
@@ -253,365 +250,365 @@ msgstr "Configuración de la Tienda"
 msgid "Store Configurations"
 msgstr "Configuraciones de la Tienda"
 
-#: models.py:280
+#: models.py:286
 msgid "Creation Date"
 msgstr "Fecha de creación"
 
-#: models.py:281
+#: models.py:287
 msgid "Customer"
 msgstr "Cliente"
 
-#: models.py:436
+#: models.py:442
 msgid "Shopping Cart"
 msgstr "Cesta de compras"
 
-#: models.py:437
+#: models.py:443
 msgid "Shopping Carts"
 msgstr "Cestas de compras"
 
-#: models.py:449 templates/base.html:84 templates/shop/cart.html:12
+#: models.py:455 templates/base.html:84 templates/shop/cart.html:12
 msgid "Cart"
 msgstr "Cesta"
 
-#: models.py:450 models.py:1105
+#: models.py:456 models.py:1128
 msgid "Product"
 msgstr "Productos"
 
-#: models.py:451 models.py:1106 templates/shop/cart.html:33
+#: models.py:457 models.py:1129 templates/shop/cart.html:33
 #: templates/shop/pdf/invoice.rml:131 templates/shop/pdf/packing-slip.rml:125
 msgid "Quantity"
 msgstr "Cantidad"
 
-#: models.py:538
+#: models.py:544
 msgid "Cart Item"
 msgstr "Artículo de la cesta"
 
-#: models.py:539
+#: models.py:545
 msgid "Cart Items"
 msgstr "Artículos de la cesta"
 
-#: models.py:547
+#: models.py:553
 msgid "detail"
 msgstr "detalle"
 
-#: models.py:548
+#: models.py:554
 msgid "name"
 msgstr "nombre"
 
-#: models.py:549
+#: models.py:555
 msgid "Item Detail Price Change"
 msgstr "Cambio en el precio del artículo detallado"
 
-#: models.py:551 models.py:1195
+#: models.py:557 models.py:1218
 msgid "Sort Order"
 msgstr "Orden de Clasificación"
 
-#: models.py:552 models.py:1196
+#: models.py:558 models.py:1219
 msgid "The display order for this group."
 msgstr "El orden de clasificación para este grupo."
 
-#: models.py:556
+#: models.py:562
 msgid "Cart Item Detail"
 msgstr "Detalle del artículo de la cesta"
 
-#: models.py:557
+#: models.py:563
 msgid "Cart Item Details"
 msgstr "Detalles del artículo de la cesta"
 
-#: models.py:561
+#: models.py:567
 msgid "Online"
 msgstr "En línea"
 
-#: models.py:562
+#: models.py:568
 msgid "In Person"
 msgstr "En persona"
 
-#: models.py:563
+#: models.py:569
 msgid "Show"
 msgstr "Mostrar"
 
-#: models.py:567
+#: models.py:573
 msgid "Temp"
 msgstr "Temp"
 
-#: models.py:568
+#: models.py:574
 msgid "New"
 msgstr "Nuevo"
 
-#: models.py:569
+#: models.py:575
 msgid "Blocked"
 msgstr "Bloqueado"
 
-#: models.py:570
+#: models.py:576
 msgid "In Process"
 msgstr "En Proceso"
 
-#: models.py:571
+#: models.py:577
 msgid "Billed"
 msgstr "Facturado"
 
-#: models.py:572
+#: models.py:578
 msgid "Shipped"
 msgstr "Enviado"
 
-#: models.py:573 models.py:1266
+#: models.py:579 models.py:1289
 msgid "Complete"
 msgstr "Completado"
 
-#: models.py:574
+#: models.py:580
 msgid "Cancelled"
 msgstr "Cancelado"
 
-#: models.py:619
+#: models.py:621
+msgid "key"
+msgstr "clave"
+
+#: models.py:622
+msgid "value"
+msgstr "valor"
+
+#: models.py:626
+msgid "Order variable"
+msgstr "Variable del pedido"
+
+#: models.py:627
+msgid "Order variables"
+msgstr "Variables del pedido"
+
+#: models.py:642
 msgid "Contact"
 msgstr "Contacto"
 
-#: models.py:620 models.py:627
+#: models.py:643 models.py:650
 msgid "Addressee"
 msgstr "Destinatario"
 
-#: models.py:634 models.py:1213
+#: models.py:657 models.py:1236
 msgid "Notes"
 msgstr "Notas"
 
-#: models.py:635 templates/shop/_order_details.html:48
+#: models.py:658 templates/shop/_order_details.html:48
 #: templates/shop/pdf/invoice.rml:154
 msgid "Subtotal"
 msgstr "Subtotal"
 
-#: models.py:637 templates/shop/_order_details.html:47
+#: models.py:660 templates/shop/_order_details.html:47
 #: templates/shop/_order_details.html:69
 #: templates/shop/_order_tracking_details.html:28
 #: templates/shop/_order_tracking_details.html:36 templates/shop/cart.html:41
-#: templates/shop/order_history.html:23
+#: templates/shop/order_history.html:24
 #: templates/shop/email/_order_detail.txt:35
 #: templates/shop/email/_order_detail.txt:40
 #: templates/shop/pdf/invoice.rml:134 templates/shop/pdf/invoice.rml.py:177
 msgid "Total"
 msgstr "Total"
 
-#: models.py:640
+#: models.py:663
 msgid "Discount Code"
 msgstr "Código de Descuento"
 
-#: models.py:641
+#: models.py:664
 msgid "Coupon Code"
 msgstr "Código promocional"
 
-#: models.py:642
+#: models.py:665
 msgid "Discount amount"
 msgstr "Importe de descuento"
 
-#: models.py:644
+#: models.py:667
 msgid "Order method"
 msgstr "Método de la Orden"
 
-#: models.py:646
+#: models.py:669
 msgid "Shipping Description"
 msgstr "Descripción de envío"
 
-#: models.py:650
+#: models.py:673
 msgid "Shipping Models"
 msgstr "Modelos de envío"
 
-#: models.py:652
+#: models.py:675
 msgid "Shipping Cost"
 msgstr "Gastos de envío"
 
-#: models.py:654 templates/shop/_order_details.html:58
+#: models.py:677 templates/shop/_order_details.html:58
 #: templates/shop/pdf/invoice.rml:169
 msgid "Shipping Discount"
 msgstr "Descuento en el envío"
 
-#: models.py:656 models.py:1376 templates/shop/_order_details.html:67
+#: models.py:679 models.py:1382 templates/shop/_order_details.html:67
 #: templates/shop/_order_tracking_details.html:34
 #: templates/shop/email/_order_detail.txt:39
 #: templates/shop/pdf/invoice.rml:174
 msgid "Tax"
 msgstr "Impuestos"
 
-#: models.py:658 models.py:1214
+#: models.py:681 models.py:1237
 #: templates/shop/admin/_orderpayment_list.html:11
 msgid "Timestamp"
 msgstr "Fecha y hora"
 
-#: models.py:659 models.py:1211 templates/shop/_order_tracking_details.html:9
-#: templates/shop/order_history.html:20
+#: models.py:682 models.py:1234 templates/shop/_order_tracking_details.html:9
+#: templates/shop/order_history.html:21
 msgid "Status"
 msgstr "Estado"
 
-#: models.py:660
+#: models.py:683
 msgid "This is set automatically."
 msgstr "Esto se ajusta automáticamente."
 
-#: models.py:863 models.py:873 models.py:991
+#: models.py:886 models.py:896 models.py:1014
 msgid "View"
 msgstr "Ver"
 
-#: models.py:943 templates/shop/_order_details.html:54
+#: models.py:966 templates/shop/_order_details.html:54
 #: templates/shop/_order_tracking_details.html:30
 #: templates/shop/email/_order_detail.txt:37
 #: templates/shop/pdf/invoice.rml:133 templates/shop/pdf/invoice.rml.py:159
 msgid "Discount"
 msgstr "Descuento"
 
-#: models.py:1097
+#: models.py:1120
 msgid "Product Order"
 msgstr "Pedido de productos"
 
-#: models.py:1098
+#: models.py:1121
 msgid "Product Orders"
 msgstr "Pedidos de productos"
 
-#: models.py:1104 models.py:1210
+#: models.py:1127 models.py:1233
 msgid "Order"
 msgstr "Pedido"
 
-#: models.py:1107
+#: models.py:1130
 msgid "Unit price"
 msgstr "Precio unitario"
 
-#: models.py:1109
+#: models.py:1132
 msgid "Unit tax"
 msgstr "Impuesto unitario"
 
-#: models.py:1111
+#: models.py:1134
 msgid "Line item price"
 msgstr "Subtotal"
 
-#: models.py:1113
+#: models.py:1136
 msgid "Line item tax"
 msgstr "Subtotal de Impuestos"
 
-#: models.py:1115
+#: models.py:1138
 msgid "Subscription End"
 msgstr "Fin de la suscripción"
 
-#: models.py:1115
+#: models.py:1138
 msgid "Subscription expiration date."
 msgstr "Suscripción expira el"
 
-#: models.py:1116
+#: models.py:1139
 msgid "Completed"
 msgstr "Completado"
 
-#: models.py:1117
+#: models.py:1140
 msgid "Line item discount"
 msgstr "Descuento"
 
-#: models.py:1183
+#: models.py:1206
 msgid "Order Line Item"
 msgstr "Artículo del pedido"
 
-#: models.py:1184
+#: models.py:1207
 msgid "Order Line Items"
 msgstr "Artículos del pedido"
 
-#: models.py:1191
+#: models.py:1214
 msgid "Order Item"
 msgstr "Artículo del pedido"
 
-#: models.py:1192 views/contact.py:20
+#: models.py:1215 views/contact.py:20
 msgid "Name"
 msgstr "Nombre"
 
-#: models.py:1193
+#: models.py:1216
 msgid "Value"
 msgstr "Valor"
 
-#: models.py:1194
+#: models.py:1217
 msgid "Price Change"
 msgstr "Cambio de precio"
 
-#: models.py:1202
+#: models.py:1225
 msgid "Order Item Detail"
 msgstr "Detalle del artículo"
 
-#: models.py:1203
+#: models.py:1226
 msgid "Order Item Details"
 msgstr "Detalles de artículos"
 
-#: models.py:1226
+#: models.py:1249
 msgid "Order Status"
 msgstr "Estado del pedido"
 
-#: models.py:1227
+#: models.py:1250
 msgid "Order Statuses"
 msgstr "Estados de pedidos"
 
-#: models.py:1232
+#: models.py:1255
 msgid "Payment Method"
 msgstr "Método de pago"
 
-#: models.py:1234
+#: models.py:1257
 msgid "amount"
 msgstr "cantidad"
 
-#: models.py:1236
+#: models.py:1259
 msgid "timestamp"
 msgstr "fecha"
 
-#: models.py:1237 templates/shop/admin/_orderpayment_list.html:12
+#: models.py:1260 templates/shop/admin/_orderpayment_list.html:12
 msgid "Transaction ID"
 msgstr "ID de transacción"
 
-#: models.py:1238
+#: models.py:1261
 msgid "Details"
 msgstr "Detalles"
 
-#: models.py:1239
+#: models.py:1262
 msgid "Reason Code"
 msgstr "Código de Razón"
 
-#: models.py:1298
+#: models.py:1321
 msgid "Order Payment Authorization"
 msgstr "Autorización de Pago"
 
-#: models.py:1299
+#: models.py:1322
 msgid "Order Payment Authorizations"
 msgstr "Autorizaciones de Pago"
 
-#: models.py:1325
+#: models.py:1348
 msgid "Order Payment"
 msgstr "Pago de pedido"
 
-#: models.py:1326 templates/shop/admin/_orderpayment_list.html:3
+#: models.py:1349 templates/shop/admin/_orderpayment_list.html:3
 msgid "Order Payments"
 msgstr "Pagos de pedidos"
 
-#: models.py:1348
+#: models.py:1371
 msgid "Order Pending Payment"
 msgstr "Pago de pedido pendiente"
 
-#: models.py:1349
+#: models.py:1372
 msgid "Order Pending Payments"
 msgstr "Pagos de pedidos pendientes"
 
-#: models.py:1356
-msgid "key"
-msgstr "clave"
-
-#: models.py:1357
-msgid "value"
-msgstr "valor"
-
-#: models.py:1361
-msgid "Order variable"
-msgstr "Variable del pedido"
-
-#: models.py:1362
-msgid "Order variables"
-msgstr "Variables del pedido"
-
-#: models.py:1374
+#: models.py:1380
 msgid "Model"
 msgstr "Modelo"
 
-#: models.py:1386
+#: models.py:1392
 msgid "Order tax detail"
 msgstr "Detalle de impuestos del pedido"
 
-#: models.py:1387
+#: models.py:1393
 msgid "Order tax details"
 msgstr "Detalles de impuestos del pedido"
 
@@ -634,13 +631,13 @@ msgstr "Su pedido en %(shop_name)s ha sido enviado"
 #: templates/shop/cart.html:11 templates/shop/contact_form.html:5
 #: templates/shop/contact_thanks.html:5 templates/shop/download.html:5
 #: templates/shop/index.html:7 templates/shop/multiple_product_form.html:10
-#: templates/shop/order_history.html:7 templates/shop/order_tracking.html:6
+#: templates/shop/order_history.html:8 templates/shop/order_tracking.html:6
 #: templates/shop/search.html:6
 msgid "Home"
 msgstr "Inicio"
 
 #: templates/404.html:10 templates/500.html:10 templates/shop/404.html:10
-#: views/cart.py:258 views/cart.py:295
+#: views/cart.py:262 views/cart.py:300
 msgid "Error"
 msgstr "Error"
 
@@ -819,7 +816,7 @@ msgid "Tax included"
 msgstr "Impuestos incluidos"
 
 #: templates/shop/_order_tracking_details.html:8
-#: templates/shop/order_history.html:19
+#: templates/shop/order_history.html:20
 msgid "Order #"
 msgstr "# Pedido"
 
@@ -903,13 +900,11 @@ msgstr "comenzará al pulsar en el siguiente enlace:"
 
 #: templates/shop/download.html:15
 msgid ""
-"Once you click the link, the download will be counted.  If you have "
-"trouble with the download, please refresh your browser and try the "
-"download again"
+"Once you click the link, the download will be counted.  If you have trouble "
+"with the download, please refresh your browser and try the download again"
 msgstr ""
-"Una vez que pulse en el enlace, la descarga será contada. Si tiene "
-"problemas con la descarga, por favor actualice el explorador e "
-"inténtelo nuevamente"
+"Una vez que pulse en el enlace, la descarga será contada. Si tiene problemas "
+"con la descarga, por favor actualice el explorador e inténtelo nuevamente"
 
 #: templates/shop/index.html:11
 msgid "Welcome to the shop."
@@ -940,25 +935,25 @@ msgstr "Cant."
 msgid "Add to Cart"
 msgstr "Añadir a la cesta"
 
-#: templates/shop/order_history.html:8 templates/shop/order_tracking.html:7
+#: templates/shop/order_history.html:9 templates/shop/order_tracking.html:7
 msgid "Account"
 msgstr "Cuenta"
 
-#: templates/shop/order_history.html:9 templates/shop/order_history.html:14
+#: templates/shop/order_history.html:10 templates/shop/order_history.html:15
 msgid "Order History"
 msgstr "Historial de pedidos"
 
-#: templates/shop/order_history.html:21 templates/shop/pdf/invoice.rml:15
+#: templates/shop/order_history.html:22 templates/shop/pdf/invoice.rml:15
 #: templates/shop/pdf/invoice.rml.py:57 templates/shop/pdf/packing-slip.rml:15
 #: templates/shop/pdf/packing-slip.rml:57
 msgid "Date"
 msgstr "Fecha"
 
-#: templates/shop/order_history.html:22
+#: templates/shop/order_history.html:23
 msgid "Items"
 msgstr "Artículos"
 
-#: templates/shop/order_history.html:52
+#: templates/shop/order_history.html:53
 msgid "You haven't made any orders yet."
 msgstr "Aún no ha realizado ningún pedido."
 
@@ -985,7 +980,7 @@ msgstr "Productos"
 
 #: templates/shop/search.html:33
 msgid "for"
-msgstr "para"
+msgstr "desde"
 
 #: templates/shop/admin/_customorder_management.html:3
 msgid "Custom Order Management"
@@ -1073,8 +1068,8 @@ msgstr "Forma de pago:"
 #: templates/shop/email/order_placed_notice.txt:12
 #, python-format
 msgid ""
-"%(credit_card_type)s card ending in %(credit_card_number)s will be "
-"charged %(order_total)s."
+"%(credit_card_type)s card ending in %(credit_card_number)s will be charged "
+"%(order_total)s."
 msgstr ""
 "Se cargarán %(order_total)s a la tarjeta %(credit_card_type)s con "
 "terminación %(credit_card_number)s."
@@ -1090,8 +1085,8 @@ msgid ""
 "Here's a %(request_type)s from %(name)s ( %(email)s ) sent via the web "
 "contact form."
 msgstr ""
-"%(request_type)s de %(name)s  ( %(email)s ) enviado a través del "
-"formulario de contacto."
+"%(request_type)s de %(name)s  ( %(email)s ) enviado a través del formulario "
+"de contacto."
 
 #: templates/shop/email/order_complete.html:7
 #: templates/shop/email/order_complete.txt:5
@@ -1124,11 +1119,11 @@ msgstr "Estimado(a) %(first_name)s %(last_name)s,"
 #: templates/shop/email/order_complete.txt:16
 #, python-format
 msgid ""
-"Your %(credit_card_type)s card ending in %(credit_card_number)s will be"
-" charged %(order_total)s."
+"Your %(credit_card_type)s card ending in %(credit_card_number)s will be "
+"charged %(order_total)s."
 msgstr ""
-"Se cargará un total de %(order_total)s a su tarjeta "
-"%(credit_card_type)s con terminación %(credit_card_number)s."
+"Se cargará un total de %(order_total)s a su tarjeta %(credit_card_type)s con "
+"terminación %(credit_card_number)s."
 
 #: templates/shop/email/order_complete.txt:16
 #, python-format
@@ -1151,16 +1146,14 @@ msgstr "Pedido realizado en %(shop_name)s  por %(customer)s<%(email)s>."
 #: templates/shop/email/order_placed_notice.txt:12
 #, python-format
 msgid ""
-"This order will be charged on the customer's account for "
-"%(order_total)s."
+"This order will be charged on the customer's account for %(order_total)s."
 msgstr "Este pedido se cargará en la cuenta del cliente por %(order_total)s ."
 
 #: templates/shop/email/order_shipped.txt:5
 #, python-format
 msgid "Your order #%(orderid)s has shipped today via %(shippingmethod)s."
 msgstr ""
-"Su pedido #%(orderid)s ha sido enviado hoy a través de "
-"%(shippingmethod)s ."
+"Su pedido #%(orderid)s ha sido enviado hoy a través de %(shippingmethod)s ."
 
 #: templates/shop/email/order_shipped.txt:15
 msgid "This completes your order."
@@ -1212,11 +1205,11 @@ msgstr "Cuentas por cobrar"
 #: templates/shop/pdf/invoice.rml:212
 #, python-format
 msgid ""
-"%(order_total)s was charged to your %(credit_card_type)s card "
-"(x%(credit_card_number)s) on %(order_date)s."
+"%(order_total)s was charged to your %(credit_card_type)s card (x"
+"%(credit_card_number)s) on %(order_date)s."
 msgstr ""
-"Se cargó un total de %(order_total)s a su tarjeta %(credit_card_type)s"
-" (x%(credit_card_number)s) el %(order_date)s."
+"Se cargó un total de %(order_total)s a su tarjeta %(credit_card_type)s (x"
+"%(credit_card_number)s) el %(order_date)s."
 
 #: templates/shop/pdf/invoice.rml:215
 msgid "This invoice has been paid in full. Thank you for your business!"
@@ -1272,11 +1265,11 @@ msgstr "Cantidad inválida."
 msgid "Please enter a positive number."
 msgstr "Por favor introduzca un número positivo."
 
-#: views/cart.py:204
+#: views/cart.py:207
 msgid "Success"
 msgstr "Éxito"
 
-#: views/cart.py:246
+#: views/cart.py:250
 msgid "You must accept the terms and conditions."
 msgstr "Debe aceptar los términos y condiciones."
 
@@ -1319,57 +1312,6 @@ msgstr "Número de página inválido"
 
 #: views/orders.py:40
 msgid ""
-"The order you have requested doesn't exist, or you don't have access to"
-" it."
+"The order you have requested doesn't exist, or you don't have access to it."
 msgstr "El pedido que ha solicitado no existe, o no tiene acceso a el mismo."
 
-#~ msgid "Please correct the following errors:"
-#~ msgstr "Por favor corriga los siguientes errores:"
-
-#~ msgid "No product requested"
-#~ msgstr "Ningun producto solicitado"
-
-#~ msgid "Choose a smaller quantity"
-#~ msgstr "Elige una cantidad menor"
-
-#~ msgid "Choose a quantity."
-#~ msgstr "Elige una cantidad."
-
-#~ msgid "Tax Classes"
-#~ msgstr "Tipos de impuestos"
-
-#~ msgid "Tax Rates"
-#~ msgstr "Impuestos"
-
-#~ msgid "Purchase item not in stock?"
-#~ msgstr "¿Permitir la compra de artículos fuera de stock?"
-
-#~ msgid "Select a valid choice."
-#~ msgstr "Seleccione una opción válida."
-
-#~ msgid "Please enter one and only one of those fields."
-#~ msgstr "Por favor, introduzca uno y sólo uno de los siguientes campos."
-
-#~ msgid "Organizations"
-#~ msgstr "Organizaciones"
-
-#~ msgid "Individual Products"
-#~ msgstr "Productos Físicos"
-
-#~ msgid "Satchmo Site Administration"
-#~ msgstr "Administración del Sitio de Satchmo"
-
-#~ msgid "Switch to Legacy View"
-#~ msgstr "Ir a vista clásica"
-
-#~ msgid "Store Web Site"
-#~ msgstr "Sitio de la Tienda"
-
-#~ msgid "Discounts"
-#~ msgstr "Promociones"
-
-#~ msgid "International Information"
-#~ msgstr "Información Internacional"
-
-#~ msgid "Areas"
-#~ msgstr "Zonas"

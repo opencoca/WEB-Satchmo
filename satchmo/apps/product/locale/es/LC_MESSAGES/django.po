@@ -8,8 +8,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Satchmo 0.5-pre\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2011-06-12 08:29+0000\n"
-"PO-Revision-Date: 2011-08-08 05:36\n"
+"POT-Creation-Date: 2011-09-06 07:21+0000\n"
+"PO-Revision-Date: 2011-09-06 10:18\n"
 "Last-Translator: Andrea  de la Huerta <info@metamorfosys.de>\n"
 "Language-Team: Spanish <satchmo-users@googlegroups.com>\n"
 "MIME-Version: 1.0\n"
@@ -937,11 +937,11 @@ msgstr ""
 "Dos opciones del mismo grupo no pueden ser aplicadas al mismo "
 "artículo."
 
-#: modules/configurable/models.py:466
+#: modules/configurable/models.py:473
 msgid "Product variation"
 msgstr "Variación del producto"
 
-#: modules/configurable/models.py:467
+#: modules/configurable/models.py:474
 msgid "Product variations"
 msgstr "Variaciones del producto"
 
@@ -1360,9 +1360,9 @@ msgid ""
 "checkout when you enter the code \"%(code)s\" during our %(desc)s which "
 "ends on %(enddate)s.</p> "
 msgstr ""
-"<p> Este artículo es elegible para recibir un descuento del %(pct)s  "
-"al salir, introduciendo el código \" %(code)s \" durante nuestra "
-"%(desc)s  que termina en %(enddate)s . </p>"
+"<p>Este artículo es elegible para recibir un descuento del %(pct)s al "
+"finalizar la compra, introduciendo el código \"%(code)s\" durante "
+"nuestra oferta \"%(desc)s\" que termina en %(enddate)s.</p>"
 
 #: templates/product/recently_added.html:8
 #: templates/product/recently_added.html:12
@@ -1390,9 +1390,9 @@ msgid ""
 "when you enter the code \"%(code)s\" during our %(desc)s which ends on "
 "%(enddate)s.</p> "
 msgstr ""
-"<p> Los productos en su cesta son elegibles para recibir un descuento "
-"del %(pct)s  al introducir el código \" %(code)s \" durante nuestra "
-"%(desc)s  que termina en %(enddate)s . </p>"
+"<p>Los productos en su cesta son elegibles para recibir un descuento "
+"del %(pct)s al introducir el código \"%(code)s\" durante nuestra oferta "
+"%(desc)s que termina en %(enddate)s.</p> "
 
 #: templates/product/some_discount_eligible.html:4
 #, python-format
@@ -1401,9 +1401,9 @@ msgid ""
 "during checkout when you enter the code \"%(code)s\" during our %(desc)s "
 "which ends on %(enddate)s.</p> "
 msgstr ""
-"<p> Los productos de esta página son elegibles para recibir un "
-"descuento del %(pct)s  al salir, introduciendo el código \" %(code)s \" "
-"durante nuestra %(desc)s  que termina en %(enddate)s . </p>"
+"<p>Los productos de esta página son elegibles para recibir un "
+"descuento del %(pct)s al salir, introduciendo el código \"%(code)s\" "
+"durante nuestra oferta %(desc)s que termina en %(enddate)s.</p> "
 
 #: templates/product/admin/inventory_form.html:64
 #: templates/product/admin/product_export_form.html:48
@@ -1670,34 +1670,3 @@ msgstr "No se encuentra ninguna carga de archivos"
 msgid "The product you have requested is not a Configurable Product."
 msgstr "El producto que ha solicitado no es un producto configurable."
 
-#~ msgid "Product Variation"
-#~ msgstr "Imágen del producto"
-
-#~ msgid "Custom Order Product"
-#~ msgstr "Producto Canónico"
-
-#~ msgid "Disconts"
-#~ msgstr "Promociones"
-
-#~ msgid "Used for URLs"
-#~ msgstr "Usado para URLs"
-
-#~ msgid "The order they will be displayed on the screen"
-#~ msgstr "El órden en el que aparecerán en pantalla"
-
-#~ msgid ""
-#~ "This is a short, descriptive name of the shirt that will be used in the"
-#~ " URL link to this item"
-#~ msgstr "Un nombre corto y descriptivo que será usado en la URL del producto"
-
-#~ msgid "Create Sub Items"
-#~ msgstr "Crear objectos derivados"
-
-#~ msgid "Create new sub-items"
-#~ msgstr "Crear nuevo objeto derivado"
-
-#~ msgid "Leave blank to delete"
-#~ msgstr "Dejar en blanco para borrar"
-
-#~ msgid "Display Order"
-#~ msgstr "Órden mostrado"
