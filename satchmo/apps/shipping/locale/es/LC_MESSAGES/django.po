@@ -2,7 +2,8 @@
 msgid ""
 msgstr ""
 "Report-Msgid-Bugs-To: \n"
-"PO-Revision-Date: 2011-08-08 00:35\n"
+"POT-Creation-Date: 2011-09-06 07:21+0000\n"
+"PO-Revision-Date: 2011-09-06 10:45\n"
 "Last-Translator: Andrea  de la Huerta <info@metamorfosys.de>\n"
 "Language-Team: Spanish <satchmo-users@googlegroups.com>\n"
 "MIME-Version: 1.0\n"
@@ -54,6 +55,10 @@ msgid "Show description only"
 msgstr "Mostrar sólo la descripción"
 
 #: config.py:34
+msgid "Download PDFs from admin page"
+msgstr "Descargar PDFs desde el admin"
+
+#: config.py:42
 msgid "Select least expensive by default?"
 msgstr "¿Seleccionar por defecto el más barato?"
 
@@ -131,28 +136,28 @@ msgstr ""
 "Enviar la solicitud y la respuesta completas al log - para asistir en "
 "la depuración a la hora de establecer la conexión con Canada Post."
 
-#: modules/canadapost/shipper.py:62
+#: modules/canadapost/shipper.py:63
 #, python-format
 msgid "Canada Post - %s"
 msgstr "Canada Post - %s"
 
-#: modules/canadapost/shipper.py:78
+#: modules/canadapost/shipper.py:79
 msgid "Canada Post"
 msgstr "Canada Post"
 
-#: modules/canadapost/shipper.py:87 modules/fedex/shipper.py:95
+#: modules/canadapost/shipper.py:90 modules/fedex/shipper.py:95
 #: modules/ups/shipper.py:107
 #, python-format
 msgid "%s business days"
 msgstr "%s días hábiles"
 
-#: modules/canadapost/shipper.py:89 modules/fedex/shipper.py:97
+#: modules/canadapost/shipper.py:92 modules/fedex/shipper.py:97
 #: modules/ups/shipper.py:109
 #, python-format
 msgid "%s business day"
 msgstr "%s día hábil"
 
-#: modules/canadapost/shipper.py:124 modules/fedex/shipper.py:151
+#: modules/canadapost/shipper.py:127 modules/fedex/shipper.py:151
 #: modules/ups/shipper.py:139
 msgid "3 - 4"
 msgstr "3 - 4"
@@ -353,7 +358,7 @@ msgstr "Envío escalonado"
 msgid "Min Price"
 msgstr "Precio mínimo"
 
-#: modules/tiered/models.py:214
+#: modules/tiered/models.py:217
 msgid "The minimum price for this tier to apply"
 msgstr "El precio mínimo para aplicar este nivel"
 
