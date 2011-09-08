@@ -2,7 +2,7 @@
 msgid ""
 msgstr ""
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2011-09-06 13:21+0000\n"
+"POT-Creation-Date: 2011-09-08 22:22+0000\n"
 "PO-Revision-Date: 2011-08-08 04:28\n"
 "Last-Translator: Andrea  de la Huerta <info@metamorfosys.de>\n"
 "Language: es\n"

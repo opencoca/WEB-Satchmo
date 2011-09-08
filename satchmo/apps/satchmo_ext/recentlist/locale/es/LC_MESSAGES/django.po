@@ -1,12 +1,14 @@
-# 
+#
 msgid ""
 msgstr ""
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2011-09-08 22:22+0000\n"
 "PO-Revision-Date: 2011-09-07 01:29\n"
 "Last-Translator: Andrea  de la Huerta <info@metamorfosys.de>\n"
+"Language: es\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"Language: es\n"
 "X-Translated-Using: django-rosetta 0.6.1\n"
 
 #: config.py:7
@@ -16,8 +18,7 @@ msgstr "Número máximo de elementos"
 #: config.py:8
 msgid "The maximum number of items show in the recent box."
 msgstr ""
-"El número máximo de elementos a mostrar en la sección de artículos "
-"recientes."
+"El número máximo de elementos a mostrar en la sección de artículos recientes."
 
 #: templates/recentlist/_recently_viewed.html:5
 msgid "Recently Viewed"
