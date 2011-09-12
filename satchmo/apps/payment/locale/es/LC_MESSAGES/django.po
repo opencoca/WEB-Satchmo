@@ -9,7 +9,7 @@ msgstr ""
 "Project-Id-Version: Satchmo 0.5-pre\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2011-09-08 22:22+0000\n"
-"PO-Revision-Date: 2011-09-09 00:25\n"
+"PO-Revision-Date: 2011-09-12 22:11\n"
 "Last-Translator: Andrea  de la Huerta <info@metamorfosys.de>\n"
 "Language-Team: Spanish <satchmo-users@googlegroups.com>\n"
 "MIME-Version: 1.0\n"
@@ -1450,9 +1450,7 @@ msgstr ""
 
 #: templates/shop/checkout/base_confirm.html:25
 msgid "Please validate the following information, then submit your order."
-msgstr ""
-"Por favor, valide la siguiente información, después vuelva a enviar el"
-" pedido."
+msgstr "Por favor valide la siguiente información antes de enviar el pedido."
 
 #: templates/shop/checkout/base_confirm.html:41
 #: templates/shop/checkout/google/confirm.html:17
