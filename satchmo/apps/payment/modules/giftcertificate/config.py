@@ -32,7 +32,7 @@ config_register_list(
     StringValue(PAYMENT_GROUP,
         'LABEL',
         description=_('English name for this group on the checkout screens'),
-        default = 'Gift Certificate',
+        default = _('Gift Certificate'),
         help_text = _('This will be passed to the translation utility')),
 
     BooleanValue(PAYMENT_GROUP,

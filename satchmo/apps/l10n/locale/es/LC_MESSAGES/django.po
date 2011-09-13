@@ -3,19 +3,19 @@
 # Copyright (C) 2008 Satchmo Project
 # This file is distributed under the same license as the Satchmo package.
 # Christian Hoeppner <hoeppner@gmail.com>, 2007.
-#
+# 
 msgid ""
 msgstr ""
 "Project-Id-Version: Satchmo 0.5-pre\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2011-09-08 22:22+0000\n"
-"PO-Revision-Date: 2011-08-12 19:31\n"
+"POT-Creation-Date: 2011-09-13 12:23+0000\n"
+"PO-Revision-Date: 2011-09-13 14:34\n"
 "Last-Translator: Andrea  de la Huerta <info@metamorfosys.de>\n"
 "Language-Team: Spanish <satchmo-users@googlegroups.com>\n"
-"Language: es\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
+"Language: es\n"
 "X-Translated-Using: django-rosetta 0.6.1\n"
 
 #: admin.py:15 admin.py:24
@@ -170,8 +170,9 @@ msgid "Republic"
 msgstr "República"
 
 #: models.py:40
+#, fuzzy
 msgid "Sheading"
-msgstr ""
+msgstr "Sheading"
 
 #: models.py:41
 msgid "State"
@@ -191,7 +192,7 @@ msgstr "Territorio"
 
 #: models.py:53
 msgid "ISO alpha-2"
-msgstr ""
+msgstr "ISO alpha-2"
 
 #: models.py:54
 msgid "Official name (CAPS)"
@@ -203,7 +204,7 @@ msgstr "Nombre del país"
 
 #: models.py:56
 msgid "ISO alpha-3"
-msgstr ""
+msgstr "ISO alpha-3"
 
 #: models.py:57
 msgid "ISO numeric"

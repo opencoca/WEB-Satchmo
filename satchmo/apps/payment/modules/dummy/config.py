@@ -30,7 +30,7 @@ config_register_list(
     StringValue(PAYMENT_GROUP,
         'LABEL',
         description=_('English name for this group on the checkout screens'),
-        default = 'Payment test module',
+        default = _('Payment test module'),
         help_text = _('This will be passed to the translation utility')),
 
     StringValue(PAYMENT_GROUP,

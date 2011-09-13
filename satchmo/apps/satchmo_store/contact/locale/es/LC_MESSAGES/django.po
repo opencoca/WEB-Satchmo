@@ -8,8 +8,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Satchmo 0.5-pre\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2011-09-08 22:22+0000\n"
-"PO-Revision-Date: 2011-09-09 01:00\n"
+"POT-Creation-Date: 2011-09-13 12:23+0000\n"
+"PO-Revision-Date: 2011-09-13 14:34\n"
 "Last-Translator: Andrea  de la Huerta <info@metamorfosys.de>\n"
 "Language-Team: Spanish <satchmo-users@googlegroups.com>\n"
 "MIME-Version: 1.0\n"
@@ -675,6 +675,10 @@ msgstr ""
 "nada al respecto, simplemente ignore este correo y no recibirá más "
 "correos electrónicos de nosotros y la cuenta caducará automáticamente "
 "en %(expiration_days)s días."
+
+#: templates/registration/activation_email_subject.txt:1
+msgid "Registration Confirmation"
+msgstr "Confirmación de registro"
 
 #: templates/registration/login.html:19
 msgid "Password"
