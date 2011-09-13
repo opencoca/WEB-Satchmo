@@ -89,7 +89,7 @@ config_register_list(
     StringValue(PAYMENT_GROUP,
         'LABEL',
         description=_('English name for this group on the checkout screens'),
-        default = 'Google Checkout',
+        default = _('Google Checkout'),
         help_text = _('This will be passed to the translation utility')),
 
     StringValue(PAYMENT_GROUP,

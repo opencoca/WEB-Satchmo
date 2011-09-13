@@ -8,8 +8,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Satchmo 0.5-pre\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2011-09-08 22:22+0000\n"
-"PO-Revision-Date: 2011-09-12 22:11\n"
+"POT-Creation-Date: 2011-09-13 12:23+0000\n"
+"PO-Revision-Date: 2011-09-13 14:32\n"
 "Last-Translator: Andrea  de la Huerta <info@metamorfosys.de>\n"
 "Language-Team: Spanish <satchmo-users@googlegroups.com>\n"
 "MIME-Version: 1.0\n"
@@ -293,7 +293,8 @@ msgstr "Año de inicio"
 msgid "Credit Card"
 msgstr "Tarjeta de Crédito"
 
-#: models.py:108
+#: models.py:108 modules/authorizenet/config.py:59
+#: modules/cybersource/config.py:47 modules/trustcommerce/config.py:48
 msgid "Credit Cards"
 msgstr "Tarjetas de Crédito"
 
@@ -510,9 +511,17 @@ msgstr "Configuración del módulo de Pago de éxito automático"
 msgid "False if you want to be in test mode"
 msgstr "Falso si quiere estar en modo de prueba"
 
+#: modules/autosuccess/config.py:30
+msgid "Pay Now"
+msgstr "Pagar ahora"
+
 #: modules/cod/config.py:8
 msgid "COD Payment Module Settings"
 msgstr "Ajustes del módulo de pago COD"
+
+#: modules/cod/config.py:34
+msgid "COD Payment"
+msgstr "Contra reembolso"
 
 #: modules/cybersource/config.py:9
 msgid "Cybersource.net Payment Settings"
@@ -546,6 +555,10 @@ msgstr "Su clave de transacción en Cybersource"
 #: modules/dummy/config.py:8
 msgid "Payment Test Module Settings"
 msgstr "Ajustes del módulo de pago de prueba"
+
+#: modules/dummy/config.py:33
+msgid "Payment test module"
+msgstr "Modulo de pruebas de pago"
 
 #: modules/dummy/config.py:60
 msgid ""
@@ -594,6 +607,13 @@ msgstr ""
 "Introduzca el formato para los códigos de los certificados. Use un '^'"
 " para la ubicación de un carácter generado al azar."
 
+#: modules/giftcertificate/config.py:35 modules/giftcertificate/models.py:98
+#: modules/giftcertificate/templates/giftcertificate/_order_summary.html:7
+#: modules/giftcertificate/templates/giftcertificate/balance.html:13
+#: modules/giftcertificate/templates/product/detail_giftcertificateproduct.html:9
+msgid "Gift Certificate"
+msgstr "Certificado de Regalo"
+
 #: modules/giftcertificate/forms.py:9
 msgid "Code"
 msgstr "Código"
@@ -641,13 +661,6 @@ msgstr "Correo electrónico"
 #: modules/giftcertificate/models.py:43
 msgid "Starting Balance"
 msgstr "Saldo inicial"
-
-#: modules/giftcertificate/models.py:98
-#: modules/giftcertificate/templates/giftcertificate/_order_summary.html:7
-#: modules/giftcertificate/templates/giftcertificate/balance.html:13
-#: modules/giftcertificate/templates/product/detail_giftcertificateproduct.html:9
-msgid "Gift Certificate"
-msgstr "Certificado de Regalo"
 
 #: modules/giftcertificate/models.py:99
 #: modules/giftcertificate/templates/giftcertificate/balance.html:6
@@ -939,6 +952,10 @@ msgstr "Identificación de prueba del comerciante"
 msgid "Merchant Test Key"
 msgstr "Clave de prueba del comerciante"
 
+#: modules/google/config.py:92
+msgid "Google Checkout"
+msgstr "Google Checkout"
+
 #: modules/google/notifications.py:48
 msgid "Received through Google Checkout."
 msgstr "Recibido a través de Google Checkout."
@@ -1002,6 +1019,10 @@ msgstr ""
 "se deja en blanco) es la URL de la página de éxito al finalizar la "
 "venta."
 
+#: modules/paypal/config.py:67
+msgid "PayPal"
+msgstr "PayPal"
+
 #: modules/paypal/views.py:53 modules/sermepa/views.py:71 views/confirm.py:212
 msgid "Your order is no longer valid."
 msgstr "Su pedido ya no es válido."
@@ -1016,7 +1037,11 @@ msgstr "--- Comentarios a través de Paypal IPN ---"
 
 #: modules/purchaseorder/config.py:5
 msgid "Purchase Order Module Settings"
-msgstr "Ajustes del módulo de pedidos de compra"
+msgstr "Ajustes del módulo de Orden de Compra"
+
+#: modules/purchaseorder/config.py:30
+msgid "Purchase Order"
+msgstr "Orden de Compra"
 
 #: modules/purchaseorder/config.py:40
 msgid "Verbose logging?"
@@ -1034,7 +1059,7 @@ msgstr "Saldo pendiente"
 msgid "Paid on"
 msgstr "Pagado en"
 
-#: modules/sagepay/config.py:6
+#: modules/sagepay/config.py:6 modules/sagepay/config.py:61
 msgid "Sage Pay Secure Payments"
 msgstr "Sage Pay Pagos Seguros"
 
@@ -1165,6 +1190,10 @@ msgstr ""
 #: modules/sermepa/config.py:17
 msgid "SERMEPA (ServiRed) Payment Module Settings"
 msgstr "Ajustes del módulo de pago SERMEPA (ServiRed)"
+
+#: modules/sermepa/config.py:35
+msgid "Credit Card (via SERMEPA)"
+msgstr "Tarjeta de Crédito (con SERMEPA)"
 
 #: modules/sermepa/config.py:56
 msgid "Currency"
@@ -1396,6 +1425,16 @@ msgstr ""
 "Por favor inicie sesión para tener acceso a sus productos y el "
 "historial de pedidos. Después de esto Usted podrá finalizar la venta."
 
+#: templates/shop/checkout/authentication_required.html:26
+#: templates/shop/checkout/form.html:37
+msgid "Username or email"
+msgstr "Nombre de usuario o correo electrónico"
+
+#: templates/shop/checkout/authentication_required.html:27
+#: templates/shop/checkout/form.html:38
+msgid "Password"
+msgstr "Contraseña"
+
 #: templates/shop/checkout/authentication_required.html:28
 #: templates/shop/checkout/form.html:39
 msgid "Login"
@@ -1570,14 +1609,6 @@ msgstr ""
 #: templates/shop/checkout/form.html:34
 msgid "This is just a convenience, no account is required!"
 msgstr "Esto es sólo por conveniencia, ¡no necesita una cuenta para continuar!"
-
-#: templates/shop/checkout/form.html:37
-msgid "Username or email"
-msgstr "Nombre de usuario o correo electrónico"
-
-#: templates/shop/checkout/form.html:38
-msgid "Password"
-msgstr "Contraseña"
 
 #: templates/shop/checkout/form.html:46
 msgid "You'll need to fill out at least the fields with a *"
