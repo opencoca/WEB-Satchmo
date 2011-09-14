@@ -34,7 +34,9 @@ def iterchoices(func):
 
 
 def iterchoices_db(func):
-    """Iterator for lazy evaluation of choices for database models, modified for functions which need database access to get results.
+    """
+    Iterator for lazy evaluation of choices for database models, modified 
+    for functions which need database access to get results.
 
     It is similar to "iterchoices" with the following difference:
     When the db model is thoroughly validated by database management commands (e.g. dbsync),
@@ -43,13 +45,22 @@ def iterchoices_db(func):
     which can be easy caused by livesettings.
     (The state of database connection could be broken without this workaround for some db backends.)
     """
-    # This test determines, for which Django manage commands should be skipped the call to "func"
-    # Skip for all commands which can be useful before dbsync. Call for runserver, runcgi, shell.
-    # For other commands is good either call or skip.
-    # I hope that this hack will remain functional until I make changes to Livesettings (and maybe enhancement to django.db)
-    # and until all users installs them. Then would not be important to skip anything.
+    # This test determines the conditions for which the call to enumerating
+    # function "func" is to be skipped. 
+    #
+    # Typically it should be skipped for syncdb and all commands which can be
+    # usually called before the first syncdb. It should be called for commands
+    # like runserver, runcgi, shell.
+    # For many other commands is good both, either call or skip.
+    #
+    # This function should be tested with Django 1.2 and 1.3
+    # (Django 1.2 has worse support for error treatment inside transactions)
+    # and for different db backends: postgres, sqlite3 and tests environment
+    #
+    # It would be better to find a solution inot here but by fix in Livesettings
+    # (it looks not possible without a change in django.db)
     command = introspect_management_command()
-    if command in ('syncdb', 'satchmo_store.shop.management.commands.satchmo_copy_static') \
+    if command in ('syncdb', 'test', 'satchmo_store.shop.management.commands.satchmo_copy_static') \
                 or command.startswith('south.'):
         log.info('Skipped model choices initialization function <%s> because'
                  ' of syncdb or other database management command' % str(func).split()[1])
@@ -67,9 +78,10 @@ def introspect_management_command():
     b) full name of external management command, e.g. 'south.management.commands.syncdb'
     c) string 'handler' in the case of running under handlers like uwsgi or mod_python.
     """
-    # This code should be tested and have been tested with respect to different commands
-    # and production server configurations including all above-mentioned,
-    # with different installation methods including compressed .egg,
+    # Output of this function should be tested and have been tested with respect 
+    # to different commands and production server configurations including
+    # all above-mentioned, with different installation methods
+    # including compressed .egg,
     # on different platforms: Linux, Windows + Mingw, Windows + Cygwin
     # and also with clonesatchmo.
     global repeated_error
