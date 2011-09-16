@@ -52,7 +52,12 @@ class Command(NoArgsCommand):
         site.domain = settings.SITE_DOMAIN
         site.name = settings.SITE_NAME
         site.save()
-        store_country = Country.objects.get(iso3_code='USA')
+        try:
+            store_country = Country.objects.get(iso3_code='USA')
+        except Country.DoesNotExist:
+            print "\nError: Country data should be first loaded by:  python manage.py satchmo_load_l10n"
+            import sys
+            sys.exit(1)
         config = Config(site=site, store_name=settings.SITE_NAME, country=store_country, sales_country=store_country)
         config.save()
         config.shipping_countries.add(store_country)
