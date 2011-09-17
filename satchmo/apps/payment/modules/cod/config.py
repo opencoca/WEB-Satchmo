@@ -31,7 +31,8 @@ config_register_list(
     StringValue(PAYMENT_GROUP,
         'LABEL',
         description=_('English name for this group on the checkout screens'),
-        default = _('COD Payment'),
+        default = 'COD Payment',
+        dummy = _('COD Payment'), # Force this to appear on po-files
         help_text = _('This will be passed to the translation utility')),
 
     StringValue(PAYMENT_GROUP,

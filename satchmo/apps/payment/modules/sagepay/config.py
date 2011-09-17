@@ -58,7 +58,8 @@ config_register_list(
     StringValue(PAYMENT_GROUP,
         'LABEL',
         description=_('English name for this group on the checkout screens'),
-        default = _('Sage Pay Secure Payments'),
+        default = 'Sage Pay Secure Payments',
+        dummy = _('Sage Pay Secure Payments'), # Force this to appear on po-files
         help_text = _('This will be passed to the translation utility')),
 
     MultipleStringValue(PAYMENT_GROUP,

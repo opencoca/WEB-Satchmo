@@ -64,7 +64,8 @@ StringValue(PAYMENT_GROUP,
 StringValue(PAYMENT_GROUP,
     'LABEL',
     description=_('English name for this group on the checkout screens'),
-    default = _('PayPal'),
+    default = 'PayPal',
+    dummy = _('PayPal'), # Force this to appear on po-files
     help_text = _('This will be passed to the translation utility')),
 
 StringValue(PAYMENT_GROUP,
