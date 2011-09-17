@@ -8,6 +8,7 @@ from livesettings import config_get_group, config_value
 from payment.config import gateway_live
 from payment.views import confirm, payship
 from satchmo_store.shop.models import Order
+from satchmo_store.shop.models import Cart, NullCart
 from satchmo_store.shop.satchmo_settings import get_satchmo_setting
 from satchmo_utils.dynamic import lookup_url
 from satchmo_utils.views import bad_or_missing
@@ -18,7 +19,8 @@ import logging
 import notifications
 import sha
 
-# TODO: This module doesn't seem to actually record any payments.
+# Notes: payments are recorded in notifications.py
+# This module uses method 3 of Google's choices, notifications by html; you'll need SSL for it to work
 
 log = logging.getLogger("payment.modules.google.processor")
 
@@ -133,6 +135,19 @@ def success(request):
         order = Order.objects.from_request(request)
     except Order.DoesNotExist:
         return bad_or_missing(request, _('Your order has already been processed.'))
+
+
+    # empty user cart
+    for cart in Cart.objects.filter(customer=order.contact):
+        cart.empty()
+	cart.delete()
+
+    cart = Cart.objects.from_request(request, create=False)
+    if isinstance(cart, NullCart):
+        pass
+    else:
+        cart.empty()
+	cart.delete()
 
     del request.session['orderID']
     context = RequestContext(request, {'order': order})
