@@ -32,7 +32,8 @@ config_register_list(
     StringValue(PAYMENT_GROUP,
         'LABEL',
         description=_('English name for this group on the checkout screens'),
-        default = _('Credit Card (via SERMEPA)'),
+        default = 'Credit Card (via SERMEPA)',
+        dummy = _('Credit Card (via SERMEPA)'), # Force this to appear on po-files
         help_text = _('This will be passed to the translation utility'),
         ordering=10
         ),
