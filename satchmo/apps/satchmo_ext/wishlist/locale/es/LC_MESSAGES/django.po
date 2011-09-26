@@ -1,13 +1,13 @@
-#
+# 
 msgid ""
 msgstr ""
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2011-09-15 12:50+0000\n"
-"PO-Revision-Date: 2011-08-08 00:36\n"
+"PO-Revision-Date: 2011-09-26 15:27\n"
 "Last-Translator: Andrea  de la Huerta <info@metamorfosys.de>\n"
-"Language: es\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
+"Language: es\n"
 "X-Translated-Using: django-rosetta 0.6.1\n"
 
 #: config.py:8
@@ -17,8 +17,8 @@ msgstr "Slug para lista de compras"
 #: config.py:9
 msgid "The url slug for wishlists.  Requires server restart if changed."
 msgstr ""
-"El slug de url para las listas de compras. Requiere reiniciar el servidor si "
-"se modifica."
+"El slug de url para las listas de compras. Requiere reiniciar el "
+"servidor si se modifica."
 
 #: models.py:33
 msgid "Contact"
@@ -46,7 +46,7 @@ msgstr "Productos en la lista"
 
 #: views.py:60 views.py:82
 msgid "The product you have requested does not exist."
-msgstr "El producto que ha solicitado no existe."
+msgstr "El producto que has solicitado no existe."
 
 #: views.py:93
 msgid "The contact associated with this request does not exist."
@@ -63,9 +63,11 @@ msgstr "Error"
 #: views.py:115
 #, python-format
 msgid ""
-"Wishlist product '%(product)s' could't be added to the cart. %(details)s"
+"Wishlist product '%(product)s' could't be added to the cart. "
+"%(details)s"
 msgstr ""
-"El producto '%(product)s' deseado no se pudo agregar a la cesta. %(details)s"
+"El producto '%(product)s' deseado no se pudo agregar a la cesta. "
+"%(details)s"
 
 #: views.py:156 views.py:167 views.py:169
 msgid "No such wishlist item."
@@ -73,7 +75,7 @@ msgstr "No existe tal artículo en la lista."
 
 #: views.py:162
 msgid "You must be logged in to do that."
-msgstr "Usted debe iniciar sesión para hacer eso."
+msgstr "Primero debes iniciar sesión."
 
 #: templates/wishlist/index.html:7 templates/wishlist/login_required.html:4
 msgid "Home"
@@ -100,11 +102,11 @@ msgstr "Borrar de la lista de compras"
 
 #: templates/wishlist/login_required.html:11
 msgid ""
-"You are authenticated but need to set up your contact information. You can "
-"update it "
+"You are authenticated but need to set up your contact information. You "
+"can update it "
 msgstr ""
-"Usted está autenticado, pero debe configurar su información de contacto. "
-"Usted puede actualizarla "
+"Ya has iniciado sesión, pero debes completar tu información de "
+"contacto. La puedes actualizar "
 
 #: templates/wishlist/login_required.html:11
 msgid "here"
@@ -113,11 +115,11 @@ msgstr "aquí"
 #: templates/wishlist/login_required.html:13
 #, python-format
 msgid ""
-"Sorry, you must be <a href=\"%(login_url)s\">logged-in</a> to access your "
-"wishlist."
+"Sorry, you must be <a href=\"%(login_url)s\">logged-in</a> to access your"
+" wishlist."
 msgstr ""
-"Lo sentimos, usted debe <a href=\"%(login_url)s\">iniciar sesión</a> para "
-"acceder a su lista de compras."
+"Lo sentimos, pero debes <a href=\"%(login_url)s\">iniciar sesión</a> "
+"para acceder a tu lista de compras."
 
 #: templates/wishlist/plugins/product_add_buttons.html:2
 msgid "Add to wishlist"

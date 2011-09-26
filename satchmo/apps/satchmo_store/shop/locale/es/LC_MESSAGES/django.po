@@ -9,7 +9,7 @@ msgstr ""
 "Project-Id-Version: Satchmo 0.5-pre\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2011-09-15 12:50+0000\n"
-"PO-Revision-Date: 2011-09-19 00:15\n"
+"PO-Revision-Date: 2011-09-26 18:04\n"
 "Last-Translator: Andrea  de la Huerta <info@metamorfosys.de>\n"
 "Language-Team: Spanish <satchmo-users@googlegroups.com>\n"
 "MIME-Version: 1.0\n"
@@ -59,26 +59,26 @@ msgstr "URI del logotipo de la tienda"
 
 #: config.py:36
 msgid "State required?"
-msgstr "Estado requerido?"
+msgstr "¿Estado requerido?"
 
 #: config.py:37
 msgid ""
 "Require a state during registration/checkout for countries that have "
 "states?"
 msgstr ""
-"Requerir un estado durante el registro/pago y envío para aquellos "
+"¿Requerir un estado durante el registro/pago y envío para aquellos "
 "países que tienen estados?"
 
 #: config.py:43
 msgid "Show Site Field?"
-msgstr "Mostrar campo del sitio?"
+msgstr "¿Mostrar campo del sitio?"
 
 #: config.py:44
 msgid ""
 "Should the Site field be displayed in the admin lists? A server restart"
 " is required for this to take effect."
 msgstr ""
-"Mostrar campo del sitio en las listas de administración? El servidor "
+"¿Mostrar campo del sitio en las listas de administración? El servidor "
 "debe reiniciarse para que esto surta efecto."
 
 #: config.py:50
@@ -90,7 +90,7 @@ msgid ""
 "What to round cart adds/deletes by, a '1' here means to round up to a "
 "whole number.  Must be -1 to 1."
 msgstr ""
-"¿Cómo redondear al agregar/eliminiar artículos a la cesta. Un '1' "
+"¿Cómo redondear al agregar/eliminar artículos a la cesta. Un '1' "
 "significa redondear a un número entero. Los números entre -1 a 1 son "
 "válidos."
 
@@ -108,27 +108,29 @@ msgstr ""
 
 #: config.py:66
 msgid "Persistent Cart: Check for old cart?"
-msgstr "Cesta Persistente: Revisar si ya existe una cesta?"
+msgstr "Cesta Persistente: ¿Revisar si ya existe una cesta?"
 
 #: config.py:67
 msgid "When a user logs in, attempt to retrieve previous cart?"
-msgstr "Cuando un usuario inicia sesión, intentar recuperar la cesta anterior?"
+msgstr ""
+"¿Cuando un usuario inicia sesión, intentar recuperar la cesta "
+"anterior?"
 
 #: config.py:74
 msgid "Persistent Cart: Overrides Current Cart?"
-msgstr "Cesta persistentes: Sobrescribe la cesta actual?"
+msgstr "Cesta persistentes: ¿Sobrescribe la cesta actual?"
 
 #: config.py:75
 msgid ""
 "If you have a persistent cart: Should you merge the carts even if the "
 "user has created a new one?"
 msgstr ""
-"Si usted tiene una cesta persistente: Combinar las cestas, incluso si "
-"el usuario ya ha creado una nueva?"
+"Si tienes una cesta persistente: ¿Combinar las cestas, incluso si el "
+"usuario ya ha creado una nueva?"
 
 #: config.py:82
 msgid "Send HTML Email?"
-msgstr "Enviar correo HTML?"
+msgstr "¿Enviar correo HTML?"
 
 #: config.py:83
 msgid "Should HTML emails be used when sending notifications?"
@@ -165,8 +167,9 @@ msgid ""
 "Use the old-style, urchin javascript?.  This is not needed unless your "
 "analytics account hasn't been updated yet."
 msgstr ""
-"Utilizar el estilo viejo, urchin, de Javascript?. Esto no es necesario"
-" a menos que su cuenta de Google Analytics no se haya actualizado aún."
+"¿Utilizar el estilo viejo, urchin, de Javascript?. Esto no es "
+"necesario a menos que tu cuenta de Google Analytics no se haya "
+"actualizado aún."
 
 #: config.py:119
 msgid "Analytics Code"
@@ -239,7 +242,7 @@ msgstr "Número de teléfono"
 
 #: models.py:89
 msgid "Only sell to in-country customers?"
-msgstr "Sólo vender a los clientes dentro del país?"
+msgstr "¿Sólo vender a los clientes dentro del país?"
 
 #: models.py:94
 msgid "Default country for customers"
@@ -275,7 +278,7 @@ msgstr "Cesta"
 
 #: models.py:456 models.py:1128
 msgid "Product"
-msgstr "Productos"
+msgstr "Producto"
 
 #: models.py:457 models.py:1129 templates/shop/cart.html:33
 #: templates/shop/pdf/invoice.rml:131 templates/shop/pdf/packing-slip.rml:125
@@ -628,7 +631,7 @@ msgstr "Nuevo pedido en %(shop_name)s"
 #: notification.py:76
 #, python-format
 msgid "Your order from %(shop_name)s has shipped"
-msgstr "Su pedido en %(shop_name)s ha sido enviado"
+msgstr "Tu pedido en %(shop_name)s ha sido enviado"
 
 #: templates/404.html:5 templates/500.html:5 templates/shop/404.html:5
 #: templates/shop/cart.html:11 templates/shop/contact_form.html:5
@@ -680,7 +683,7 @@ msgstr "Formulario de pedido rápido"
 
 #: templates/base.html:71
 msgid "Account Information"
-msgstr "Información de la cuenta"
+msgstr "Datos de mi cuenta"
 
 #: templates/base.html:73
 msgid "Admin"
@@ -700,7 +703,7 @@ msgstr "Acceder"
 
 #: templates/base.html:89 templates/shop/cart.html:73
 msgid "Check out"
-msgstr "Finalizar venta"
+msgstr "Realizar pedido"
 
 #: templates/base.html:95 templates/shop/contact_form.html:6
 #: templates/shop/contact_thanks.html:6
@@ -743,7 +746,7 @@ msgstr "Modificar"
 
 #: templates/admin/index.html:93
 msgid "You don't have permission to edit anything."
-msgstr "Usted no tiene permiso para editar."
+msgstr "No tienes permiso para editar."
 
 #: templates/admin/index.html:101
 msgid "Recent Actions"
@@ -821,7 +824,7 @@ msgstr "Impuestos incluidos"
 #: templates/shop/_order_tracking_details.html:8
 #: templates/shop/order_history.html:20
 msgid "Order #"
-msgstr "# Pedido"
+msgstr "Pedido #"
 
 #: templates/shop/_order_tracking_details.html:41
 msgid "Shipping To"
@@ -837,11 +840,11 @@ msgstr "Todos los productos"
 
 #: templates/shop/cart.html:29
 msgid "Your cart is empty."
-msgstr "Su cesta está vacía."
+msgstr "Tu cesta está vacía."
 
 #: templates/shop/cart.html:31
 msgid "Your Cart"
-msgstr "Su cesta"
+msgstr "Tu cesta"
 
 #: templates/shop/cart.html:34
 msgid "Item"
@@ -878,8 +881,8 @@ msgstr "Total de la cesta"
 #: templates/shop/contact_form.html:13
 msgid "Please correct the following error:"
 msgid_plural "Please correct the following errors:"
-msgstr[0] "Por favor corriga los siguientes errores:"
-msgstr[1] "Por favor corriga el siguiente error:"
+msgstr[0] "Por favor corrige los siguientes errores:"
+msgstr[1] "Por favor corrige el siguiente error:"
 
 #: templates/shop/contact_form.html:19
 msgid "Send Email"
@@ -907,9 +910,9 @@ msgid ""
 "trouble with the download, please refresh your browser and try the "
 "download again"
 msgstr ""
-"Una vez que pulse en el enlace, la descarga será contada. Si tiene "
-"problemas con la descarga, por favor actualice el explorador e "
-"inténtelo nuevamente"
+"Una vez que pulses en el enlace, la descarga será contada. Si tienes "
+"problemas con la descarga, por favor actualiza el explorador e "
+"inténtalo nuevamente"
 
 #: templates/shop/index.html:11
 msgid "Welcome to the shop."
@@ -960,7 +963,7 @@ msgstr "Artículos"
 
 #: templates/shop/order_history.html:53
 msgid "You haven't made any orders yet."
-msgstr "Aún no ha realizado ningún pedido."
+msgstr "Aún no has realizado ningún pedido."
 
 #: templates/shop/order_tracking.html:8 templates/shop/order_tracking.html:13
 msgid "Order Tracking"
@@ -993,11 +996,11 @@ msgstr "Gestión de pedidos personalizados"
 
 #: templates/shop/admin/_customorder_management.html:8
 msgid "Fully charged"
-msgstr "Totalmente cargado"
+msgstr "Cargado en su totalidad"
 
 #: templates/shop/admin/_customorder_management.html:10
 msgid "Charge remaining amount"
-msgstr "Cantidad de carga restante"
+msgstr "Cantidad restante a cargar"
 
 #: templates/shop/admin/_customorder_management.html:13
 msgid "Product Details"
@@ -1005,7 +1008,7 @@ msgstr "Detalles del Producto"
 
 #: templates/shop/admin/_ordercount_list.html:7
 msgid "on"
-msgstr "del"
+msgstr "el"
 
 #: templates/shop/admin/_orderpayment_list.html:8
 #: templates/shop/email/order_complete.txt:13
@@ -1127,13 +1130,13 @@ msgid ""
 "Your %(credit_card_type)s card ending in %(credit_card_number)s will be"
 " charged %(order_total)s."
 msgstr ""
-"Se cargará un total de %(order_total)s a su tarjeta "
+"Se cargará un total de %(order_total)s a tu tarjeta "
 "%(credit_card_type)s con terminación %(credit_card_number)s."
 
 #: templates/shop/email/order_complete.txt:16
 #, python-format
 msgid "This order will be charged on your account for %(order_total)s."
-msgstr "Este pedido se cargará a su cuenta con un total de %(order_total)s."
+msgstr "Este pedido se cargará a tu cuenta con un total de %(order_total)s."
 
 #: templates/shop/email/order_complete.txt:19
 msgid "Your order contains products that can be downloaded"
@@ -1159,7 +1162,7 @@ msgstr "Este pedido se cargará en la cuenta del cliente por %(order_total)s ."
 #, python-format
 msgid "Your order #%(orderid)s has shipped today via %(shippingmethod)s."
 msgstr ""
-"Su pedido #%(orderid)s ha sido enviado hoy a través de "
+"Tu pedido #%(orderid)s ha sido enviado hoy a través de "
 "%(shippingmethod)s ."
 
 #: templates/shop/email/order_shipped.txt:15
@@ -1215,12 +1218,12 @@ msgid ""
 "%(order_total)s was charged to your %(credit_card_type)s card "
 "(x%(credit_card_number)s) on %(order_date)s."
 msgstr ""
-"Se cargó un total de %(order_total)s a su tarjeta %(credit_card_type)s"
+"Se cargó un total de %(order_total)s a tu tarjeta %(credit_card_type)s"
 " (x%(credit_card_number)s) el %(order_date)s."
 
 #: templates/shop/pdf/invoice.rml:215
 msgid "This invoice has been paid in full. Thank you for your business!"
-msgstr "Esta factura ha sido pagada en su totalidad. Gracias por su compra!"
+msgstr "Esta factura ha sido pagada en su totalidad. Gracias por tu compra!"
 
 #: templates/shop/pdf/packing-slip.rml:21
 #: templates/shop/pdf/packing-slip.rml:63
@@ -1229,7 +1232,7 @@ msgstr "LISTA DE EMBALAJE"
 
 #: templates/shop/pdf/packing-slip.rml:138
 msgid "Thank you for your business!"
-msgstr "Gracias por su compra!"
+msgstr "Gracias por tu compra!"
 
 #: views/cart.py:64
 msgid "No cart to update."
@@ -1245,7 +1248,7 @@ msgstr "Número del Artículo inválido."
 
 #: views/cart.py:91
 msgid "No such item in your cart."
-msgstr "No existe ese artículo en su cesta."
+msgstr "No existe ese artículo en tu cesta."
 
 #: views/cart.py:101
 #, python-format
@@ -1270,7 +1273,7 @@ msgstr "Cantidad inválida."
 
 #: views/cart.py:176
 msgid "Please enter a positive number."
-msgstr "Por favor introduzca un número positivo."
+msgstr "Por favor introduce un número positivo."
 
 #: views/cart.py:208
 msgid "Success"
@@ -1278,7 +1281,7 @@ msgstr "Éxito"
 
 #: views/cart.py:251
 msgid "You must accept the terms and conditions."
-msgstr "Debe aceptar los términos y condiciones."
+msgstr "Debes aceptar los términos y condiciones."
 
 #: views/comments.py:20 views/comments.py:31
 msgid "One or more of the required fields wasn't submitted"
@@ -1321,4 +1324,4 @@ msgstr "Número de página inválido"
 msgid ""
 "The order you have requested doesn't exist, or you don't have access to"
 " it."
-msgstr "El pedido que ha solicitado no existe, o no tiene acceso a el mismo."
+msgstr "El pedido que has solicitado no existe, o no tienes acceso a el mismo."
