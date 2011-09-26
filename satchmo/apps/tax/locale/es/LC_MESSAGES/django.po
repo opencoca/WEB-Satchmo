@@ -3,19 +3,19 @@
 # Copyright (C) 2008 Satchmo Project
 # This file is distributed under the same license as the Satchmo package.
 # Christian Hoeppner <hoeppner@gmail.com>, 2007.
-#
+# 
 msgid ""
 msgstr ""
 "Project-Id-Version: Satchmo 0.5-pre\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2011-09-15 12:50+0000\n"
-"PO-Revision-Date: 2011-08-08 00:44\n"
+"PO-Revision-Date: 2011-09-26 18:55\n"
 "Last-Translator: Andrea  de la Huerta <info@metamorfosys.de>\n"
 "Language-Team: Spanish <satchmo-users@googlegroups.com>\n"
-"Language: es\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
+"Language: es\n"
 "X-Translated-Using: django-rosetta 0.6.1\n"
 
 #: config.py:7
@@ -29,8 +29,8 @@ msgstr "Módulo de impuestos activo"
 #: config.py:11
 msgid "Select a module, save and reload to set any module-specific settings."
 msgstr ""
-"Seleccione un módulo, guárdelo y recargue la página para poder configurar "
-"los ajustes específicos del módulo."
+"Selecciona un módulo, guárdalo y recarga la página para poder "
+"configurar los ajustes específicos del módulo."
 
 #: config.py:13
 msgid "No Tax"
@@ -43,7 +43,8 @@ msgstr "Mostrar con IVA incluido"
 #: config.py:20
 msgid "If yes, then all products and the cart will display with tax included."
 msgstr ""
-"Si es así, todos los productos y el carro se mostrarán con IVA incluido."
+"Si es así, todos los productos y el carro se mostrarán con IVA "
+"incluido."
 
 #: config.py:26
 msgid "New products are automatically made taxable"
@@ -63,7 +64,7 @@ msgstr "Esto sólo se utilizará si el IVA se calcula en base a una dirección."
 
 #: modules/area/admin.py:14
 msgid "You must choose a zone or a country."
-msgstr "Debe elegir una zona o país."
+msgstr "Debes elegir una zona o país."
 
 #: modules/area/config.py:5
 msgid "By Country/Area"
@@ -79,7 +80,7 @@ msgstr "Tipo de impuestos de envío"
 
 #: modules/area/config.py:21 modules/us_sst/config.py:24
 msgid "Select a TaxClass that should be applied for shipments."
-msgstr "Seleccione un tipo de impuesto aplicable a los envíos."
+msgstr "Selecciona un tipo de impuesto aplicable a los envíos."
 
 #: modules/area/models.py:10 modules/us_sst/models.py:57
 msgid "Tax Class"
@@ -131,8 +132,8 @@ msgstr "Registros de CP+5 necesitan una alta y una baja para ambas partes."
 #, fuzzy
 msgid "Address rocord needs: low, high, street, city, zip, zip+4"
 msgstr ""
-"El registro de dirección necesita: bajo, alto, calle, ciudad, código postal, "
-"código postal 4"
+"El registro de dirección necesita: bajo, alto, calle, ciudad, código "
+"postal, código postal 4"
 
 #: modules/us_sst/config.py:7
 #, fuzzy
