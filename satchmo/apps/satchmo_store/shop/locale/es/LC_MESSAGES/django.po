@@ -9,7 +9,7 @@ msgstr ""
 "Project-Id-Version: Satchmo 0.5-pre\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2011-09-15 12:50+0000\n"
-"PO-Revision-Date: 2011-09-26 18:04\n"
+"PO-Revision-Date: 2011-09-26 19:00\n"
 "Last-Translator: Andrea  de la Huerta <info@metamorfosys.de>\n"
 "Language-Team: Spanish <satchmo-users@googlegroups.com>\n"
 "MIME-Version: 1.0\n"
@@ -699,7 +699,7 @@ msgstr "Salir"
 
 #: templates/base.html:80
 msgid "Log in"
-msgstr "Acceder"
+msgstr "Iniciar sesión"
 
 #: templates/base.html:89 templates/shop/cart.html:73
 msgid "Check out"
