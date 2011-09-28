@@ -9,7 +9,7 @@ msgstr ""
 "Project-Id-Version: Satchmo 0.5-pre\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2011-09-15 12:50+0000\n"
-"PO-Revision-Date: 2011-09-26 18:50\n"
+"PO-Revision-Date: 2011-09-26 21:01\n"
 "Last-Translator: Andrea  de la Huerta <info@metamorfosys.de>\n"
 "Language-Team: Spanish <satchmo-users@googlegroups.com>\n"
 "MIME-Version: 1.0\n"
@@ -82,11 +82,11 @@ msgstr "Organización"
 #: templates/contact/_contact_info_form_shipping.html:12
 #: templates/contact/_contact_info_form_shipping.html:15
 msgid "Street"
-msgstr "Calle"
+msgstr "Dirección"
 
 #: config.py:34 config.py:52
 msgid "Street (second line)"
-msgstr "Calle (segunda línea)"
+msgstr "Dirección (adicional)"
 
 #: config.py:35 config.py:53 forms.py:45 forms.py:52 models.py:288
 #: templates/contact/_contact_info_form_billing.html:15
