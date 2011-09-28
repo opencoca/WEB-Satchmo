@@ -9,7 +9,7 @@ msgstr ""
 "Project-Id-Version: Satchmo 0.5-pre\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2011-09-15 12:50+0000\n"
-"PO-Revision-Date: 2011-09-26 19:00\n"
+"PO-Revision-Date: 2011-09-26 21:13\n"
 "Last-Translator: Andrea  de la Huerta <info@metamorfosys.de>\n"
 "Language-Team: Spanish <satchmo-users@googlegroups.com>\n"
 "MIME-Version: 1.0\n"
@@ -218,7 +218,7 @@ msgstr "Correo"
 #: models.py:81 models.py:82 models.py:644 models.py:645 models.py:651
 #: models.py:652
 msgid "Street"
-msgstr "Calle"
+msgstr "Dirección"
 
 #: models.py:83 models.py:646 models.py:653
 msgid "City"
@@ -667,7 +667,7 @@ msgstr "Enlaces rápidos"
 
 #: templates/base.html:62
 msgid "Recently Added"
-msgstr "Productos recientes"
+msgstr "Novedades"
 
 #: templates/base.html:64
 msgid "Best Sellers"
@@ -695,7 +695,7 @@ msgstr "Detalles de la cuenta"
 
 #: templates/base.html:78
 msgid "Log out"
-msgstr "Salir"
+msgstr "Cerrar sesión"
 
 #: templates/base.html:80
 msgid "Log in"
