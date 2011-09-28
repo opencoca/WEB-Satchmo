@@ -2,7 +2,7 @@
 msgid ""
 msgstr ""
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2011-09-15 12:50+0000\n"
+"POT-Creation-Date: 2011-09-28 19:29+0000\n"
 "PO-Revision-Date: 2011-06-17 10:42\n"
 "Last-Translator: Jens Grather <graether@dinamo-papeleria.es>\n"
 "Language-Team: Spanish <satchmo-users@googlegroups.com>\n"
@@ -14,65 +14,65 @@ msgstr ""
 
 #: forms.py:37
 msgid "Title"
-msgstr ""
+msgstr "Título"
 
 #: forms.py:38
 msgid "Email address"
-msgstr ""
+msgstr "Correo electrónico"
 
 #: forms.py:40
 msgid "Password (again)"
-msgstr ""
+msgstr "Contraseña (de nuevo)"
 
 #: forms.py:42
 msgid "Password"
-msgstr ""
+msgstr "Contraseña"
 
 #: forms.py:44
 msgid "First name"
-msgstr ""
+msgstr "Nombre"
 
 #: forms.py:46
 msgid "Last name"
-msgstr ""
+msgstr "Apellido(s)"
 
 #: forms.py:53
 msgid "Username"
-msgstr ""
+msgstr "Nombre de usuario"
 
 #: forms.py:54
 msgid "Please use only letters, numbers and @/./+/-/_"
-msgstr ""
+msgstr "Por favor usa sólo letras, números y @/./+/-/_"
 
 #: forms.py:72
 msgid "Newsletter"
-msgstr ""
+msgstr "Boletín"
 
 #: forms.py:81
 msgid "The two passwords do not match."
-msgstr ""
+msgstr "Las dos contraseñas no son iguales."
 
 #: forms.py:93
 msgid "That username is already in use."
-msgstr ""
+msgstr "Ese nombre de usuario ya está en uso."
 
 #: forms.py:101
 msgid "That email address is already in use."
-msgstr ""
+msgstr "Ese correo electrónico ya está en uso."
 
 #: mail.py:17
 #, python-format
 msgid "Welcome to %(shop_name)s"
-msgstr ""
+msgstr "Bienvenido a %(shop_name)s"
 
 #: views.py:24
 msgid "Yes"
-msgstr ""
+msgstr "Sí"
 
 #: views.py:25
 msgid "No"
-msgstr ""
+msgstr "No"
 
 #: views.py:380
 msgid "Registration Form"
-msgstr ""
+msgstr "Formulario de registro"
