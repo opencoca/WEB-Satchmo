@@ -8,8 +8,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Satchmo 0.5-pre\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2011-09-15 12:50+0000\n"
-"PO-Revision-Date: 2011-09-26 21:08\n"
+"POT-Creation-Date: 2011-09-28 19:29+0000\n"
+"PO-Revision-Date: 2011-09-28 21:31\n"
 "Last-Translator: Andrea  de la Huerta <info@metamorfosys.de>\n"
 "Language-Team: Spanish <satchmo-users@googlegroups.com>\n"
 "MIME-Version: 1.0\n"
@@ -1366,7 +1366,7 @@ msgstr ""
 "<p>Este artículo es elegible para recibir un descuento del %(pct)s si "
 "introduces el código \"%(code)s\" al realizar tu pedido. Promoción "
 "válida durante nuestra oferta \"%(desc)s\" que termina el "
-"%(enddate)s.</p>  "
+"%(enddate)s.</p>   "
 
 #: templates/product/recently_added.html:8
 #: templates/product/recently_added.html:12
@@ -1397,7 +1397,7 @@ msgstr ""
 "<p>Los productos en tu cesta son elegibles para recibir un descuento "
 "del %(pct)s si introduces el código \"%(code)s\" al realizar tu pedido. "
 "Promoción válida durante nuestra oferta %(desc)s que termina el "
-"%(enddate)s.</p>   "
+"%(enddate)s.</p>    "
 
 #: templates/product/some_discount_eligible.html:4
 #, python-format
@@ -1409,7 +1409,7 @@ msgstr ""
 "<p>Los productos de esta página son elegibles para recibir un "
 "descuento del %(pct)s si introduces el código \"%(code)s\" al realizar "
 "tu pedido. Promoción válida durante nuestra oferta %(desc)s que "
-"termina el %(enddate)s.</p>   "
+"termina el %(enddate)s.</p>    "
 
 #: templates/product/admin/inventory_form.html:64
 #: templates/product/admin/product_export_form.html:48
