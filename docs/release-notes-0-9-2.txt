@@ -23,12 +23,14 @@ New Features
 - New config option to allow users to create their username instead of automatically generating
 - Satchmo check now does a more thorough job of checking your environment for issues
 - Product variation images can be shown when the user selects the product
+- In the admin view of products, stock and price are displayed in a more useable format
 
 Translations
 ------------
 - Added Dutch translation
 - Added Czech translation
 - Updated French translation
+- Updated Spanish translation
 
 Bug Fixes
 ---------
@@ -72,6 +74,7 @@ Bug Fixes
 - Fedex module API changes
 - Several fixes to handle unicode characters better
 - Replace some admin jquery scripts with simpler django readonly fields
+- Ensure that google checkout empties the cart
 
 Performance Improvements
 ------------------------
