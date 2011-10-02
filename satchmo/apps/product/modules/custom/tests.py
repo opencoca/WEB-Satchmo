@@ -55,7 +55,7 @@ class ShopTest(TestCase):
         response = self.client.get(prefix+'/cart/')
         self.assertContains(response, '/satchmo-computer/">satchmo computer', count=1, status_code=200)
         amount = smart_str(moneyfmt(Decimal('168.00')))
-        self.assertContains(response, amount, count=3)
+        self.assertContains(response, amount, count=4)
 
         amount = smart_str('Monogram: CBM  ' + moneyfmt(Decimal('10.00')))
         self.assertContains(response, amount, count=1)
