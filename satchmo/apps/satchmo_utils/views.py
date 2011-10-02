@@ -90,6 +90,9 @@ class CreditCard(object):
         RETURNS: (String) Credit card type string if legal.(None) if invalid.
         '''
         s = self._stripCardNum(self.card_number)
+        # If we get an input of all characters, this will be 0 length
+        if not len(s):
+            return None
         if self._verifyMod10(s):
             return self.card_type
         return None
