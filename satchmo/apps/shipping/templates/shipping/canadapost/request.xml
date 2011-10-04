@@ -1,3 +1,4 @@
+
 {% load satchmo_product %}<?xml version="1.0" encoding="UTF-8" ?>
 {% spaceless %}
 <eparcel>
@@ -8,14 +9,14 @@
 		<turnAroundTime>{{config.turn_around_time}}</turnAroundTime>
 		<itemsPrice>{{cart.total}}</itemsPrice>
 		<lineItems>
-		{% for product in cart.get_shipment_list %}
+		{% for product in cart.get_shipment_by_amount %}
 			<item>
-				<quantity>1</quantity>
-				<weight>{{product|smart_attr:"weight"}}</weight>
-				<length>{{product|smart_attr:"length"}}</length>
-				<width>{{product|smart_attr:"width"}}</width>
-				<height>{{product|smart_attr:"height"}}</height>
-				<description>{{product.name}}</description>
+				<quantity>{{ product.0 }}</quantity>
+				<weight>{{product.1|smart_attr:"weight"}}</weight>
+				<length>{{product.1|smart_attr:"length"}}</length>
+				<width>{{product.1|smart_attr:"width"}}</width>
+				<height>{{product.1|smart_attr:"height"}}</height>
+				<description>{{product.1.name}}</description>
 			</item>
 		{% endfor %}
 		</lineItems>
