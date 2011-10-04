@@ -433,9 +433,21 @@ class Cart(models.Model):
         for cartitem in self.cartitem_set.all():
             if cartitem.is_shippable:
                 p = cartitem.product
-                q =  int(cartitem.quantity.quantize(Decimal('0'), ROUND_CEILING))
+                q = int(cartitem.quantity.quantize(Decimal('0'), ROUND_CEILING))
                 for single in range(0, q):
                     items.append(p)
+        return items
+
+    def get_shipment_by_amount(self):
+        """
+        Returna list of shippable products, with it's quantity
+        """
+        items = []
+        for cartitem in self.cartitem_set.all():
+            if cartitem.is_shippable:
+                p = cartitem.product
+                q = int(cartitem.quantity.quantize(Decimal('0'), ROUND_CEILING))
+                items.append((q,p))
         return items
 
     class Meta:
