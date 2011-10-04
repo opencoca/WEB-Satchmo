@@ -167,6 +167,7 @@ class Shipper(BaseShipper):
             tree = self._process_request(connection, request)
             self.verbose_log("Got from Canada Post [%s]:\n%s", cache_key_response, self.raw)
             needs_cache = True
+            cache.set(cache_key_response, tree, 60)
         else:
             needs_cache = False
             
