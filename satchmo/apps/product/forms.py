@@ -24,7 +24,7 @@ import zipfile
 log = logging.getLogger('product.forms')
 
 def export_choices():
-    fmts = serializers.get_serializer_formats()
+    fmts = serializers.get_public_serializer_formats()
     return zip(fmts,fmts)
 
 class InventoryForm(forms.Form):
@@ -209,8 +209,10 @@ class ProductExportForm(forms.Form):
                     images.append(image.picture)
             if include_categories:
                 for category in product.category.all():
-                    if category not in categories:
-                        categories[category] = 1
+                    wcategory = category
+                    while wcategory and wcategory not in categories:
+                        categories[wcategory] = 1
+                        wcategory = wcategory.parent
 
         # Export all categories, translations.  Export images,translations if
         # desired.
@@ -229,7 +231,6 @@ class ProductExportForm(forms.Form):
             raise CommandError("Unable to serialize database: %s" % e)
 
         if include_images:
-            filedir = settings.MEDIA_ROOT
             buf = StringIO()
             zf = zipfile.ZipFile(buf, 'a', zipfile.ZIP_STORED)
 
@@ -249,7 +250,7 @@ class ProductExportForm(forms.Form):
             zinfo.external_attr = 2175008768L
 
             for image in images:
-                f = os.path.join(filedir, image)
+                f = image.path
                 if os.path.exists(f):
                     zf.write(f, str(image))
 
@@ -343,7 +344,7 @@ class ProductImportForm(forms.Form):
         else:
             raw = StringIO(str(raw))
 
-        if not format in serializers.get_serializer_formats():
+        if not format in serializers.get_public_serializer_formats():
             errors.append(_('Unknown file format: %s') % format)
 
         if not errors:
