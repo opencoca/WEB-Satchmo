@@ -43,7 +43,7 @@ def export_products(request, template='product/admin/product_export_form.html'):
             return form.export(request)
     else:
         form = ProductExportForm()
-        fileform = ProductImportForm()
+    fileform = ProductImportForm()
 
 
     ctx = RequestContext(request, {
