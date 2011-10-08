@@ -24,13 +24,7 @@ log = logging.getLogger('accounts.forms')
 
 class EmailAuthenticationForm(AuthenticationForm):
     """Authentication form with a longer username field."""
-
-    def __init__(self, *args, **kwargs):
-
-        super(EmailAuthenticationForm, self).__init__(*args, **kwargs)
-        username = self.fields['username']
-        username.max_length = 75
-        username.widget.attrs['maxlength'] = 75
+    username = forms.CharField(label=_("Username"), max_length=75)
 
 class RegistrationForm(forms.Form):
     """The basic account registration form."""
