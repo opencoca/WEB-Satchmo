@@ -334,11 +334,6 @@ class ProductExportTest(TestCase):
         self.assertTrue(response.has_header('Content-Type'))
         self.assertEqual('text/xml', response['Content-Type'])
 
-        form_data['format'] = 'python'
-        response = self.client.post(url, form_data)
-        self.assertTrue(response.has_header('Content-Type'))
-        self.assertEqual('text/python', response['Content-Type'])
-
     def test_zip_export_content_type(self):
         """
         Test the content type of an exported zip file.
