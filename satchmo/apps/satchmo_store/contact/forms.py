@@ -447,3 +447,44 @@ class ExtendedContactInfoForm(ContactInfoForm):
     years_to_display = range(datetime.datetime.now().year-100,datetime.datetime.now().year+1)
     dob = forms.DateField(widget=SelectDateWidget(years=years_to_display), required=False)
     newsletter = forms.BooleanField(label=_('Newsletter'), widget=forms.CheckboxInput(), required=False)
+
+class AddressBookForm(forms.Form):
+    addressee_name = forms.CharField(max_length=61, label=_('Addressee Name'), required=True)
+    description = forms.CharField(max_length=20, label=_('Description'),required=False)
+    street1 = forms.CharField(max_length=30, label=_('Street'), required=True)
+    street2 = forms.CharField(max_length=30, required=False)
+    city = forms.CharField(max_length=30, label=_('City'), required=True)
+    state = forms.CharField(max_length=30, label=_('State'), required=True)
+    postal_code = forms.CharField(max_length=10, label=_('ZIP code/Postcode'), required=True)
+
+    def __init__(self, *args, **kwargs):
+        shop = kwargs.pop('shop', None)
+        super(AddressBookForm, self).__init__(*args, **kwargs)
+        if not shop:
+            shop = Config.objects.get_current()
+        self._default_country = shop.sales_country
+        shipping_areas = area_choices_for_country(self._default_country)
+        self.fields['country'] = forms.ModelChoiceField(shop.countries(), required=False, label=_('Country'), empty_label=None, initial=shop.sales_country.pk)
+        self.fields['state'] = forms.ChoiceField(choices=shipping_areas, required=False, label=_('State'))
+        
+    def save(self, contact, address_entry=None, **kwargs):
+        data = self.cleaned_data.copy()
+        if not address_entry:
+            address_entry = AddressBook()
+            log.debug('creating new AddressBook entry')
+        else:
+            address_entry = address_entry
+            log.debug('Saving Addressbook info for %s', address_entry)
+        for field in data.keys():
+            # Getting around the issue where we normally want this auto created on the front end
+            if field <> 'addressee_name':
+                setattr(address_entry, field, data[field])
+        address_entry.addressee = data['addressee_name']
+        address_entry.contact = contact
+        address_entry.save()
+
+YES_NO_CHOICES = (('Yes',_('Yes')),
+                   ('No',_('No')))
+                   
+class YesNoForm(forms.Form):
+    delete_entry = forms.MultipleChoiceField(label=_('Delete entry?'), required=True, widget=forms.widgets.RadioSelect, choices=YES_NO_CHOICES, initial="No")

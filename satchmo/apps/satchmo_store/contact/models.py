@@ -212,6 +212,13 @@ class Contact(models.Model):
 
         super(Contact, self).save(**kwargs)
 
+    def _get_address_book_entries(self):
+        """ Return all non primary shipping and billing addresses
+        """
+        return AddressBook.objects.filter(contact=self.pk).exclude(is_default_shipping=True).exclude(is_default_billing=True)
+        
+    address_book_entries=property(_get_address_book_entries)
+        
     class Meta:
         verbose_name = _("Contact")
         verbose_name_plural = _("Contacts")
