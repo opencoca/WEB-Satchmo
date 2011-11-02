@@ -81,7 +81,7 @@ class TieredTest(TestCase):
         self.assertEqual(product.unit_price, Decimal("19.50"))
 
     def test_multiple_pricing_tiers(self):
-        """Test that a user belonging to more pricing tiers gets a tiered price, namely the lower of them."""
+        """Test that a user belonging to more pricing tiers gets a tiered price, namely the lower of them. #1294"""
         tiergroup2 = Group(name="tiertest2")
         tiergroup2.save()
         self.tieruser.groups.add(tiergroup2)
@@ -91,3 +91,20 @@ class TieredTest(TestCase):
         product = Product.objects.get(slug='PY-Rocks')
         set_current_user(self.tieruser)
         self.assertEqual(product.unit_price, Decimal("15.60"))
+
+    def test_tiered_superuser_bug(self):
+        """Test that superuser does not get tiered price by mistake. #1282"""
+        product = Product.objects.get(slug='PY-Rocks')
+        self.tieruser.is_superuser = True
+        self.tieruser.save()
+        set_current_user(self.tieruser)
+        self.assertEqual(product.unit_price, Decimal("19.50"))
+
+    def test_tiered_staffmember_bug(self):
+        """Test that a staff member does not get tiered price by mistake. #1282"""
+        product = Product.objects.get(slug='PY-Rocks')
+        self.tieruser.is_staff = True
+        self.tieruser.save()
+        set_current_user(self.tieruser)
+        self.assertEqual(product.unit_price, Decimal("19.50"))
+
