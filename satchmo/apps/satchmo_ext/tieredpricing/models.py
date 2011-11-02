@@ -1,5 +1,5 @@
 from decimal import Decimal
-from django.contrib.auth.models import Group
+from django.contrib.auth.models import Group, User
 from django.db import models
 from django.utils.translation import ugettext_lazy as _
 from product import signals
@@ -162,3 +162,18 @@ def tiered_price_listener(signal, adjustment=None, **kwargs):
                 pass
 
 signals.satchmo_price_query.connect(tiered_price_listener)
+
+def tiered_price_changed_group_listener(action=None, reverse=None, instance=None, **kwargs):
+    """Listens for changes of m2m relation between auth.User/Group and resets related threadlocals cached object"""
+    if action in ('post_add', 'pre_remove', 'pre_clear'):
+        if not reverse:
+            modified_users_id = [instance.id]
+        else:
+            modified_users_id = [u.id for u in instance.user_set.all()]
+            # After required Django version will be 1.3+, the previous line can be replaced by:
+            #modified_users = kwargs['pk_set']
+        for user_id in modified_users_id:
+            key = 'TIER_%i' % user_id
+            threadlocals.set_thread_variable(key, None)
+
+models.signals.m2m_changed.connect(tiered_price_changed_group_listener, sender=User.groups.through)
