@@ -80,3 +80,14 @@ class TieredTest(TestCase):
         tiergroup.user_set.clear()
         self.assertEqual(product.unit_price, Decimal("19.50"))
 
+    def test_multiple_pricing_tiers(self):
+        """Test that a user belonging to more pricing tiers gets a tiered price, namely the lower of them."""
+        tiergroup2 = Group(name="tiertest2")
+        tiergroup2.save()
+        self.tieruser.groups.add(tiergroup2)
+        self.tieruser.save()
+        self.tier = PricingTier(group=tiergroup2, title="Test Tier 2", discount_percent=Decimal('20.0'))
+        self.tier.save()
+        product = Product.objects.get(slug='PY-Rocks')
+        set_current_user(self.tieruser)
+        self.assertEqual(product.unit_price, Decimal("15.60"))
