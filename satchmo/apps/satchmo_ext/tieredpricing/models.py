@@ -1,6 +1,7 @@
 from decimal import Decimal
 from django.contrib.auth.models import Group, User
 from django.db import models
+from django.db.models import Q
 from django.utils.translation import ugettext_lazy as _
 from product import signals
 from product.models import Product
@@ -22,9 +23,11 @@ class PricingTierManager(models.Manager):
         if current is None:
             groups = user.groups.all()
             if groups:
-                q = self.all()
+                filterQ = Q()
                 for group in groups:
-                    q = q.filter(group=group)
+                    filterQ = filterQ | Q(group=group)
+                q = self.filter(filterQ)
+
                 if q.count() > 0:
                     current = list(q)
 
