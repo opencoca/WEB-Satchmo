@@ -95,18 +95,19 @@ def introspect_management_command():
         while f is not None:
             co = f.f_code
             filename = co.co_filename.replace('\\', '/')
-            if filename.find('/django/core/') >= 0 and nidentify < 3:
-                if filename.find('/django/core/management/base.',) >= 0:
+            if filename.find('/core/') >= 0 and nidentify < 3:
+                # django.core is usually in '/django/core/' but it can be e.g. in /Django-x.y.z/core/ for some installation
+                if filename.find('/core/management/base.',) >= 0:
                     name = co.co_name
-                    if name == ('validate', 'execute', 'run_from_argv')[nidentify]:
+                    if name in (('validate', 'handle'), ('execute',), ('run_from_argv',))[nidentify]:
                         nidentify += 1
                         # analyze first argument of execute(self, *args, **options)
                         if name == 'execute' and co.co_argcount == 1 and (co.co_flags & 0xC == 0xC):
                             command = f.f_locals[co.co_varnames[0]].__module__.replace('django.core.management.commands.', '')
-                elif filename.find('/django/core/management/commands/') >= 0:
-                    command = re.sub('.*/django/core/management/commands/(.*)\..*', '\\1', filename)
+                elif filename.find('/core/management/commands/') >= 0:
+                    command = re.sub('.*/core/management/commands/(.*)\..*', '\\1', filename)
                     nidentify = 3
-                elif filename.find('/django/core/handlers/') >= 0:
+                elif filename.find('/core/handlers/') >= 0:
                     command = 'handler'
                     nidentify = 3
             f = f.f_back
