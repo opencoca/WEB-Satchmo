@@ -72,3 +72,19 @@ class TieredTest(TestCase):
         set_current_user(self.stduser)
         self.assertEqual(product.unit_price, Decimal("19.50"))
 
+    def test_tiered_user_dynamic_update(self):
+        """
+        Test that adding a user to tiered group or removing him is reflected immediately
+        (without waiting for server restart)
+        """
+        product = Product.objects.get(slug='PY-Rocks')
+        set_current_user(self.tieruser)
+        _ = product.unit_price
+        tiergroup = Group.objects.get(name="tiertest")
+        self.tieruser.groups.remove(tiergroup)
+        self.assertEqual(product.unit_price, Decimal("19.50"))
+        self.tieruser.groups.add(tiergroup)
+        self.assertEqual(product.unit_price, Decimal("17.550"))
+        tiergroup.user_set.clear()
+        self.assertEqual(product.unit_price, Decimal("19.50"))
+
