@@ -22,21 +22,16 @@ class PricingTierManager(models.Manager):
 
         if current is None:
             groups = user.groups.all()
+            current = []
             if groups and not user.is_superuser and not user.is_staff:
                 filterQ = Q()
                 for group in groups:
                     filterQ = filterQ | Q(group=group)
-                q = self.filter(filterQ)
-
-                if q.count() > 0:
-                    current = list(q)
-
-            if current is None:
-                current = "no"
+                current = list(self.filter(filterQ))
 
             threadlocals.set_thread_variable(key, current)
 
-        if current == "no":
+        if not current:
             raise PricingTier.DoesNotExist
 
         return current
@@ -48,7 +43,8 @@ class PricingTier(models.Model):
     title = models.CharField(_(u'Title'), max_length=50)
     discount_percent = models.DecimalField(_(u"Discount Percent"), null=True, blank=True,
         max_digits=5, decimal_places=2,
-        help_text=_(u"This is the discount that will be applied to every product if no explicit Tiered Price exists for that product.  Leave as 0 if you don't want any automatic discount in that case."))
+        help_text=_(u"This is the discount that will be applied to every product if no explicit Tiered Price exists for that "
+                    u"product.  Leave as 0 if you don't want any automatic discount in that case."))
 
     objects = PricingTierManager()
 
@@ -60,18 +56,20 @@ class TieredPriceManager(models.Manager):
     def by_product_qty(self, tier, product, qty=Decimal('1')):
         """Get the tiered price for the specified product and quantity. If it's a product variation, we check the parent too"""
 
-        qty_discounts = product.tieredprices.exclude(expires__isnull=False, expires__lt=datetime.date.today()).filter(quantity__lte=qty, pricingtier=tier)
-
-        if qty_discounts.count() > 0:
+        qty_discounts = list(product.tieredprices.exclude(expires__isnull=False, expires__lt=datetime.date.today()). \
+                filter(quantity__lte=qty, pricingtier=tier).order_by('-quantity'))
+        if qty_discounts:
             # Get the price with the quantity closest to the one specified without going over
-            return qty_discounts.order_by('-quantity')[0]
+            return qty_discounts[0]
+
         # If we haven't found a price, see if the parent product has a price tier
         if 'ProductVariation' in product.get_subtypes():
             parent_product = product.productvariation.parent.product
-            qty_discounts = parent_product.tieredprices.exclude(expires__isnull=False, expires__lt=datetime.date.today()).filter(quantity__lte=qty, pricingtier=tier)
-            if qty_discounts.count() > 0:
+            qty_discounts = list(parent_product.tieredprices.exclude(expires__isnull=False, expires__lt=datetime.date.today()). \
+                    filter(quantity__lte=qty, pricingtier=tier).order_by('-quantity'))
+            if qty_discounts:
                 # Get the price with the quantity closest to the one specified without going over
-                return qty_discounts.order_by('-quantity')[0]
+                return qty_discounts[0]
         raise TieredPrice.DoesNotExist
 
 class TieredPrice(models.Model):
@@ -96,6 +94,7 @@ class TieredPrice(models.Model):
     dynamic_price = property(fget=_dynamic_price)
 
     def save(self, **kwargs):
+        """Save with the prevention of storing duplicates""" 
         prices = TieredPrice.objects.filter(product=self.product, quantity=self.quantity, pricingtier=self.pricingtier)
         if self.expires:
             prices = prices.filter(expires=self.expires)
@@ -167,7 +166,7 @@ def tiered_price_listener(signal, adjustment=None, **kwargs):
 # dispatch_uid prevents applying the same discount multiple times if the module is imported repeatedly.
 signals.satchmo_price_query.connect(tiered_price_listener, dispatch_uid='tieredpricing.models.tiered_price_listener')
 
-def tiered_price_changed_group_listener(action=None, reverse=None, instance=None, **kwargs):
+def pricingtier_group_change_listener(action=None, reverse=None, instance=None, **kwargs):
     """Listens for changes of m2m relation between auth.User/Group and resets related threadlocals cached object"""
     if action in ('post_add', 'pre_remove', 'pre_clear'):
         if not reverse:
@@ -180,4 +179,4 @@ def tiered_price_changed_group_listener(action=None, reverse=None, instance=None
             key = 'TIER_%i' % user_id
             threadlocals.set_thread_variable(key, None)
 
-models.signals.m2m_changed.connect(tiered_price_changed_group_listener, sender=User.groups.through)
+models.signals.m2m_changed.connect(pricingtier_group_change_listener, sender=User.groups.through)
