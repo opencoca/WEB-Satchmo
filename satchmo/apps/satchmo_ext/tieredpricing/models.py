@@ -22,7 +22,7 @@ class PricingTierManager(models.Manager):
 
         if current is None:
             groups = user.groups.all()
-            if groups:
+            if groups and not user.is_superuser and not user.is_staff:
                 filterQ = Q()
                 for group in groups:
                     filterQ = filterQ | Q(group=group)
@@ -164,7 +164,8 @@ def tiered_price_listener(signal, adjustment=None, **kwargs):
             except PricingTier.DoesNotExist:
                 pass
 
-signals.satchmo_price_query.connect(tiered_price_listener)
+# dispatch_uid prevents applying the same discount multiple times if the module is imported repeatedly.
+signals.satchmo_price_query.connect(tiered_price_listener, dispatch_uid='tieredpricing.models.tiered_price_listener')
 
 def tiered_price_changed_group_listener(action=None, reverse=None, instance=None, **kwargs):
     """Listens for changes of m2m relation between auth.User/Group and resets related threadlocals cached object"""
