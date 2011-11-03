@@ -3,7 +3,7 @@ from django.contrib.auth.models import User, Group
 from django.test import TestCase
 from product.models import Product, Price
 from satchmo_ext.tieredpricing.models import *
-from threaded_multihost.threadlocals import set_current_user, set_thread_variable
+from threaded_multihost.threadlocals import set_current_user, set_thread_variable, get_thread_variable
 import keyedcache
 
 class TieredTest(TestCase):
@@ -47,6 +47,8 @@ class TieredTest(TestCase):
         product = Product.objects.get(slug='PY-Rocks')
         set_current_user(self.stduser)
         self.assertEqual(product.unit_price, Decimal("19.50"))
+        # test that a negative answer is cached in threadlocals
+        self.assertEqual(get_thread_variable('TIER_%i' % self.stduser.id), [])
 
     def test_tieredprice(self):
         """Test setting an explicit tieredprice on a product"""
