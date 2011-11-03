@@ -1,4 +1,5 @@
 from decimal import Decimal
+from django.conf import settings
 from django.contrib.auth.models import User
 from django.contrib.sites.models import Site
 from django.core import mail
@@ -71,9 +72,12 @@ class ShopTest(TestCase):
         current_site = Site.objects.get_current()
         cache_key = "cat-%s-%s" % (current_site.id, get_language())
         cache.delete(cache_key)
+        self.old_language_code = settings.LANGUAGE_CODE
+        settings.LANGUAGE_CODE = 'en-us'
 
     def tearDown(self):
         cache_delete()
+        settings.LANGUAGE_CODE = self.old_language_code
 
     def test_main_page(self):
         """
