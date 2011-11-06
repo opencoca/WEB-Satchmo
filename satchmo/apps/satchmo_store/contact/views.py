@@ -114,6 +114,7 @@ def address_create_edit(request, id=None):
     initial_entry = None
     initial_data = {}
     editing = False
+    next_url = request.GET.get('next',None)
     try:
         contact = Contact.objects.from_request(request, create=False)
     except Contact.DoesNotExist:
@@ -130,12 +131,15 @@ def address_create_edit(request, id=None):
         form = AddressBookForm(request.POST)
         if form.is_valid():
             form.save(contact, address_entry=initial_entry)
-            return http.HttpResponseRedirect(urlresolvers.reverse('satchmo_account_info'))
+            if next_url:
+                return http.HttpResponseRedirect(next_url)
+            else:
+                return http.HttpResponseRedirect(urlresolvers.reverse('satchmo_account_info'))
     else:
         form = AddressBookForm(initial=initial_data)
     if initial_entry:
         editing = True
-    context = RequestContext(request, {'form':form, 'editing':editing, 'entry':initial_entry})    
+    context = RequestContext(request, {'form':form, 'editing':editing, 'entry':initial_entry, 'next':next_url})    
     return render_to_response('contact/address_form.html',context_instance=context)
 address_create_edit = login_required(address_create_edit)
 
