@@ -103,4 +103,6 @@ def notify_chargeamount(request, data):
     transaction_id = data['google-order-number']
     processor = get_processor_by_key('PAYMENT_GOOGLE')
     processor.record_payment(amount=data['latest-charge-amount'], transaction_id=transaction_id, order=order)
-
+    total_charged_amount = data['total-charge-amount']
+    if total_charged_amount >= order.total:
+        order.order_success()
