@@ -1,6 +1,7 @@
 from django import http
 from django.contrib.auth import REDIRECT_FIELD_NAME
 from django.contrib.auth.decorators import login_required
+from django.contrib import messages
 from django.core import urlresolvers
 from django.shortcuts import render_to_response, get_object_or_404
 from django.template import RequestContext
@@ -11,6 +12,7 @@ from satchmo_store.contact.forms import ExtendedContactInfoForm, ContactInfoForm
 from satchmo_store.contact.models import Contact, AddressBook
 from satchmo_store.shop.models import Config
 import logging
+from django.utils.translation import ugettext, ugettext_lazy as _
 
 log = logging.getLogger('satchmo_store.contact.views')
 
@@ -131,6 +133,7 @@ def address_create_edit(request, id=None):
         form = AddressBookForm(request.POST)
         if form.is_valid():
             form.save(contact, address_entry=initial_entry)
+            messages.success(request, _('Succcessfully saved addressbook changes.'))
             if next_url:
                 return http.HttpResponseRedirect(next_url)
             else:
