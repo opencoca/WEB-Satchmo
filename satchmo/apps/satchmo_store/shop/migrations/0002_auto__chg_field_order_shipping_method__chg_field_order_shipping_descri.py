@@ -6,6 +6,11 @@ from django.db import models
 
 class Migration(SchemaMigration):
 
+    depends_on = (
+        ('product', '0001_initial'),
+        ('satchmo_store.contact', '0001_initial'),
+    )   
+
     def forwards(self, orm):
         
         # Changing field 'Order.shipping_method'
