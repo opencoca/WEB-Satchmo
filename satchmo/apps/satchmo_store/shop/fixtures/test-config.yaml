@@ -1,25 +1,25 @@
-- fields: {group: !!python/unicode 'PAYMENT_DUMMY', key: !!python/unicode 'CREDITCHOICES',
-    site: !!python/long '1', value: !!python/unicode '["Visa", "Mastercard", "Discover"]'}
-  model: !!python/unicode 'livesettings.setting'
-  pk: !!python/long '1'
-- fields: {group: !!python/unicode 'PAYMENT_AUTHORIZENET', key: !!python/unicode 'CREDITCHOICES',
-    site: !!python/long '1', value: !!python/unicode '["Visa", "Mastercard", "Discover"]'}
-  model: !!python/unicode 'livesettings.setting'
-  pk: !!python/long '3'
-- fields: {group: !!python/unicode 'SHIPPING', key: !!python/unicode 'MODULES', site: !!python/long '1',
-    value: !!python/unicode '["shipping.modules.flat", "shipping.modules.per"]'}
-  model: !!python/unicode 'livesettings.setting'
-  pk: !!python/long '4'
-- fields: {group: !!python/unicode 'TAX', key: !!python/unicode 'MODULE', site: !!python/long '1',
-    value: !!python/unicode 'tax.modules.percent'}
-  model: !!python/unicode 'livesettings.setting'
-  pk: !!python/long '5'
-- fields: {group: !!python/unicode 'TAX', key: !!python/unicode 'PERCENT', site: !!python/long '1',
-    value: !!python/unicode '10'}
-  model: !!python/unicode 'livesettings.setting'
-  pk: !!python/long '6'
-- fields: {group: !!python/unicode 'LANGUAGE', key: !!python/unicode 'CURRENCY', site: !!python/long '1',
-    value: !!python/unicode '€'}
-  model: !!python/unicode 'livesettings.setting'
-  pk: !!python/long '7'
+- fields: {group: !!str 'PAYMENT_DUMMY', key: !!str 'CREDITCHOICES',
+    site: !!int '1', value: !!str '["Visa", "Mastercard", "Discover"]'}
+  model: !!str 'livesettings.setting'
+  pk: !!int '1'
+- fields: {group: !!str 'PAYMENT_AUTHORIZENET', key: !!str 'CREDITCHOICES',
+    site: !!int '1', value: !!str '["Visa", "Mastercard", "Discover"]'}
+  model: !!str 'livesettings.setting'
+  pk: !!int '3'
+- fields: {group: !!str 'SHIPPING', key: !!str 'MODULES', site: !!int '1',
+    value: !!str '["shipping.modules.flat", "shipping.modules.per"]'}
+  model: !!str 'livesettings.setting'
+  pk: !!int '4'
+- fields: {group: !!str 'TAX', key: !!str 'MODULE', site: !!int '1',
+    value: !!str 'tax.modules.percent'}
+  model: !!str 'livesettings.setting'
+  pk: !!int '5'
+- fields: {group: !!str 'TAX', key: !!str 'PERCENT', site: !!int '1',
+    value: !!str '10'}
+  model: !!str 'livesettings.setting'
+  pk: !!int '6'
+- fields: {group: !!str 'LANGUAGE', key: !!str 'CURRENCY', site: !!int '1',
+    value: !!str '€'}
+  model: !!str 'livesettings.setting'
+  pk: !!int '7'
 
