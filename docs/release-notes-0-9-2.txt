@@ -23,12 +23,15 @@ New Features
 - New config option to allow users to create their username instead of automatically generating
 - Satchmo check now does a more thorough job of checking your environment for issues
 - Product variation images can be shown when the user selects the product
+- In the admin view of products, stock and price are displayed in a more useable format
+- Ability add and manage addressbook entries
 
 Translations
 ------------
 - Added Dutch translation
 - Added Czech translation
 - Updated French translation
+- Updated Spanish translation
 
 Bug Fixes
 ---------
@@ -72,6 +75,7 @@ Bug Fixes
 - Fedex module API changes
 - Several fixes to handle unicode characters better
 - Replace some admin jquery scripts with simpler django readonly fields
+- Ensure that google checkout empties the cart
 
 Performance Improvements
 ------------------------
@@ -135,3 +139,12 @@ Previously, category.active_products() would not consistently return the correct
 this was fixed but had the unintended side effect of returning all the product variations in the default templates. In order to maintain
 consistency, the default variation display value is now False. The only people that will notice the issue are those that customized
 the variation display in the category page.
+
+Order Shipping Method and Description Fields increased
+++++++++++++++++++++++++++++++++++++++++++++++++++++++
+The fields in the Order model for storing the shipping method and description were too small. The size of the field has been increased to 200 characters.
+A migration is included for this change:
+
+    python manage.py migrate contact --fake 0001
+    python manage.py migrate shop --fake 0001
+    python manage.py migrate shop

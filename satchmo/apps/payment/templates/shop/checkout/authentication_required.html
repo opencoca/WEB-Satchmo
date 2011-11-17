@@ -20,12 +20,11 @@
 <table> 
                 <tr> 
                         <td colspan="2"> 
-                                In order to have access to your products and order history, please log in. 
-                                After that you may continue to checkout with your current cart. 
+                            {% trans "In order to have access to your products and order history, please log in. After that you may continue to checkout with your current cart." %}
                         </td> 
                 </tr> 
-                <tr><td><label for="id_username">Username or email:</label></td><td><input type="text" id="id_username" class="vTextField required" name="username" size="15" value="" maxlength="75" /></td></tr>
-                <tr><td><label for="id_password">Password:</label></td><td><input type="password" id="id_password" class="vPasswordField required" name="password" size="15" value="" maxlength="30" /></td></tr> 
+                <tr><td><label for="id_username">{% trans "Username or email" %}:</label></td><td><input type="text" id="id_username" class="vTextField required" name="username" size="15" value="" maxlength="75" /></td></tr>
+                <tr><td><label for="id_password">{% trans "Password" %}:</label></td><td><input type="password" id="id_password" class="vPasswordField required" name="password" size="15" value="" maxlength="30" /></td></tr> 
                 <tr><td>&nbsp;</td><td><input type="submit" value="{% trans "Login" %}" /></td></tr> 
 </table> 
 </form> 

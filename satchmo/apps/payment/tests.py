@@ -1,4 +1,5 @@
 from decimal import Decimal
+from django.conf import settings
 from django.contrib.sites.models import Site
 from django.core import urlresolvers
 from django.core.urlresolvers import reverse as url
@@ -136,9 +137,12 @@ class TestMinimumOrder(TestCase):
     def setUp(self):
         # Every test needs a client
         self.client = Client()
+        self.old_language_code = settings.LANGUAGE_CODE
+        settings.LANGUAGE_CODE = 'en-us'
 
     def tearDown(self):
         keyedcache.cache_delete()
+        settings.LANGUAGE_CODE = self.old_language_code
 
     def test_checkout_minimums(self):
         """

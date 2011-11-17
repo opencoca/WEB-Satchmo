@@ -433,9 +433,21 @@ class Cart(models.Model):
         for cartitem in self.cartitem_set.all():
             if cartitem.is_shippable:
                 p = cartitem.product
-                q =  int(cartitem.quantity.quantize(Decimal('0'), ROUND_CEILING))
+                q = int(cartitem.quantity.quantize(Decimal('0'), ROUND_CEILING))
                 for single in range(0, q):
                     items.append(p)
+        return items
+
+    def get_shipment_by_amount(self):
+        """
+        Returna list of shippable products, with it's quantity
+        """
+        items = []
+        for cartitem in self.cartitem_set.all():
+            if cartitem.is_shippable:
+                p = cartitem.product
+                q = int(cartitem.quantity.quantize(Decimal('0'), ROUND_CEILING))
+                items.append((q,p))
         return items
 
     class Meta:
@@ -667,9 +679,9 @@ class Order(models.Model):
     method = models.CharField(_("Order method"),
         choices=ORDER_CHOICES, max_length=50, blank=True)
     shipping_description = models.CharField(_("Shipping Description"),
-        max_length=50, blank=True, null=True)
+        max_length=200, blank=True, null=True)
     shipping_method = models.CharField(_("Shipping Method"),
-        max_length=50, blank=True, null=True)
+        max_length=200, blank=True, null=True)
     shipping_model = models.CharField(_("Shipping Models"), choices=iterchoices_db(shipping.fields.shipping_choices),
         max_length=30, blank=True, null=True)
     shipping_cost = CurrencyField(_("Shipping Cost"),

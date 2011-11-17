@@ -41,6 +41,8 @@ Expiring Pricing
 If you are using expiring dates for prices, please note that you must run a daily update of the pricing lookup table.  To do this, you need 
 to run :command:`./manage.py satchmo_rebuild_pricing`
 
+This command also helps every time when this error occurs: "Sorry, we don't have any of that combination available."
+
 The easiest way to run this automatically is to use the excellent "Django_Extensions_" app.  We've already added a daily job to rebuild prices, so all you need to do is to ensure that the daily job is getting run via crontab::
 
     # run every morning at 2:22 am
@@ -81,6 +83,9 @@ The price resolution process is straightforward.
   2b. Else return the non-tiered price reduced by the default tier discount percent.
   
 3. If the user has multiple tiers, return the lowest amount found in 2a & 2b.
+
+Pricing tiers should not be applied to superuser or staff members and they are ignored for them.
+It is easy to create other unprivileged user account for testing or shopping.
 
 .. _Django_Extensions: https://github.com/django-extensions/django-extensions/
     Extensive Wiki on: http://code.google.com/p/django-command-extensions/

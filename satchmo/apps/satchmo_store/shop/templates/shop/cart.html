@@ -56,8 +56,8 @@
                 </form>
             </td>
             <td><a href="{{cartitem.product.get_absolute_url}}">{{ cartitem.description }}</a></td>
-			{% if sale %}<td align="center">{{ cartitem.product.unit_price|currency }}</td>{% endif %}
-			<td align="center">{{ cartitem.product|discount_price:sale|currency }}</td>
+			{% if sale %}<td align="center">{{ cartitem.unit_price|currency }}</td>{% endif %}
+			<td align="center">{{ cartitem|discount_line_unit_price:sale|currency }}</td>
             <td align="center">{{ cartitem|discount_line_total:sale|currency }}</td>
         </tr>
 		{% cartitem_custom_details cartitem %}
