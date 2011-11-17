@@ -5,7 +5,7 @@
   model: product.taxclass
   pk: 2
 - fields:
-      sort: !!python/long '1'
+      sort: !!int '1'
       picture: 'images/productimage-picture-default.jpg'
       caption: 'Photo Not Available'
   model: product.productimage

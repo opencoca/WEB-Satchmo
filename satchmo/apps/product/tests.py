@@ -1,4 +1,5 @@
 from decimal import Decimal
+from django.conf import settings
 from django.contrib.sites.models import Site
 from django.core import urlresolvers
 from django.forms.util import ValidationError
@@ -135,9 +136,12 @@ class DiscountTest(TestCase):
         end = datetime.date(5000, 10, 1)
         self.discount = Discount.objects.create(description="New Sale", code="BUYME", amount="5.00", allowedUses=10,
             numUses=0, minOrder=5, active=True, startDate=start, endDate=end, shipping='NONE', site=self.site)
+        self.old_language_code = settings.LANGUAGE_CODE
+        settings.LANGUAGE_CODE = 'en-us'
 
     def tearDown(self):
         keyedcache.cache_delete()
+        settings.LANGUAGE_CODE = self.old_language_code
 
     def testValid(self):
 
@@ -333,11 +337,6 @@ class ProductExportTest(TestCase):
         response = self.client.post(url, form_data)
         self.assertTrue(response.has_header('Content-Type'))
         self.assertEqual('text/xml', response['Content-Type'])
-
-        form_data['format'] = 'python'
-        response = self.client.post(url, form_data)
-        self.assertTrue(response.has_header('Content-Type'))
-        self.assertEqual('text/python', response['Content-Type'])
 
     def test_zip_export_content_type(self):
         """
