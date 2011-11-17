@@ -275,6 +275,9 @@ class FreeProcessorModule(object):
 
     def process(self, *args, **kwargs):
         if self.order.paid_in_full:
+            # marc order as succed to emit signals, if not present, 
+            # orders with balance 0 not correctly notified
+            self.order.order_success()
             return ProcessorResult('FREE', True, _('Success'))
         else:
             return ProcessorResult('FREE', False, _('This order does not have a zero balance'))
