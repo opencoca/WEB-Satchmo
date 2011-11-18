@@ -235,10 +235,10 @@ def success(request):
         product.items_in_stock -= item.quantity
         product.save()
 
-    log.warning('El contacto es %s' % order.contact)
+    log.warning(_('The contact is %s') % order.contact)
     # Clean up cart now, the rest of the order will be cleaned on paypal IPN
     for cart in Cart.objects.filter(customer=order.contact):
-        log.warning('Procesando item cart %s' % cart.pk)
+        log.warning(_('Processing cart item %s') % cart.pk)
         cart.empty()
 
     del request.session['orderID']
