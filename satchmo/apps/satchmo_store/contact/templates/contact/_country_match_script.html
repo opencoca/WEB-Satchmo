@@ -4,7 +4,8 @@ var satchmo = satchmo || {};
 satchmo.updating = false;
 
 satchmo.force_match = function(elt, ship) {
-    var val = $(elt).fieldValue()[0];
+    
+    var val = $(elt).val();
     if (!satchmo.updating) {
         satchmo.updating = true;
         if (ship) {
