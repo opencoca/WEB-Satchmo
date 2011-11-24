@@ -17,6 +17,7 @@ Then run:
 
 import os
 import shutil
+import sys
 from random import choice
 import re
 from optparse import OptionParser
@@ -109,21 +110,22 @@ def setup_satchmo(site_name, local_site_name):
     """
     Do the final configs for satchmo
     """
+    variables = {'site_name':site_name, 'python':sys.executable}
     errors = []
-    copy_check = os.system('cd %s && python manage.py satchmo_copy_static' % site_name)
+    copy_check = os.system('cd %(site_name)s && %(python)s manage.py satchmo_copy_static' % variables)
     if copy_check != 0:
         errors.append("Can not copy the static files.")
-    sync_check = os.system('cd %s && python manage.py syncdb' % site_name)
+    sync_check = os.system('cd %(site_name)s && %(python)s manage.py syncdb' % variables)
     if sync_check != 0:
         errors.append("Can not syncdb.")
     else:
-        l10n_check = os.system('cd %s && python manage.py satchmo_load_l10n' % site_name)
+        l10n_check = os.system('cd %(site_name)s && %(python)s manage.py satchmo_load_l10n' % variables)
         if l10n_check != 0:
             errors.append("Can not load l10n data.")
-        load_check = os.system('cd %s && python manage.py satchmo_load_store' % site_name)
+        load_check = os.system('cd %(site_name)s && %(python)s manage.py satchmo_load_store' % variables)
         if load_check != 0:
             errors.append("Can not load sample store data.")
-        pricing_check = os.system('cd %s && python manage.py satchmo_rebuild_pricing' % site_name)
+        pricing_check = os.system('cd %(site_name)s && %(python)s manage.py satchmo_rebuild_pricing' % variables)
         if pricing_check != 0:
             errors.append("Can not rebuild pricing.")
     return errors
