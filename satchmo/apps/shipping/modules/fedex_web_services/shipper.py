@@ -175,13 +175,11 @@ class Shipper(BaseShipper):
         # before it is actually sent. This is useful for seeing what values you can
         # change.
         # print rate_request.RequestedShipment
-        print "Sending request"
         # Fires off the request, sets the 'response' attribute on the object.
         try:
             rate_request.send_request()
         except:
             pass
-        print "Request done"
         # This will show the reply to your rate_request being sent. You can access the
         # attributes through the response attribute on the request object. This is
         # good to un-comment to see the variables returned by the FedEx reply.
