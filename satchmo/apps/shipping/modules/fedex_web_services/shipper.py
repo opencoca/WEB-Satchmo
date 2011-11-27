@@ -153,12 +153,12 @@ class Shipper(BaseShipper):
             for product in cart.get_shipment_list():
                 item_weight = product_or_parent(product, 'weight')
                 if item_weight is None or item_weight < self.default_weight:
-                    item_weight = self.default_weight
+                    item_weight = float(self.default_weight)
                 # Valid weight units are only KG or LB
                 if product.smart_attr('weight_units') and product.smart_attr('weight_units') != "":
                     item_weight_units = product.smart_attr('weight_units')
                 else:
-                    box_weight_units = settings.DEFAULT_WEIGHT_UNITS.value
+                    item_weight_units = settings.DEFAULT_WEIGHT_UNITS.value
                 item = rate_request.create_wsdl_object_of_type('RequestedPackageLineItem')
                 item.SequenceNumber = seq
                 item.Weight.Units = item_weight_units
@@ -175,13 +175,13 @@ class Shipper(BaseShipper):
         # before it is actually sent. This is useful for seeing what values you can
         # change.
         # print rate_request.RequestedShipment
-
+        print "Sending request"
         # Fires off the request, sets the 'response' attribute on the object.
         try:
             rate_request.send_request()
         except:
             pass
-
+        print "Request done"
         # This will show the reply to your rate_request being sent. You can access the
         # attributes through the response attribute on the request object. This is
         # good to un-comment to see the variables returned by the FedEx reply.
