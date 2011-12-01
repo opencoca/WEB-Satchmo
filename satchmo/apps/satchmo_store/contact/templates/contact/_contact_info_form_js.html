@@ -1,13 +1,5 @@
 <script type="text/javascript">
-var satchmo = satchmo || {};{% comment %}
-#
-# Code that require shipping fields to be present.
-#
-# Presently, we assume that shipping fields are always present, unless the cart
-# is not shippable. This seems to hold true across both checkout and user
-# account use-cases.
-#
-{% endcomment %}{% if cart and cart.is_shippable %}
+var satchmo = satchmo || {};
 
 satchmo.ship_form_toggler = function(state) {
     var inputs = $('tr.shiprow input');
@@ -34,28 +26,27 @@ satchmo.update_ship_copy = function(elt) {
 }
 
 $(document).ready(function() {
-    satchmo.update_ship_copy('#id_copy_address');
-    $('#id_copy_address').click(function() {
-        satchmo.update_ship_copy(this);
-    });
-    $('#id_addressee').bind("change", function() {
-         $('#id_ship_addressee').attr('value', $('#id_addressee').attr('value'));
-    });
-});{% endif %}{% comment %}
-#
-# Code that don't require shipping fields.
-#
-{% endcomment %}
+    var copy_address = $('#id_copy_address');
+
+    {# If copy address is missing, it's a cart which isn't shippable #}
+    if (copy_address.length) {
+        satchmo.update_ship_copy('#id_copy_address');
+        $('#id_copy_address').click(function() {
+            satchmo.update_ship_copy(this);
+        });
+        $('#id_addressee').bind("change", function() {
+             $('#id_ship_addressee').attr('value', $('#id_addressee').attr('value'));
+        });
+    }
+});
 
 satchmo.name_change = function() {
     var first_name = $('#id_first_name').attr('value');
     var last_name = $('#id_last_name').attr('value');
     if (!first_name) { first_name = ''; }
     if (!last_name) { last_name = ''; }
-    $('#id_addressee').attr('value',  jQuery.trim(first_name + ' ' + last_name));{% if cart and cart.is_shippable %}
-
+    $('#id_addressee').attr('value',  jQuery.trim(first_name + ' ' + last_name));
     $('#id_ship_addressee').attr('value', $('#id_addressee').attr('value'));
-{% endif %}
 };
 
 $(document).ready(function() {
