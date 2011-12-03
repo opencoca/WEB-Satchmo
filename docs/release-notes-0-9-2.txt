@@ -76,6 +76,7 @@ Bug Fixes
 - Several fixes to handle unicode characters better
 - Replace some admin jquery scripts with simpler django readonly fields
 - Ensure that google checkout empties the cart
+- Converted to SOAP based Fedex api
 
 Performance Improvements
 ------------------------
@@ -148,3 +149,13 @@ A migration is included for this change:
     python manage.py migrate contact --fake 0001
     python manage.py migrate shop --fake 0001
     python manage.py migrate shop
+
+Fedex Module Update
++++++++++++++++++++
+The old Fedex module used the XML api reference. The Fedex API documentation is geared more towards a SOAP API. We have moved to
+using this new interface.  If you were using the old Fedex module, you will need to update your account and get a new API key.
+
+Additionally, we are requiring two new modules for Fedex. You can install them using pip or easy_install:
+
+    pip install fedex
+    pip install suds
