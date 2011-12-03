@@ -135,6 +135,11 @@ Installing Dependencies
 
    .. versionadded:: 0.9.1
 
+#. If you use the Fedex shipping module, you will need to install 2 additional modules::
+
+     easy_install fedex
+     easy_install suds
+     
 Installing Satchmo into your path
 ---------------------------------
 
