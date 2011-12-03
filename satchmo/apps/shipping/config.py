@@ -50,11 +50,11 @@ config_register(
 # 'no' is used internally
 # 'Tiered' is special, since it needs to be added as a module.  To enable it,
 # just add shipping.modules.tiered to your INSTALLED_APPS
-_default_modules = ('canadapost', 'dummy', 'fedex', 'flat', 'per', 'ups', 'usps')
+_default_modules = ('canadapost', 'dummy', 'fedex_web_services', 'flat', 'per', 'ups', 'usps')
 
 for module in _default_modules:
     try:
-    	load_module("shipping.modules.%s.config" % module)
+        load_module("shipping.modules.%s.config" % module)
     except ImportError:
         log.debug('Could not load default shipping module configuration: %s', module)
 
