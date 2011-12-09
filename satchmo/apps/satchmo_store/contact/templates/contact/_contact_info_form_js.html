@@ -40,15 +40,23 @@ $(document).ready(function() {
 satchmo.name_change = function() {
     var first_name = $('#id_first_name').attr('value');
     var last_name = $('#id_last_name').attr('value');
-    if (!first_name) { first_name = ''; }
-    if (!last_name) { last_name = ''; }
+    var old_first_name = $('#id_first_name').data('old_first_name');
+    var old_last_name = $('#id_last_name').data('old_last_name');
+    var full_name = $.trim(first_name + ' ' + last_name);
+    var old_full_name = $.trim(old_first_name + ' ' + old_last_name);
     
-    if (!$.trim($('#id_addressee').attr('value')).length || $('#id_addressee').attr('value') === first_name) {
-        $('#id_addressee').attr('value',  $.trim(first_name + ' ' + last_name));
+    function name_updater(selector, first_name, full_name, old_full_name) {
+        if (!$.trim($(selector).attr('value')).length ||
+        $(selector).attr('value') === first_name ||
+        $(selector).attr('value') === old_full_name) {
+            $(selector).attr('value',  full_name);
+        }
     }
-    if (!$.trim($('#id_ship_addressee').attr('value')).length || $('#id_ship_addressee').attr('value') === first_name) {
-        $('#id_ship_addressee').attr('value', $('#id_addressee').attr('value'));
-    }
+    name_updater('#id_addressee', first_name, full_name, old_full_name);
+    name_updater('#id_ship_addressee', first_name, full_name, old_full_name);
+   
+    $('#id_first_name').data('old_first_name', first_name);
+    $('#id_last_name').data('old_last_name', last_name);
 };
 
 $(document).ready(function() {
