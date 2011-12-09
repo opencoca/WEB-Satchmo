@@ -639,7 +639,7 @@ msgstr "Spiacenti, l'utente con il quale hai effettuato l'accesso non ha nessuna
 msgid "Probably because you are an admin."
 msgstr "Probabilmente perché tu sei un amministratore"
 
-# translated = "Probabilmente perch� si e' un amministratore &"
+# translated = "Probabilmente perché si e' un amministratore &"
 #: templates/contact/view_profile.html:45
 msgid "Set up contact information"
 msgstr "Modifica le informazioni di contatto"
