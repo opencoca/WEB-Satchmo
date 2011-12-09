@@ -295,8 +295,8 @@ class Shipper(BaseShipper):
                         if service.attrib['ID'] == self.service_type_code and \
                             self.service_type_text.startswith('Int`l: '):
                             
-                            self.charges = service.find('.//Postage/').text
-                            self.delivery_days = service.find('.//SvcCommitments/').text
+                            self.charges = service.find('.//Postage').text
+                            self.delivery_days = service.find('.//SvcCommitments').text
                             #self.verbose_log('%s %s' % (self.charges, self.delivery_days))
                             self.is_valid = True
                             self._calculated = True
@@ -309,7 +309,7 @@ class Shipper(BaseShipper):
                     for postage in package.getiterator('Postage'):
                         if postage.attrib['CLASSID'] == self.service_type_code and \
                             not self.service_type_text.startswith('Int`l: '):
-                            self.charges = postage.find('.//Rate/').text
+                            self.charges = postage.find('.//Rate').text
 
                             # Now try to figure out how long it would take for this delivery
                             if self.api:
@@ -323,10 +323,10 @@ class Shipper(BaseShipper):
 
                                     # express mail usually has a date commitment
                                     if self.api == 'ExpressMailCommitment':
-                                        key = './/Date/'
+                                        key = './/Date'
                                         self.exact_date = True
                                     else:
-                                        key = './/Days/'
+                                        key = './/Days'
                                     if i.find(key) != None:
                                         self.delivery_days = i.find(key).text
 
