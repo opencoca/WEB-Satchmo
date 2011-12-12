@@ -68,7 +68,7 @@ for extra in extra_shipping:
         log.warn('Could not load shipping module configuration: %s' % extra)
 
 class ShippingModuleNotFound(Exception):
-    def __init__(key):
+    def __init__(self, key):
         self.key = key
 
 def shipping_methods():
