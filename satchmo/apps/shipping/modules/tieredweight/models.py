@@ -106,7 +106,7 @@ class Shipper(BaseShipper):
             log.debug("Tiered weight not valid for weight = %s" % (self._weight))
             return False
 
-        if self._zone and self._cost:
+        if self._zone is not None and self._cost is not None:
             return True
 
 
