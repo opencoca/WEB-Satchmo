@@ -39,6 +39,7 @@
 
 {% if order.is_shippable %}
 <h4>{% trans "Shipping To" %}</h4>
+{{ order.ship_addressee }}<br/>
 {{ order.full_ship_street }}<br/>
 {{ order.ship_city }}<br/>
 {{ order.ship_state }}<br/>

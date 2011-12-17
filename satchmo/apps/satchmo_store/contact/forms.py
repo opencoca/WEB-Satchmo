@@ -383,16 +383,29 @@ class ContactInfoForm(ProxyContactForm):
         copy_address = data['copy_address']
 
         ship_address = customer.shipping_address
-
-        if copy_address:
+        try:
+            setattr(ship_address, "addressee",data.get('ship_addressee', ""))
+            setattr(bill_address, "addressee",data.get('addressee', ""))
+        except AttributeError:
+            pass
+        # If we are copying the address and one isn't in place for shipping
+        # copy it
+        if not getattr(ship_address, "addressee", False) and copy_address:
+            try:
+                ship_address.addressee = bill_address.addressee
+            except AttributeError:
+                pass
+                
+        # Make sure not to overwrite a custom ship to name
+        if copy_address and getattr(ship_address, "addressee", "") == getattr(bill_address, "addressee", ""):
             # make sure we don't have any other default shipping address
             if ship_address and ship_address.id != bill_address.id:
                 ship_address.delete()
             bill_address.is_default_shipping = True
 
         bill_address.save()
-
-        if not copy_address:
+        # If we have different ship to and bill to names, preserve them
+        if not copy_address or getattr(ship_address, "addressee", "") != getattr(bill_address, "addressee", ""):
             if not ship_address or ship_address.id == bill_address.id:
                 ship_address = AddressBook()
 
