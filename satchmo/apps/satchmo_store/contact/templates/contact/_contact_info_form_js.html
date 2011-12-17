@@ -45,10 +45,10 @@ satchmo.name_change = function() {
     var full_name = $.trim(first_name + ' ' + last_name);
     var old_full_name = $.trim(old_first_name + ' ' + old_last_name);
     if ($('#id_addressee').attr('value') === old_full_name) {
-	$('#id_addressee').attr('value', full_name);
+    $('#id_addressee').attr('value', full_name);
     }
     if ($('#id_ship_addressee').attr('value') === old_full_name) {
-	$('#id_ship_addressee').attr('value', full_name);
+    $('#id_ship_addressee').attr('value', full_name);
     }
     $('#id_first_name').data('old_first_name', first_name);
     $('#id_last_name').data('old_last_name', last_name);
