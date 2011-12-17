@@ -20,6 +20,7 @@
 {{ order.contact.primary_phone.phone }}<br/>
 
 <h4>{% trans "Billing Information" %}</h4>
+{{ order.bill_addressee }}<br/>
 {{ order.full_bill_street|linebreaksbr }}<br/>
 {{ order.bill_city }}<br/>
 {{ order.bill_state }}<br/>
@@ -28,6 +29,7 @@
 
 {% if order.is_shippable %}
 <h4>{% trans "Shipping Address" %}</h4>
+{{ order.ship_addressee }}<br/>
 {{ order.full_ship_street|linebreaksbr }}<br/>
 {{ order.ship_city }}<br/>
 {{ order.ship_state }}<br/>

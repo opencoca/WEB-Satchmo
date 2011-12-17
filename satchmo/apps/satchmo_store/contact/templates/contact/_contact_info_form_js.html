@@ -33,7 +33,7 @@ $(document).ready(function() {
         satchmo.update_ship_copy('#id_copy_address');
         $('#id_copy_address').click(function() {
             satchmo.update_ship_copy(this);
-        });    
+        });
     }
 });
 
@@ -44,22 +44,18 @@ satchmo.name_change = function() {
     var old_last_name = $('#id_last_name').data('old_last_name');
     var full_name = $.trim(first_name + ' ' + last_name);
     var old_full_name = $.trim(old_first_name + ' ' + old_last_name);
-    
-    function name_updater(selector, first_name, full_name, old_full_name) {
-        if (!$.trim($(selector).attr('value')).length ||
-        $(selector).attr('value') === first_name ||
-        $(selector).attr('value') === old_full_name) {
-            $(selector).attr('value',  full_name);
-        }
+    if ($('#id_addressee').attr('value') === old_full_name) {
+    $('#id_addressee').attr('value', full_name);
     }
-    name_updater('#id_addressee', first_name, full_name, old_full_name);
-    name_updater('#id_ship_addressee', first_name, full_name, old_full_name);
-   
+    if ($('#id_ship_addressee').attr('value') === old_full_name) {
+    $('#id_ship_addressee').attr('value', full_name);
+    }
     $('#id_first_name').data('old_first_name', first_name);
     $('#id_last_name').data('old_last_name', last_name);
 };
 
 $(document).ready(function() {
+    satchmo.name_change();
     $('#id_first_name').bind("change", {}, satchmo.name_change);
     $('#id_last_name').bind("change", {}, satchmo.name_change);
 });
