@@ -32,6 +32,7 @@ Translations
 - Added Czech translation
 - Updated French translation
 - Updated Spanish translation
+- Added Romanian translation
 
 Bug Fixes
 ---------
@@ -77,6 +78,8 @@ Bug Fixes
 - Replace some admin jquery scripts with simpler django readonly fields
 - Ensure that google checkout empties the cart
 - Converted to SOAP based Fedex api
+- Fix use of sale variable in context processor
+- Handle different ship to and bill to addressees better
 
 Performance Improvements
 ------------------------
