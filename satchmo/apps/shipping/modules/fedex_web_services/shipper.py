@@ -8,7 +8,9 @@ from decimal import Decimal
 from django.utils.translation import ugettext as _
 from shipping.modules.base import BaseShipper
 from livesettings import config_get_group
+from fedex.base_service import FedexBaseServiceException
 from fedex.services.rate_service import FedexRateServiceRequest
+import traceback
 
 import logging
 
@@ -178,28 +180,37 @@ class Shipper(BaseShipper):
         # Fires off the request, sets the 'response' attribute on the object.
         try:
             rate_request.send_request()
-        except:
-            pass
+        except FedexBaseServiceException, e:
+            # Expected Fedex exceptions with good messages are:
+            # FedexFailure (for temporary server error), FedexError (for wrong request), SchemaValidationError
+            log.info('******************* Error in shipping: %s' % str(e))
+        except Exception, e:
+            # Unexpected exceptions mostly need a traceback but also continue.
+            log.info('******************* Error in shipping:\n%s', traceback.format_exc(limit=15))
+
         # This will show the reply to your rate_request being sent. You can access the
         # attributes through the response attribute on the request object. This is
         # good to un-comment to see the variables returned by the FedEx reply.
         # print rate_request.response
 
-        if rate_request.response.HighestSeverity in ['SUCCESS', 'WARNING', 'NOTE']:
-            # we're good
-            log.debug('******************good shipping: %s' % self.service_type_code)
-            try:
-                self._expected_delivery = rate_request.response.RateReplyDetails[0].TransitTime
-            except AttributeError: # TransitTime not included for everything
-                pass
-            cost = 0
-            for rate_detail in rate_request.response.RateReplyDetails[0].RatedShipmentDetails:
-                cost = max(cost, rate_detail.ShipmentRateDetail.TotalNetFedExCharge.Amount)
-            self._cost = Decimal(str(cost))
-            self._valid = True
+        if rate_request.response:
+            if rate_request.response.HighestSeverity in ['SUCCESS', 'WARNING', 'NOTE']:
+                # we're good
+                log.debug('******************good shipping: %s' % self.service_type_code)
+                try:
+                    self._expected_delivery = rate_request.response.RateReplyDetails[0].TransitTime
+                except AttributeError: # TransitTime not included for everything
+                    pass
+                cost = 0
+                for rate_detail in rate_request.response.RateReplyDetails[0].RatedShipmentDetails:
+                    cost = max(cost, rate_detail.ShipmentRateDetail.TotalNetFedExCharge.Amount)
+                self._cost = Decimal(str(cost))
+                self._valid = True
+            else:
+                log.debug('*******************bad shipping: %s' % self.service_type_code)
+                log.debug(rate_request.response.HighestSeverity)
+                log.debug(rate_request.response.Notifications)
+                self._valid = False
         else:
-            log.debug('*******************bad shipping: %s' % self.service_type_code)
-            log.debug(rate_request.response.HighestSeverity)
-            log.debug(rate_request.response.Notifications)
             self._valid = False
         self._calculated = True
