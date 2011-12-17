@@ -36,7 +36,7 @@
 			</td>
 			<td class="price">
 				{% if sale %}<strike id="fullprice" style="display: block;">{{ product|discount_price:""|currency }}</strike>{% endif %}
-				<span id="price">{{ product|discount_price:sale|currency }}</span>
+				<span id="price">{{ product|discount_price:storewide_sale|currency }}</span>
 			</td>
 			<td class="qty">
 				{{ field }}
