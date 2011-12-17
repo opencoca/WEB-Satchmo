@@ -37,7 +37,7 @@ def settings(request):
         'request' : request,
         'login_url': site_settings.LOGIN_URL,
         'logout_url': site_settings.LOGOUT_URL,
-        'sale': sale
+        'storewide_sale': sale
     }
 
     satchmo_context.send(shop_config, context=ctx)
