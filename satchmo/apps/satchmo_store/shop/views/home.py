@@ -1,4 +1,4 @@
-from django.core.paginator import Paginator, EmptyPage
+from django.core.paginator import Paginator, InvalidPage
 from django.shortcuts import render_to_response
 from django.template import RequestContext
 from django.utils.translation import ugettext as _
@@ -25,7 +25,7 @@ def home(request, template="shop/index.html"):
     
     try:
         paginator.validate_number(currpage)
-    except EmptyPage:
+    except InvalidPage:
         return bad_or_missing(request, _("Invalid page number"))
             
     is_paged = paginator.num_pages > 1
