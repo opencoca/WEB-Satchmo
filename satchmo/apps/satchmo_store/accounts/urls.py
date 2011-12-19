@@ -13,6 +13,9 @@ from livesettings import config_value
 from satchmo_store.contact.urls import urlpatterns
 from signals_ahoy.signals import collect_urls
 from satchmo_store import accounts
+# The following import of satchmo_store.contact.config should not be removed
+# because it is sometimes indirectly important for loading config_value('SHOP', 'ACCOUNT_VERIFICATION')
+import satchmo_store.contact.config
 
 
 # Activation keys get matched by \w+ instead of the more specific
