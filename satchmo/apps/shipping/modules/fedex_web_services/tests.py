@@ -46,7 +46,7 @@ class FedexBaseTest(TestCase):
         self.prod_counter += 1
         return prod
 
-    def new_shipper(self):
+    def new_shipper(self, single_box=True):
         """
         Creates a new Shipper instance, make sure that you set-up your livesettings for this module.
         """
@@ -58,7 +58,7 @@ class FedexBaseTest(TestCase):
         packaging = settings.PACKAGING.value or "YOUR_PACKAGING"
         default_weight = settings.DEFAULT_ITEM_WEIGHT.value or 0.5
         default_weight_units = settings.DEFAULT_WEIGHT_UNITS.value
-        single_box = settings.SINGLE_BOX.value
+        single_box = single_box
         verbose_log = settings.VERBOSE_LOG.value
         dropoff_type = settings.DROPOFF_TYPE.value
 
@@ -74,13 +74,13 @@ class FedexBaseTest(TestCase):
 
         return shipper
 
-    def new_calculated_shipper(self, weight_units, weight=1.0, cart_item_qty=1):
+    def new_calculated_shipper(self, weight_units, weight=1.0, cart_item_qty=1, single_box=True):
         """
         This returns a shipper, already calculated for a new cart and with cartitems.
         """
         cart = self.new_cart()
         cart_item = cart.add_item(self.new_product(weight_units, weight), cart_item_qty)
-        shipper = self.new_shipper()
+        shipper = self.new_shipper(single_box=single_box)
         shipper.calculate(cart, self.contact)
         return shipper
 
@@ -97,6 +97,17 @@ class FedexBaseTest(TestCase):
         assert(self.new_calculated_shipper('oz').cost() > Decimal("0.00"))
         assert(self.new_calculated_shipper('lb').cost() > Decimal("0.00"))
         assert(self.new_calculated_shipper('g').cost() > Decimal("0.00"))
+
+    def test_single_box_false(self):
+        """
+        Checks that we get a valid cost with single_box as False, and few lineitems.
+        """
+        cart = self.new_cart()
+        cart_item1 = cart.add_item(self.new_product('KG', 1.0), 2)
+        cart_item2 = cart.add_item(self.new_product('KG', 1.0), 2)
+        shipper = self.new_shipper(single_box=False)
+        shipper.calculate(cart, self.contact)
+        assert(shipper.cost() > Decimal("0.00"))
 
     def test_value_is_same(self):
         """
