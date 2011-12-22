@@ -260,7 +260,7 @@ class ZoneTranslation(models.Model):
 class WeightTier(models.Model):
     zone = models.ForeignKey(Zone, verbose_name=_('zone'), related_name='tiers')
     min_weight = models.DecimalField(_('min weight'), max_digits=10, decimal_places=2)
-    handling = models.DecimalField(_('handling ajustment'), max_digits=10, decimal_places=2,
+    handling = models.DecimalField(_('handling adjustment'), max_digits=10, decimal_places=2,
         null=True, blank=True)
     price = models.DecimalField(_('shipping price'), max_digits=10, decimal_places=2)
     expires = models.DateField(_('expires'), null=True, blank=True)
