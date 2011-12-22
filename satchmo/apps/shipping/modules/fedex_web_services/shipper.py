@@ -7,7 +7,6 @@ Satchmo shipping module using python-fedex
 from decimal import Decimal
 from django.utils.translation import ugettext as _
 from shipping.modules.base import BaseShipper
-from livesettings import config_get_group
 from fedex.base_service import FedexBaseServiceException
 from fedex.services.rate_service import FedexRateServiceRequest
 import traceback
@@ -30,15 +29,42 @@ transit_days = {
     'STANDARD_OVERNIGHT': '1 day',
 }
 
+WEIGHT_UNITS = {
+    'KG': 1.0,
+    'G':  0.001,
+    'LB': 0.45359237,
+    'OZ': 0.028349523125,
+    }
+
+def convert_weight(value, src_unit, dst_unit):
+    try:
+        return value * (WEIGHT_UNITS[src_unit.upper()] / WEIGHT_UNITS[dst_unit.upper()])
+    except KeyError:
+        raise KeyError('Unknown weight unit')
+
 class Shipper(BaseShipper):
 
     id = "fedex_web_services"
     
-    def __init__(self, cart=None, contact=None, service_type=None, config=None, packaging=None, default_weight=None):
+    def __init__(self,
+                 cart=None,
+                 contact=None,
+                 service_type=None,
+                 config=None,
+                 packaging=None,
+                 default_weight=None,
+                 default_weight_units=None,
+                 single_box=True,
+                 verbose_log=False,
+                 dropoff_type=None):
         
         self._calculated = False
         self.cart = cart
         self.contact = contact
+        self.default_weight_units = default_weight_units
+        self.single_box = single_box
+        self.verbose_log = verbose_log
+        self.dropoff_type = dropoff_type
         
         if service_type:    
             self.service_type_code = service_type[0]
@@ -86,9 +112,7 @@ class Shipper(BaseShipper):
         from shipping.utils import product_or_parent
         shop_details = Config.objects.get_current()
         
-        settings = config_get_group('shipping.modules.fedex_web_services')
-        
-        verbose = settings.VERBOSE_LOG.value
+        verbose = self.verbose_log
         
         if verbose:
             log.debug('Calculating fedex with type=%s', self.service_type_code)
@@ -96,7 +120,7 @@ class Shipper(BaseShipper):
         rate_request = FedexRateServiceRequest(self.CONFIG_OBJ)
         # This is very generalized, top-level information.
         # REGULAR_PICKUP, REQUEST_COURIER, DROP_BOX, BUSINESS_SERVICE_CENTER or STATION
-        rate_request.RequestedShipment.DropoffType = settings.DROPOFF_TYPE.value
+        rate_request.RequestedShipment.DropoffType = self.dropoff_type
 
         # See page 355 in WS_ShipService.pdf for a full list. Here are the common ones:
         # STANDARD_OVERNIGHT, PRIORITY_OVERNIGHT, FEDEX_GROUND, FEDEX_EXPRESS_SAVER
@@ -128,42 +152,36 @@ class Shipper(BaseShipper):
         #EDT is used to determine which estimated taxes and duties are included in the response
         #For international shipments only
         rate_request.RequestedShipment.EdtRequestType = 'NONE'
-
         seq = 1
         # If we are using one, box we add up all the weights and ship in one box
         # Otherwise, we send multiple boxes
-        box_weight = 0.0
-        if settings.SINGLE_BOX.value:
+        default_weight_units = (self.default_weight_units or "").upper()
+        assert default_weight_units in ('KG', 'LB'), "Valid default weight units are only KG or LB"
+        if self.single_box:
+            box_weight = 0.0
             for product in cart.get_shipment_list():
-                item_weight = product_or_parent(product, 'weight')
-                if item_weight is None or item_weight < self.default_weight:
-                    item_weight = float(self.default_weight)
-                box_weight += item_weight
-            # Valid weight units are only KG or LB
-            if product.smart_attr('weight_units') and product.smart_attr('weight_units') != "":
-                box_weight_units = product.smart_attr('weight_units')
-            else:
-                box_weight_units = settings.DEFAULT_WEIGHT_UNITS.value
+                item_weight = product_or_parent(product, 'weight') or 0.0
+                converted_item_weight = (
+                    convert_weight(float(item_weight), product.smart_attr('weight_units') 
+                                   or default_weight_units, default_weight_units))
+
+                box_weight += max(converted_item_weight, float(self.default_weight))
             item = rate_request.create_wsdl_object_of_type('RequestedPackageLineItem')
             item.SequenceNumber = seq
             item.Weight = rate_request.create_wsdl_object_of_type('Weight')
-            item.Weight.Units = box_weight_units
+            item.Weight.Units = default_weight_units
             item.Weight.Value = box_weight
             item.PhysicalPackaging = 'BOX'
             rate_request.add_package(item)
         else: # Send separate packages for each item
             for product in cart.get_shipment_list():
                 item_weight = product_or_parent(product, 'weight')
-                if item_weight is None or item_weight < self.default_weight:
-                    item_weight = float(self.default_weight)
-                # Valid weight units are only KG or LB
-                if product.smart_attr('weight_units') and product.smart_attr('weight_units') != "":
-                    item_weight_units = product.smart_attr('weight_units')
-                else:
-                    item_weight_units = settings.DEFAULT_WEIGHT_UNITS.value
+                converted_item_weight = convert_weight(float(item_weight), product.smart_attr('weight_units') \
+                        or default_weight_units, default_weight_units)
+                item_weight = max(float(self.default_weight), float(self.default_weight))
                 item = rate_request.create_wsdl_object_of_type('RequestedPackageLineItem')
                 item.SequenceNumber = seq
-                item.Weight.Units = item_weight_units
+                item.Weight.Units = default_weight_units
                 item.Weight.Value = item_weight
                 item.PhysicalPackaging = 'BOX'
                 rate_request.add_package(item)
@@ -192,7 +210,7 @@ class Shipper(BaseShipper):
         # attributes through the response attribute on the request object. This is
         # good to un-comment to see the variables returned by the FedEx reply.
         # print rate_request.response
-
+        
         if rate_request.response:
             if rate_request.response.HighestSeverity in ['SUCCESS', 'WARNING', 'NOTE']:
                 # we're good

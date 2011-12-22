@@ -5,6 +5,16 @@ import logging
 
 log = logging.getLogger('fedex_web_service.shipper')
 
+def get_config_obj(settings):
+    return FedexConfig(
+        key=settings.AUTHENTICATION_KEY.value,
+        password=settings.AUTHENTICATION_PASSWORD.value,
+        account_number=settings.ACCOUNT.value,
+        meter_number=settings.METER_NUMBER.value,
+        express_region_code=settings.SHIPPER_REGION.value,
+        use_test_server=settings.TEST_SERVER.value)
+
+
 def get_methods():
     settings = config_get_group('shipping.modules.fedex_web_services')
     if not settings.ACCOUNT.value:
@@ -23,19 +33,20 @@ def get_methods():
         log.warn("No fedex authentication password found in settings")
         return
         
-    if not settings.PACKAGING.value:
-        packaging = "YOUR_PACKAGING"
-    else:
-        packaging = settings.PACKAGING.value
-    if not settings.DEFAULT_ITEM_WEIGHT.value:
-        default_weight = 0.5
-    else:
-        default_weight = settings.DEFAULT_ITEM_WEIGHT.value
-    CONFIG_OBJ = FedexConfig(key=settings.AUTHENTICATION_KEY.value,
-                         password=settings.AUTHENTICATION_PASSWORD.value,
-                         account_number=settings.ACCOUNT.value,
-                         meter_number=settings.METER_NUMBER.value,
-                         express_region_code=settings.SHIPPER_REGION.value,
-                         use_test_server=settings.TEST_SERVER.value)
+    CONFIG_OBJ = get_config_obj(settings)
+    packaging = settings.PACKAGING.value or "YOUR_PACKAGING"
+    default_weight = settings.DEFAULT_ITEM_WEIGHT.value or 0.5
+    default_weight_units = settings.DEFAULT_WEIGHT_UNITS.value
+    single_box = settings.SINGLE_BOX.value
+    verbose_log = settings.VERBOSE_LOG.value
+    dropoff_type = settings.DROPOFF_TYPE.value
 
-    return [shipper.Shipper(service_type=value, config=CONFIG_OBJ, packaging=packaging, default_weight = default_weight) for value in config_choice_values('shipping.modules.fedex_web_services', 'SHIPPING_CHOICES')]
+    return [
+        shipper.Shipper(
+            service_type=value, config=CONFIG_OBJ, packaging=packaging,
+            default_weight=default_weight, default_weight_units=default_weight_units,
+            single_box=single_box, verbose_log=verbose_log,
+            dropoff_type=dropoff_type)
+        for value in config_choice_values(
+            'shipping.modules.fedex_web_services', 'SHIPPING_CHOICES')
+        ]
