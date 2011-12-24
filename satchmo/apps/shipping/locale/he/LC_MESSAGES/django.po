@@ -461,7 +461,7 @@ msgstr ""
 
 #: modules/tieredweight/models.py:264
 #, fuzzy
-msgid "handling ajustment"
+msgid "handling adjustment"
 msgstr "דמי טיפול"
 
 #: modules/tieredweight/models.py:266
