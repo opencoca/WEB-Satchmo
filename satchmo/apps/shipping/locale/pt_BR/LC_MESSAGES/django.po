@@ -457,7 +457,7 @@ msgid "min weight"
 msgstr "peso mínimo"
 
 #: modules/tieredweight/models.py:264
-msgid "handling ajustment"
+msgid "handling adjustment"
 msgstr "ajuste manipulação"
 
 #: modules/tieredweight/models.py:266

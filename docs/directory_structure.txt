@@ -82,14 +82,6 @@ may wish to include in your site.
         This application is useful if you have different brands of products that you want to use to
         categorize and display your products.
 
-    **contrib**
-        This application contains one small helper function that modifies the price
-        calculation to count all items in the cart when figuring quantity discounts.
-
-    **metrics**
-        The metrics app has a Log Middleware which you can add to your middleware and capture
-        items that are being viewed.
-
     **newsletter**
         Satchmo has two basic options for handling newsletter configurations. You can use a simple
         database list or interface with mailman. See :ref:`newsletter`.

@@ -453,7 +453,7 @@ msgid "min weight"
 msgstr "peso mínimo"
 
 #: modules/tieredweight/models.py:263
-msgid "handling ajustment"
+msgid "handling adjustment"
 msgstr "ajuste al precio por manejo de envío"
 
 #: modules/tieredweight/models.py:265
