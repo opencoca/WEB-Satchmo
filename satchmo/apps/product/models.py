@@ -612,49 +612,44 @@ class Discount(models.Model):
         verbose_name_plural = _("Discounts")
 
     def apply_even_split(cls, discounted, amount):
-        lastct = -1
-        ct = len(discounted)
-        work = {}
+        """Splits ``amount`` to the most even values,
+        but none of them is greater then the value in the dict ``discounted``.
+        > > > cls.apply_even_split({1: Decimal('3.00'), 2: Decimal('8.00'), 3: Decimal('9.00')}, Decimal('10.00'))
+        {1: Decimal('3.00'), 2: Decimal('3.50'), 3: Decimal('3.50')}
+        """
         context = Context(rounding=ROUND_FLOOR)
-        if ct > 0:
-            split_discount = context.divide(amount, Decimal(ct)).quantize(Decimal("0.01"))
-            remainder = amount - context.multiply(split_discount, Decimal(ct))
-        else:
-            split_discount = remainder = Decimal("0.00")
+        lastct = None
+        ct = sentinel = len(discounted)
+        work = {}
+        applied = delta = Decimal("0.00")
+        # "applied" is how much has been applied in the previous round total
+        # "delta"   is how much has been applied only for limited values in the previous round
 
-        while ct > 0:
-            log.debug("Trying with ct=%i", ct)
-            delta = Decimal("0.00")
-            applied = Decimal("0.00")
+        while ct > 0 and applied < amount and ct != lastct and sentinel:
+            split_discount = context.quantize((amount - delta) / ct, Decimal('0.01'))
+            remainder = amount - delta - split_discount * ct
+            lastct = ct
+
+            ct = len(discounted)
             work = {}
-            should_apply_remainder = True
+            applied = delta = Decimal("0.00")
             for lid, price in discounted.items():
-                if should_apply_remainder \
-                    and remainder > Decimal('0') \
-                    and price > split_discount + remainder:
-                    to_apply = split_discount + remainder
-                    should_apply_remainder = False
-                elif price > split_discount:
-                    to_apply = split_discount
+                if price > split_discount:
+                    if remainder:
+                        to_apply = split_discount + Decimal('0.01')
+                        remainder -= Decimal('0.01')
+                    else:
+                        to_apply = split_discount
                 else:
                     to_apply = price
                     delta += price
                     ct -= 1
-
                 work[lid] = to_apply
                 applied += to_apply
+            sentinel -= 1
 
-            if applied >= amount - Decimal("0.01"):
-                ct = 0
-
-            if ct == lastct:
-                ct = 0
-            else:
-                lastct = ct
-
-            if ct > 0:
-                split_discount = (amount-delta)/ct
-
+        assert sentinel >= 0, "Infinite loop in 'apply_even_split'"
+        assert applied == amount or applied <= amount and applied == delta, "Internal error in 'apply_even_split'"
         round_cents(work)
         return work
 

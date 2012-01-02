@@ -184,6 +184,26 @@ class DiscountTest(TestCase):
 
 class CalcFunctionTest(TestCase):
 
+    def assert_apply_even_split(self, input_str, amount_str, expect_str):
+        """
+        Method which simplifies many similar tests to be written more compact on one line
+        Example: the following line does the same as the method ``testEvenSplit1``.
+        > > > self.assert_apply_even_split('10 10 10 10', '16', '4.00 4.00 4.00 4.00')
+        """
+        ddd = input_str.split()
+        dd = map(lambda x: Decimal(str(x)).quantize(Decimal("0.01")), ddd)
+        d = dict(enumerate(dd))
+        amount = Decimal(str(amount_str)).quantize(Decimal("0.01"))
+        s = Discount.apply_even_split(d, amount)
+        self.assertEqual(s.keys(), d.keys())
+        output_str = ' '.join(map(lambda (k, v): str(v), sorted(s.items())))
+        self.assertEqual(output_str, expect_str)
+
+    def testEvenSplit1Duplicate(self):
+        """Does the same as the following test, but written more compact on one line""";
+        self.assert_apply_even_split('10 10 10 10', '16', '4.00 4.00 4.00 4.00')
+
+        
     def testEvenSplit1(self):
         """Simple split test"""
         d = {
@@ -278,7 +298,7 @@ class CalcFunctionTest(TestCase):
         }
 
         s = Discount.apply_even_split(d, Decimal("10.00"))
-        self.assertEqual(s[1], Decimal("3.51"))
+        self.assertEqual(s[1], Decimal("3.50"))
         self.assertEqual(s[2], Decimal("3.50"))
         self.assertEqual(s[3], Decimal("3.00"))
 
@@ -294,6 +314,60 @@ class CalcFunctionTest(TestCase):
         self.assertEqual(s[1], Decimal("1.00"))
         self.assertEqual(s[2], Decimal("1.00"))
         self.assertEqual(s[3], Decimal("1.00"))
+
+
+    def testEvenSplitUncommonNear(self):
+        """Simple split test"""
+        self.assert_apply_even_split('6.67 6.67 6.67', '20.00', '6.67 6.67 6.66')
+
+
+    def testEvenSplitUncommon1(self):
+        """Simple split test"""
+        self.assert_apply_even_split('12.90 5.80 25.80 1.99', '20.00', '6.11 5.80 6.10 1.99')
+
+    def testEvenSplitUncommon2(self):
+        """Simple split test"""
+        self.assert_apply_even_split('12.90 5.80 25.80 2.99', '20.00', '5.67 5.67 5.67 2.99')
+    
+    def testEvenSplitUncommon3(self):
+        """Simple split test"""
+        self.assert_apply_even_split('12.90 5.80 25.80 1.98', '20.00', '6.11 5.80 6.11 1.98')
+    
+    def testEvenSplitUncommon4(self):
+        """Simple split test"""
+        self.assert_apply_even_split('12.90 5.80 25.80 0.98', '20.00', '6.61 5.80 6.61 0.98')
+    
+    def testEvenSplitUncommon5(self):
+        """Simple split test"""
+        self.assert_apply_even_split('12.90 5.80 25.80 0.98', '10.00', '3.01 3.01 3.00 0.98')
+    
+    def testEvenSplitUncommon6(self):
+        """Simple split test"""
+        self.assert_apply_even_split('12.90 5.80 25.80 3.99', '30.00', '10.11 5.80 10.10 3.99')
+    
+    def testEvenSplitUncommon7(self):
+        """Simple split test"""
+        self.assert_apply_even_split('12.90 5.80 25.80 3.99', '40.00', '12.90 5.80 17.31 3.99')
+    
+    def testEvenSplitUncommon8(self):
+        """Simple split test"""
+        self.assert_apply_even_split('12.90 35.80 25.80 3.99', '40.00', '12.01 12.00 12.00 3.99')
+    
+    def testEvenSplitUncommon9(self):
+        """Simple split test"""
+        self.assert_apply_even_split('8.00 15.80 25.80 3.99', '40.00', '8.00 14.01 14.00 3.99')
+    
+    def testEvenSplitUncommon10(self):
+        """Simple split test"""
+        self.assert_apply_even_split('8.00 15.80 25.80 13.99', '40.00', '8.00 10.67 10.67 10.66')
+    
+    def testEvenSplitUncommon11(self):
+        """Simple split test"""
+        self.assert_apply_even_split('8.00 15.80 25.80 14.00', '40.00', '8.00 10.67 10.67 10.66')
+    
+    def testEvenSplitUncommon12(self):
+        """Simple split test"""
+        self.assert_apply_even_split('5.80 25.80 12.90', '20.00', '5.80 7.10 7.10')
 
 
 class ProductExportTest(TestCase):
