@@ -282,12 +282,15 @@ class ProductVariation(models.Model):
 
     objects = ProductVariationManager()
 
+    def _get_self_qty_price_list(self, qty=1):
+        return Price.objects.filter(product__id=self.product.id).exclude(expires__isnull=False, expires__lt=datetime.date.today()).filter(quantity__lte=qty)
+    
     def _get_fullPrice(self):
         """ Get price based on parent ConfigurableProduct """
         # allow explicit setting of prices.
         #qty_discounts = self.price_set.exclude(expires__isnull=False, expires__lt=datetime.date.today()).filter(quantity__lte=1)
         try:
-            qty_discounts = Price.objects.filter(product__id=self.product.id).exclude(expires__isnull=False, expires__lt=datetime.date.today())
+            qty_discounts = self._get_self_qty_price_list()
             if qty_discounts.count() > 0:
                 # Get the price with the quantity closest to the one specified without going over
                 return qty_discounts.order_by('-quantity')[0].dynamic_price
@@ -362,10 +365,13 @@ class ProductVariation(models.Model):
         return(False)
 
     def get_qty_price(self, qty, include_discount=True):
+        # if no prices have been set specifically for this variation, we derive a price from the parent
+        # if a price *has* been set (for the appropriate quantity), the delta is ignored, and the price is used as-is
+        should_use_delta = len(self._get_self_qty_price_list(qty)) == 0
         if include_discount:
             price = get_product_quantity_price(
                 self.product, qty,
-                delta=self.price_delta(False),
+                delta=(0, self.price_delta(False))[should_use_delta],
                 parent=self.parent.product)
         else:
             adjustment = get_product_quantity_adjustments(self, qty, parent=self.parent.product)
@@ -378,7 +384,7 @@ class ProductVariation(models.Model):
 
     def get_qty_price_list(self):
         """Return a list of tuples (qty, price)"""
-        prices = Price.objects.filter(product__id=self.product.id).exclude(expires__isnull=False, expires__lt=datetime.date.today())
+        prices = self._get_self_qty_price_list()
         if prices.count() > 0:
             # prices directly set, return them
             pricelist = [(price.quantity, price.dynamic_price) for price in prices]
