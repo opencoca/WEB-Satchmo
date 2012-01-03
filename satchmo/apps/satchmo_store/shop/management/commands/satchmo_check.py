@@ -200,7 +200,7 @@ def find_module_extend(appname):
     except ImportError:
         return (None, None, None)
 
-APP_NOT_FOUND, APP_OLD_VERSION, APP_IMPORT_FAIL, APP_OK = range(4)
+APP_NOT_FOUND, APP_OLD_VERSION, APP_FILE_FAIL, APP_IMPORT_FAIL, APP_OK = range(5)
 
 def check_install(project_name, appname, min_version=None, hg_hash=None):
     """Checks if package is installed, version is greater or equal to the required and can be imported.
@@ -227,17 +227,16 @@ def check_install(project_name, appname, min_version=None, hg_hash=None):
     isimported = False
     isversion = None
     version = ''
-    # find it only
+    # find module file only
     pkgtype, filename, root_filename = find_module_extend(appname)
     isfound = (pkgtype != None)
-    if isfound:
-        try:
-            # import it
-            app = __import__(appname)
-            isimported = True
-        except ImportError:
-            log.exception('Can not import "%s"' % appname)
-            logged_more = True
+    # import module
+    try:
+        app = __import__(appname)
+        isimported = True
+    except ImportError:
+        log.exception('Can not import "%s"' % appname)
+        logged_more = True
 
     if isimported:
         try:
@@ -272,8 +271,9 @@ def check_install(project_name, appname, min_version=None, hg_hash=None):
             hg_dir = os.path.normpath(os.path.join(dirname, '..'))
             repo = hg.repository(ui.ui(), hg_dir)
             try:
-                node_id = repo.changelog.lookup(hg_hash)
-                isversion = True
+                if hg_hash:
+                    node_id = repo.changelog.lookup(hg_hash)
+                    isversion = True
                 #node = repo[node_id]    # required node
                 node = repo['.']        # current node
                 datestr = time.strftime('%Y-%m-%d', time.gmtime(node.date()[0]))
@@ -284,7 +284,7 @@ def check_install(project_name, appname, min_version=None, hg_hash=None):
         except:
             pass
 
-    if isfound and min_version and project_name and isversion == None:
+    if (isfound or isimported) and min_version and project_name and isversion == None:
         try:
             # get version from setuptools
             from pkg_resources import require
@@ -296,14 +296,17 @@ def check_install(project_name, appname, min_version=None, hg_hash=None):
             pass
     # If no required version specified, then it is also OK
     isversion = isversion or (isversion == None and min_version == None)
-    result = isfound and (isversion and (isimported and APP_OK or APP_IMPORT_FAIL) or APP_OLD_VERSION) or APP_NOT_FOUND
+    result = (((isfound or isimported) and version or isfound and isimported) and not isversion and APP_OLD_VERSION or \
+            isfound and (isimported and APP_OK or APP_IMPORT_FAIL) or \
+            isimported and APP_FILE_FAIL or APP_NOT_FOUND)
     return (result, version)
 
 def verbose_check_install(project_name, appname, min_version=None, hg_hash=None, verbose_name=None, required=True):
     """Check a pagkage and writes the results.
 
     Calls ``check_install`` (see for info about the similar parameters)
-    verbose_name is used for messageses. Default is same as appname."""
+    verbose_name is used for messageses. Default is same as appname.
+    """
     result, version = check_install(project_name, appname, min_version, hg_hash)
     verbose_name = (verbose_name or re.sub('[_-]', ' ', appname.capitalize()))
     if result != APP_NOT_FOUND and required or result == APP_OK:
@@ -315,6 +318,10 @@ def verbose_check_install(project_name, appname, min_version=None, hg_hash=None,
         msg = 'should be upgraded to version %s or newer.' % min_version
     elif result == APP_IMPORT_FAIL:
         msg = 'can not be imported now, but the right version is probably installed. Maybe dependency problem.'
+    elif result == APP_FILE_FAIL:
+        msg = None
+        log.debug('%s is imported but imp.find_module fails. Probably it is installed compressed, '
+                'which is not problem but sometimes can be.' % verbose_name)
     elif result == APP_OK:
         msg = None
     #
