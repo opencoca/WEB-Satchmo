@@ -18,10 +18,11 @@ logging.getLogger().setLevel(logging.INFO)
 logging.getLogger('satchmo_check').setLevel(logging.DEBUG)
 log = logging.getLogger('satchmo_check')
 
+
 class Command(NoArgsCommand):
     help = "Check the system to see if the Satchmo components are installed correctly."
-    
-    # These settings help to not import some dependencies before they are
+
+    # These settings help to not import some dependencies before they are necessary.
     can_import_settings = False
     requires_model_validation = False
 
@@ -60,15 +61,17 @@ class Command(NoArgsCommand):
             try:
                 import PIL
                 if os.path.dirname(Image.__file__) != os.path.dirname(PIL.__file__):
-                    # e.g. if env/site-packages/PIL is a link to /user/lib/.../site-packages/PIL
-                    # but if env/site-packages/PIL is not on python path
-                    # or if is after /user/lib/.../site-packages/PIL
-                    print_out ("Packages Image and PIL.Image are found on different paths which can usually cause " \
-                               "AccessInit error:\n" \
-                               "  %(image)s\n  %(pil)s\n  Change the PYTHONPATH in order to they are found on the " \
-                               "same paths first.\n" \
-                               "  Usually add '%(pil)s' to the beginning of PYTHONPATH."
-                                % {'image':os.path.dirname(Image.__file__), 'pil':os.path.dirname(PIL.__file__)})
+                    # Circumstancies of the serious problem beeing threated are related to confused installations
+                    # of virtualenv e.g. if virtual...env/site-packages/PIL is a link
+                    # to /user/lib/python*/site-packages/PIL but if virtual...env/site-packages/PIL is not on python
+                    # path or if it is written after /user/lib/python*/site-packages/PIL.
+                    print_out("Packages 'Image' and 'PIL.Image' are found on different paths " \
+                                    "which usually cause difficult AccessInit error:\n" \
+                            "  %(image)s\n  %(pil)s\n" \
+                            "  Fix: Change the PYTHONPATH in order to packages are found on the same paths\n" \
+                            "  usually by adding '%(pil)s' to the beginning of PYTHONPATH." \
+                            % {'image': os.path.dirname(Image.__file__), 'pil': os.path.dirname(PIL.__file__)}
+                            )
             except ImportError:
                 pass
         except ImportError:
@@ -97,39 +100,41 @@ class Command(NoArgsCommand):
         # Installers versions can be interesting for installation problems
         check_install('pip', 'pip')   # pip can not show the version number
         verbose_check_install('setuptools', 'setuptools', required=False)
-        #verbose_check_install('mercurial', 'mercurial', required=False)
+        verbose_check_install('mercurial', 'mercurial', required=False)
 
         try:
             cache_avail = settings.CACHE_BACKEND
         except AttributeError:
             error_out("A CACHE_BACKEND must be configured.")
-        # Try looking up a url to see if there's a misconfiguration there    
+        # Try looking up a url to see if there's a misconfiguration there
         try:
             from livesettings.models import Setting
             Setting.objects.all().count()
         except Exception, e:
-            error_out("Can not use livesettings: %s" %e)
+            error_out("Can not use livesettings: %s" % e)
         else:
-            # The function urlresolvers.reverse has its own way of error reporting to screen and we have no access to it
-            # so that we call it only if basic preconditions are fulfilled
+            # The function urlresolvers.reverse has its own way of error reporting to screen and we have no access
+            # to it so that we call it only if basic preconditions are fulfilled.
             try:
                 url = urlresolvers.reverse('satchmo_search')
                 # Catch SystemExit, because if an error occurs, `urlresolvers` usually calls sys.exit() and other error
                 # messages would be lost.
             except (Exception, SystemExit), e:
                 error_out("Unable to resolve urls. Received error - %s" % formaterror(e))
-	try:
-	    from l10n.l10n_settings import get_l10n_default_currency_symbol
-	except:
-	    pass
-        if not isinstance(get_l10n_default_currency_symbol(),types.UnicodeType):
+        try:
+            from l10n.l10n_settings import get_l10n_default_currency_symbol
+        except Exception:
+            pass
+        if not isinstance(get_l10n_default_currency_symbol(), types.UnicodeType):
             error_out("Your currency symbol should be a unicode string.")
         if 'satchmo_store.shop.SSLMiddleware.SSLRedirect' not in settings.MIDDLEWARE_CLASSES:
             error_out("You must have satchmo_store.shop.SSLMiddleware.SSLRedirect in your MIDDLEWARE_CLASSES.")
         if 'satchmo_store.shop.context_processors.settings' not in settings.TEMPLATE_CONTEXT_PROCESSORS:
-            error_out("You must have satchmo_store.shop.context_processors.settings in your TEMPLATE_CONTEXT_PROCESSORS.")
+            error_out("You must have satchmo_store.shop.context_processors.settings in your "
+                    "TEMPLATE_CONTEXT_PROCESSORS.")
         if 'threaded_multihost.middleware.ThreadLocalMiddleware' not in settings.MIDDLEWARE_CLASSES:
-            error_out("You must install django threaded multihost \n and place threaded_multihost.middleware.ThreadLocalMiddleware in your MIDDLEWARE_CLASSES.")
+            error_out("You must install 'django threaded multihost'\n"
+                    "and place 'threaded_multihost.middleware.ThreadLocalMiddleware' in your MIDDLEWARE_CLASSES.")
         if 'satchmo_store.accounts.email-auth.EmailBackend' not in settings.AUTHENTICATION_BACKENDS:
             error_out("You must have satchmo_store.accounts.email-auth.EmailBackend in your AUTHENTICATION_BACKENDS")
         if len(settings.SECRET_KEY) == 0:
@@ -153,7 +158,7 @@ class Command(NoArgsCommand):
                     if not pkgtype:
                         error_out('Can not find module "%s"' % appname)
                     else:
-                        error_out('Can not import "%s"' % appname) 
+                        error_out('Can not import "%s"' % appname)
                         log.exception('Can not import "%s"' % appname)
                         logged_more = True
         else:
@@ -166,43 +171,50 @@ class Command(NoArgsCommand):
                 [v for k, v in app_paths.items() if k.startswith('/root')],
                 set()))
         if apps_in_root:
-            error_out('No package should be installed in the "/root" home directory, but packages %s are.' % (apps_in_root,))
+            error_out('No package should be installed in the "/root" home directory, but packages %s are.' \
+                    % (apps_in_root,))
             logged_more = True
 
         if len(errors) == 0:
-            print_out("Your configuration has no errors.")
+            print_out("Your configuration is OK. (no errors)")
         else:
-            print_out(""); print_out("The following errors were found:")
+            print_out("")
+            print_out("The following errors were found:")
             for error in errors:
                 print_out(error)
             if logged_more:
-                print "Error details are in 'satchmo.log'"
+                print >>sys.stderr, "Error details are in 'satchmo.log'"
+
 
 def print_out(msg):
     "Print immediately to screen and to the log."
     log.info(msg)
-    print msg
+    print >>sys.stderr, msg
+
 
 def error_out(msg):
     "Prints not to the log and at the end to the screen."
     log.error(msg)
     errors.append(msg)
 
+
 def formaterror(e):
     "Format an exception like this: 'ExceptionName: error message'."
     exc_name = getattr(type(e), '__name__', None)
     if not exc_name:
         # some exceptions defined in C++ do not have an attribute __name__
-        # e.g. backend.DatabaseError for postgres_psycopg2 
+        # e.g. backend.DatabaseError for postgres_psycopg2
         exc_name = re.sub(r"<.*'(.*)'>", '\\1', str(type(e)))
         exc_name = exc_name.split('.')[-1]
     return '%s: %s' % (exc_name, e)
+
 
 def find_module_extend(appname):
     """Find module - support for "package.package.module".
     Returns tuple (pkgtype, filename, root_filename)   (result constants are defined in imp)
     root_filename is for the firstlevel package
-    This does not find an yet imported module which is not on the python path now and was only at the time of import (typically store.localsite)
+    This does not find an yet imported module which is not on the python path now and was only
+    at the time of import. (typically store.localsite)
     """
     lpos = 0
     path = pkgtype = None
@@ -225,22 +237,26 @@ def find_module_extend(appname):
 
 APP_NOT_FOUND, APP_OLD_VERSION, APP_FILE_FAIL, APP_IMPORT_FAIL, APP_OK = range(5)
 
+
 def check_install(project_name, appname, min_version=None, hg_hash=None):
     """Checks if package is installed, version is greater or equal to the required and can be imported.
-    
+
     This uses different methods of determining the version for diffenent types of installation
-    in this order: app.get_version() (custom), app.VERSION (tuple), app.__version__ (string), mercurial hash, setuptools version
+    in this order: app.get_version() (custom), app.VERSION (tuple), app.__version__ (string), mercurial hash,
+    setuptools version
 
       project_name  # verbose name for setuptools (can be with "-")
       package_name  # package name for python import
       min_version   # minimal required version (>=min_version)
-      hg_hash       # hg hash of the commit, which should be in the repository. This should be consistent to min_version.
-                      (A developper need not eventually to use specified important version (need not hg up tip) but should be informed to do pull.)
-                      One met condition is sufficient.
+      hg_hash       # hg hash of the commit, which should be in the repository. This should be consistent to
+                      min_version. (The developper need not to use specified important version finally but should
+                      pull it.)
+      One met condition the two min_version or gh_hash is sufficient.
 
     Returns tuple:  (result_code,     # any of APP_* constants
                      version_string)
-    The import problem can be caused by a dependency on other packages and therefore it is differentiated from not installed.
+    An import problem can be caused by dependency on other packages, therefore it is differentiated from
+    not installed packages.
     """
     # Version number can be obtained even without any requirements for a version this way: (all versions meet this)
     #    check_install(project_name, appname, min_version='.', hg_hash='')
@@ -260,6 +276,9 @@ def check_install(project_name, appname, min_version=None, hg_hash=None):
     except ImportError:
         log.exception('Can not import "%s"' % appname)
         logged_more = True
+    except Exception, e:
+        log.exception('Error while importing "%s": %s' % (appname, str(e)))
+        logged_more = True
 
     if isimported:
         try:
@@ -278,7 +297,7 @@ def check_install(project_name, appname, min_version=None, hg_hash=None):
                 version = '.'.join(map(str, version))
             if version and version[0].isdigit() and min_version:
                 isversion = LooseVersion(version) >= LooseVersion(min_version)
-        except:
+        except Exception:
             pass
 
     if pkgtype == imp.PKG_DIRECTORY:   # and hg_hash != None and (version == None or not version[0].isdigit()):
@@ -288,7 +307,7 @@ def check_install(project_name, appname, min_version=None, hg_hash=None):
             try:
                 linkpath = os.readlink(filename)
                 dirname = os.path.join(os.path.dirname(filename), linkpath)
-            except:
+            except Exception:
                 dirname = filename
             repo = None
             hg_dir = os.path.normpath(os.path.join(dirname, '..'))
@@ -302,9 +321,9 @@ def check_install(project_name, appname, min_version=None, hg_hash=None):
                 datestr = time.strftime('%Y-%m-%d', time.gmtime(node.date()[0]))
                 version_hg = "hg-%s:%s %s" % (node.rev(), node.hex()[0:12], datestr)
                 version = (version + ' ' + version_hg).strip()
-            except:
+            except Exception:
                 isversion = isversion or False
-        except:
+        except Exception:
             pass
 
     if (isfound or isimported) and min_version and project_name and isversion == None:
@@ -315,14 +334,15 @@ def check_install(project_name, appname, min_version=None, hg_hash=None):
             isversion = isversion or False
             require('%s >=%s' % (project_name, min_version))
             isversion = True
-        except:
+        except Exception:
             pass
     # If no required version specified, then it is also OK
     isversion = isversion or (isversion == None and min_version == None)
-    result = (((isfound or isimported) and version or isfound and isimported) and not isversion and APP_OLD_VERSION or \
-            isfound and (isimported and APP_OK or APP_IMPORT_FAIL) or \
-            isimported and APP_FILE_FAIL or APP_NOT_FOUND)
+    result = (((isfound or isimported) and version or isfound and isimported) and not isversion and APP_OLD_VERSION \
+            or isfound and (isimported and APP_OK or APP_IMPORT_FAIL) \
+            or isimported and APP_FILE_FAIL or APP_NOT_FOUND)
     return (result, version)
+
 
 def verbose_check_install(project_name, appname, min_version=None, hg_hash=None, verbose_name=None, required=True):
     """Check a pagkage and writes the results.
