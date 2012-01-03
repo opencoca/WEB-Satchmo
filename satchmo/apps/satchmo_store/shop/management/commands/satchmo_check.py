@@ -6,6 +6,7 @@ from django.utils.importlib import import_module
 import django
 import imp
 import logging
+import os
 import re
 import sys
 import types
@@ -56,6 +57,20 @@ class Command(NoArgsCommand):
         try:
             import Image
             verbose_check_install('Image', 'Image')
+            try:
+                import PIL
+                if os.path.dirname(Image.__file__) != os.path.dirname(PIL.__file__):
+                    # e.g. if env/site-packages/PIL is a link to /user/lib/.../site-packages/PIL
+                    # but if env/site-packages/PIL is not on python path
+                    # or if is after /user/lib/.../site-packages/PIL
+                    print_out ("Packages Image and PIL.Image are found on different paths which can usually cause " \
+                               "AccessInit error:\n" \
+                               "  %(image)s\n  %(pil)s\n  Change the PYTHONPATH in order to they are found on the " \
+                               "same paths first.\n" \
+                               "  Usually add '%(pil)s' to the beginning of PYTHONPATH."
+                                % {'image':os.path.dirname(Image.__file__), 'pil':os.path.dirname(PIL.__file__)})
+            except ImportError:
+                pass
         except ImportError:
             verbose_check_install('PIL', 'PIL', verbose_name='The Python Imaging Library')
 
