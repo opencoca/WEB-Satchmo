@@ -24,7 +24,7 @@ New Features
 - Satchmo check now does a more thorough job of checking your environment for issues
 - Product variation images can be shown when the user selects the product
 - In the admin view of products, stock and price are displayed in a more useable format
-- Ability add and manage addressbook entries
+- Ability to add and manage addressbook entries
 
 Translations
 ------------
@@ -77,9 +77,14 @@ Bug Fixes
 - Several fixes to handle unicode characters better
 - Replace some admin jquery scripts with simpler django readonly fields
 - Ensure that google checkout empties the cart
-- Converted to SOAP based Fedex api
+- Converted to SOAP based Fedex API
 - Fix use of sale variable in context processor
 - Handle different ship to and bill to addressees better
+- Tax processor was not being cached correctly
+- Secure autocomplete view so that only staff users could view it
+- Fix product variation pricing so that explicit prices don't get overriden by deltas
+- Fix apply_even_split so that discounts get applied properly
+- Ensure home page paginator handles improper inputs better
 
 Performance Improvements
 ------------------------
