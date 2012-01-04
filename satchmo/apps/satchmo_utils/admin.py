@@ -15,6 +15,7 @@ from django.http import HttpResponse, HttpResponseNotFound
 from django.utils.encoding import smart_str
 from django.utils.safestring import mark_safe
 from django.utils.text import truncate_words
+from django.utils.functional import update_wrapper
 
 import operator
 
@@ -135,13 +136,19 @@ class AutocompleteAdmin(admin.ModelAdmin):
 
     def get_urls(self):
         from django.conf.urls.defaults import url
+        
+        def wrap(view):
+            # This is needed to secure the view so that only admin users can access
+            def wrapper(*args, **kwargs):
+                return self.admin_site.admin_view(view)(*args, **kwargs)
+            return update_wrapper(wrapper, view)
+
         patterns = super(AutocompleteAdmin, self).get_urls()
         info = self.admin_site.name, self.model._meta.app_label, self.model._meta.module_name
         patterns.insert(
                 -1,     # insert just before (.+) rule (see django.contrib.admin.options.ModelAdmin.get_urls)
-                url(
-                    r'^search/$',
-                    self.search,
+                url(r'^search/$',
+                    wrap(self.search),
                     name='%sadmin_%s_%s_search' % info
                     )
                 )
