@@ -759,7 +759,7 @@ class Option(models.Model):
     unique_id = property(_get_unique_id)
 
     def __repr__(self):
-        return u"<Option: %s>" % self.name
+        return "<Option: %s>" % repr(self.name)
 
     def __unicode__(self):
         return u'%s: %s' % (self.option_group.name, self.name)

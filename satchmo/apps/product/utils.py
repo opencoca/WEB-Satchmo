@@ -216,8 +216,6 @@ def serialize_options(product, selected_options=()):
         for v in values:
             v['items'] = _sort_options(v['items'])
 
-    log.debug('serialized: %s', values)
-
     log.debug('Serialized Options %s: %s', product.product.slug, values)
     return values
 
