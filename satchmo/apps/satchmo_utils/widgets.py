@@ -5,13 +5,21 @@ from livesettings import config_value
 from satchmo_utils.numbers import round_decimal
 import logging
 from django.utils.html import escape
-
+from decimal import Decimal
 
 log = logging.getLogger('satchmo_utils.widgets')
 
 def _render_decimal(value, places=2, min_places=2):
-
-    if value is not None:
+    # Check to make sure this is a Decimal before we try to round
+    # and format. If it's not, just pass it on.
+    # The admin validation will handle making sure only valid values get
+    # saved.
+    bad_decimal = False
+    try:
+        Decimal(value)
+    except:
+        bad_decimal = True
+    if value is not None and not bad_decimal:
         roundfactor = "0." + "0"*(places-1) + "1"
         if value < 0:
             roundfactor = "-" + roundfactor
