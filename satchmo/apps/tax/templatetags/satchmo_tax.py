@@ -20,7 +20,7 @@ def _get_taxprocessor(request=None):
             user_id = "None"
     else:
         user = get_current_user()
-        user_id = user.id
+        user_id = user and user.id
     thread_key = "taxer-%s" % user_id
     taxprocessor = get_thread_variable(thread_key, None)
     if not taxprocessor:
