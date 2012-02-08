@@ -92,10 +92,39 @@ class PaymentProcessor(BasePaymentProcessor):
                 self.log.warn("Something went wrong with python-payflowpro. "
                               "We got some unconsumed data: %s" % 
                               str(unconsumed_data))
+
+            self.log_extra("Response variables from payflowpro:")
+            for response in responses:
+                self.log_extra("%(classname)s: %(response_fields)s" % {
+                        'classname': response.__class__.__name__,
+                        'response_fields': "%s" % response.data })
+
             response = responses[0]
-            if response.result == 0:
+            success = response.result == 0
+            if success:
                 # success!
-                self.log.
+                self.log.log("Authorize success for order #%d" % order.id)
+                transaction_id = response.pnref
+                response_text = response.respmsg
+                reason_code = response.result
+                if not testing:
+                    self.log_extra("Success, recording authorization")
+                    payment = self.record_authorization(
+                        order=order, amount=balance,
+                        transaction_id=transaction_id, reason_code=reason_code)
+            else:
+                # failure =(
+                self.log.log("Authorize failure for order #%d" % order.id)
+                if not testing:
+                    payment = self.record_failure(
+                        amount=amount, transaction_id=transaction_id,
+                        reason_code=reason_code, details=response_text)
+                
+            self.log_extra("Returning success=%s, reason=%s, response_text=%s",
+                           success, reason_code, response_text)
+            return ProcessorResult(self.key, success, response_text,
+                                   payment=payment)
+
 
         return results
 
