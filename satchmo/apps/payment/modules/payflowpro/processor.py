@@ -103,7 +103,7 @@ class PaymentProcessor(BasePaymentProcessor):
             success = response.result == 0
             if success:
                 # success!
-                self.log.log("Authorize success for order #%d" % order.id)
+                self.log.info("Authorize success for order #%d" % order.id)
                 transaction_id = response.pnref
                 response_text = response.respmsg
                 reason_code = response.result
@@ -114,7 +114,7 @@ class PaymentProcessor(BasePaymentProcessor):
                         transaction_id=transaction_id, reason_code=reason_code)
             else:
                 # failure =(
-                self.log.log("Authorize failure for order #%d" % order.id)
+                self.log.info("Authorize failure for order #%d" % order.id)
                 if not testing:
                     payment = self.record_failure(
                         amount=amount, transaction_id=transaction_id,
