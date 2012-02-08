@@ -32,6 +32,59 @@ class PaymentProcessor(BasePaymentProcessor):
                                         username=username, password=password,
                                         url_base=url_base)
 
+    def get_charge_data(self, amount=None, authorize=False):
+        """
+        Build the dictionary needed to process a credit card charge.
+
+        Return: a dictionary with the following key-values:
+            * redacted_data: the transaction data without the sensible buyer
+                             data. Suitable for logs.
+            * credit_card, amount, address, ship_address, customer_info :
+                 the payflowpro.classes.* instances to be passed to
+                 self.payflowpro
+        """
+        order = self.order
+        if amount is None:
+            amount = order.balance
+        balance = trunc_decimal(amount, 2)
+
+        ret = {
+            'credit_card': CreditCard(
+                acct=order.credit_card.decryptedCC,
+                expdate="%d%d" % (order.credit_card.expire_year,
+                                  order.credit_card.expire_month),
+                cvv2=order.credit_card.cvv,
+                ),
+            
+            'amount': Amount(amt=balance,),
+
+            'address': Address(
+                street=order.full_bill_street,
+                zip=order.bill_postal_code,
+                city=order.bill_city,
+                state=order.bill_state,
+                country=order.bill_country,
+                ),
+
+            'ship_address': ShippingAddress(
+                shiptostreet=order.full_ship_street,
+                shiptocity=order.ship_city,
+                shiptofirstname=order.ship_first_name,
+                shiptolastname=order.ship_last_name,
+                shiptostate=order.ship_state,
+                shiptocountry=order.ship_country,
+                shiptozip=order.ship_postal_code,
+                ),
+
+            'customer_info': CustomerInfo(
+                firstname=order.contact.first_name,
+                lastname=order.contact.last_name,
+                ),
+            }
+
+        return ret
+
+
     def authorize_payment(self, order=None, amount=None, testing=False):
         """
         Authorize a single payment.
@@ -49,45 +102,14 @@ class PaymentProcessor(BasePaymentProcessor):
         else:
             self.log_extra('Authorizing payment of %s for %s', amount, order)
 
-            credit_card = CreditCard(
-                acct=order.credit_card.decryptedCC,
-                expdate="%d%d" % (order.credit_card.expire_year,
-                                  order.credit_card.expire_month),
-                cvv2=order.credit_card.cvv,
-                )
+            data = self.get_charge_data(authorize=True, amount=balance)
 
-            if amount is None:
-                amount = order.balance
-            balance = trunc_decimal(amount, 2)
-            amount=Amount(amt=balance,)
-
-            address=Address(
-                street=order.full_bill_street,
-                zip=order.bill_postal_code,
-                city=order.bill_city,
-                state=order.bill_state,
-                country=order.bill_country,
-                )
-
-            ship_address=ShippingAddress(
-                shiptostreet=order.full_ship_street,
-                shiptocity=order.ship_city,
-                shiptofirstname=order.ship_first_name,
-                shiptolastname=order.ship_last_name,
-                shiptostate=order.ship_state,
-                shiptocountry=order.ship_country,
-                shiptozip=order.ship_postal_code,
-                )
-
-            customer = CustomerInfo(
-                firstname=order.contact.first_name,
-                lastname=order.contact.last_name,
-                )
-
-            extras = [address, ship_address, customer,]
-
+            extras = [data['address'], data['ship_address'], 
+                      data['customer_info'],]
             responses, unconsumed_data = self.payflow.authorization(
-                credit_card=credit_card, amount=amount, extras=extras)
+                credit_card=data['credit_card'],
+                amount=data['amount'],
+                extras=extras)
             if unconsumed_data:
                 self.log.warn("Something went wrong with python-payflowpro. "
                               "We got some unconsumed data: %s" % 
@@ -122,11 +144,11 @@ class PaymentProcessor(BasePaymentProcessor):
                 
             self.log_extra("Returning success=%s, reason=%s, response_text=%s",
                            success, reason_code, response_text)
-            return ProcessorResult(self.key, success, response_text,
+            result = ProcessorResult(self.key, success, response_text,
                                    payment=payment)
 
 
-        return results
+        return result
 
     def can_authorize(self):
         return True
