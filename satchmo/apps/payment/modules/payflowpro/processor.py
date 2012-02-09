@@ -163,7 +163,9 @@ class PaymentProcessor(BasePaymentProcessor):
 
         self.log_extra('Capturing Authorization #%i for %s',
                        authorization.id, order)
-        result = self.send_post(data=authorization.id, testing=testing,
+        data = self.get_charge_data()
+        data['authorization_id'] = authorization.transaction_id
+        result = self.send_post(data=data, testing=testing,
                                 post_func=self.send_capture_post,)
 
         return result
@@ -201,7 +203,9 @@ class PaymentProcessor(BasePaymentProcessor):
             order = self.order
 
         self.log_extra('Releasing Authorization #%i for %s', auth.id, order)
-        result = self.send_post(data=auth.id, post_func=self.send_release_post,
+        data = self.get_charge_data()
+        data['authorization_id'] = auth.transaction_id
+        result = self.send_post(data=data, post_func=self.send_release_post,
                                 testing=testing)
         if result.success:
             auth.complete = True
@@ -218,18 +222,20 @@ class PaymentProcessor(BasePaymentProcessor):
             extras=data['extras'])
         return responses, unconsumed_data, self.record_authorization
 
-    def send_capture_post(self, authorization_id):
+    def send_capture_post(self, data):
         """
         Capture previously authorized sale
         """
-        responses, unconsumed_data = self.payflow.capture(authorization_id)
+        responses, unconsumed_data = self.payflow.capture(
+            data['authorization_id'])
         return responses, unconsumed_data, self.record_payment
 
-    def send_release_post(self, authorization_id):
+    def send_release_post(self, data):
         """
         Release previously authorized sale
         """
-        responses, unconsumed_data = self.payflow.void(authorization_id)
+        responses, unconsumed_data = self.payflow.void(
+            data['authorization_id'])
         def nothing(*args, **kwargs):
             return None
         return responses, unconsumed_data, nothing 
