@@ -37,8 +37,8 @@ class PaymentProcessor(BasePaymentProcessor):
         Build the dictionary needed to process a credit card charge.
 
         Return: a dictionary with the following key-values:
-            * redacted_data: the transaction data without the sensible buyer
-                             data. Suitable for logs.
+            * log_string: the transaction data without the sensible
+                           buyer data. Suitable for logs.
             * credit_card, amount, address, ship_address, customer_info :
                  the payflowpro.classes.* instances to be passed to
                  self.payflowpro
@@ -82,7 +82,38 @@ class PaymentProcessor(BasePaymentProcessor):
                 ),
             }
 
+        redacted_data = ret.copy()
+        redacted_data['credit_card'] = {
+            'acct': order.credit_card.display_cc,
+            'expdate': "%d%d" % (order.credit_card.expire_year,
+                                 order.credit_card.expire_month),
+            'cvv2': "REDACTED",
+            }
+
+        dicts = [getattr(d, 'data', d) for d in redacted_data.values()]
+        ret['log_string'] = "\n".join("%s: %s" % (k, v) for d in dicts
+                                      for k, v in d.items())
+
         return ret
+
+    def _handle_unconsumed(self, unconsumed_data):
+        """
+        Handler for when we've got unconsumed data from the response
+        """
+        if unconsumed_data:
+            self.log.warn("Something went wrong with python-payflowpro. "
+                          "We got some unconsumed data: %s" % 
+                          str(unconsumed_data))
+
+    def _log_responses(self, responses):
+        """
+        Log the responses from PayflowPro for debugging
+        """
+        self.log_extra("Response variables from payflowpro:")
+        for response in responses:
+            self.log_extra("%(classname)s: %(response_fields)s" % {
+                    'classname': response.__class__.__name__,
+                    'response_fields': "%s" % response.data })
 
 
     def authorize_payment(self, order=None, amount=None, testing=False):
@@ -97,8 +128,10 @@ class PaymentProcessor(BasePaymentProcessor):
             order = self.order
 
         if order.paid_in_full:
-            self.log_extra('%s is paid in full, no authorization attempted.', order)
-            results = ProcessorResult(self.key, True, _("No charge needed, paid in full."))
+            self.log_extra('%s is paid in full, no authorization attempted.',
+                           order)
+            results = ProcessorResult(self.key, True,
+                                      _("No charge needed, paid in full."))
         else:
             self.log_extra('Authorizing payment of %s for %s', amount, order)
 
@@ -106,20 +139,14 @@ class PaymentProcessor(BasePaymentProcessor):
 
             extras = [data['address'], data['ship_address'], 
                       data['customer_info'],]
+            self.log_extra("About to send PayflowPro a request: %s" %
+                           data['log_string'])
             responses, unconsumed_data = self.payflow.authorization(
                 credit_card=data['credit_card'],
                 amount=data['amount'],
                 extras=extras)
-            if unconsumed_data:
-                self.log.warn("Something went wrong with python-payflowpro. "
-                              "We got some unconsumed data: %s" % 
-                              str(unconsumed_data))
-
-            self.log_extra("Response variables from payflowpro:")
-            for response in responses:
-                self.log_extra("%(classname)s: %(response_fields)s" % {
-                        'classname': response.__class__.__name__,
-                        'response_fields': "%s" % response.data })
+            self._handle_unconsumed(unconsumed_data)
+            self._log_responses(rseponses)
 
             response = responses[0]
             success = response.result == 0
@@ -147,7 +174,6 @@ class PaymentProcessor(BasePaymentProcessor):
             result = ProcessorResult(self.key, success, response_text,
                                    payment=payment)
 
-
         return result
 
     def can_authorize(self):
@@ -156,7 +182,8 @@ class PaymentProcessor(BasePaymentProcessor):
     #def can_recur_bill(self):
     #    return True
 
-    def capture_authorized_payment(self, authorization, testing=False, order=None, amount=None):
+    def capture_authorized_payment(self, authorization, testing=False,
+                                   order=None, amount=None):
         """
         Capture a single payment
         """
@@ -169,13 +196,40 @@ class PaymentProcessor(BasePaymentProcessor):
             self.log_extra('No remaining authorizations on %s', order)
             return ProcessorResult(self.key, True, _("Already complete"))
 
-        self.log_extra('Capturing Authorization #%i for %s', authorization.id, order)
-        data = self.get_prior_auth_data(authorization, amount=amount)
-        results = None
-        if data:
-            results = self.send_post(data, testing)
+        self.log_extra('Capturing Authorization #%i for %s',
+                       authorization.id, order)
+        responses, unconsumed_data = self.payflowpro.capture(authorization.id)
+        self._handle_unconsumed(unconsumed_data)
+        self._log_responses(responses)
 
-        return results
+        response = responses[0]
+        success = response.result == 0
+
+        if success:
+            # success!
+            self.log.info("Capture success for order #%d" % order.id)
+            transaction_id = response.pnref
+            response_text = response.respmsg
+            reason_code = response.result
+            if not testing:
+                self.log_extra("Success, recording capture")
+                payment = self.record_payment(
+                    order=order, amount=balance,
+                    transaction_id=transaction_id, reason_code=reason_code)
+        else:
+            # failure =(
+            self.log.info("Capture failure for order #%d" % order.id)
+            if not testing:
+                payment = self.record_failure(
+                    amount=amount, transaction_id=transaction_id,
+                    reason_code=reason_code, details=response_text)
+                
+        self.log_extra("Returning success=%s, reason=%s, response_text=%s",
+                       success, reason_code, response_text)
+        result = ProcessorResult(self.key, success, response_text,
+                                 payment=payment)
+
+        return result
 
     def capture_payment(self, testing=False, order=None, amount=None):
         """
@@ -207,60 +261,6 @@ class PaymentProcessor(BasePaymentProcessor):
             results = self.send_post(standard, testing)
 
         return results
-
-    def get_prior_auth_data(self, authorization, amount=None):
-        """Build the dictionary needed to process a prior auth capture."""
-        settings = self.settings
-        trans = {'authorization' : authorization}
-        remaining = authorization.remaining()
-        if amount is None or amount > remaining:
-            amount = remaining
-
-        balance = trunc_decimal(amount, 2)
-        trans['amount'] = amount
-
-        if self.is_live():
-            conn = settings.CONNECTION.value
-            self.log_extra('Using live connection.')
-        else:
-            testflag = 'TRUE'
-            conn = settings.CONNECTION_TEST.value
-            self.log_extra('Using test connection.')
-
-        if self.settings.SIMULATE.value:
-            testflag = 'TRUE'
-        else:
-            testflag = 'FALSE'
-
-        trans['connection'] = conn
-
-        trans['configuration'] = {
-            'x_login' : settings.LOGIN.value,
-            'x_tran_key' : settings.TRANKEY.value,
-            'x_version' : '3.1',
-            'x_relay_response' : 'FALSE',
-            'x_test_request' : testflag,
-            'x_delim_data' : 'TRUE',
-            'x_delim_char' : '|',
-            'x_type': 'PRIOR_AUTH_CAPTURE',
-            'x_trans_id' : authorization.transaction_id
-            }
-
-        self.log_extra('prior auth configuration: %s', trans['configuration'])
-
-        trans['transactionData'] = {
-            'x_amount' : balance,
-            }
-
-        part1 = urlencode(trans['configuration'])
-        postdata = part1 + "&" + urlencode(trans['transactionData'])
-        trans['postString'] = postdata
-
-        self.log_extra('prior auth poststring: %s', postdata)
-        trans['logPostString'] = postdata
-
-        return trans
-
 
     def get_void_auth_data(self, authorization):
         """Build the dictionary needed to process a prior auth release."""
