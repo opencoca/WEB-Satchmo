@@ -29,11 +29,18 @@ config_register_list(
         hidden=True,
         default = 'payment.modules.payflowpro'),
 
+    BooleanValue(PAYMENT_GROUP,
+        'CAPTURE',
+        description=_('Capture Payment immediately?'),
+        default=True,
+        help_text=_('IMPORTANT: If false, a capture attempt will be '
+                    'made when the order is marked as shipped.')),
+
     StringValue(PAYMENT_GROUP,
         'KEY',
         description=_("Module key"),
         hidden=True,
-        default = 'AUTHORIZENET'),
+        default = 'PAYFLOWPRO'),
 
     StringValue(PAYMENT_GROUP,
         'LABEL',
