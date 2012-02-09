@@ -1,15 +1,11 @@
-import random
-
-from datetime import datetime
 from decimal import Decimal
-from django.template import loader, Context
 from django.utils.translation import ugettext_lazy as _
 from payment.modules.base import BasePaymentProcessor, ProcessorResult
-from satchmo_store.shop.models import Config
 from satchmo_utils.numbers import trunc_decimal
-from tax.utils import get_tax_processor
 
 from payflowpro.client import PayflowProClient
+from payflowpro.classes import (CreditCard, Amount, Address, ShippingAddress,
+                                CustomerInfo)
 
 class PaymentProcessor(BasePaymentProcessor):
     """
@@ -135,7 +131,7 @@ class PaymentProcessor(BasePaymentProcessor):
         else:
             self.log_extra('Authorizing payment of %s for %s', amount, order)
 
-            data = self.get_charge_data(amount=balance)
+            data = self.get_charge_data(amount=amount)
             data['extras'] = [data['address'], data['ship_address'], 
                               data['customer_info'],]
 
@@ -182,7 +178,7 @@ class PaymentProcessor(BasePaymentProcessor):
 
         if order.paid_in_full:
             self.log_extra('%s is paid in full, no capture attempted.', order)
-            results = ProcessorResult(self.key, True, _("No charge needed, "
+            result = ProcessorResult(self.key, True, _("No charge needed, "
                                                         "paid in full."))
             self.record_payment()
         else:
@@ -191,10 +187,10 @@ class PaymentProcessor(BasePaymentProcessor):
             data = self.get_charge_data(amount=amount)
             data['extras'] = [data['address'], data['ship_address'], 
                               data['customer_info'],]
-            results = self.send_post(data=data, post_func=self.send_sale_post,
+            result = self.send_post(data=data, post_func=self.send_sale_post,
                                      testing=testing,)
 
-        return results
+        return result
 
     def release_authorized_payment(self, order=None, auth=None, testing=False):
         """Release a previously authorized payment."""
@@ -213,26 +209,38 @@ class PaymentProcessor(BasePaymentProcessor):
         return result
 
     def send_authorize_post(self, data):
+        """
+        Authorize sell with PayflowPro
+        """
         responses, unconsumed_data = self.payflow.authorization(
             credit_card=data['credit_card'], amount=data['amount'],
             extras=data['extras'])
         return responses, unconsumed_data, self.record_authorization
 
     def send_capture_post(self, authorization_id):
-        responses, unconsumed_data = self.payflow.capture(authorization.id)
+        """
+        Capture previously authorized sale
+        """
+        responses, unconsumed_data = self.payflow.capture(authorization_id)
         return responses, unconsumed_data, self.record_payment
 
     def send_release_post(self, authorization_id):
-        responses, unconsumed_data = self.payflow.void(authorization_id_)
-        return responses, unconsumed_data, lambda 
+        """
+        Release previously authorized sale
+        """
+        responses, unconsumed_data = self.payflow.void(authorization_id)
+        def nothing(*args, **kwargs):
+            return None
+        return responses, unconsumed_data, nothing 
 
-    def send_sale_psot(self, data):
+    def send_sale_post(self, data):
+        """
+        Immediately charge a credit card
+        """
         responses, unconsumed_data = self.payflow.sale(
             credit_card=data['credit_card'], amount=data['amount'],
             extras=data['extras'])
-        def nothing(*args, **kwargs):
-            return None
-        return responses, unconsumed_data, nothing
+        return responses, unconsumed_data, self.record_payment
 
     def send_post(self, data, post_func, testing=False):
         """
@@ -251,28 +259,34 @@ class PaymentProcessor(BasePaymentProcessor):
         """
         self.log_extra("About to send PayflowPro a request: %s",
                        data['log_string'])
+
+        if 'amount' in data:
+            amount = data['amount']
+        else:
+            amount = self.order.balance
+
         responses, unconsumed_data, record_function = post_func(data)
         self._handle_unconsumed(unconsumed_data)
-        self._log_responses(rseponses)
+        self._log_responses(responses)
 
         response = responses[0]
         success = response.result == 0
         if success:
             # success!
             self.log.info("successful %s for order #%d",
-                          post_func.__name__, order.id)
+                          post_func.__name__, self.order.id)
             transaction_id = response.pnref
             response_text = response.respmsg
             reason_code = response.result
             if not testing:
                 self.log_extra("Success, calling %s", record_function.__name__)
                 payment = record_function(
-                    order=order, amount=balance,
+                    order=self.order, amount=amount,
                     transaction_id=transaction_id, reason_code=reason_code)
         else:
             # failure =(
             self.log.info("failed %s for order #%d",
-                          post_func.__name__, order.id)
+                          post_func.__name__, self.order.id)
             if not testing:
                 payment = self.record_failure(
                     amount=amount, transaction_id=transaction_id,
@@ -306,7 +320,7 @@ if __name__ == "__main__":
             pass
 
     if not os.environ.has_key("DJANGO_SETTINGS_MODULE"):
-        os.environ["DJANGO_SETTINGS_MODULE"]="satchmo_store.settings"
+        os.environ["DJANGO_SETTINGS_MODULE"] = "satchmo_store.settings"
 
     settings_module = os.environ['DJANGO_SETTINGS_MODULE']
     settingsl = settings_module.split('.')

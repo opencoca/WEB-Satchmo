@@ -1,2 +1,2 @@
 import config
-PAYMENT_PROCESSOR=True
+PAYMENT_PROCESSOR = True

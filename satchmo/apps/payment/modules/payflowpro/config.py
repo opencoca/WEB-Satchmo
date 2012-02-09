@@ -1,4 +1,6 @@
-from livesettings import *
+from livesettings import (ConfigurationGroup, config_register_list,
+                          BooleanValue, ModuleValue, StringValue,
+                          MultipleStringValue)
 from django.utils.translation import ugettext_lazy as _
 
 # this is so that the translation utility will pick up the string
@@ -76,13 +78,13 @@ config_register_list(
         description=_("If you set up more additional users on the PayPal "
                       "account, this value is the ID of the user authorized to "
                       "process transactions. If you have not set up additional "
-                      "users on the account, has the same value as VENDOR.")
-        default="VENDOR_ID")
+                      "users on the account, has the same value as VENDOR."),
+        default="VENDOR_ID"),
 
     StringValue(
         PAYMENT_GROUP,
         'PASSWORD',
-        description=_("Your PayflowPro account password")
+        description=_("Your PayflowPro account password"),
         default=""),
 
     #BooleanValue(PAYMENT_GROUP,
