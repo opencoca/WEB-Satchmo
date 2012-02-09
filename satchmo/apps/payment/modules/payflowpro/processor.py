@@ -41,7 +41,7 @@ class PaymentProcessor(BasePaymentProcessor):
                            buyer data. Suitable for logs.
             * credit_card, amount, address, ship_address, customer_info :
                  the payflowpro.classes.* instances to be passed to
-                 self.payflowpro
+                 self.payflow
         """
         order = self.order
         if amount is None:
@@ -196,51 +196,6 @@ class PaymentProcessor(BasePaymentProcessor):
 
         return results
 
-    def get_void_auth_data(self, authorization):
-        """Build the dictionary needed to process a prior auth release."""
-        settings = self.settings
-        trans = {
-            'authorization' : authorization,
-            'amount' : Decimal('0.00'),
-        }
-
-        if self.is_live():
-            conn = settings.CONNECTION.value
-            self.log_extra('Using live connection.')
-        else:
-            testflag = 'TRUE'
-            conn = settings.CONNECTION_TEST.value
-            self.log_extra('Using test connection.')
-
-        if self.settings.SIMULATE.value:
-            testflag = 'TRUE'
-        else:
-            testflag = 'FALSE'
-
-        trans['connection'] = conn
-
-        trans['configuration'] = {
-            'x_login' : settings.LOGIN.value,
-            'x_tran_key' : settings.TRANKEY.value,
-            'x_version' : '3.1',
-            'x_relay_response' : 'FALSE',
-            'x_test_request' : testflag,
-            'x_delim_data' : 'TRUE',
-            'x_delim_char' : '|',
-            'x_type': 'VOID',
-            'x_trans_id' : authorization.transaction_id
-            }
-
-        self.log_extra('void auth configuration: %s', trans['configuration'])
-
-        postdata = urlencode(trans['configuration'])
-        trans['postString'] = postdata
-
-        self.log_extra('void auth poststring: %s', postdata)
-        trans['logPostString'] = postdata
-
-        return trans
-
     def release_authorized_payment(self, order=None, auth=None, testing=False):
         """Release a previously authorized payment."""
         if order:
@@ -249,16 +204,13 @@ class PaymentProcessor(BasePaymentProcessor):
             order = self.order
 
         self.log_extra('Releasing Authorization #%i for %s', auth.id, order)
-        data = self.get_void_auth_data(auth)
-        results = None
-        if data:
-            results = self.send_post(data, testing)
-
-        if results.success:
+        result = self.send_post(data=auth.id, post_func=self.send_release_post,
+                                testing=testing)
+        if result.success:
             auth.complete = True
             auth.save()
 
-        return results
+        return result
 
     def send_authorize_post(self, data):
         responses, unconsumed_data = self.payflow.authorization(
@@ -267,20 +219,31 @@ class PaymentProcessor(BasePaymentProcessor):
         return responses, unconsumed_data, self.record_authorization
 
     def send_capture_post(self, authorization_id):
-        responses, unconsumed_data = self.payflowpro.capture(authorization.id)
+        responses, unconsumed_data = self.payflow.capture(authorization.id)
         return responses, unconsumed_data, self.record_payment
 
+    def send_release_post(self, authorization_id):
+        responses, unconsumed_data = self.payflow.void(authorization_id_)
+        return responses, unconsumed_data, lambda 
+
     def send_sale_psot(self, data):
-        responses, unconsumed_data = self.payflowpro.sale(
+        responses, unconsumed_data = self.payflow.sale(
             credit_card=data['credit_card'], amount=data['amount'],
             extras=data['extras'])
+        def nothing(*args, **kwargs):
+            return None
+        return responses, unconsumed_data, nothing
 
     def send_post(self, data, post_func, testing=False):
         """
-        Execute the post to Authorize Net.
+        Execute the post to PayflowPro.
 
         Params:
-        - data: dictionary as returned by get_standard_charge_data
+        - data: the argument expected by `post_func`. Usually a dict which this
+                function knows how to use
+        - post_func: a function that takes `data` as argument, and sends the
+                     actual request to the PayflowPro Gateway. It should return
+                     a 3-tuple (responses, unconsumed_data, record_* function)
         - testing: if true, then don't record the payment
 
         Returns:
@@ -364,9 +327,10 @@ if __name__ == "__main__":
     sampleOrder.credit_card.expirationDate = "10/11"
     sampleOrder.credit_card.ccv = "144"
 
-    authorize_settings = config_get_group('PAYMENT_AUTHORIZENET')
+    authorize_settings = config_get_group('PAYMENT_PAYFLOWPRO')
     if authorize_settings.LIVE.value:
-        print "Warning.  You are submitting a live order.  AUTHORIZE.NET system is set LIVE."
+        print ("Warning.  You are submitting a live order.  PAYFLOWPRO system "
+               "is set LIVE.")
 
     processor = PaymentProcessor(authorize_settings)
     processor.prepare_data(sampleOrder)
