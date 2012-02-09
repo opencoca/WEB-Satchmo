@@ -44,12 +44,13 @@ class PaymentProcessor(BasePaymentProcessor):
             amount = order.balance
         balance = trunc_decimal(amount, 2)
 
+
         ret = {
             'credit_card': CreditCard(
                 acct=order.credit_card.decryptedCC,
-                expdate="%d%d" % (order.credit_card.expire_year,
-                                  order.credit_card.expire_month),
-                cvv2=order.credit_card.cvv,
+                expdate="%02d%02d" % (order.credit_card.expire_month,
+                                      order.credit_card.expire_year % 100),
+                cvv2=order.credit_card.ccv,
                 ),
             
             'amount': Amount(amt=balance,),
@@ -261,7 +262,7 @@ class PaymentProcessor(BasePaymentProcessor):
                        data['log_string'])
 
         if 'amount' in data:
-            amount = data['amount']
+            amount = data['amount'].amt
         else:
             amount = self.order.balance
 
@@ -270,14 +271,15 @@ class PaymentProcessor(BasePaymentProcessor):
         self._log_responses(responses)
 
         response = responses[0]
-        success = response.result == 0
+
+        success = response.result == '0'
+        transaction_id = response.pnref
+        response_text = response.respmsg
+        reason_code = response.result
         if success:
             # success!
             self.log.info("successful %s for order #%d",
                           post_func.__name__, self.order.id)
-            transaction_id = response.pnref
-            response_text = response.respmsg
-            reason_code = response.result
             if not testing:
                 self.log_extra("Success, calling %s", record_function.__name__)
                 payment = record_function(
