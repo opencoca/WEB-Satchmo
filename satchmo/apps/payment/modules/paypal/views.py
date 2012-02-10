@@ -147,7 +147,7 @@ def ipn(request):
     try:
         data = request.POST
         log.debug("PayPal IPN data: " + repr(data))
-        if not confirm_ipn_data(data, PP_URL):
+        if not confirm_ipn_data(request.META.QUERY_STRING, PP_URL):
             return HttpResponse()
 
         if not 'payment_status' in data or not data['payment_status'] == "Completed":
@@ -193,15 +193,10 @@ def ipn(request):
 
     return HttpResponse()
 
-def confirm_ipn_data(data, PP_URL):
+def confirm_ipn_data(query_string, PP_URL):
     # data is the form data that was submitted to the IPN URL.
 
-    newparams = {}
-    for key in data.keys():
-        newparams[key] = data[key]
-
-    newparams['cmd'] = "_notify-validate"
-    params = urlencode(newparams)
+    params = 'cmd=_notify-validate&' + query_string
 
     req = urllib2.Request(PP_URL)
     req.add_header("Content-type", "application/x-www-form-urlencoded")
