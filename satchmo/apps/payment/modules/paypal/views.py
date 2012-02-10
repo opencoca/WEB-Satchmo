@@ -147,7 +147,7 @@ def ipn(request):
     try:
         data = request.POST
         log.debug("PayPal IPN data: " + repr(data))
-        if not confirm_ipn_data(request.META.QUERY_STRING, PP_URL):
+        if not confirm_ipn_data(request.raw_post_data, PP_URL):
             return HttpResponse()
 
         if not 'payment_status' in data or not data['payment_status'] == "Completed":
