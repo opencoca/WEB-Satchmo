@@ -1,5 +1,5 @@
 # Django settings for satchmo project.
-# If you have an existing project, then ensure that you modify local_settings-customize.py
+# If you have an existing project, then ensure that you modify local_settings.py
 # and import it from your main settings file. (from local_settings import *)
 import os
 
