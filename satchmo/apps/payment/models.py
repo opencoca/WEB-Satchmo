@@ -78,7 +78,7 @@ class CreditCardDetail(models.Model):
     
     def getCCV(self):
         try:
-            ccv = keyedcache.cache_get(self.encrypted_cc)
+            ccv = keyedcache.cache_get(self.encrypted_cc, skiplog=True)
         except keyedcache.NotCachedError:
             ccv = ""
 
@@ -91,7 +91,7 @@ class CreditCardDetail(models.Model):
         if not config_value('PAYMENT', 'STORE_CREDIT_NUMBERS'):
             try:
                 key = _encrypt_code(ccnum + '-card')
-                encrypted_ccnum = keyedcache.cache_get(key)
+                encrypted_ccnum = keyedcache.cache_get(key, skiplog=True)
                 ccnum = _decrypt_code(encrypted_ccnum)
             except keyedcache.NotCachedError:
                 ccnum = ""
