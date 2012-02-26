@@ -79,7 +79,7 @@
     <tr><td><label for="id_discount">{% trans "Discount code" %}</label></td><td>{{ form.discount }}</td></tr>
     {% if form.discount.errors %}<tr><td class="error" colspan="2">*** {{ form.discount.errors|join:", " }}</td></tr>{% endif %}
 {% endif %}
-{% if sale %}{% include "product/sale_details.html" %}{% endif %}
+{% if storewide_sale %}{% include "product/sale_details.html" %}{% endif %}
 
 	<tr><td></td><td><input type="submit" value="{% trans "Continue Checkout" %}"/></td></tr>
 </table>
