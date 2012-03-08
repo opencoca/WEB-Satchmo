@@ -1233,7 +1233,7 @@ class ProductPriceLookupManager(models.Manager):
                 quantity=qty,
                 discountable=product.is_discountable,
                 items_in_stock=product.items_in_stock,
-		productimage_set=product.productimage_set)
+                productimage_set=product.productimage_set)
             obj.save()
             objs.append(obj)
         return objs
@@ -1319,12 +1319,12 @@ class ProductPriceLookup(models.Model):
     product = property(fget=_product)
 
     def _productimage_set(self):
-	try:
-    		return ProductImage.objects.filter(product=self.product)
-	except ProductImage.DoesNotExist:
-    		return None
-	except Product.DoesNotExist:
-		return None
+        try:
+                return ProductImage.objects.filter(product=self.product)
+        except ProductImage.DoesNotExist:
+                return None
+        except Product.DoesNotExist:
+                return None
 
     productimage_set = property(fget=_productimage_set)
 
