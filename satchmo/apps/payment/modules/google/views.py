@@ -140,14 +140,14 @@ def success(request):
     # empty user cart
     for cart in Cart.objects.filter(customer=order.contact):
         cart.empty()
-	cart.delete()
+        cart.delete()
 
     cart = Cart.objects.from_request(request, create=False)
     if isinstance(cart, NullCart):
         pass
     else:
         cart.empty()
-	cart.delete()
+        cart.delete()
 
     del request.session['orderID']
     context = RequestContext(request, {'order': order})
