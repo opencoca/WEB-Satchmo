@@ -5,14 +5,19 @@ Satchmo currently has support for several different payment modules.  This
 document will discuss some of the particular configuration items to keep in
 mind for each module.
 
-Modules based on views not asking for credit card number on the merchant site:
-Google Checkout, PayPal, Sermepa.
+There are 3 primary types of payment modules in Satchmo:
+    
+    1. Modules based on views not asking for credit card number on the merchant site:
 
-Modules using card number:
-Authorize.net Cybersource.net, Sage Pay, TrustCommerce.
+        Google Checkout, PayPal, Sermepa.
 
-Modules which are not typical payment gateways:
-Auto success, COD (cash on delivery), dummy, gift certificate, purchase order.
+    2. Modules that collect and process a card number:
+        
+        Authorize.net Cybersource.net, Sage Pay, TrustCommerce.
+
+    3. Modules which are not typical payment gateways:
+        
+        Auto success, COD (cash on delivery), dummy, gift certificate, purchase order.
 
 .. index:: Authorize.net
 
