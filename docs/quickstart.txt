@@ -54,7 +54,7 @@ Next Steps
 
 You should review :doc:`Tutorial 1 <tutorial1>` to learn how to add Products to your store.
 
-When your development is ready, you can "freeze" versions of packages, which
-you want install the same later on the production server::
+When your development is ready, you can "freeze" versions of packages, that
+you may want to install later on the production server::
 
     pip freeze -r edited-requirements.txt > my-stable-reqirements.txt
