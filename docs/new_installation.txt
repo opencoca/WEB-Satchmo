@@ -86,7 +86,7 @@ Installing Dependencies
 
    - Using pip::
    
-       pip install sorl-thumbnail==3.2.5
+       pip install sorl-thumbnail
 
 #. Install signals-ahoy:
 
