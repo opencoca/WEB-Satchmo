@@ -20,13 +20,14 @@
 <h3>{{ category.translated_name }}</h3>
 {% if category.translated_description %}<p class="product_category_description">{{ category.translated_description }}</p>{% endif %}
     {% if category.main_image %}
-            {% thumbnail category.main_image.picture 85x85 as image %}
-           <img src="{{ image }}" width="{{ image.width }}" height="{{ image.height }}" />
+            {% thumbnail category.main_image.picture "85x85" as image %}
+           <img src="{{ image.url }}" width="{{ image.width }}" height="{{ image.height }}" />
+           {% endthumbnail %}
     {% endif %}
     {% for product in products %} 
         {% if forloop.first %} <ul>  {% endif %}
-            <li>{% thumbnail product.main_image.picture 85x85 as image %}
-            <a href="{{ product.get_absolute_url }}"><img src="{{ image }}" width="{{ image.width }}" height="{{ image.height }}" /></a>
+            <li>{% thumbnail product.main_image.picture "85x85" as image %}
+            <a href="{{ product.get_absolute_url }}"><img src="{{ image.url }}" width="{{ image.width }}" height="{{ image.height }}" /></a>{% endthumbnail %}
             <a href="{{ product.get_absolute_url }}">{{ product.translated_name }}</a></li>
         {% if forloop.last %} </ul> {% endif %}
     {% endfor %}
@@ -36,8 +37,8 @@
             {% if cat.translated_description %}<p class="product_category_description">{{ cat.translated_description }}</p>{% endif %}
             {% for product in cat.active_products %}
                 {% if forloop.first %} <ul>  {% endif %}
-                    <li>{% thumbnail product.main_image.picture 85x85 as image %}
-                    <a href="{{ product.get_absolute_url }}"><img src="{{ image }}" width="{{ image.width }}" height="{{ image.height }}" /></a>
+                    <li>{% thumbnail product.main_image.picture "85x85" as image %}
+                    <a href="{{ product.get_absolute_url }}"><img src="{{ image.url }}" width="{{ image.width }}" height="{{ image.height }}" /></a>{% endthumbnail %}
                 <a href="{{ product.get_absolute_url }}">{{ product.translated_name }}</a></li>
                 {% if forloop.last %} </ul> {% endif %}
             {% endfor %}
