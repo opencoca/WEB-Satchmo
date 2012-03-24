@@ -214,6 +214,10 @@ choose a default zone for each carrier. Each zone can have a number of cart weig
 price and handling fee. This means that at checkout the shipping price is based on the shipping country
 and the total weight of the cart.
 
+NOTE: the weight value of the Weight Tier part of the Zone object is called
+"Min Weight", but each tier is used for carts that weight at MOST that amount.
+This means this is the MAXIMUM weight that will be handled by that price.
+
 .. _shipping_tieredquantity:
 
 Tiered Quantity
