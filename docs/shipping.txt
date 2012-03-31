@@ -298,6 +298,7 @@ To enable, see `Enabling Modules`_.
 
 The Fedex module allows Satchmo to calculate shipping costs using the Fedex Web Services interface. The Fedex module
 has two additional dependencies:
+
     1. `python-fedex <http://code.google.com/p/python-fedex/>`_
     2. `suds <https://fedorahosted.org/suds/>`_
     
