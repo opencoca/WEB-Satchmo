@@ -12,7 +12,7 @@
 
 {% include "shop/_jquery.html" %}
 {% include "shop/_jquery_form.html" %}
-<script type="text/javascript" src="{{media_url}}js/satchmo_product.js"></script>
+<script type="text/javascript" src="{{ STATIC_URL }}js/satchmo_product.js"></script>
 {% blackbird_logging %}
 <script type="text/javascript">{# Javascript which is generated uniquely for each page #}
 satchmo.default_view_tax = {% if default_view_tax %}true{% else %}false{% endif %};

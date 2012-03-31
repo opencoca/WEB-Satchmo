@@ -15,7 +15,7 @@ tr.ConfigurableProduct {
 </style>
 {% endblock %}
 {% block extrahead %}{{ block.super }}
-    <script src="{{media_url}}js/jquery.cookie.js" type="text/javascript"></script>
+    <script src="{{ STATIC_URL }}js/jquery.cookie.js" type="text/javascript"></script>
     <script type="text/javascript">
     var satchmo = satchmo || {};
     satchmo.toggle = function(cls, state) {
