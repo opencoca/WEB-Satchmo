@@ -47,11 +47,10 @@ def as_json(value):
 register.filter('as_json', as_json)
 
 def blackbird_logging(context):
-    form = context.get('form', None)
     return {
         'debug' : settings.DEBUG,
-        'media_url' : settings.MEDIA_URL,
-        'form' : form,
+        'form': context.get('form', None), 
+        'STATIC_URL': context.get('STATIC_URL', None),
         }
 
 register.inclusion_tag('shop/_blackbird_logging.html', takes_context=True)(blackbird_logging)
@@ -191,12 +190,11 @@ def satchmo_language_selection_form(context):
     else:
         url = ""
 
-    media_url = context.get('media_url', None)
     return {
         'enabled' : enabled,
         'set_language_url' : url,
         'languages' : languages,
-        'media_url' : media_url,
+        'STATIC_URL': context.get('STATIC_URL', ''),  # for easy flag images
         'django_language' : request.session.get('django_language', 'en'),
     }
 register.inclusion_tag("l10n/_language_selection_form.html", takes_context=True)(satchmo_language_selection_form)
