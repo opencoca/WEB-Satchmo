@@ -1,10 +1,12 @@
 from django.conf import settings
 import datetime
+import django
 import logging
 import os
 import random
 import sys
 import types
+import warnings
 
 log = logging.getLogger('shop.utils')
 
@@ -58,6 +60,25 @@ def current_media_url(request):
         except AttributeError:
             media_url = media_url.replace('http://','https://')
     return media_url
+
+def current_static_url(request):
+    """Return the static_url, taking into account SSL."""
+    static_url = getattr(settings, 'STATIC_URL', None)
+    if not static_url:
+        if django.VERSION >= (1, 3):
+            warnings.warn("Undefined settings.STATIC_URL. This is a problem. Read docs.")
+        else:
+            warnings.warn("Undefined settings.STATIC_URL. It has been replaced by '%s'. "
+                    "It is normal for Django 1.2 in order to work with newer packages."
+                                % settings.MEDIA_URL, PendingDeprecationWarning)
+            static_url = settings.MEDIA_URL
+    secure = request_is_secure(request)
+    if secure:
+        try:
+            static_url = settings.STATIC_SECURE_URL
+        except AttributeError:
+            static_url = static_url.replace('http://','https://')
+    return static_url
 
 def is_scalar(maybe):
     """Test to see value is a string, an int, or some other scalar type"""

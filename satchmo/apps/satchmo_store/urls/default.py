@@ -1,7 +1,15 @@
 from django.conf import settings
-from django.conf.urls.defaults import patterns, include
+from django.conf.urls.defaults import patterns, include, url
 from django.contrib import admin
 import logging
+import re
+
+try:
+    import django.contrib.staticfiles
+    view = 'django.contrib.staticfiles.views.serve'
+except ImportError:
+    view = 'django.views.static.serve'   # for Django 1.2
+
 log = logging.getLogger('satchmo_store.urls')
 
 # discover all admin modules - if you override this for your
@@ -19,16 +27,16 @@ if urlpatterns:
 else:
     urlpatterns = adminpatterns
 
-#The following is used to serve up local media files like images
-if getattr(settings, 'LOCAL_DEV', False):
-    log.debug("Adding local serving of static files at: %s", settings.MEDIA_ROOT)
-    baseurlregex = r'^static/(?P<path>.*)$'
+#The following is used to serve up local media files like product images
+prefix = settings.MEDIA_URL
+if getattr(settings, 'LOCAL_DEV', False) and prefix and not '://' in prefix:
+    log.debug("Adding local serving of media files '%s' at: %s", prefix, \
+            settings.MEDIA_ROOT)
     urlpatterns += patterns('',
-        (baseurlregex, 'django.views.static.serve',
+        # usually r'^media/(?P<path>.*)$'
+        url(r'^%s(?P<path>.*)$' % re.escape(prefix.lstrip('/')), view,
         {'document_root':  settings.MEDIA_ROOT}),
-
-        (r'^site_media/(.*)$', 'django.views.static.serve',
-        {'document_root': settings.MEDIA_ROOT}),
     )
 
-
+# Removed prefix '^site_media/' because it is very old, unused, duplicated,
+# undocumented and a replacement is easy.
