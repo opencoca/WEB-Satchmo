@@ -1,0 +1,25 @@
+Satchmo Development Branch
+==========================
+
+These are the notes for the development version of Satchmo.
+
+
+New Features
+------------
+
+Translations
+------------
+
+
+Bug Fixes
+---------
+
+Performance Improvements
+------------------------
+
+Additional Packages
+-------------------
+
+
+Migration Notes
+---------------
