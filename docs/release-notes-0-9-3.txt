@@ -13,13 +13,13 @@ Translations
 
 Bug Fixes
 ---------
+ * Make variation manager more robust so that you can't delete an order when deleting the variation.
 
 Performance Improvements
 ------------------------
 
 Additional Packages
 -------------------
-
 
 Migration Notes
 ---------------

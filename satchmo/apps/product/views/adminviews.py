@@ -1,9 +1,11 @@
 from django.contrib.auth.decorators import user_passes_test
+from django.contrib import messages
 from django.core import urlresolvers
 from django.http import HttpResponseRedirect
 from django.shortcuts import render_to_response
 from django.template import RequestContext
 from django.utils.translation import ugettext as _
+from django.db import IntegrityError
 from product.forms import VariationManagerForm, InventoryForm, ProductExportForm, ProductImportForm
 from product.models import Product
 from product.modules.configurable.models import ConfigurableProduct
@@ -128,7 +130,10 @@ def variation_manager(request, product_id = ""):
         form = VariationManagerForm(new_data, product=product)
         if form.is_valid():
             log.debug("Saving form")
-            form.save(request)
+            try:
+                form.save(request)
+            except IntegrityError:
+                messages.error(request, _('The product you are attempting to remove is linked to an order and can not be removed.'))
             # rebuild the form
             form = VariationManagerForm(product=product)
         else:
