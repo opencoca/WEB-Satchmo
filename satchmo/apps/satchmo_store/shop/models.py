@@ -1137,7 +1137,7 @@ class OrderItem(models.Model):
     A line item on an order.
     """
     order = models.ForeignKey(Order, verbose_name=_("Order"))
-    product = models.ForeignKey(Product, verbose_name=_("Product"))
+    product = models.ForeignKey(Product, verbose_name=_("Product"), on_delete=models.PROTECT)
     quantity = models.DecimalField(_("Quantity"),  max_digits=18,  decimal_places=6)
     unit_price = CurrencyField(_("Unit price"),
         max_digits=18, decimal_places=10)
