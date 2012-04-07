@@ -23,8 +23,7 @@ def product_ratings(context):
     """
     Display the ratings for a specific product.
     """
-    shop = context['shop']
-    rendered = render_to_string('productratings/_product_ratings.html', context)
+    rendered = render_to_string('productratings/_product_ratings.html', context_instance=context)
     return { 'rendered_product_ratings': rendered }
 
 register.inclusion_tag('productratings/_render_product_ratings.html', takes_context=True)(product_ratings)
