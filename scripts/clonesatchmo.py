@@ -148,12 +148,12 @@ if __name__ == '__main__':
     if errors:
         for error in errors:
             print error
-        exit()
+        sys.exit()
     print "Creating the Satchmo Application"
     result, msg = create_satchmo_site(opts.site_name, opts.skeleton_dir)
     if not result:
         print msg
-        exit()
+        sys.exit()
     print "Customizing the files"
     customize_files(opts.site_name, opts.local_site_name)
     print "Performing initial data synching"
@@ -162,6 +162,6 @@ if __name__ == '__main__':
         print "Store setup had the following setup errors:"
         for error in errors:
             print "- %s" % error
-        exit()
+        sys.exit()
     print "Store installation complete."
     print "You may run the server by typying: \n cd %s \n python manage.py runserver" % opts.site_name

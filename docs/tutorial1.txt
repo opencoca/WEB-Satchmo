@@ -28,11 +28,8 @@ Steps
 Setup product types
 +++++++++++++++++++
 
-Ensure the you have ``ConfigurableProducts`` and ``ProductVariations`` installed.
-Go to /settings and verify both values are highlighted in ``Product Model Options``:
-
-.. image:: /images/admin-product-settings.png
-
+Verify that the necessary module ``product.modules.configurable`` is enabled
+in ``INSTALLED_APPS`` which is satisfied by default.
 
 Create the Product
 ++++++++++++++++++

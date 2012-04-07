@@ -81,7 +81,7 @@ class Command(NoArgsCommand):
 
         verbose_check_install('TRML2PDF', 'trml2pdf', '1.0', verbose_name='Tiny RML2PDF')
 
-        verbose_check_install('django_registration', 'registration', '0.7')
+        verbose_check_install('django_registration', 'registration', '0.7.1', 'eedf14249b89')
 
         verbose_check_install('', 'yaml', verbose_name='YAML')
 

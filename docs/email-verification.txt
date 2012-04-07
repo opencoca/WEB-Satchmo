@@ -23,5 +23,5 @@ like to, you can configure Satchmo to use django-registration.
     - Account Verification -> Email
     - Days to verify Account -> Your integer value here
 
-.. _django-registration: http://code.google.com/p/django-registration/
+.. _django-registration: https://bitbucket.org/hynekcer/django-registration/
 

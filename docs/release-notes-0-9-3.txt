@@ -1,0 +1,50 @@
+Satchmo Development Branch
+==========================
+
+These are the notes for the development version of Satchmo.
+
+
+New Features
+------------
+ * upgraded to use the latest Sorl Thumbnail code. Please review the migration notes.
+
+Translations
+------------
+
+
+Bug Fixes
+---------
+ * Make variation manager more robust so that you can't delete an order when deleting the variation.
+
+Performance Improvements
+------------------------
+
+Additional Packages
+-------------------
+
+Migration Notes
+---------------
+
+Sorl Thumbnail
+++++++++++++++
+In `rev 2449 <http://bitbucket.org/chris1610/satchmo/changeset/9fb522d26404>`_ Satchmo is updated to use the latest Sorl Thumbnail code.
+
+The primary change is that all custom templates that reference images, will need to be changed to support Sorl's updated syntax. 
+A typical example of an old template tag looks like this::
+
+    {% thumbnail pic.picture 280x280 as image %}
+    <img src="{{ image }}" width="{{ image.width }}" height="{{ image.height }}" />
+    
+Templates need to be updated to support the endthumbnail tag::
+
+    {% thumbnail pic.picture "280x280" as image %}
+    <img src="{{ image.url }}" width="{{ image.width }}" height="{{ image.height }}" />
+    {% endthumbnail %}
+
+Also, after upgrading to the latest Sorl Thumbnail code, you must remember to do a syncdb to create Sorl's cache table.
+
+This upgrade allows Satchmo to utilize all the latest features in Sorl. You are encouraged to read `Sorl's docs <http://thumbnail.sorl.net/index.html>`_ in order to determine 
+which ones you'd like to include in your store.
+
+
+

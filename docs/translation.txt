@@ -116,7 +116,7 @@ After you have created a product, you can use the Product Translation section to
 .. _ISO 639-1: http://en.wikipedia.org/wiki/List_of_ISO_639-1_codes
 .. _ISO 3166-1: http://www.iso.org/iso/country_codes/iso_3166_code_lists/english_country_names_and_code_elements.htm
 .. _Django: http://www.djangoproject.com/
-.. _Django Registration: http://code.google.com/p/django-registration/
+.. _Django Registration: https://bitbucket.org/ubernostrum/django-registration/wiki/Home
 .. _poedit: http://www.poedit.net/
 .. _kbabel: http://kbabel.kde.org/
 .. _gtranslator: http://gtranslator.sourceforge.net/

@@ -1,4 +1,4 @@
-{% load i18n satchmo_currency satchmo_discounts satchmo_order normalize_decimal %}
+{% load i18n satchmo_currency satchmo_discounts satchmo_order normalize_decimal satchmo_checkout %}
 <table style="margin-bottom:20px;">
 	<tr><th style="text-align:left;">Order #:</th><td>{{ order.id }}</td></tr>
 </table>
@@ -91,24 +91,16 @@
 		<th style="text-align:right;border-top:2px dotted #ccc;">{% trans "Total:" %}</th>
 		<td style="text-align:right;border-top:2px dotted #ccc;font-weight:bold;" >{{order.total|currency}}</td>
 	</tr>
-	<tr>
-		<td></td>
-		<td>Payment method(s):</td>
-		<td>{{ order|order_payment_methods|join:", " }}</td>
-		<td></td>
-		<td></td>
-	</tr>
-	<tr>
+    <tr>
 		<td></td>
 		<td colspan="2">
-		{% trans "Payment: " %}
-		{% with order.credit_card.credit_type as credit_card_type %}
-		{% with order.credit_card.display_cc as credit_card_number %}
-		{% with order.total|currency as order_total %}
-		{% blocktrans %}{{ credit_card_type }} card ending in {{ credit_card_number }} will be charged {{ order_total }}.{% endblocktrans %}
-		{% endwith %}
-		{% endwith %}
-		{% endwith %}
+        {% for payment in order.payments_completed %}
+            {% if payment.credit_card %}
+                {% trans "Your" %}  {{payment.credit_card.get_credit_type_display}} {% trans "ending in" %} {{payment.credit_card.display_cc}} {% trans "will be charged" %} {{payment.amount|currency}}<br/>
+            {% else %}
+                {{ payment.get_payment_display }} {% trans "will be charged" %} {{ payment.amount|currency }} <br/>
+            {% endif %}
+        {% endfor %}
 		</td>
 		<td></td>
 		<td></td>

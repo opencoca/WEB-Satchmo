@@ -32,8 +32,8 @@ def order_variable(order, args):
 
     """
     args, kwargs = get_filter_args(args)
-    if not len(args == 1):
-        raise template.TemplateSyntaxError("%r filter expected variable, got: %s" % (args[0], args))
+    if len(args) != 1:
+        raise template.TemplateSyntaxError("%r filter expected only a variable, got: %s" % (args[0], args))
 
     return order.get_variable(args[0])
 

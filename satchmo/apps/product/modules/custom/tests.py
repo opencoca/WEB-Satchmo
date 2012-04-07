@@ -73,7 +73,7 @@ class ShopTest(TestCase):
             'credit_type': 'Visa',
             'credit_number': '4485079141095836',
             'month_expires': '1',
-            'year_expires': '2012',
+            'year_expires': '2015',
             'ccv': '552',
             'shipping': 'FlatRate'}
         response = self.client.post(url('DUMMY_satchmo_checkout-step2'), data)
