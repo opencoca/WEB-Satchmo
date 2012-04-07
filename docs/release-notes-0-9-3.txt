@@ -1,0 +1,25 @@
+Satchmo Development Branch
+==========================
+
+These are the notes for the development version of Satchmo.
+
+
+New Features
+------------
+
+Translations
+------------
+
+
+Bug Fixes
+---------
+ * Make variation manager more robust so that you can't delete an order when deleting the variation.
+
+Performance Improvements
+------------------------
+
+Additional Packages
+-------------------
+
+Migration Notes
+---------------

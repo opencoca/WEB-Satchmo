@@ -520,9 +520,9 @@ class VariationManagerForm(forms.Form):
     def _delete_variation(self, opts, request):
         variation = self.product.configurableproduct.get_product_from_options(opts)
         if variation:
+            variation.delete()
             log.info("Deleting variation for [%s] %s", self.product.slug, opts)
             messages.add_message(request, messages.INFO, 'Deleted %s' % variation)
-            variation.delete()
 
 def _get_optiondict():
     site = Site.objects.get_current()
