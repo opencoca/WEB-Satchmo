@@ -190,10 +190,12 @@ class PaymentMethodForm(ProxyContactForm):
                 order=order,
                 contact=self._contact
                 )
+        if self.fields['paymentmethod'].initial == None:
+            self.fields['paymentmethod'].initial = payment_choices[0][0]
         if len(payment_choices) == 1:
-            self.fields['paymentmethod'].widget = forms.HiddenInput(attrs={'value' : payment_choices[0][0]})
+            self.fields['paymentmethod'].widget = forms.HiddenInput()
         else:
-            self.fields['paymentmethod'].widget = forms.RadioSelect(attrs={'value' : payment_choices[0][0]})
+            self.fields['paymentmethod'].widget = forms.RadioSelect()
         self.fields['paymentmethod'].choices = payment_choices
 
     def clean(self):

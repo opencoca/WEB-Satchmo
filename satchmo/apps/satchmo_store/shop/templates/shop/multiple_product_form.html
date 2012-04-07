@@ -22,11 +22,13 @@
 			<th>{% trans "Price" %}</th>
 			<th>{% trans "Qty" %}</th>
 		</tr>
-		{% for field in form %}{% with field.field.product as product %}
-		{% thumbnail product.main_image.picture 84x84 as image %}
+		{% for field in form %}
+		{% with field.field.product as product %}
 		<tr {% if forloop.first %} class="first"{% else %}{% if forloop.last %} class="last"{% endif %}{% endif %}>
 			<td>
-				<img src="{{ image }}" width="{{ image.width }}" height="{{ image.height }}" alt="{{ product.short_description }}"/>
+			    {% thumbnail product.main_image.picture "84x84" as image %}
+				<img src="{{ image.url }}" width="{{ image.width }}" height="{{ image.height }}" alt="{{ product.short_description }}"/>
+				{% endthumbnail %}
 			</td>
 			<td class="productDetail">
 				<h3>{{ product.name }}</h3>
@@ -46,7 +48,8 @@
 			<td>&nbsp;</td>
 			<td colspan="3" class="error">{{ field.errors|join:"," }}</td>
 		</tr>{% endif %}
-		{% endwith %}{% endfor %}
+		{% endwith %}
+		{% endfor %}
 		<tr>
 			<td colspan="3">&nbsp;</td>
 			<td><input type="submit" value='{% trans "Add to Cart" %}' /></td>

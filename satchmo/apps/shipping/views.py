@@ -38,6 +38,7 @@ def displayDoc(request, id, doc):
                 'iconURI' : icon_uri,
                 'shopDetails' : shopDetails,
                 'order' : order,
+                'default_view_tax': config_value('TAX','DEFAULT_VIEW_TAX')
                 })
     pdf = trml2pdf.parseString(smart_str(t.render(c)))
     response.write(pdf)

@@ -1,5 +1,5 @@
 # Django settings for satchmo project.
-# This is a recommended base setting for further customization
+# This is a recommended base setting for further customization, default for clonesatchmo.py
 import os
 
 DIRNAME = os.path.dirname(__file__)

@@ -6,6 +6,7 @@ Django instance to use Satchmo.  The `Django installation guide`_ will step you
 through the process.
 
 You must use Django 1.2.3 or greater in order to use the latest CSRF features.
+Series 1.3.x is currently recommended.
 
 Satchmo requires Python 2.4 or later and a database supported by Django.
 
@@ -20,10 +21,10 @@ features in Satchmo.
 - Satchmo's thumbnail capability is very robust and utilizes the following packages:
 
   - `Python Imaging Library`_
-  - Sorl Thumbnails
+  - Sorl Thumbnail
   
   .. warning::
-    You must use Sorl Thumbnails version 3.2.5 with Satchmo.
+    You must use `Sorl Thumbnail version 3.2.5`_ with Satchmo.
 
 - In order to securely store sensitive information, you will need:
 
@@ -72,8 +73,8 @@ There are also a number of other Django packages (mentioned below) that you will
   - `Django Registration`_
 
   .. warning::
-    You must use Django registration 0.7 with Satchmo. When 0.8 comes out, we will
-    migrate to the new version.
+    You must use our `Django registration 0.7.1`_ with Satchmo. When 0.8 comes out, we will
+    migrate to the original new version.
 
 A valid Django cache backend (file, memcached or DB) is required for the config settings.
 
@@ -119,6 +120,7 @@ Detailed steps for installing these dependencies is included in the :doc:`new_in
 .. _Authorize.net: http://www.authorize.net/
 .. _download link: http://www.satchmoproject.com/snapshots/trml2pdf-1.2.tar.gz
 .. _Django Registration: http://bitbucket.org/ubernostrum/django-registration/wiki/Home
+.. _`Django registration 0.7.1`: https://bitbucket.org/hynekcer/django-registration
 .. _snapshot: http://www.satchmoproject.com/snapshots/
 .. _`Django Threaded Multihost`: http://bitbucket.org/bkroeze/django-threaded-multihost
 .. _`Django App Plugins`: http://bitbucket.org/bkroeze/django-caching-app-plugins/
@@ -128,3 +130,4 @@ Detailed steps for installing these dependencies is included in the :doc:`new_in
 .. _Django Livesettings: http://bitbucket.org/bkroeze/django-livesettings
 .. _Django Keyedcache: http://bitbucket.org/bkroeze/django-keyedcache
 .. _Akismet: http://www.voidspace.org.uk/python/akismet_python.html
+.. _`Sorl Thumbnail version 3.2.5`: http://pypi.python.org/packages/source/s/sorl-thumbnail/sorl-thumbnail-3.2.5.tar.gz

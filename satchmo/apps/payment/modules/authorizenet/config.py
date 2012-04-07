@@ -89,7 +89,7 @@ test mode turned on.
         'CAPTURE',
         description=_('Capture Payment immediately?'),
         default=True,
-        help_text=_('IMPORTANT: If false, a capture attempt will be made when the order is marked as shipped."')),
+        help_text=_('IMPORTANT: If false, a capture attempt will be made when the order is marked as shipped.')),
 
     BooleanValue(PAYMENT_GROUP,
         'EXTRA_LOGGING',
