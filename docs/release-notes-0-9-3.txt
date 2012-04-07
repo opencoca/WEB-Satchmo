@@ -6,7 +6,8 @@ These are the notes for the development version of Satchmo.
 
 New Features
 ------------
- * upgraded to use the latest Sorl Thumbnail code. Please review the migration notes.
+ * upgraded to use the latest Sorl Thumbnail code. Please review the migration notes
+ * Added Paypal Payflowpro payment module
 
 Translations
 ------------
