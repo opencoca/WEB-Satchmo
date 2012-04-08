@@ -23,8 +23,8 @@ features in Satchmo.
   - `Python Imaging Library`_
   - Sorl Thumbnail
   
-  .. warning::
-    You must use `Sorl Thumbnail version 3.2.5`_ with Satchmo.
+    .. versionadded:: 0.9.3 - Use the latest version of Sorl Thumbnail
+    
 
 - In order to securely store sensitive information, you will need:
 
