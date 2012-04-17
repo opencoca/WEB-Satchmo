@@ -41,6 +41,7 @@ def settings(request):
         'storewide_sale': sale
     }
 
+    # the signal can by used to dynamically customize context variables
     satchmo_context.send(shop_config, context=ctx)
 
     return ctx
