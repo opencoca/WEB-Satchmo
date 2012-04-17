@@ -557,19 +557,21 @@ Variables provided by Satchmo's context processor
 Here are the variables provided in the context by Satchmo's context processor,
 satchmo_store.shop.context_processor.settings.
 
-  :shop_base: the value SHOP_BASE of in SATCHMO_SETTINGS in your
-              local_settings.py
-  :shop: the current satchmo_store.shop.models.Config in use
+  :shop_base: The base URL from SHOP_BASE in SATCHMO_SETTINGS
+  :shop: an object satchmo_store.shop.models.Config representing the
+    current store configuration
   :shop_name: the *store_name* value from the config
-  :media_url: .. TODO
+  :media_url: The current media url, taking into account SSL
+  :STATIC_URL: The current static url, taking into account SSL
   :cart_count: number of items in the cart
   :cart: user's current cart; an instance of satchmo_store.shop.models.Cart
   :categories: all categories in the site
-  :is_secure: .. TODO
-  :request: .. TODO
+  :is_secure: A boolean representing weather or not SSL is enabled
+  :request: The HttpRequest object passed into the context processor
   :login_url: the LOGIN_URL setting in your settings.py
   :logout_url: the LOGOUT_URL setting in your settings.py
-  :sale: .. TODO
+  :storewide_sale: An instance of product.models.Discount if there is a
+    global sale, or None
 
 Common variables
 ----------------

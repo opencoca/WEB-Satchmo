@@ -215,6 +215,7 @@ satchmo_cart_details_query=django.dispatch.Signal()
 #:     current store configuration
 #:   :shop_name: The shop name
 #:   :media_url: The current media url, taking into account SSL
+#:   :STATIC_URL: The current static url, taking into account SSL
 #:   :cart_count: The number of items in the cart
 #:   :cart: An instance of ``satchmo_store.shop.models.Cart`` representing the
 #:     current cart
@@ -224,8 +225,8 @@ satchmo_cart_details_query=django.dispatch.Signal()
 #:   :request: The ``HttpRequest`` object passed into the context processor
 #:   :login_url: The login url defined in ``settings.LOGIN_URL``
 #:   :logout_url: The logout url defined in ``settings.LOGOUT_URL``
-#:   :sale: An instance of ``product.models.Discount`` if there is a current
-#:     sale, or ``None``
+#:   :storewide_sale: An instance of ``product.models.Discount`` if there is a
+#:     current sale, or ``None``
 satchmo_context = django.dispatch.Signal()
 
 #: Sent after each item from the cart is copied into an order.
