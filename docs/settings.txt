@@ -156,12 +156,7 @@ Configure the rest of the required files
             (r'test/', include('simple.localsite.urls'))
         )
 
-
-3. Copy over the static directory::
-
-        python manage.py satchmo_copy_static
-
-4. Ensure that you have a template directory setup. You only need to place templates in the directory if you are
+3. Ensure that you have a template directory setup. You only need to place templates in the directory if you are
 overriding existing templates.
 
 After you have installed everything, you should have a directory structure that looks similar to this::

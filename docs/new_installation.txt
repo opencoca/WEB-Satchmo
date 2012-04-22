@@ -11,7 +11,7 @@ This guide assumes you are working on a unix variant and that you are installing
 you have write access to. In the below example, we use :file:`/home/user/src`. You are expected to modify the path to fit your needs.
 
 .. warning::
-   You must have Django 1.3.1 properly installed.
+   You must have Django 1.3.1 or higher properly installed.
 
 A Quick Note About Installing Dependencies
 ------------------------------------------
@@ -26,7 +26,7 @@ install them by:
 All of these will work fine with Satchmo, but in the interest of keeping this as
 straightforward as possible, we show how to install the packages with either:
 
-  - :command:`easy_install`, or
+  - :command:`pip`, or
   - :command:`python setup.py install` on a source code checkout (with mercurial)
 
 .. note::
@@ -44,16 +44,9 @@ Installing Dependencies
 
 #. Install required dependencies (this may vary based on your OS of choice)::
 
-        easy_install pycrypto
-        easy_install http://www.satchmoproject.com/snapshots/trml2pdf-1.2.tar.gz
-        easy_install PyYAML
-
-   .. note::
-      If you have the old Python 2.4 installed, you should use also the old version
-      of python-yaml provided by your distribution, not the latest PyYAML from pipy.
-      If you have Python 2.4 installed, you will need to install elementtree also::
-
-        easy_install elementtree
+        pip install pycrypto
+        pip install http://www.satchmoproject.com/snapshots/trml2pdf-1.2.tar.gz
+        pip install pyyaml
 
 #. Install Python Imaging Library. There are multiple options for installing
    this application; please use one of the options below:
@@ -66,53 +59,29 @@ Installing Dependencies
 
 #. Install Reportlab based on the description for your OS `here <http://www.reportlab.com/software/opensource/rl-toolkit/download/>`_
 
-#. Install django-threaded-multihost:
+#. Install django-threaded-multihost::
 
-   - Check out from source::
+        pip install django-threaded-multihost
 
-       hg clone http://bitbucket.org/bkroeze/django-threaded-multihost/
-       cd /path/to/django-threaded-multihost
-       python setup.py install
+#. Install django-app-plugins::
 
-#. Install django-app-plugins:
+        pip install django-app-plugins
 
-   - Check out the satchmo-enhanced version::
+#. Install sorl-thumbnail::
 
-       hg clone http://bitbucket.org/bkroeze/django-caching-app-plugins/
-       cd /path/to/django-caching-app-plugins
-       python setup.py install
+        pip install sorl-thumbnail
 
-#. Install sorl-thumbnail:
+#. Install signals-ahoy::
 
-   - Using pip::
-   
-       pip install sorl-thumbnail
+        pip install django-signals-ahoy
 
-#. Install signals-ahoy:
+#. Install livesettings::
 
-   - Check out from source::
+        pip install django-livesettings
 
-       hg clone http://bitbucket.org/bkroeze/django-signals-ahoy/
-       cd /path/to/django-signals-ahoy
-       python setup.py install
+#. Install keyedcache::
 
-#. Install livesettings:
-
-   - Check out from source::
-
-       hg clone http://bitbucket.org/bkroeze/django-livesettings/
-       cd /path/to/djang-livesettings
-       python setup.py install
-
-   .. versionadded:: 0.9.1
-
-#. Install keyedcache:
-
-   - Check out from source::
-
-       hg clone http://bitbucket.org/bkroeze/django-keyedcache/
-       cd /path/to/django-keyedcache
-       python setup.py install
+        pip install django-keyedcache
 
    .. versionadded:: 0.9.1
 
@@ -122,12 +91,12 @@ Installing Dependencies
 
    You may choose to install these dependencies by running::
 
-     easy_install Sphinx
-     easy_install docutils
+        pip install sphinx
+        pip install docutils
 
 #. Satchmo also uses South for database migrations. You may also install it::
 
-     easy_install South
+        pip install South
 
    .. seealso::
 
@@ -138,8 +107,8 @@ Installing Dependencies
 
 #. If you use the Fedex shipping module, you will need to install 2 additional modules::
 
-     easy_install fedex
-     easy_install suds
+        pip install fedex
+        pip install suds
 
 #. Install django-registration:
 
