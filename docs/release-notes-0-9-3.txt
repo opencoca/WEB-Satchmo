@@ -8,6 +8,7 @@ New Features
 ------------
  * upgraded to use the latest Sorl Thumbnail code. Please review the migration notes
  * Added Paypal Payflowpro payment module
+ * Updated all templates to use `Django static files <https://docs.djangoproject.com/en/dev/howto/static-files/>`_
 
 Translations
 ------------
@@ -47,5 +48,14 @@ Also, after upgrading to the latest Sorl Thumbnail code, you must remember to do
 This upgrade allows Satchmo to utilize all the latest features in Sorl. You are encouraged to read `Sorl's docs <http://thumbnail.sorl.net/index.html>`_ in order to determine 
 which ones you'd like to include in your store.
 
+Django Static Files
++++++++++++++++++++
+In `rev 2476 <https://bitbucket.org/chris1610/satchmo/changeset/3848d39b63c0>`_ Satchmo is updated to use Django's static files. If you have made any changes to templates, you'll need to make sure
+to replace references top media_url with STATIC_URL. Here is an example of the original template::
 
-
+    <script src="{{media_url}}js/jquery.cookie.js" type="text/javascript"></script>
+    
+Here is the new template::
+    
+    <script src="{{ STATIC_URL }}js/jquery.cookie.js" type="text/javascript"></script>
+    
