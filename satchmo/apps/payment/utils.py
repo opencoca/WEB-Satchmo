@@ -1,8 +1,10 @@
 from decimal import Decimal
-from livesettings import config_get_group
+from livesettings import config_get_group, config_value
 from satchmo_store.shop.models import Order, OrderItem, OrderItemDetail, OrderCart
 from satchmo_store.shop.signals import satchmo_post_copy_item_to_order
 from shipping.utils import update_shipping
+from satchmo_store.mail import send_store_mail
+from django.utils.translation import ugettext as _
 import logging
 
 log = logging.getLogger('payment.utils')
@@ -153,3 +155,38 @@ def update_orderitems(new_order, cart, update=False):
                     )
 
     new_order.recalculate_total()
+
+def send_gift_certificate_by_email(gc):
+    """ Helper function to send email messages to gift certificate recipients
+    """
+    ctx = {
+        'message': gc.message,
+        'addressee': gc.recipient_email,
+        'code': gc.code,
+        'balance':gc.balance,
+        'purchased_by': gc.purchased_by
+        }
+    subject = _('Your Gift Certificate')
+
+    send_store_mail(
+        subject,
+        ctx,
+        template = 'shop/email/gift_certificate_recipient.txt',
+        template_html='shop/email/gift_certificate_recipient.html',
+        recipients_list=[gc.recipient_email,],
+        fail_silently=True,
+        )
+
+def gift_certificate_processor(order):
+    """ If an order has gift certificates, then we'll try to send emails to the recipients
+    """
+    from payment.modules.giftcertificate.models import GiftCertificate
+    email_sent = False
+    send_email = config_value('PAYMENT_GIFTCERTIFICATE','EMAIL_RECIPIENT')
+    if send_email:
+        gcs = GiftCertificate.objects.filter(order=order)
+        for gc in gcs:
+            if gc.recipient_email:
+                send_gift_certificate_by_email(gc)
+                email_sent = True
+    return email_sent

@@ -42,6 +42,12 @@ config_register_list(
         help_text=_("False if you want to be in test mode"),
         default=False),
 
+    BooleanValue(PAYMENT_GROUP,
+        'EMAIL_RECIPIENT',
+        description=_("Send email to recipients"),
+        help_text=_("If the purchaser includes an email address, should we send a notification to them?"),
+        default=True),
+
     StringValue(PAYMENT_GROUP,
         'URL_BASE',
         description=_('The url base used for constructing urlpatterns which will use this module'),
