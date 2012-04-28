@@ -9,6 +9,7 @@ New Features
  * upgraded to use the latest Sorl Thumbnail code. Please review the migration notes
  * Added Paypal Payflowpro payment module
  * Updated all templates to use `Django static files <https://docs.djangoproject.com/en/dev/howto/static-files/>`_
+ * Send email to gift certificate recipients
 
 Translations
 ------------
