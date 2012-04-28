@@ -4,6 +4,7 @@ from django.utils.translation import ugettext as _
 from django.views.decorators.cache import never_cache
 from satchmo_store.shop.models import Order
 from satchmo_utils.views import bad_or_missing
+from payment.utils import gift_certificate_processor
 
 def success(request):
     """
@@ -15,8 +16,14 @@ def success(request):
         return bad_or_missing(request, _('Your order has already been processed.'))
 
     del request.session['orderID']
+    # We check to see if there are any gift certificates in the order
+    gc_email_sent = False
+    gc_in_orderitems = len(filter(lambda x: 'GiftCertificateProduct' in x.product.get_subtypes(), order.orderitem_set.all()))
+    if gc_in_orderitems:
+        gc_email_sent = gift_certificate_processor(order)
     return render_to_response('shop/checkout/success.html',
-                              {'order': order},
+                              {'order': order,
+                              'gc_email_sent': gc_email_sent},
                               context_instance=RequestContext(request))
 success = never_cache(success)
 
