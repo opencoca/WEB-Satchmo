@@ -2,7 +2,7 @@ from django.core.cache import cache
 from django.contrib.sites.models import Site
 from django.template import Library, Node, Variable
 from django.template import TemplateSyntaxError, VariableDoesNotExist
-from product.models import Category
+from product.models import Category, CategoryAttribute
 from satchmo_utils.templatetags import get_filter_args
 from django.utils.translation import get_language
 
@@ -342,3 +342,14 @@ def all_products_for_category(parser, token):
 
     raise TemplateSyntaxError, "Invalid arguments for %r tag" \
           % tag_name
+
+@register.filter
+def attribute(category, attr_name):
+    """
+    usage: {{ category|attribute:"attr-name" }} prints the attribute named
+    `attr-name`'s value
+    """
+    try:
+        return category.categoryattribute_set.get(option__name=attr_name).value
+    except CategoryAttribute.DoesNotExist:
+        return ""
