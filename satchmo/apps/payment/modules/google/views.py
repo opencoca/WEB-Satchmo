@@ -4,6 +4,7 @@ from django.template import Context, RequestContext
 from django.template.loader import get_template
 from django.utils.translation import ugettext as _
 from django.views.decorators.cache import never_cache
+from django.views.decorators.csrf import csrf_exempt
 from livesettings import config_get_group, config_value
 from payment.config import gateway_live
 from payment.views import confirm, payship
@@ -91,6 +92,7 @@ def confirm_info(request):
     controller.confirm()
     return controller.response
 
+@csrf_exempt
 @never_cache
 def notification(request):
     """
