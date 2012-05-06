@@ -25,3 +25,4 @@ build
 .*.sw?
 *.egg
 .git
+.emacs.desktop*
