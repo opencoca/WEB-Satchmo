@@ -1,0 +1,56 @@
+<!DOCTYPE HTML PUBLIC "-//w3c//DTD HTML 4.0 Frameset//EN">
+<html>
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+    <style type="text/css">
+        p {margin:0px; font-size:12px;}
+        td {font-size:14px;}
+        p.returnto {font-size:14.0px}
+        p.sendto {font-size:17.0px}
+    </style>
+</head>
+<body>
+    <div id="tiny_data">
+        <table border='0' width='160'>
+            <tr>
+                <td width='19'>&nbsp;</td>
+                <td>
+                    <p style='returnto' class='returnto'>
+                        {{shopDetails.store_name}}
+                    </p>
+                    <p style='returnto' class='returnto'>
+                        {{shopDetails.street1}}
+                    </p>
+                    {% if shopDetails.street2 %}
+                    <p style='returnto' class='returnto'>
+                        {{shopDetails.street2}}
+                    </p>
+                    {% endif %}
+                    <p style='returnto' class='returnto'>
+                        {{shopDetails.city}}, {{shopDetails.state}} {{shopDetails.postal_code}}
+                    </p>
+                    {% ifnotequal shopDetails.country.iso2_code order.ship_country %}
+                    <p style='returnto' class='returnto'>
+                        {{ shopDetails.country.name }}
+                    </p>
+                    {% endifnotequal %}
+                </td>
+            </tr>
+        </table>
+        <br/><br/>
+        <table border='0' width='240'>
+            <tr>
+                <td width='99'>&nbsp;</td>
+                <td>
+                    <p style='sendto' class='sendto'><b>{{order.ship_addressee}}</b></p>
+                    <p style='sendto' class='sendto'>{{order.ship_street1}}</p>
+                    {% if order.ship_street2 %}<p style='sendto' class='sendto'>{{order.ship_street2}}</p>{% endif %}
+                    <p style='sendto' class='sendto'>{{order.ship_city}}, {{order.ship_state}} {{order.ship_postal_code}}</p>
+                    {% ifnotequal shopDetails.country.iso2_code order.ship_country %}<p style='sendto' class='sendto'>{{ order.ship_country_name }}</p>{% endifnotequal %}
+                </td>
+            </tr>
+        </table>
+        <br/><br/>
+    </div>
+</body>
+</html>

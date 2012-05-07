@@ -1,0 +1,128 @@
+<!DOCTYPE HTML PUBLIC "-//w3c//DTD HTML 4.0 Frameset//EN">
+{% load i18n satchmo_currency %}
+<html>
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+    <style type="text/css">
+        p {margin:0px; font-size:12px;}
+        td {font-size:14px;}
+        p.conditions {font-size:13.0px; text-align:justify}
+        p.name {font-size:17.0px}
+        p.payment {font-size:19.0px}
+    </style>
+</head>
+<body>
+<img src='{{ iconURI }}' width='80' height='72' />
+<div id="tiny_data">
+    <table border='0' cellpadding='0' cellspacing='0'>
+        <tr>
+            <td width='396'></td>
+            <td style='color:(0,0,0);font-size:10px' width='0'></td>
+            <td width='113' align='right' style='color:(0,0,0);font-size:10px'>{{ order.id }}</td>
+        </tr>
+    </table>
+    <table border='0' cellpadding='0' cellspacing='0'>
+        <tr>
+            <td width='396'></td>
+            <td style='color:(0,0,0);font-size:10px' width='0'></td>
+            <td width='113' align='right' style='color:(0,0,0);font-size:10px'></td>
+        </tr>
+    </table>
+    <table border='0' cellpadding='0' cellspacing='0'>
+        <tr>
+            <td width='212'></td>
+            <td style='color:(0,0,0);font-size:14px' width='0'></td>
+            <td width='170'></td>
+            <td style='color:(0,0,0);font-size:14px' width='0'></td>
+        </tr>
+    </table>
+    <table border='0' cellpadding='0' cellspacing='0'>
+        <tr>
+            <td width='28'></td>
+            <td style='color:(0,0,0);font-size:12px' width='0'>{{shopDetails.street1}}</td>
+        </tr>
+    </table>
+    <table border='0' cellpadding='0' cellspacing='0'>
+        <tr>
+            <td width='28'></td>
+            <td style='color:(0,0,0);font-size:12px' width='0'>{{shopDetails.city}}, {{shopDetails.state}} {{shopDetails.postal_code}}</td>
+        </tr>
+    </table>
+    <table border='0' cellpadding='0' cellspacing='0'>
+        <tr>
+            <td width='28'></td>
+            <td style='color:(0,0,0);font-size:12px' width='0'>{{shopDetails.phone}}</td>
+        </tr>
+    </table>
+    <table border='0' cellpadding='0' cellspacing='0'>
+        <tr>
+            <td width='28'></td>
+            <td style='color:(0,0,0);font-size:12px' width='0'>{{shopDetails.store_email}}</td>
+        </tr>
+    </table>
+    <table border='0' cellpadding='0' cellspacing='0'>
+        <tr>
+            <td width='28'></td>
+            <td style='color:(0,0,0);font-size:12px' width='0'>{{shopDetails.store_email}}</td>
+        </tr>
+    </table>
+    <table border='0' width='509'>
+        <tr>
+            <td width='368'>&nbsp;</td>
+            <td>
+                <p style='name' class='name'>{{order.bill_addressee}}</p>
+	            <p>{{order.bill_street1}}</p>
+	            <p>{{ order.bill_street2}}</p>
+                <p>{{order.bill_city}}, {{order.bill_state}}</p>
+	            <p>{{order.bill_postal_code}}</p>
+                <p>{{order.bill_country_name}}</p>
+                <br/>
+                <p>{% trans 'Phone' %}: {{order.contact.primary_phone.phone}}</p>
+	            <p>{% trans 'Email' %}: {{order.contact.email}}</p>
+	        </td>
+	    </tr>
+	</table>
+	<br/><br/>
+	<table border='0' cellpadding='0' cellspacing='0'>
+	    <tr>
+	        <td width='623' align='center' style='color:(0,0,0);font-size:16px'></td>
+	    </tr>
+	</table>
+	<table border='0' width='566'>
+	    <tr>
+	        <td width='28'>&nbsp;</td>
+	        <td>
+	            <p style='name' class='name'>{{order.ship_addressee}}</p>
+	            <p>{{order.ship_street1}}</p>
+                <p>{{ order.ship_street2 }}</p>
+                <p>{{order.ship_city}}, {{order.ship_state}}</p>
+	            <p>{{order.ship_postal_code}}</p>
+                <p>{{ order.ship_country_name }}</p>
+                <br/>
+            </td>
+        </tr>
+    </table>
+    <br/><br/><br/>
+    <table colWidths='14cm, 3.5cm' style='products'>
+	    <tr>
+		    <td>{% trans 'Description' %}</td>
+            <td>{% trans 'Quantity' %}</td>
+	    </tr>
+        {% for item in order.orderitem_set.all %}
+        <tr>
+            <td><p>{{ item.product.name|fix_ampersands }}</p></td>
+            <td><p>{{ item.quantity }} </p></td>
+        </tr>
+        {% endfor %}
+    	<tr><p></p></tr>
+        <tr><p></p></tr>
+    	<tr>
+    	    <td width='396.850393701'/>
+    	    <td width='False'/>
+    	</tr>
+    </table>
+	<br/><p style='payment' class='payment'>{% trans 'Thank you for your business!' %}</p>
+
+</div>
+</body>
+</html>
