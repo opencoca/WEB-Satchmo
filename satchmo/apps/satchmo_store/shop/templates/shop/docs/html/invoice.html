@@ -1,0 +1,112 @@
+<!DOCTYPE HTML PUBLIC "-//w3c//DTD HTML 4.0 Frameset//EN">
+{% load i18n satchmo_currency %}
+<html>
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+    <style type="text/css">
+        p {margin:0px; font-size:12px;}
+        td {font-size:14px;}
+        p.conditions {font-size:13.0px; text-align:justify}
+        p.name {font-size:17.0px}
+        p.payment {font-size:19.0px}
+    </style>
+</head>
+<body>
+    <img src='{{ iconURI }}' width='80' height='72' />
+    <div id="tiny_data">
+        <table border='0' cellpadding='0' cellspacing='0'><tr><td width='396'></td><td style='color:(0,0,0);font-size:10px' width='0'></td><td width='113' align='right' style='color:(0,0,0);font-size:10px'>{{ order.id }}</td></tr></table><table border='0' cellpadding='0' cellspacing='0'><tr><td width='396'></td><td style='color:(0,0,0);font-size:10px' width='0'></td><td width='113' align='right' style='color:(0,0,0);font-size:10px'></td></tr></table><table border='0' cellpadding='0' cellspacing='0'><tr><td width='212'></td><td style='color:(0,0,0);font-size:14px' width='0'></td><td width='170'></td><td style='color:(0,0,0);font-size:14px' width='0'></td></tr></table><table border='0' cellpadding='0' cellspacing='0'><tr><td width='28'></td><td style='color:(0,0,0);font-size:12px' width='0'>{{shopDetails.street1}}</td></tr></table><table border='0' cellpadding='0' cellspacing='0'><tr><td width='28'></td><td style='color:(0,0,0);font-size:12px' width='0'>{{shopDetails.city}} {{shopDetails.state}}, {{shopDetails.postal_code}}</td></tr></table><table border='0' cellpadding='0' cellspacing='0'><tr><td width='28'></td><td style='color:(0,0,0);font-size:12px' width='0'>{{shopDetails.phone}}</td></tr></table><table border='0' cellpadding='0' cellspacing='0'><tr><td width='28'></td><td style='color:(0,0,0);font-size:12px' width='0'>{{shopDetails.store_email}}</td></tr></table><table border='0' cellpadding='0' cellspacing='0'><tr><td width='28'></td><td style='color:(0,0,0);font-size:12px' width='0'>{{shopDetails.store_email}}</td></tr></table><table border='0' width='509'><tr><td width='368'>&nbsp;</td><td><p style='name' class='name'>{{order.bill_addressee}}</p>
+    <p>{{order.bill_street1}}</p>
+    <p>{{order.bill_street2}}</p>
+    <p>{{order.bill_city}}, {{order.bill_state}}</p>
+    <p>{{order.bill_postal_code}}</p>
+    <br/><p>{% trans 'Phone' %}: {{order.contact.primary_phone.phone}}</p>
+    <p>{% trans 'Email' %}: {{order.contact.email}}</p>
+
+    </td></tr></table><br/><br/><table border='0' cellpadding='0' cellspacing='0'><tr><td width='623' align='center' style='color:(0,0,0);font-size:16px'></td></tr></table><table border='0' width='566'><tr><td width='28'>&nbsp;</td><td><p style='name' class='name'>{{order.ship_addressee}}</p>
+    <p>{{order.ship_street1}}</p>
+    <p>{{order.ship_street2}}</p>
+    <p>{{order.ship_city}}, {{order.ship_state}}</p>
+    <p>{{order.ship_postal_code}}</p>
+    <br/></td></tr></table><br/><br/><br/><table colWidths='7cm, 3.0cm, 3.0cm, 3.0cm, 3.0cm' style='products'>
+    <tr>
+        <td>{% trans 'Description' %}</td>
+        <td>{% trans 'Quantity' %}</td>
+        <td>{% trans 'Unit Price' %}</td>
+	<td>{% trans 'Discount' %}</td>
+        <td>{% trans 'Total' %}</td>
+    </tr>
+    {% for item in order.orderitem_set.all %}
+    <tr>
+        <td><p>{{ item.product.name|fix_ampersands }}</p></td>
+        <p>{{ item.quantity }} </p>
+        <p>{{ item.unit_price|currency }}</p>
+	<p>{{ item.discount|currency }}</p>
+        <p>{{ item.sub_total|currency }} </p>
+    </tr>
+    {% endfor %}
+    <tr><p></p></tr>
+    <tr><p></p></tr>
+    <tr><p></p></tr>
+    <tr><p></p></tr>
+    <tr><p></p></tr>
+    <tr><td width='198.42519685'/><td width='False'/><td width='False'/><td width='False'/><td width='False'/></tr></table>
+    <table colWidths='7cm, 3.0cm, 3.0cm, 3.0cm, 3.0cm' style='products2'>
+    <tr>
+        <p></p><p></p><p></p>
+        <td>{% trans 'Subtotal' %}:</td><p>{{order.sub_total|currency}}</p>
+    </tr>
+    {% if order.discount %}
+    <tr>
+	<p></p><p></p><p></p>
+	<td>{% trans 'Discount' %}:</td><p>- {{order.item_discount|currency}}</p>
+    </tr>
+    {% endif %}
+    <tr>
+        <p></p><p></p>
+        <p></p><p>{{order.shipping_method}} - {{order.shipping_description}}</p><p>{{order.shipping_cost|currency}}</p>
+    </tr>
+    {% if order.shipping_discount %}
+    <tr>
+        <p></p><p></p><p></p>
+        <td>{% trans 'Shipping Discount' %}</td><p>- {{ order.shipping_discount|currency }}</p>
+    </tr>
+    {% endif %}
+    <tr>
+        <p></p><p></p><p></p>
+        <td>{% trans 'Tax' %}:</td><p>{{order.tax|currency}}</p>
+    </tr><tr>
+        <p></p><p></p><p></p>
+        <td>{% trans 'Total' %}:</td><p>{{order.total|currency}}</p>
+    </tr>
+    <tr>
+	<p></p><p></p><p></p>
+	<td>{% trans 'Payments Made' %}</td><p>- {{ order.balance_paid|currency }}</p>
+    </tr>
+    <tr>
+	<p></p><p></p><p></p>
+        <td>{% trans 'Balance Due' %}</td><p>{{ order.balance|currency }}</p>
+    </tr>
+    <tr><td width='198.42519685'/><td width='False'/><td width='False'/><td width='False'/><td width='False'/></tr></table>
+    <br/><br/><p style='payment' class='payment'>
+            {% with order.total|currency as order_total %}
+            {% blocktrans %}Payment total {{order_total}} due to:{% endblocktrans %}
+            {% endwith %}
+        </p>
+        <br/><p style='payment' class='payment'>
+            {% trans 'Accounts Receivable' %}
+        </p><p style='payment' class='payment'>
+            {{shopDetails.street1}}
+        {% if shopDetails.street2 %}
+            </p><p style='payment' class='payment'>
+            {{shopDetails.street2}}
+        {% endif %}
+        </p><p style='payment' class='payment'>
+            {{shopDetails.city}} {{shopDetails.state}}, {{shopDetails.postal_code}}
+        </p>
+    <p style='payment' class='payment'>{% blocktrans with order.time_stamp|date:'F j, Y' as order_date %}{{ order_total }} was charged to your {{ credit_card_type }} card (x{{ credit_card_number }}) on {{ order_date }}.{% endblocktrans %}</p>
+        <p style='payment' class='payment'>{% blocktrans %}This invoice has been paid in full. Thank you for your business!{% endblocktrans %}</p>
+    
+</div>
+
+</body>
+</html>
