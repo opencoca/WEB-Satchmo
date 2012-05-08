@@ -1,6 +1,15 @@
  # pylint: disable=W0613,W0231
 import os
+import sys
 import logging
+import threading
+import subprocess
+try:
+    import trml2pdf
+    HAS_TRML = True
+except ImportError:
+    trml2pdf = object()
+    HAS_TRML = False
 from django.conf import settings
 from django.contrib.admin.views.decorators import staff_member_required
 from django.http import HttpResponse
@@ -45,31 +54,29 @@ class DocumentBase(object):
         )
 
 
-class RMLTemplateMixin(object):
-    """The RML template mixin.
+class FileTemplateMixin(object):
+    """The file template mixin.
 
-    Subclass from this mixin to load RML templates.
+    Subclass from this mixin to load file templates.
     """
 
     def get_template(self, request, context):
-        template_name = "%s.rml" % context['doc']
-        template_path = os.path.join('shop/docs/rml', template_name)
+        template_name = "%s.%s" % (context['doc'], self.template_ext)
+        template_path = os.path.join(self.template_dir, template_name)
         return loader.get_template(template_path)
 
 
-class HTMLTemplateMixin(object):
-    """The HTML template mixin.
-
-    Subclass from this mixin to load HTML templates.
+class BaseRenderer(object):
+    """The base class for rendering the document (usually in an intermediate
+    format).
     """
 
-    def get_template(self, request, context):
-        template_name = "%s.html" % context['doc']
-        template_path = os.path.join('shop/docs/html', template_name)
-        return loader.get_template(template_path)
+    def get_content(self, request, context):
+        template = self.get_template(request, context)
+        return template.render(RequestContext(request, context))
 
 
-class HTMLRenderMixin(object):
+class HTMLRenderMixin(BaseRenderer):
     """The HTML (normal page) template mixin.
 
     Subclass from this mixin if you want to render directly within the
@@ -77,23 +84,27 @@ class HTMLRenderMixin(object):
     """
 
     def render(self, request, context):
-        template = self.get_template(request, context)
-        return HttpResponse(template.render(RequestContext(request, context)))
+        return HttpResponse(self.get_content(request, context))
 
 
-class FileRenderMixin(object):
+class FileRenderMixin(BaseRenderer):
     """The file render mixin.
 
     Renders as a downloadable file (attachment). Subclass from this mixin if
     you are not rendering to a format understood by the browser natively.
     """
 
-    def render(self, request, context):
-        template = self.get_template(request, context)
-        filename = self.get_filename(request, context)
-        content = self.convert(
-            template.render(RequestContext(request, context))
+    def get_filename(self, request, context):
+        return '%s-%s-%d.%s' % (
+            context['shopDetails'].domain,
+            context['doc'],
+            context['order'].pk,
+            self.output_ext
         )
+
+    def render(self, request, context):
+        filename = self.get_filename(request, context)
+        content = self.convert(self.get_content(request, context))
         response = HttpResponse(mimetype=self.mimetype)
         if config_value('SHIPPING','DOWNLOAD_PDFS'):
             content_disposition = 'attachment; filename=%s' % filename
@@ -102,23 +113,26 @@ class FileRenderMixin(object):
         return response
 
 
-class HTMLDocument(DocumentBase, HTMLTemplateMixin, HTMLRenderMixin):
+class HTMLDocument(DocumentBase, FileTemplateMixin, HTMLRenderMixin):
     """The default document class, rendering every document as HTML
     """
+    template_ext = 'html'
+    template_dir = 'shop/docs/html'
 
 
-class TRMLDocument(DocumentBase, RMLTemplateMixin, FileRenderMixin):
+class TRMLDocument(DocumentBase, FileTemplateMixin, FileRenderMixin):
     """The RML PDF document generator.
 
     Available only if trml2pdf is installed.
     """
 
     mimetype = "application/pdf"
+    template_ext = 'rml'
+    template_dir = 'shop/docs/rml'
+    output_ext = 'pdf'
 
     def __init__(self):
-        try:
-            import trml2pdf
-        except ImportError:
+        if not HAS_TRML:
             raise ConverterError(
                 "'trml2pdf' must be installed on your system "
                 "for the TRMLDocument converter to work properly. "
@@ -126,20 +140,12 @@ class TRMLDocument(DocumentBase, RMLTemplateMixin, FileRenderMixin):
                 "that the 'trml2pdf' egg is within your PYTHONPATH, "
                 "and install it via 'pip install trml2pdf' otherwise."
             )
-        self._converter = (trml2pdf.parseString,)
-
-    def get_filename(self, request, context):
-        return '%s-%s-%d.pdf' % (
-            context['shopDetails'].domain,
-            context['doc'],
-            context['order'].pk
-        )
 
     def convert(self, data):
-        return self._converter[0](smart_str(data))
+        return trml2pdf.parseString(smart_str(data))
 
 
-class WKHTMLDocument(DocumentBase, HTMLTemplateMixin, FileRenderMixin):
+class WKHTMLDocument(DocumentBase, FileTemplateMixin, FileRenderMixin):
     """The "webkit to html" PDF generator.
 
     Available only if the static binary of
@@ -162,9 +168,11 @@ class WKHTMLDocument(DocumentBase, HTMLTemplateMixin, FileRenderMixin):
     """
 
     mimetype = "application/pdf"
+    template_ext = 'html'
+    template_dir = 'shop/docs/html'
+    output_ext = 'pdf'
 
     def __init__(self):
-        import sys
         satchmo_settings = getattr(settings, 'SATCHMO_SETTINGS', {})
         wkhtml2pdf_binaries = satchmo_settings.get(
             'WKHTML2PDF_BINARIES',
@@ -183,15 +191,7 @@ class WKHTMLDocument(DocumentBase, HTMLTemplateMixin, FileRenderMixin):
                 )
             )
 
-    def get_filename(self, request, context):
-        return '%s-%s-%d.pdf' % (
-            context['shopDetails'].domain,
-            context['doc'],
-            context['order'].pk
-        )
-
     def convert(self, data):
-        import subprocess
         logger = logging.getLogger('wkhtml2pdf')
         if isinstance(data, unicode):
             data = data.encode("utf-8")
@@ -211,22 +211,42 @@ class WKHTMLDocument(DocumentBase, HTMLTemplateMixin, FileRenderMixin):
         return stdout
 
 
-@staff_member_required
-@never_cache
-def displayDoc(request, id, doc):
-    """Tries to load the converted specified in the
+class ConverterFactory(object):
+    """A thread-safe document converter factory.
+
+    Tries to load the converted specified in the
     SATCHMO_SETTINGS['DOCUMENT_CONVERTER'] setting (as the full dotted name of
     the class).
 
     If this setting is absent, defaults to using HTMLDocument.
     """
-    Converter = getattr(settings, 'SATCHMO_SETTINGS', {}).get(
-        'DOCUMENT_CONVERTER', None)
-    if Converter is None:
-        Converter = HTMLDocument
-    else:
-        module_name, class_name = Converter.rsplit('.', 1)
-        module = import_module(module_name)
-        Converter = getattr(module, class_name)
-    converter = Converter()
+
+    def __init__(self):
+        self.Converter = None
+        self.lock = threading.Lock()
+
+    def __call__(self, *args, **kwargs):
+        if self.Converter is None:
+            self.lock.acquire()
+            classpath = getattr(settings, 'SATCHMO_SETTINGS', {}).get(
+                'DOCUMENT_CONVERTER', None)
+            if classpath is None:
+                self.Converter = HTMLDocument
+            else:
+                module_name, class_name = classpath.rsplit('.', 1)
+                module = import_module(module_name)
+                self.Converter = getattr(module, class_name)
+            self.lock.release()
+        return self.Converter(*args, **kwargs)
+
+
+converter_factory = ConverterFactory()
+
+
+@staff_member_required
+@never_cache
+def displayDoc(request, id, doc):
+    """Displays the document using the specified converter in 'settings.py'.
+    """
+    converter = converter_factory()
     return converter(request, id, doc)
