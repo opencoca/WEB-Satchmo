@@ -16,6 +16,7 @@ from django.utils.encoding import smart_str
 from django.utils.safestring import mark_safe
 from django.utils.text import truncate_words
 from django.utils.functional import update_wrapper
+from django.contrib.admin.templatetags.admin_static import static
 
 import operator
 
@@ -63,7 +64,7 @@ class ForeignKeySearchInput(forms.HiddenInput):
                 #lookup_%(name)s {
                     padding-right:16px;
                     background: url(
-                        %(admin_media_prefix)simg/admin/selector-search.gif
+                        %(admin_media_prefix)sselector-search.gif
                     ) no-repeat right;
                 }
                 #del_%(name)s {
@@ -72,7 +73,7 @@ class ForeignKeySearchInput(forms.HiddenInput):
             </style>
 <input type="text" id="lookup_%(name)s" value="%(label)s"/>
 <a href="#" id="del_%(name)s">
-<img src="%(admin_media_prefix)simg/admin/icon_deletelink.gif" />
+<img src="%(admin_media_prefix)sicon_deletelink.gif" />
 </a>
 <script type="text/javascript">
             var lookup = $('#lookup_%(name)s')
@@ -101,7 +102,7 @@ class ForeignKeySearchInput(forms.HiddenInput):
             </script>
         ''') % {
             'search_fields': ','.join(self.search_fields),
-            'admin_media_prefix': settings.ADMIN_MEDIA_PREFIX,
+            'admin_media_prefix': static('admin/img/'),
             'model_name': self.rel.to._meta.module_name,
             'app_label': self.rel.to._meta.app_label,
             'label': label,
