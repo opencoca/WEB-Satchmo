@@ -7,62 +7,63 @@ msgid ""
 msgstr ""
 "Project-Id-Version: django\n"
 "Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2012-05-16 20:13+0200\n"
+"PO-Revision-Date: 2012-05-17 12:39+0100\n"
+"Last-Translator: Simone Deponti <simone.deponti@abstract.it>\n"
 "Language-Team: italiano <nn@nn.it>\n"
+"Language: \n"
 "MIME-Version: 1.0\n"
-"Content-Type: text/plain; charset=utf-8\n"
-"Content-Transfer-Encoding: utf-8\n"
-"Plural-Forms: s\n"
-"Last-Translator: Andrea Innocenti <andyinno@gmail.com>\n"
-"PO-Revision-Date: 2010-05-12 15:19+0200\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Plural-Forms: nplurals=2; plural=n > 1\n"
+"X-Poedit-Language: Italian\n"
+"X-Poedit-Country: ITALY\n"
+"X-Poedit-Basepath: ../../../\n"
 
-#: admin.py:11 models.py:102
+#: admin.py:11
+#: models.py:112
 msgid "Tiered Price"
 msgstr "Prezzo a scalare per grossi volumi di vendita"
 
-#: admin.py:12 models.py:103
+#: admin.py:12
+#: models.py:113
 msgid "Tiered Prices"
 msgstr "Prezzi a scalare per grossi volumi di vendita"
 
-#: models.py:43
+#: models.py:42
 msgid "The user group that will receive the discount"
 msgstr "Il gruppo di utenti che riceverà lo sconto"
 
-#: models.py:44
+#: models.py:43
 msgid "Title"
 msgstr "Titolo"
 
-#: models.py:45
+#: models.py:44
 msgid "Discount Percent"
-msgstr "Percentuale di Sconto"
+msgstr "Percentuale di sconto"
 
-#: models.py:47
-msgid ""
-"This is the discount that will be applied to every product if no explicit "
-"Tiered Price exists for that product.  Leave as 0 if you don't want any "
-"automatic discount in that case."
-msgstr ""
-"Questo è lo sconto che verrà applicato ad ogni prodotto se non ne verrà "
-"esplicitato unoa scalare per il singolo prodotto.  Lascia il valore a 0 se "
-"non vuoi applicarenessuno sconto automatico."
+#: models.py:46
+msgid "This is the discount that will be applied to every product if no explicit Tiered Price exists for that product.  Leave as 0 if you don't want any automatic discount in that case."
+msgstr "Questo è lo sconto che verrà applicato ad ogni prodotto se non ne verrà esplicitato uno a scalare per il singolo prodotto. Lascia il valore a zero se non vuoi applicare nessuno sconto automatico."
 
-#: models.py:72
+#: models.py:81
 msgid "Price"
 msgstr "Prezzo"
 
-#: models.py:73
+#: models.py:82
 msgid "Discount Quantity"
 msgstr "Quantità per ottenere lo sconto"
 
-#: models.py:73
+#: models.py:82
 msgid "Use this price only for this quantity or higher"
-msgstr ""
-"Utilizza questo prezzo solo per quantità pari o superiori a quella impostata"
+msgstr "Utilizza questo prezzo solo per quantità pari o superiori a quella impostata"
 
-#: models.py:74
+#: models.py:83
 msgid "Expires"
 msgstr "Scade"
 
-#: models.py:150
+#: models.py:160
 #, python-format
 msgid "Tiered Pricing for %(tier)s"
 msgstr "Prezzo a scalare per %(tier)s"
+
