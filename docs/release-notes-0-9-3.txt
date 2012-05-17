@@ -10,6 +10,7 @@ New Features
  * Added Paypal Payflowpro payment module
  * Updated all templates to use `Django static files <https://docs.djangoproject.com/en/dev/howto/static-files/>`_
  * Send email to gift certificate recipients
+ * Rewritted PDF (document) generation, removed trml2pdf and Reportlab dependencies: please see :ref:`document_settings_trml2pdf` and the migration notes when upgrading
 
 Translations
 ------------
@@ -27,6 +28,29 @@ Additional Packages
 
 Migration Notes
 ---------------
+
+PDF generation
+++++++++++++++
+
+If you wish to maintain the ``trml2pdf`` PDF generation (recommended if you
+have customized templates) for invoices, packing slips and shipping labels,
+you must set the ``'DOCUMENT_CONVERTER'`` key
+within ``SATCHMO_SETTINGS`` to ``'shipping.views.TRMLDocument'``::
+
+    SATCHMO_SETTINGS = {
+        ...
+        'DOCUMENT_CONVERTER': 'shipping.views.TRMLDocument',
+        ...
+    }
+
+You should also move your templates, as the following template renames happened
+(here is indicated only the *template path*, from ``templates/`` onward):
+
+    * ``shop/pdf/invoice.rml`` → ``shop/docs/rml/invoice.rml``
+    * ``shop/pdf/packing-slip.rml`` → ``shop/docs/rml/packingslip.rml``
+    * ``shop/pdf/shipping-label.rml`` → ``shop/docs/rml/shippinglabel.rml``
+
+See :ref:`document_settings` for more details.
 
 Sorl Thumbnail
 ++++++++++++++

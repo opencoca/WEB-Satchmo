@@ -113,6 +113,12 @@ number of places you might want to configure.
 
     Whether or not SSL should be enabled for the checkout modules.
 
+  ``'DOCUMENT_CONVERTER'``
+
+    :default: ``'shipping.views.HTMLDocument'``
+
+    Which document generation system to use. See :ref:`documents_settings`.
+
 2. In addition to the Satchmo specific settings, there are some Django settings you will want to make sure are properly set:
 
     - Make sure that your ``DATABASES['default']['ENGINE']`` variable is also set correctly.
@@ -180,6 +186,138 @@ Satchmo recognises the following keys in ``L10N_SETTINGS``:
 
 The ``L10N_SETTINGS`` variable also allows you to control whether or not translation fields
 should be displayed in the admin. In the example above, they will be disabled. The default is ``True``
+
+.. index::
+   single: settings; PDF
+   single: settings; documents
+
+.. _documents_settings:
+
+Setting up document generation
+^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+
+.. versionchanged: 0.9.3
+
+Satchmo is able to generate a various range of *documents*
+that generally need to be printed on plain old paper
+or on an equivalent electronic format
+(such as :abbr:`PDF (Portable Document Format)`).
+
+Examples of these documents are invoices,
+packing slips and shipping labels
+(although the system can be adapted to much more than this).
+
+By default, Satchmo renders these documents as normal HTML pages,
+which have been slightly optimized for direct printing
+(i.e. from the browser).
+
+Should this not be enough for you,
+Satchmo also includes two (optional) ways
+to export said documents in :abbr:`PDF (Portable Document Format)`:
+one based on trml2pdf_ and the other based on wkhtml2pdf_.
+
+Which system to use is controlled by the ``'DOCUMENT_CONVERTER'`` key
+within the ``SATCHMO_SETTINGS`` dictionary,
+which should contain
+the full dotted path of the *document converter* to use.
+
+wkhtmltopdf
+"""""""""""
+
+wkhtmltopdf_ is a program that contains a statically compiled,
+headless WebKit rendering engine
+(which is the basis of succesful browsers
+such as Safari, Google Chrome,
+and the default browsers on the two most popular mobile platforms).
+
+Installing it is as simple as downloading and unzipping the release
+for the platform you are using.
+After doing that, keep note of the directory where you have unzipped
+the release, and then enable it in your settings file.
+
+To do the latter, set the ``'DOCUMENT_CONVERTER'`` key
+within ``SATCHMO_SETTINGS`` dictionary
+to ``'shipping.views.WKHTMLDocument'``.
+Then you must tell Satchmo where the wkhtmltopdf_ binary can be found,
+by adding a ``'WKHTML2PDF_BINARIES'`` key in the dictionary,
+whose value is another dictionary
+where the keys are the operating system categories
+as reported by ``sys.platform``
+and the values are the absolute paths to the corresponding wkhtmltopdf_
+binary.
+
+.. Note::
+   You are **not required** to fill in a key for each platform:
+   the key of the platform you are on is sufficient.
+
+The values for the keys can be obtained by looking at the documentation
+for the core module ``sys``,
+but here is a quick,
+non authoritative and incomplete list:
+
+    * ``linux2`` for Linux (``linux`` on Python 3.3 and above)
+    * ``darwin`` for Mac OS X
+    * ``win32`` for Windows
+
+Therefore, if you are on a Linux machine you will do::
+
+    SATCHMO_SETTINGS = {
+        ...
+        'DOCUMENT_CONVERTER': 'shipping.views.WKHTMLDocument',
+        'WKHTML2PDF_BINARIES': {
+            'linux2': '/path/to/wkhtmltopdf-i386'
+        },
+        ...
+    }
+
+While on Mac OS X you will do::
+
+    SATCHMO_SETTINGS = {
+        ...
+        'DOCUMENT_CONVERTER': 'shipping.views.WKHTMLDocument',
+        'WKHTML2PDF_BINARIES': {
+            'darwin': '/path/to/wkhtmltopdf'
+        },
+        ...
+    }
+
+.. _document_settings_trml2pdf:
+
+trml2pdf
+""""""""
+
+If you wish to use trml2pdf_, you must first install Reportlab
+(based on the description for your OS
+`here <http://www.reportlab.com/software/opensource/rl-toolkit/download/>`_)
+and then trml2pdf_ itself::
+
+    pip install http://www.satchmoproject.com/snapshots/trml2pdf-1.2.tar.gz
+
+Then you must set the ``'DOCUMENT_CONVERTER'`` key
+within ``SATCHMO_SETTINGS`` dictionary
+to ``'shipping.views.TRMLDocument'``.
+
+Customizing templates
+"""""""""""""""""""""
+
+If you wish to customize templates,
+keep in mind that they are located in ``shop/docs/html``
+within the ``shop`` application
+for HTML templates
+(used by the default HTML generator, and by the wkhtmltopdf_ one)
+and within ``shop/docs/rml``
+for the trml2pdf_ ones.
+
+Developing your own
+"""""""""""""""""""
+
+If you wish to develop your own *document converter*, take a look at
+``shipping.views`` and implement a class with the same methods as
+``HTMLDocument``.
+
+You will then be able to activate it by setting ``'DOCUMENT_CONVERTER'``
+to your class *full dotted name*
+(e.g. ``'my.module.converter.MyDocument``)
 
 .. Note::
     If you use a unicode character, you'll need to have an encoding at the top
@@ -383,3 +521,5 @@ states based on the selected country.
 
 .. _Authorize.net: http://www.authorize.net/
 .. _Mailman: http://www.gnu.org/software/mailman/
+.. _trml2pdf: http://pypi.python.org/pypi/trml2pdf/
+.. _wkhtmltopdf: http://code.google.com/p/wkhtmltopdf/
