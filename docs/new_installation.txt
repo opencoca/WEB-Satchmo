@@ -45,7 +45,6 @@ Installing Dependencies
 #. Install required dependencies (this may vary based on your OS of choice)::
 
         pip install pycrypto
-        pip install http://www.satchmoproject.com/snapshots/trml2pdf-1.2.tar.gz
         pip install pyyaml
 
 #. Install Python Imaging Library. There are multiple options for installing
@@ -56,8 +55,6 @@ Installing Dependencies
    - Use your distribution's package manager. For Ubuntu::
 
        sudo apt-get install python-imaging
-
-#. Install Reportlab based on the description for your OS `here <http://www.reportlab.com/software/opensource/rl-toolkit/download/>`_
 
 #. Install django-threaded-multihost::
 

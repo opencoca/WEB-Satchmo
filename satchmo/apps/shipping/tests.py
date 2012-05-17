@@ -1,4 +1,5 @@
 from decimal import Decimal
+from django.conf import settings
 from django.contrib.sites.models import Site
 from django.test import TestCase
 from product.models import Product
@@ -30,3 +31,12 @@ class ShippingBaseTest(TestCase):
         self.assert_(self.cart1.is_shippable)
         self.assertEqual(flat(self.cart1, None).cost(), Decimal("4.00"))
         self.assertEqual(per(self.cart1, None).cost(), Decimal("12.00"))
+
+
+class ConverterFactoryTest(TestCase):
+
+    def setUp(self):
+        pass
+
+    def tearDown(self):
+        pass
