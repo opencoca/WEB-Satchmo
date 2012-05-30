@@ -282,9 +282,12 @@ class ProductVariation(models.Model):
 
     objects = ProductVariationManager()
 
-    def _get_self_qty_price_list(self, qty=1):
-        return Price.objects.filter(product__id=self.product.id).exclude(expires__isnull=False, expires__lt=datetime.date.today()).filter(quantity__lte=qty)
-    
+    def _get_self_qty_price_list(self, qty=None):
+        prices = Price.objects.filter(product__id=self.product.id).exclude(expires__isnull=False, expires__lt=datetime.date.today())
+        if qty:
+            prices = prices.filter(quantity__lte=qty)
+        return prices
+        
     def _get_fullPrice(self):
         """ Get price based on parent ConfigurableProduct """
         # allow explicit setting of prices.
