@@ -194,7 +194,7 @@ def register_handle_form(request, redirect=None):
     if request.method == 'POST':
         form = RegistrationForm(request.POST)
         if form.is_valid():
-            contact = form.save(request)
+            contact = form.save(request, force_new=True)
 
             # look for explicit "next"
             next = request.POST.get('next', '')
