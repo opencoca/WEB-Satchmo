@@ -54,7 +54,7 @@ def highest_rated(count=0, site=None):
         cache_set(nce.key, value=pkstring)
     
     if pks:
-        pks = [pk for pk in pks if _int_or_long(pk)]
+        pks = [pk for pk in pks if isinstance(pk, (int, long))]
         productdict = Product.objects.in_bulk(pks)
         products = []
         for pk in pks:
@@ -72,14 +72,3 @@ def highest_rated(count=0, site=None):
         products = []
         
     return products
-        
-        
-def _int_or_long(v):
-    try:
-        v = int(v)
-    except ValueError:
-        try:
-            v = long(v)
-        except ValueError:
-            return False
-    return True
