@@ -4,10 +4,10 @@ http://www.satchmoproject.com/snapshots/trml2pdf-1.2.tar.gz
 PyYAML
 reportlab
 south
+sorl-thumbnail
 -e hg+https://bitbucket.org/bkroeze/django-threaded-multihost/#egg=django-threaded-multihost
 -e hg+https://bitbucket.org/bkroeze/django-caching-app-plugins/#egg=django-caching-app-plugins
 -e hg+https://bitbucket.org/bkroeze/django-signals-ahoy/#egg=django-signals-ahoy
 -e hg+https://bitbucket.org/bkroeze/django-keyedcache/#egg=django-keyedcache
 -e hg+https://bitbucket.org/bkroeze/django-livesettings/#egg=django-livesettings
 -e hg+https://bitbucket.org/hynekcer/django-registration#egg=django-registration
--e hg+https://bitbucket.org/hynekcer/sorl-thumbnail/#egg=sorl-thumbnail
