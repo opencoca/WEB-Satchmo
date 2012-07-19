@@ -24,7 +24,7 @@ def confirm_info(request):
         settings, 
         template='shop/checkout/purchaseorder/confirm.html')
 
-def purchaseorder_process_form(request, contact, working_cart, payment_module):
+def purchaseorder_process_form(request, contact, working_cart, payment_module, allow_skip):
     log.debug('purchaseorder_process_form')
     if request.method == "POST":
         log.debug('handling POST')
