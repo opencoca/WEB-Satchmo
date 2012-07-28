@@ -1,8 +1,16 @@
 {% extends "admin/base_site.html" %}
-{% load i18n adminmedia app_plugins satchmo_util %}
+{% load i18n app_plugins satchmo_util %}
 
-{% block extrastyle %}<link rel="stylesheet" type="text/css" href="{% load adminmedia %}{% admin_media_prefix %}css/dashboard.css"/>{% endblock %}
-
+{% block extrastyle %}
+{{ block.super }}
+{% if STATIC_URL %}
+    {% load admin_static %}
+    <link rel="stylesheet" type="text/css" href="{% static 'admin/css/dashboard.css' %}" />
+{% else %}
+    {% load adminmedia %}
+    <link rel="stylesheet" type="text/css" href="{% admin_media_prefix %}css/dashboard.css"/>
+{% endif %}
+{% endblock %}
 {% block coltype %}colMS{% endblock %}
 
 {% block bodyclass %}dashboard{% endblock %}
