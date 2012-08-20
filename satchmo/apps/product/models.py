@@ -282,7 +282,7 @@ class Category(models.Model):
         return flat_list
 
     class Meta:
-        ordering = ['site', 'parent__id', 'ordering', 'name']
+        ordering = ['site', 'parent__ordering', 'parent__name', 'ordering', 'name']
         verbose_name = _("Category")
         verbose_name_plural = _("Categories")
         unique_together = ('site', 'slug')
