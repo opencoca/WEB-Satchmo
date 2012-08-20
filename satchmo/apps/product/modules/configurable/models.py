@@ -377,7 +377,7 @@ class ProductVariation(models.Model):
                 delta=(0, self.price_delta(False))[should_use_delta],
                 parent=self.parent.product)
         else:
-            adjustment = get_product_quantity_adjustments(self, qty, parent=self.parent.product)
+            adjustment = get_product_quantity_adjustments(self.product, qty, parent=self.parent.product)
             if adjustment.price is not None:
                 price = adjustment.price.price + self.price_delta(True)
             else:
