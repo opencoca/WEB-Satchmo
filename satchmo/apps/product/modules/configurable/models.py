@@ -296,7 +296,7 @@ class ProductVariation(models.Model):
             qty_discounts = self._get_self_qty_price_list()
             if qty_discounts.count() > 0:
                 # Get the price with the quantity closest to the one specified without going over
-                return qty_discounts.order_by('-quantity')[0].dynamic_price
+                return qty_discounts.order_by('-quantity', 'price')[0].dynamic_price
 
             if self.parent.product.unit_price is None:
                 log.warn("%s: Unexpectedly no parent.product.unit_price", self)
