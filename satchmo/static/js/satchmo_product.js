@@ -37,8 +37,10 @@ satchmo.make_optionkey = function() {
     var work = Array(satchmo.option_ids.length);
     for (var ix=0; ix<satchmo.option_ids.length; ix++) {
         var k = "#" + satchmo.option_ids[ix];
-        var v = $(k).fieldValue()[0];
-        work[ix] = v;
+        var it = $(k);
+        if (it.length) {
+            work[ix] = it[0].value;
+        } 
     }
     return work.join('::');
 };
@@ -107,7 +109,7 @@ satchmo.update_price = function() {
 	$('#product_images').html(images_to_stay);
 
 
-        var qty = parseInt($('#quantity').fieldValue()[0]);
+        var qty = parseInt($('#quantity')[0].value);
         satchmo.set_name(detail['SLUG']);
         
         if (!satchmo.variations['SALE']) {
