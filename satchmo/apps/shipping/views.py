@@ -96,7 +96,7 @@ class FileRenderMixin(BaseRenderer):
 
     def get_filename(self, request, context):
         return '%s-%s-%d.%s' % (
-            context['shopDetails'].domain,
+            context['shopDetails'].site.domain,
             context['doc'],
             context['order'].pk,
             self.output_ext
