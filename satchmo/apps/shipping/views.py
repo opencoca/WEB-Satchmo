@@ -231,7 +231,7 @@ class ConverterFactory(object):
             classpath = getattr(settings, 'SATCHMO_SETTINGS', {}).get(
                 'DOCUMENT_CONVERTER', None)
             if classpath is None:
-                self.Converter = HTMLDocument
+                self.Converter = TRMLDocument
             else:
                 module_name, class_name = classpath.rsplit('.', 1)
                 module = import_module(module_name)

@@ -145,6 +145,7 @@ L10N_SETTINGS = {
 SATCHMO_SETTINGS = {
     'SHOP_BASE' : '',
     'MULTISHOP' : False,
+    'DOCUMENT_CONVERTER': 'shipping.views.HTMLDocument',
     #'SHOP_URLS' : patterns('satchmo_store.shop.views',)
 }
 
