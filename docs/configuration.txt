@@ -115,7 +115,7 @@ number of places you might want to configure.
 
   ``'DOCUMENT_CONVERTER'``
 
-    :default: ``'shipping.views.HTMLDocument'``
+    :default: ``'shipping.views.TRMLDocument'``
 
     Which document generation system to use. See :ref:`documents_settings`.
 
@@ -207,7 +207,7 @@ Examples of these documents are invoices,
 packing slips and shipping labels
 (although the system can be adapted to much more than this).
 
-By default, Satchmo renders these documents as normal HTML pages,
+For new projects, Satchmo renders these documents as normal HTML pages,
 which have been slightly optimized for direct printing
 (i.e. from the browser).
 
