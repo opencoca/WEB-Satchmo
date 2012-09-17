@@ -4,6 +4,7 @@ import sys
 import logging
 import threading
 import subprocess
+from tempfile import mkstemp
 try:
     import trml2pdf
     HAS_TRML = True
@@ -193,22 +194,41 @@ class WKHTMLDocument(DocumentBase, FileTemplateMixin, FileRenderMixin):
 
     def convert(self, data):
         logger = logging.getLogger('wkhtml2pdf')
-        if isinstance(data, unicode):
-            data = data.encode("utf-8")
-        args = (self.wkhtml2pdf, "-q", "--encoding", "utf-8",
-                "--print-media-type", "-", "-")
-        process = subprocess.Popen(
-            args,
-            stdin = subprocess.PIPE,
-            stdout = subprocess.PIPE,
-            stderr = subprocess.PIPE
+        fd, input_file = mkstemp(suffix='input.'+self.template_ext,
+                                 prefix='satchmo-wkhtml')
+        os.close(fd)
+        fd, output_file = mkstemp(suffix='output.'+self.output_ext,
+                                  prefix='satchmo-wkhtml')
+        os.close(fd)
+        errors_fd, errors_file = mkstemp(
+            suffix='errors',
+            prefix='satchmo-wkhtml'
         )
-        logger.debug("Calling %s" % " ".join(args))
-        stdout, stderr = process.communicate(data)
-        if process.returncode != 0:
-            logger.error("wkhtmltopdf failed (%d): %s" % (process.returncode,
-                                                          stderr))
-        return stdout
+        try:
+            if isinstance(data, unicode):
+                data = data.encode("utf-8")
+            with open(input_file, 'wb') as input:
+                input.write(data)
+            args = (self.wkhtml2pdf, "-q",
+                    input_file, "--encoding", "utf-8", "--print-media-type",
+                    output_file)
+            logger.debug("Calling %s" % " ".join(args))
+            returncode = subprocess.call(args, stderr=errors_fd)
+            if returncode != 0:
+                with open(errors_file, 'rb') as errors:
+                    logger.error(
+                        "wkhtmltopdf failed (%d): %s" % (
+                            returncode,
+                            errors.read()
+                        )
+                    )
+            with open(output_file, 'rb') as output:
+                return output.read()
+        finally:
+            os.close(errors_fd)
+            os.remove(input_file)
+            os.remove(output_file)
+            os.remove(errors_file)
 
 
 class ConverterFactory(object):
