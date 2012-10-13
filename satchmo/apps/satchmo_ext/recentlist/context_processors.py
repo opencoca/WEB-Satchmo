@@ -5,17 +5,7 @@ def recent_products(request):
     """Puts the recently-viewed products in the page variables"""
     recent = request.session.get('RECENTLIST',[])
     maxrecent = config_value('PRODUCT','RECENT_MAX')
-        
-    products = []
-    for slug in recent:
-        if len(products) > maxrecent:
-            break
-            
-        try:
-            p = Product.objects.get_by_site(slug__exact = slug)
-            products.append(p)
-        except Product.DoesNotExist:
-            pass
-    
+    products = Product.objects.active_by_site().filter(
+        slug__in = recent[:maxrecent]).prefetch_related('productimage_set')    
     return {'recent_products' : products}
     
