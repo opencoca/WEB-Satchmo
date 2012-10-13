@@ -124,16 +124,8 @@ class RegistrationForm(forms.Form):
         if verify:
             site = Site.objects.get_current()
             from registration.models import RegistrationProfile
-            # TODO:
-            # In django-registration trunk this signature has changed.
-            # Satchmo is going to stick with the latest release so I'm changing
-            # this to work with 0.7
-            # When 0.8 comes out we're going to have to refactor to this:
-            #user = RegistrationProfile.objects.create_inactive_user(
-            #    username, email, password, site)
-            # See ticket #1028 where we checked in the above line prematurely
-            user = RegistrationProfile.objects.create_inactive_user(username,
-                    password, email)
+            user = RegistrationProfile.objects.create_inactive_user(
+                username, email, password, site)
         else:
             user = User.objects.create_user(username, email, password)
 

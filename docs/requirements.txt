@@ -5,7 +5,7 @@ Satchmo is based on the Django framework, therefore you do need a fully function
 Django instance to use Satchmo.  The `Django installation guide`_ will step you
 through the process.
 
-You must use Django 1.3.1 or greater. 
+You must use Django 1.4 or greater. 
 
 Satchmo requires Python 2.5 or later and a database supported by Django.
 
@@ -70,10 +70,6 @@ There are also a number of other Django packages (mentioned below) that you will
 - For the account registration process, you will need:
 
   - `Django Registration`_
-
-  .. warning::
-    You must use our `Django registration 0.7.1`_ with Satchmo. When 0.8 comes out, we will
-    migrate to the original new version.
 
 A valid Django cache backend (file, memcached or DB) is required for the config settings.
 
