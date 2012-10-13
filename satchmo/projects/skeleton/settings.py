@@ -86,6 +86,7 @@ TEMPLATE_CONTEXT_PROCESSORS = (
         # but will be
         'django.core.context_processors.media',   # MEDIA_URL
         'django.core.context_processors.static',  # STATIC_URL
+        'django.contrib.messages.context_processors.messages',
 )
 
 ROOT_URLCONF = ''
@@ -108,6 +109,7 @@ INSTALLED_APPS = (
     'django.contrib.sessions',
     'django.contrib.sitemaps',
     'django.contrib.staticfiles',
+    'django.contrib.messages',
     'registration',
     'sorl.thumbnail',
     'keyedcache',
@@ -124,7 +126,6 @@ INSTALLED_APPS = (
     #'shipping.modules.tiered',
     #'satchmo_ext.newsletter',
     #'satchmo_ext.recentlist',
-    #'testimonials',         # dependency on  http://www.assembla.com/spaces/django-testimonials/
     'product',
     'product.modules.configurable',
     'product.modules.custom',
@@ -143,7 +144,6 @@ INSTALLED_APPS = (
     'satchmo_utils',
     #'shipping.modules.tieredquantity',
     #'satchmo_ext.tieredpricing',
-    #'typogrify',            # dependency on  http://code.google.com/p/typogrify/
     #'debug_toolbar',
     'app_plugins',
     'simple.localsite',

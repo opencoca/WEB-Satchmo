@@ -10,6 +10,7 @@ New Features
  * Added Paypal Payflowpro payment module
  * Updated all templates to use `Django static files <https://docs.djangoproject.com/en/dev/howto/static-files/>`_
  * Send email to gift certificate recipients
+ * Updated to using django-registration 0.8
 
 Translations
 ------------
