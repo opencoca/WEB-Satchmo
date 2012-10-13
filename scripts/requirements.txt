@@ -6,8 +6,8 @@ reportlab
 south
 sorl-thumbnail
 django-registration
--e hg+https://bitbucket.org/bkroeze/django-threaded-multihost/#egg=django-threaded-multihost
--e hg+https://bitbucket.org/bkroeze/django-caching-app-plugins/#egg=django-caching-app-plugins
--e hg+https://bitbucket.org/bkroeze/django-signals-ahoy/#egg=django-signals-ahoy
--e hg+https://bitbucket.org/bkroeze/django-keyedcache/#egg=django-keyedcache
--e hg+https://bitbucket.org/bkroeze/django-livesettings/#egg=django-livesettings
+django-livesettings
+django-threaded-multihost
+django-caching-app-plugins
+django-signals-ahoy
+django-keyedcache
