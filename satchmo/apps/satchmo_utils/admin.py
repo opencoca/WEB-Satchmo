@@ -16,6 +16,9 @@ from django.utils.encoding import smart_str
 from django.utils.safestring import mark_safe
 from django.utils.text import truncate_words
 from django.utils.functional import update_wrapper
+# Commenting out for Django 1.3 compatibility
+# TODO: Need to find long term solution
+#from django.contrib.admin.templatetags.admin_static import static
 
 import operator
 

@@ -134,8 +134,9 @@ class Category(models.Model):
 
     def _get_mainImage(self):
         img = False
-        if self.images.count() > 0:
-            img = self.images.order_by('sort')[0]
+        images = self.images.order_by('sort')
+        if images:
+            img = images[0]
         else:
             if self.parent_id and self.parent != self:
                 img = self.parent.main_image
@@ -163,9 +164,10 @@ class Category(models.Model):
 
         if variations:
             slugs = qry.filter(site=self.site, active=True, **kwargs).values_list('slug',flat=True)
-            return Product.objects.filter(Q(productvariation__parent__product__slug__in = slugs)|Q(slug__in = slugs))
+            return Product.objects.filter(Q(productvariation__parent__product__slug__in = slugs)|Q(slug__in = slugs)).prefetch_related('productimage_set')
         else:
-            return qry.filter(site=self.site, active=True, productvariation__parent__isnull=True, **kwargs)
+            return qry.filter(site=self.site, active=True, productvariation__parent__isnull=True, **kwargs).prefetch_related('productimage_set')
+ 
 
     def translated_attributes(self, language_code=None):
         if not language_code:
@@ -282,7 +284,7 @@ class Category(models.Model):
         return flat_list
 
     class Meta:
-        ordering = ['site', 'parent__id', 'ordering', 'name']
+        ordering = ['site', 'parent__ordering', 'parent__name', 'ordering', 'name']
         verbose_name = _("Category")
         verbose_name_plural = _("Categories")
         unique_together = ('site', 'slug')

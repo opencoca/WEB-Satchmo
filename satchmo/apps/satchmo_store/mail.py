@@ -102,6 +102,9 @@ def send_store_mail(subject, context, template='', recipients_list=None,
         log.warn('No email address configured for the shop.  Using admin settings.')
         shop_email = settings.ADMINS[0][1]
 
+    if shop_name:
+        shop_email = "%s <%s>" % (shop_name, shop_email)
+    
     c_dict = {'shop_name': shop_name}
 
     if format_subject:

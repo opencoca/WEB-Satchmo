@@ -76,8 +76,6 @@ class OrderOptions(AutocompleteAdmin):
             ('bill_street1', 'bill_street2', 'bill_city', 'bill_state', 'bill_postal_code', 'bill_country')}), (_('Totals'), {'fields':
             ('sub_total', 'shipping_cost', 'shipping_discount', 'tax', 'discount', 'total', 'time_stamp')}))
     list_display = ('id', 'contact', 'time_stamp', 'order_total', 'balance_forward', 'status', 'invoice', 'packingslip', 'shippinglabel')
-    list_filter = ['time_stamp', 'contact', 'status']
-    date_hierarchy = 'time_stamp'
     list_filter = ['time_stamp', 'status']
     date_hierarchy = 'time_stamp'
     search_fields = ('contact__first_name', 'contact__last_name', 'contact__email')
