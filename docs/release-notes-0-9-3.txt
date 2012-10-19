@@ -10,7 +10,8 @@ New Features
  * Added Paypal Payflowpro payment module
  * Updated all templates to use `Django static files <https://docs.djangoproject.com/en/dev/howto/static-files/>`_
  * Send email to gift certificate recipients
- * Rewritted PDF (document) generation, removed trml2pdf and Reportlab dependencies: please see :ref:`document_settings_trml2pdf` and the migration notes when upgrading
+ * Rewrite PDF (document) generation, removed trml2pdf and Reportlab dependencies: please see :ref:`document_settings_trml2pdf` and the migration notes when upgrading
+ * Updated to using django-registration 0.8
 
 Translations
 ------------

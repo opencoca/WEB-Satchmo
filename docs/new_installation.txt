@@ -11,7 +11,7 @@ This guide assumes you are working on a unix variant and that you are installing
 you have write access to. In the below example, we use :file:`/home/user/src`. You are expected to modify the path to fit your needs.
 
 .. warning::
-   You must have Django 1.3.1 or higher properly installed.
+   You must have Django 1.4 or higher properly installed.
 
 A Quick Note About Installing Dependencies
 ------------------------------------------
@@ -109,11 +109,8 @@ Installing Dependencies
 
 #. Install django-registration:
 
-   - Check out from source::
+        pip install django-registration
 
-       hg clone http://bitbucket.org/hynekcer/django-registration/
-       cd /path/to/django-registration
-       python setup.py install
 
 Installing Satchmo into your path
 ---------------------------------

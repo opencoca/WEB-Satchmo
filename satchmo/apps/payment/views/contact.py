@@ -75,12 +75,6 @@ class CheckoutForm(FormView):
         Returns the initial data to use for forms on this view.
         """
         init_data = {}
-        if not self.request.user.is_authenticated() and \
-                config_value('SHOP', 'AUTHENTICATION_REQUIRED'):
-            url = urlresolvers.reverse('satchmo_checkout_auth_required')
-            thisurl = urlresolvers.reverse('satchmo_checkout-step1')
-            return http.HttpResponseRedirect(url + "?next=" + thisurl)
-
         if self.request.user.is_authenticated():
             if self.request.user.email:
                 init_data['email'] = self.request.user.email
@@ -120,6 +114,12 @@ class CheckoutForm(FormView):
     def get(self, request, *args, **kwargs):
         contact = self.get_contact()
         init_data = self.get_initial()
+        
+        if not self.request.user.is_authenticated() and \
+                config_value('SHOP', 'AUTHENTICATION_REQUIRED'):
+            url = urlresolvers.reverse('satchmo_checkout_auth_required')
+            thisurl = urlresolvers.reverse('satchmo_checkout-step1')
+            return http.HttpResponseRedirect(url + "?next=" + thisurl)
 
         if contact:
             # If a person has their contact info,

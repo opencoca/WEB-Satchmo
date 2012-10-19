@@ -332,7 +332,8 @@ class SimplePayShipForm(forms.Form):
         if order and order.discount_code:
             try:
                 discount = Discount.objects.by_code(order.discount_code)
-                if discount and discount.shipping == "FREECHEAP":
+                # 'discount' object could be NullDiscount instance
+                if discount and hasattr(discount, 'shipping') and discount.shipping == "FREECHEAP":
                     if cheapshipping:
                         shipping_choices = [opt for opt in shipping_choices if opt[0] == cheapshipping]
                         shipping_dict = {cheapshipping: shipping_dict[cheapshipping]}

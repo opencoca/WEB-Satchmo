@@ -282,9 +282,12 @@ class ProductVariation(models.Model):
 
     objects = ProductVariationManager()
 
-    def _get_self_qty_price_list(self, qty=1):
-        return Price.objects.filter(product__id=self.product.id).exclude(expires__isnull=False, expires__lt=datetime.date.today()).filter(quantity__lte=qty)
-    
+    def _get_self_qty_price_list(self, qty=None):
+        prices = Price.objects.filter(product__id=self.product.id).exclude(expires__isnull=False, expires__lt=datetime.date.today())
+        if qty:
+            prices = prices.filter(quantity__lte=qty)
+        return prices
+        
     def _get_fullPrice(self):
         """ Get price based on parent ConfigurableProduct """
         # allow explicit setting of prices.
@@ -293,7 +296,7 @@ class ProductVariation(models.Model):
             qty_discounts = self._get_self_qty_price_list()
             if qty_discounts.count() > 0:
                 # Get the price with the quantity closest to the one specified without going over
-                return qty_discounts.order_by('-quantity')[0].dynamic_price
+                return qty_discounts.order_by('-quantity', 'price')[0].dynamic_price
 
             if self.parent.product.unit_price is None:
                 log.warn("%s: Unexpectedly no parent.product.unit_price", self)
@@ -374,7 +377,7 @@ class ProductVariation(models.Model):
                 delta=(0, self.price_delta(False))[should_use_delta],
                 parent=self.parent.product)
         else:
-            adjustment = get_product_quantity_adjustments(self, qty, parent=self.parent.product)
+            adjustment = get_product_quantity_adjustments(self.product, qty, parent=self.parent.product)
             if adjustment.price is not None:
                 price = adjustment.price.price + self.price_delta(True)
             else:

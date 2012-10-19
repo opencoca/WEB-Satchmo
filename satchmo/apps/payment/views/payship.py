@@ -176,7 +176,13 @@ def base_pay_ship_info(request, payment_module, form_handler, template):
     contact = results[1]
     working_cart = results[2]
 
-    results = form_handler(request, contact, working_cart, payment_module)
+    # possibly hide the shipping based on store config
+    shiphide = config_value('SHIPPING','HIDING')
+    if shiphide in ('YES', 'DESCRIPTION'):
+        allow_skip = True
+    else:
+        allow_skip = False
+    results = form_handler(request, contact, working_cart, payment_module, allow_skip)
     if results[0]:
         return results[1]
 

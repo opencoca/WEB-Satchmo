@@ -46,7 +46,7 @@ jQuery(document).ready(function($) {
 			if (CLONE) { satchmo[params.other_state_callback](true); }
 
 			$.ajax({
-				type: "POST",
+				type: "GET",
 				url: "{% url satchmo_contact_ajax_state %}",
 				data: data,
 				success: success,

@@ -227,7 +227,8 @@ def success(request):
     for item in order.orderitem_set.all():
         product = item.product
         product.total_sold += item.quantity
-        product.items_in_stock -= item.quantity
+        if config_value('PRODUCT','TRACK_INVENTORY'):
+            product.items_in_stock -= item.quantity
         product.save()
 
     # Clean up cart now, the rest of the order will be cleaned on paypal IPN
