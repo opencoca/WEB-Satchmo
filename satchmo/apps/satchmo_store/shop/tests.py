@@ -303,14 +303,14 @@ class ShopTest(TestCase):
         user.save()
         self.client.login(username='fredsu', password='passwd')
 
-        # Test pdf generation
+        # Test invoice, packing slip and shipping label generation
         order_id = Order.objects.all()[0].id
         response = self.client.get('/admin/print/invoice/%d/' % order_id)
-        self.assertContains(response, 'reportlab', status_code=200)
+        self.assertEqual(response.status_code, 200)
         response = self.client.get('/admin/print/packingslip/%d/' % order_id)
-        self.assertContains(response, 'reportlab', status_code=200)
+        self.assertEqual(response.status_code, 200)
         response = self.client.get('/admin/print/shippinglabel/%d/' % order_id)
-        self.assertContains(response, 'reportlab', status_code=200)
+        self.assertEqual(response.status_code, 200)
 
     def test_two_checkouts_dont_duplicate_contact(self):
         """
