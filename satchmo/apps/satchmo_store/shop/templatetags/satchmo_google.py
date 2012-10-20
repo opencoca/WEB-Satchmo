@@ -10,8 +10,7 @@ def show_tracker(context, secure=False):
     """
     Output the google tracker code.
     """
-    return RequestContext(context['request'],
-        {"GOOGLE_CODE": config_value('GOOGLE', 'ANALYTICS_CODE'), "secure" : secure})
+    return ({"GOOGLE_CODE": config_value('GOOGLE', 'ANALYTICS_CODE'), "secure" : secure})
 
 register.inclusion_tag("shop/google-analytics/tracker.html", takes_context=True)(show_tracker)
 

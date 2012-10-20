@@ -1031,10 +1031,11 @@ class Product(models.Model):
             for module, subtype in active_product_types():
                 try:
                     subclass = getattr(self, subtype.lower())
-                    gettype = getattr(subclass, '_get_subtype')
-                    subtype = gettype()
-                    if not subtype in types:
-                        types.append(subtype)
+                    if subclass is not None:
+                        gettype = getattr(subclass, '_get_subtype')
+                        subtype = gettype()
+                        if not subtype in types:
+                            types.append(subtype)
                 except models.ObjectDoesNotExist:
                     pass
         except SettingNotSet:
