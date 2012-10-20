@@ -331,8 +331,8 @@ class PaymentProcessor(BasePaymentProcessor):
         self.log_extra('standard charges configuration: %s', trans['configuration'])
 
         trans['custBillData'] = {
-            'x_first_name' : order.contact.first_name,
-            'x_last_name' : order.contact.last_name,
+            'x_first_name' : order.bill_first_name,
+            'x_last_name' : order.bill_last_name,
             'x_address': order.full_bill_street,
             'x_city': order.bill_city,
             'x_state' : order.bill_state,

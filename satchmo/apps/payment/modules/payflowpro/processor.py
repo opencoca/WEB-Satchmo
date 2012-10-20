@@ -74,8 +74,8 @@ class PaymentProcessor(BasePaymentProcessor):
                 ),
 
             'customer_info': CustomerInfo(
-                firstname=order.contact.first_name,
-                lastname=order.contact.last_name,
+                firstname=order.bill_first_name,
+                lastname=order.bill_last_name,
                 ),
             }
 
