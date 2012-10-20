@@ -94,7 +94,7 @@ class TieredPrice(models.Model):
     dynamic_price = property(fget=_dynamic_price)
 
     def save(self, **kwargs):
-        """Save with the prevention of storing duplicates""" 
+        """Save with the prevention of storing duplicates"""
         prices = TieredPrice.objects.filter(product=self.product, quantity=self.quantity, pricingtier=self.pricingtier)
         if self.expires:
             prices = prices.filter(expires=self.expires)
@@ -176,7 +176,8 @@ def pricingtier_group_change_listener(action=None, reverse=None, instance=None, 
             # After required Django version will be 1.3+, the previous line can be replaced by:
             #modified_users = kwargs['pk_set']
         for user_id in modified_users_id:
-            key = 'TIER_%i' % user_id
-            threadlocals.set_thread_variable(key, None)
+            if user_id:
+                key = 'TIER_%i' % user_id
+                threadlocals.set_thread_variable(key, None)
 
 models.signals.m2m_changed.connect(pricingtier_group_change_listener, sender=User.groups.through)
