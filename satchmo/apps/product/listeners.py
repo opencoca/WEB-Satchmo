@@ -18,14 +18,16 @@ def default_product_search_listener(sender, request=None, category=None, keyword
     show_pv = config_value('PRODUCT','SEARCH_SHOW_PRODUCTVARIATIONS', False)
 
     products = Product.objects.active_by_site(variations=show_pv, site=site)
-    categories = Category.objects.by_site(site=site)
-    log.debug('initial: %s', list(products))
-
     if category:
         categories = Category.objects.active(site=site, slug=category)
         if categories:
             categories = categories[0].get_active_children(include_self=True)
         products = products.filter(category__in=categories)
+    else:
+        #automatically assumes active categories only
+        categories = Category.objects.by_site(site=site)
+
+    log.debug('initial: %s', list(products))
 
     for keyword in keywords:
         if not category:
