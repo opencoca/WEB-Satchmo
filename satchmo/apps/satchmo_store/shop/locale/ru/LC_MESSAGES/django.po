@@ -229,7 +229,7 @@ msgstr "Подробности о продукции"
 
 #: .\models.py:445 .\models.py:1065 .\templates\shop\cart.html.py:25
 msgid "Quantity"
-msgstr "Платежный адрес"
+msgstr "Количество"
 
 #: .\models.py:526
 msgid "Cart Item"
