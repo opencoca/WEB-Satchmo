@@ -15,15 +15,20 @@ New Features
 
 Translations
 ------------
-
+ * Italian updates
 
 Bug Fixes
 ---------
  * Make variation manager more robust so that you can't delete an order when deleting the variation.
-
+ * Javascript updates for newer jquery
+ * Fix bug with required login not working
+ * Ensure TRACK_INVENTORY is used in all payment modules
+ 
 Performance Improvements
 ------------------------
-
+ * DB optimizations using new prefetch_related from Django 1.4 
+ * Tweaks to product ratings
+ 
 Additional Packages
 -------------------
 

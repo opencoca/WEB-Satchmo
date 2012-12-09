@@ -1317,7 +1317,7 @@ class ProductPriceLookup(models.Model):
     objects = ProductPriceLookupManager()
 
     def _product(self):
-        return Product.objects.get(slug=self.productslug)
+        return Product.objects.get(slug=self.productslug, site__id=self.siteid)
 
     product = property(fget=_product)
 
