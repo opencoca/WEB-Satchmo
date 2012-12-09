@@ -114,7 +114,7 @@ class CheckoutForm(FormView):
     def get(self, request, *args, **kwargs):
         contact = self.get_contact()
         init_data = self.get_initial()
-        
+
         if not self.request.user.is_authenticated() and \
                 config_value('SHOP', 'AUTHENTICATION_REQUIRED'):
             url = urlresolvers.reverse('satchmo_checkout_auth_required')
@@ -187,7 +187,7 @@ class CheckoutForm(FormView):
         tempCart = self.get_cart()
         new_data = self.request.POST.copy()
 
-        if not tempCart.is_shippable:
+        if not tempCart.is_shippable and not self.get_order():
             new_data['copy_address'] = True
         self._form_extrakwargs['data'] = new_data
         self._form_extrakwargs['shop'] = self.get_shop()
