@@ -14,9 +14,12 @@ import datetime
 
 class ProductWishManager(models.Manager):
     def create_if_new(self, product, contact, details):
-        encoded = simplejson.dumps(details)
+        if details:
+            encoded = simplejson.dumps(details)
+            products = ProductWish.objects.filter(product=product, contact=contact, _details=encoded)
+        else:
+            products = ProductWish.objects.filter(product=product, contact=contact, _details__isnull=True)
 
-        products = ProductWish.objects.filter(product=product, contact=contact, _details=encoded)
         if products and len(products) > 0:
             wish = products[0]
             if len(products) > 1:
