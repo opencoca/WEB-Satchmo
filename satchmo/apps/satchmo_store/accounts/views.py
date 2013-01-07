@@ -110,7 +110,7 @@ def _get_prev_cart(request):
         if saved_cart and len(saved_cart):
             if 'cart' in request.session:
                 existing_cart = Cart.objects.from_request(request, create=False)
-                if ( (len(existing_cart) == 0) or config_value('SHOP','PERSISTENT_CART_MERGE') ):
+                if existing_cart.pk != saved_cart.pk and ( (len(existing_cart) == 0) or config_value('SHOP','PERSISTENT_CART_MERGE') ):
                     # Merge the two carts together
                     saved_cart.merge_carts(existing_cart)
 
