@@ -107,7 +107,7 @@ Detailed steps for installing these dependencies is included in the :doc:`new_in
 .. _Django installation guide: http://www.djangoproject.com/documentation/install/
 .. _Python Imaging Library: http://www.pythonware.com/products/pil/
 .. _Elementtree: http://effbot.org/zone/element-index.htm
-.. _Python cryptography toolkit: http://www.amk.ca/python/code/crypto
+.. _Python cryptography toolkit: http://pypi.python.org/pypi/pycrypto/2.6
 .. _Windows binary: http://www.voidspace.org.uk/python/modules.shtml#pycrypto
 .. _ReportLab: http://www.reportlab.com/software/opensource/rl-toolkit/download/
 .. _Sphinx: http://sphinx.pocoo.org/
