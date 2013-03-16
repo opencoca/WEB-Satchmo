@@ -56,7 +56,7 @@ You should also move your templates, as the following template renames happened
     * ``shop/pdf/packing-slip.rml`` → ``shop/docs/rml/packingslip.rml``
     * ``shop/pdf/shipping-label.rml`` → ``shop/docs/rml/shippinglabel.rml``
 
-See :ref:`document_settings` for more details.
+See :ref:`document_settings_trml2pdf` for more details.
 
 Sorl Thumbnail
 ++++++++++++++

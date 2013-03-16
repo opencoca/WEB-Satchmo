@@ -32,8 +32,7 @@ straightforward as possible, we show how to install the packages with either:
 .. note::
     The provided egg and tar files by the various dependencies may not be the
     most current installation, so you should ensure that the version recommended
-    by satchmo (see :doc:`requirements`) is available via
-    :command:`easy_install` before proceeding.
+    by satchmo (see :doc:`requirements`) is available via `easy_install` before proceeding.
 
 Installing Dependencies
 -----------------------
