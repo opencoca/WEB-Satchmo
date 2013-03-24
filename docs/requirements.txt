@@ -5,7 +5,7 @@ Satchmo is based on the Django framework, therefore you do need a fully function
 Django instance to use Satchmo.  The `Django installation guide`_ will step you
 through the process.
 
-You must use Django 1.4 or greater. 
+You must use Django 1.4.x. Satchmo is not compatible with Django 1.5.x at this time.
 
 Satchmo requires Python 2.5 or later and a database supported by Django.
 
