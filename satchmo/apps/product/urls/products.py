@@ -1,4 +1,4 @@
-from django.conf.urls.defaults import *
+from django.conf.urls import *
 import product
 from signals_ahoy.signals import collect_urls
 

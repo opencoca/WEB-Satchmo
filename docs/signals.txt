@@ -136,7 +136,7 @@ Arguments sent with this signal:
         The module having url patterns added to it
 
     ``patterns``
-        The url patterns to be added. This is an instance of ``django.conf.urls.defaults.patterns``
+        The url patterns to be added. This is an instance of ``django.conf.urls.patterns``
 
     ``section``
         The name of the section adding the urls (Note: this argument is not always provided). For example '__init__' or 'product'

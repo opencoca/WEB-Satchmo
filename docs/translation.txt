@@ -81,7 +81,7 @@ your settings.py (or local_settings.py)::
 Then, edit your settings.py file to enable the i18n urls.::
 
     #### Satchmo unique variables ####
-    from django.conf.urls.defaults import patterns, include
+    from django.conf.urls import patterns, include
     SATCHMO_SETTINGS = {
         'SHOP_BASE' : '',
         'MULTISHOP' : False,

@@ -26,7 +26,7 @@ earlier in your custom urls.py file, and you want the shop at "store/"::
 """
 from base import urlpatterns as basepatterns
 from default import urlpatterns as defaultpatterns
-from django.conf.urls.defaults import patterns, include
+from django.conf.urls import patterns, include
 from satchmo_utils import urlhelper
 
 from satchmo_store.shop import get_satchmo_setting

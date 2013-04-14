@@ -138,7 +138,7 @@ class AutocompleteAdmin(admin.ModelAdmin):
         return super(AutocompleteAdmin, self).__call__(request, url)
 
     def get_urls(self):
-        from django.conf.urls.defaults import url
+        from django.conf.urls import url
         
         def wrap(view):
             # This is needed to secure the view so that only admin users can access

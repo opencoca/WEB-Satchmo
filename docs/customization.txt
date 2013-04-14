@@ -129,7 +129,7 @@ Here is a simple example of using it to replace the quick_order view. In this ex
 the items that are displayed on the quick order page so that only featured items are shown. The full 
 urls.py is shown below::
 
-    from django.conf.urls.defaults import *
+    from django.conf.urls import *
 
     # Uncomment the next two lines to enable the admin:
     # from django.contrib import admin

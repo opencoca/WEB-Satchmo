@@ -1,4 +1,4 @@
-from django.conf.urls.defaults import patterns, include
+from django.conf.urls import patterns, include
 from product.urls import urlpatterns as productpatterns
 from satchmo_store import shop
 from satchmo_store.shop.views.sitemaps import sitemaps
