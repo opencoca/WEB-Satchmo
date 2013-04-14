@@ -141,7 +141,7 @@ if __name__ == '__main__':
     dest_dir = os.path.join('./',opts.site_name)
 
     skeleton_dir = opts.skeleton_dir
-    if skeleton_dir.startswith('~/'):
+    if skeleton_dir and skeleton_dir.startswith('~/'):
         skeleton_dir = os.path.join(os.environ.get('HOME', ''), skeleton_dir[2:])
     result, msg = check_skeleton_dir(skeleton_dir)
     if not result:
