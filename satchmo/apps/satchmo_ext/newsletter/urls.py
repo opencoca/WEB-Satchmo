@@ -4,7 +4,7 @@ URLConf for Satchmo Newsletter app
 This will get automatically added by satchmo_store, under the url given in your livesettings "NEWSLETTER","NEWSLETTER_SLUG"
 """
 
-from django.conf.urls.defaults import *
+from django.conf.urls import *
 from livesettings import config_value
 import logging
 log = logging.getLogger('newsletter.urls')

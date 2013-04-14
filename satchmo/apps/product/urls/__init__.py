@@ -1,5 +1,5 @@
 from category import urlpatterns as catpatterns
-from django.conf.urls.defaults import *
+from django.conf.urls import *
 from products import urlpatterns as prodpatterns
 import product
 from signals_ahoy.signals import collect_urls

@@ -1,4 +1,4 @@
-from django.conf.urls.defaults import patterns as patterns_func
+from django.conf.urls import patterns as patterns_func
 from django.utils.translation import ugettext
 import product
 from product import signals as product_signals

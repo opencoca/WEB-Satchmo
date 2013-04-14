@@ -1,7 +1,7 @@
 """
 Urls for Product Brand module, note that you do not have to add this to your urls file, it will get automatically included by collect_urls.
 """
-from django.conf.urls.defaults import *
+from django.conf.urls import *
 from satchmo_store.shop import get_satchmo_setting
 import logging
 

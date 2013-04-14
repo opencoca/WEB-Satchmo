@@ -37,7 +37,7 @@ def replace_urlpattern(urlpatterns, replacement):
 
     parameters:
         urlpatterns: list
-        replacement: an `django.conf.urls.defaults.url` object.
+        replacement: an `django.conf.urls.url` object.
 
     example:
 

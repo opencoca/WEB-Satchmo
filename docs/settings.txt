@@ -93,7 +93,7 @@ to add any pieces of satchmo.
             )
 
         #### Satchmo unique variables ####
-        #from django.conf.urls.defaults import patterns, include
+        #from django.conf.urls import patterns, include
         SATCHMO_SETTINGS = {
                             'SHOP_BASE' : '',
                             'MULTISHOP' : False,
@@ -143,13 +143,13 @@ Configure the rest of the required files
 
 1. Next, you need to configure your :file:`urls.py` file. The most simple :file:`urls.py` file would look like this::
 
-        from django.conf.urls.defaults import *
+        from django.conf.urls import *
         from satchmo_store.urls import urlpatterns
 
 
 2. If you have additional urls you would like to add to your project, it would look like this::
 
-        from django.conf.urls.defaults import *
+        from django.conf.urls import *
         from satchmo_store.urls import urlpatterns
 
         urlpatterns += patterns('',

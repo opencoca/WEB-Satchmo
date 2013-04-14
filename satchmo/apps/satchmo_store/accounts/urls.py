@@ -6,7 +6,7 @@ root URLConf to include this URLConf for any URL beginning with
 '/accounts/'.
 
 """
-from django.conf.urls.defaults import patterns
+from django.conf.urls import patterns
 from livesettings import config_value
 
 # extending the urls in contacts

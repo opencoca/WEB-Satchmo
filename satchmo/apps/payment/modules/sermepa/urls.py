@@ -10,7 +10,7 @@
 #   TODO: SERMEPA interface provides possibility of recurring payments, which
 #   could be probably used for SubscriptionProducts. This module doesn't support it.
 #
-from django.conf.urls.defaults import patterns
+from django.conf.urls import patterns
 from satchmo_store.shop.satchmo_settings import get_satchmo_setting
 
 ssl = get_satchmo_setting('SSL', default_value=False)
