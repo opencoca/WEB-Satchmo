@@ -1,4 +1,4 @@
-{% extends "product/product.html" %}
+{% extends "product/product.html" %}{% load url from future %}
 {% load i18n %}
 {% load thumbnail %}
 {% load satchmo_price %}
@@ -57,7 +57,7 @@ satchmo.thumbnails = new Array();
 {% endif %}{% endwith %}
 
 {% if error_message %}<p><strong>{{ error_message }}</strong></p>{% endif %}
-<form id="options" action="{% url satchmo_smart_add %}" method="post">{% csrf_token %}
+<form id="options" action="{% url 'satchmo_smart_add' %}" method="post">{% csrf_token %}
 {% if options %}
 <p>{% trans "Please choose your options" %}:</p>
 {% endif %}

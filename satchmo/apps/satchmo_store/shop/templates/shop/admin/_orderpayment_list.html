@@ -1,4 +1,4 @@
-{% load i18n satchmo_currency %}
+{% load i18n satchmo_currency %}{% load url from future %}
 <fieldset class="module">
     <h2>{% trans 'Order Payments' %}</h2>
     <div class="form-row">
@@ -14,7 +14,7 @@
     {% for payment in order.payments.all %}
         <tr>
             <td>
-                <a href="{% url admin:shop_orderpayment_change payment.id %}">{{ payment.id }}</a>
+                <a href="{% url 'admin:shop_orderpayment_change' payment.id %}">{{ payment.id }}</a>
             </td>
             <td>
                 {{ payment.amount|currency }}

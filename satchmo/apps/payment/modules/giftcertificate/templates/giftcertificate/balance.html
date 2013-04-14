@@ -1,4 +1,4 @@
-{% extends "shop/base.html" %}
+{% extends "shop/base.html" %}{% load url from future %}
 {% load i18n satchmo_currency %}
 
 {% block navbar %}
@@ -25,7 +25,7 @@
 	<p class="warning">{% trans 'No such gift certificate found.' %}</p>
 	{% endif %}
 	{% else %}
-	<form method="GET" action="{% url satchmo_giftcertificate_balance %}">
+	<form method="GET" action="{% url 'satchmo_giftcertificate_balance' %}">
 	{{ form }}
 	<p><input type="submit" value="{% trans 'Look up balance' %}" /></p>
 	</form>

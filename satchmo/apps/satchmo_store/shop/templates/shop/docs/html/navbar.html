@@ -1,4 +1,4 @@
-{% load i18n %}
+{% load i18n %}{% load url from future %}
 <div id="navigation-bar">
   <h2>
     {% blocktrans with order_id=order.id %}
@@ -13,7 +13,7 @@
       </a>
     </li>
     <li>
-      <a href="{% url admin:shop_order_changelist %}"
+      <a href="{% url 'admin:shop_order_changelist' %}"
          title="{% trans "Back to orders list"%}">
         {% trans "Go back to the orders list" %}
       </a>

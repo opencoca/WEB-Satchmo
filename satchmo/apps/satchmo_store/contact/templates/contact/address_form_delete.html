@@ -1,10 +1,10 @@
-{% extends "shop/base.html" %}
+{% extends "shop/base.html" %}{% load url from future %}
 {% load satchmo_contact %}
 {% load i18n %}
 
 {% block navbar %}
    <li class="first"><a href="{{ shop_base }}/">{% trans "Home" %}</a></li>
-   <li><a href="{% url satchmo_account_info %}">{% trans "Account" %}</a></li>
+   <li><a href="{% url 'satchmo_account_info' %}">{% trans "Account" %}</a></li>
    <li>{% trans "Add Address" %}</li>
 {% endblock %}
 
@@ -14,7 +14,7 @@
 
 <ul class="profile">
     {% addressblock entry %}
-<form method="post" action="{% url satchmo_address_delete entry.id %}">{% csrf_token %}
+<form method="post" action="{% url 'satchmo_address_delete' entry.id %}">{% csrf_token %}
 {{ form.as_p }}
 <input type="submit" value="{% trans "Delete" %}"/>
 </ul>

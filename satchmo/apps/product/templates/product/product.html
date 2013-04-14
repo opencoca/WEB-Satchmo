@@ -1,4 +1,4 @@
-{% extends "shop/base.html" %}
+{% extends "shop/base.html" %}{% load url from future %}
 {% comment %}
 -------------------------------------------------------------------
 This is the base product detail page.
@@ -51,7 +51,7 @@ ProductVariations or CustomProducts, look for product/detail_xxx.html
 {% endif %}{% endwith %}
 
 {% if error_message %}<p><strong>{{ error_message }}</strong></p>{% endif %}
-<form id="options" action="{% url satchmo_smart_add %}" method="post">{% csrf_token %}
+<form id="options" action="{% url 'satchmo_smart_add' %}" method="post">{% csrf_token %}
 {% trans "Quantity" %} <input type="text" size="5" name="quantity" id="quantity" value="1" class="priced" />
 <input type="hidden" name="productname" id="productname" value="{{product.slug}}" />
 <input type="submit" name="addcart" value="{% trans "Add to cart" %}" />

@@ -1,4 +1,4 @@
-{% extends "shop/base.html" %}
+{% extends "shop/base.html" %}{% load url from future %}
 {% load i18n %}
 
 {% block extra-head %}
@@ -25,8 +25,8 @@
 {{ form.non_field_errors }}
 {% endif %}
 {% if user.is_anonymous %}
-<form method="post" action="{% if is_secure %}{% url auth_secure_login %}{% else %}{{ login_url }}{% endif %}">{% csrf_token %}
-<input type="hidden" name="next" value="{% url satchmo_checkout-step1 %}" />
+<form method="post" action="{% if is_secure %}{% url 'auth_secure_login' %}{% else %}{{ login_url }}{% endif %}">{% csrf_token %}
+<input type="hidden" name="next" value="{% url 'satchmo_checkout-step1' %}" />
 <table>
 		<tr>
 			<td colspan="2">
@@ -41,7 +41,7 @@
 </form>
 {% endif %}
 
-<form method="post" action="{% url satchmo_checkout-step1 %}">{% csrf_token %}
+<form method="post" action="{% url 'satchmo_checkout-step1' %}">{% csrf_token %}
 <table>
     <tr><td colspan="2"><p>{% trans "You'll need to fill out at least the fields with a *" %}</p></td></tr>
 
