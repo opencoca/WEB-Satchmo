@@ -1,8 +1,8 @@
-{% load i18n %}
+{% load i18n %}{% load url from future %}
 
 {% block login-form %}
-<form name="loginform" method="post" action="{% url auth_login %}">{% csrf_token %}
-<input type="hidden" name="next" value="{% if next %}{{ next }}{% else %}{% url satchmo_account_info %}{% endif %}" />
+<form name="loginform" method="post" action="{% url 'auth_login' %}">{% csrf_token %}
+<input type="hidden" name="next" value="{% if next %}{{ next }}{% else %}{% url 'satchmo_account_info' %}{% endif %}" />
 <input type="hidden" name="action" value="login" />
 <table class="form" style="float:left; width: 50%">
     <thead>
