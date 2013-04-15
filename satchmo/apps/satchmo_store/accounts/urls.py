@@ -9,6 +9,7 @@ root URLConf to include this URLConf for any URL beginning with
 from django.conf.urls import patterns
 from livesettings import config_value
 
+from satchmo_store.accounts.views import RegistrationComplete
 # extending the urls in contacts
 from satchmo_store.contact.urls import urlpatterns
 from signals_ahoy.signals import collect_urls
@@ -33,12 +34,9 @@ urlpatterns += patterns('',
     ('^logout/$','django.contrib.auth.views.logout', {'template_name': 'registration/logout.html'}, 'auth_logout'),
     )
 
-verify = (config_value('SHOP', 'ACCOUNT_VERIFICATION') == 'EMAIL')
-
-urlpatterns += patterns('django.views.generic',
-    (r'^register/complete/$', 'simple.direct_to_template',
-        {'template': 'registration/registration_complete.html',
-        'extra_context': {'verify': verify }},
+urlpatterns += patterns('',
+    (r'^register/complete/$',
+        RegistrationComplete.as_view(template_name='registration/registration_complete.html'), {},
         'registration_complete'),
 )
 

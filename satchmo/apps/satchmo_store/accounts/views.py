@@ -7,6 +7,7 @@ from django.shortcuts import render_to_response
 from django.template import RequestContext
 from django.utils.translation import ugettext_lazy as _
 from django.views.decorators.cache import never_cache
+from django.views.generic.base import TemplateView
 from forms import RegistrationAddressForm, RegistrationForm, EmailAuthenticationForm
 from l10n.models import Country
 from livesettings import config_get_group, config_value
@@ -387,4 +388,13 @@ def register(request, redirect=None, template='registration/registration_form.ht
 
         context = RequestContext(request, ctx)
         return render_to_response(template, context_instance=context)
+
+
+class RegistrationComplete(TemplateView):
+
+    def get_context_data(self, **kwargs):
+        context = super(RegistrationComplete, self).get_context_data(**kwargs)
+        verify = (config_value('SHOP', 'ACCOUNT_VERIFICATION') == 'EMAIL')
+        context.update(verify=verify)
+        return context
 
