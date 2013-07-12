@@ -1276,7 +1276,7 @@ msgstr "(вкл. налоги)"
 
 #: .\templates\product\detail_configurableproduct.html.py:54
 msgid "Please choose your options"
-msgstr "Пожалуйств, выберите желаемые опции"
+msgstr "Пожалуйста, выберите желаемые опции"
 
 #: .\templates\product\detail_configurableproduct.html.py:69
 #: .\templates\product\detail_customproduct.html.py:50
