@@ -110,11 +110,11 @@ class ConfigurableProduct(models.Model):
         if not variations:
             # There isn't an existing ProductVariation.
             if self.product:
-                site = self.product.site
+                sites = self.product.site.all()
             else:
-                site = self.site
+                sites = self.site.all()
 
-            variant = Product(site=site, items_in_stock=0, name=name)
+            variant = Product(items_in_stock=0, name=name)
             optnames = [opt.value for opt in options]
             if not slug:
                 slug = slugify(u'%s_%s' % (self.product.slug, u'_'.join(optnames)))
@@ -126,6 +126,7 @@ class ConfigurableProduct(models.Model):
 
             log.info("Creating variation for [%s] %s", self.product.slug, variant.slug)
             variant.save()
+            variant.site.add(*sites)
 
             pv = ProductVariation(product=variant, parent=self)
             pv.save()
