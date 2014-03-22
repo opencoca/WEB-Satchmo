@@ -39,6 +39,12 @@ class OrderItem_Inline(admin.TabularInline):
     model = OrderItem
     extra = 3
     raw_id_fields = ('product',)
+    list_select_related = True
+    fields = ('product', 'product_sku', 'quantity', 'unit_price', 'unit_tax', 'line_item_price', 'tax', 'expire_date', 'completed', 'discount')
+    readonly_fields = ('product_sku',)
+
+    def product_sku(self, order_item):
+        return order_item.product.sku
 
 class OrderItemDetail_Inline(admin.TabularInline):
     model = OrderItemDetail
