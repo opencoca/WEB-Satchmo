@@ -9,7 +9,7 @@ from livesettings import config_value
 from satchmo_store.contact.forms import ContactInfoForm
 from satchmo_store.contact.models import Contact, ContactRole
 from satchmo_utils.unique_id import generate_id
-from signals_ahoy.signals import form_init, form_initialdata
+from satchmo_utils.signals import form_init, form_initialdata, form_postsave
 
 import logging
 import signals

@@ -2,7 +2,7 @@ from django.shortcuts import render_to_response
 from django.template import RequestContext
 from product.models import Product
 from satchmo_store.shop import signals
-from signals_ahoy.signals import application_search
+from satchmo_utils.signals import application_search
 
 def search_view(request, template="shop/search.html"):
     """Perform a search based on keywords and categories in the form submission"""

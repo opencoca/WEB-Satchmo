@@ -3,8 +3,7 @@ from django.core.exceptions import ImproperlyConfigured
 from payment import signals
 from payment.forms import SimplePayShipForm
 from payment.modules.purchaseorder.models import PurchaseOrder
-from satchmo_utils import app_enabled
-from signals_ahoy import signals
+from satchmo_utils import app_enabled, signals
 
 class PurchaseorderPayShipForm(SimplePayShipForm):
     po_number = forms.CharField(max_length=20, required=False)

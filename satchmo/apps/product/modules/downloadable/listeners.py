@@ -8,7 +8,7 @@ from satchmo_store.shop import notification
 from satchmo_store.shop import signals
 from satchmo_store.shop.listeners import recalc_total_on_contact_change, decrease_inventory_on_sale
 
-from signals_ahoy.signals import collect_urls
+from satchmo_utils.signals import collect_urls
 
 import logging
 

@@ -7,7 +7,7 @@ from satchmo_store.mail import send_html_email
 from satchmo_store.shop import signals
 from satchmo_store.shop.exceptions import OutOfStockError
 from satchmo_store.shop.models import Order
-from signals_ahoy.signals import application_search
+from satchmo_utils.signals import application_search
 
 import notification
 import logging
