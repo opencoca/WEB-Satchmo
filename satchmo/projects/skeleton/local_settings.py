@@ -51,10 +51,13 @@ SITE_DOMAIN = "localhost"
 SITE_NAME = "Simple Satchmo"
 
 # not suitable for deployment, for testing only, for deployment strongly consider memcached.
-CACHE_BACKEND = "locmem:///"
-CACHE_TIMEOUT = 60*5
-CACHE_PREFIX = "Z"
-
+CACHES = {
+    'default': {
+        'BACKEND': 'django.core.cache.backends.locmem.LocMemCache',
+        'LOCATION': 'satchmo-cache',
+        'TIMEOUT': 60
+    }
+}
 ACCOUNT_ACTIVATION_DAYS = 7
 
 #Configure logging
