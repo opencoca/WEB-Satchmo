@@ -135,7 +135,7 @@ def simple_pay_ship_process_form(request, contact, working_cart, payment_module,
                 order_data['shipping'] = order.shipping_model
             ordershippable = order.is_shippable
         except Order.DoesNotExist:
-            pass
+            ordershippable = False
 
         form = SimplePayShipForm(request, payment_module, order_data)
         if allow_skip:
