@@ -42,5 +42,4 @@ else:
     )
 
 urlpatterns = basepatterns + shoppatterns + defaultpatterns
-
 urlhelper.remove_duplicate_urls(urlpatterns, [])

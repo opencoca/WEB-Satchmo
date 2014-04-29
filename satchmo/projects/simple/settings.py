@@ -26,14 +26,15 @@ LANGUAGE_CODE = 'en-us'
 SITE_ID = 1
 
 # Absolute path to the directory that holds media.
-# Example: "/home/media/media.lawrence.com/"
-#Image files will be stored off of this path
 MEDIA_ROOT = os.path.join(DIRNAME, 'static/')
-#MEDIA_ROOT = "/static"
-# URL that handles the media served from MEDIA_ROOT.
-# Example: "http://media.lawrence.com"
-#MEDIA_URL = 'site_media'
-MEDIA_URL="/static/"
+MEDIA_URL = "/media/"
+
+# Absolute path to the directory that holds static files.
+STATIC_URL="/static/"
+STATICFILES_DIRS = (
+    os.path.join(DIRNAME, 'static'),
+)
+
 # URL prefix for admin media -- CSS, JavaScript and images. Make sure to use a
 # trailing slash.
 # Examples: "http://foo.com/media/", "/media/".
@@ -83,6 +84,7 @@ INSTALLED_APPS = (
     'django.contrib.auth',
     'django.contrib.contenttypes',
     'django.contrib.comments',
+    'django.contrib.staticfiles',
     'django.contrib.sessions',
     'django.contrib.sitemaps',
     'registration',

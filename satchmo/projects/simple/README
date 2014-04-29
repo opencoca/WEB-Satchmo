@@ -1,6 +1,13 @@
 This is a very basic example of a "simple" Satchmo store.
 
-It should work right from checkout.  Start it with "./manage.py runserver" and browse to http://localhost:8000/
+It should work right from checkout.  
+
+Required packages can be installed with:
+pip install -r ../../../scripts/requirements.txt
+
+
+
+Start it with "./manage.py runserver" and browse to http://localhost:8000/
 
 Admin is:
 
