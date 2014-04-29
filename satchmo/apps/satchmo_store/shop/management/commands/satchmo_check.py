@@ -91,8 +91,6 @@ class Command(NoArgsCommand):
 
         verbose_check_install('django_livesettings', 'livesettings', '1.4-8', '9a3f0ed0dca5')
 
-        verbose_check_install('django_signals_ahoy', 'signals_ahoy', '0.1.0', '9ad8779d4c63')
-
         verbose_check_install('django_threaded_multihost', 'threaded_multihost', '1.4.1', '7ca3743d8a70')
 
         verbose_check_install('django-keyedcache', 'keyedcache', '1.4-4', '4be18235b372')

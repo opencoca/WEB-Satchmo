@@ -7,7 +7,7 @@ from livesettings import config_value
 from satchmo_store.contact.models import Contact, AddressBook, PhoneNumber, Organization, ContactRole
 from satchmo_store.shop.models import Config
 from satchmo_store.shop.utils import clean_field
-from signals_ahoy.signals import form_init, form_initialdata, form_postsave
+from satchmo_utils.signals import form_init, form_initialdata, form_postsave
 import datetime
 import logging
 import signals

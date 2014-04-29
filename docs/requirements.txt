@@ -63,10 +63,6 @@ There are also a number of other Django packages (mentioned below) that you will
 
   .. versionadded:: 0.9.1
 
-- For reusable, consistent signals:
-
-  - `Signals Ahoy`_
-
 - For the account registration process, you will need:
 
   - `Django Registration`_
@@ -120,7 +116,6 @@ Detailed steps for installing these dependencies is included in the :doc:`new_in
 .. _`Django Threaded Multihost`: http://bitbucket.org/bkroeze/django-threaded-multihost
 .. _`Django App Plugins`: http://bitbucket.org/bkroeze/django-caching-app-plugins/
 .. _`SSL Backport`: http://pypi.python.org/pypi/ssl/
-.. _`Signals Ahoy`: http://bitbucket.org/bkroeze/django-signals-ahoy/
 .. _DocUtils: http://docutils.sourceforge.net/
 .. _Django Livesettings: http://bitbucket.org/bkroeze/django-livesettings
 .. _Django Keyedcache: http://bitbucket.org/bkroeze/django-keyedcache

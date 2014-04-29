@@ -10,5 +10,4 @@ django-registration
 django-livesettings
 django-threaded-multihost
 django-caching-app-plugins
-django-signals-ahoy
 django-keyedcache

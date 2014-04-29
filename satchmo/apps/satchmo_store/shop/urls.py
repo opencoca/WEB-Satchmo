@@ -3,7 +3,7 @@ from django.views.generic.base import TemplateView
 from product.urls import urlpatterns as productpatterns
 from satchmo_store import shop
 from satchmo_store.shop.views.sitemaps import sitemaps
-from signals_ahoy.signals import collect_urls
+from satchmo_utils.signals import collect_urls
 
 urlpatterns = shop.get_satchmo_setting('SHOP_URLS')
 

@@ -67,10 +67,6 @@ Installing Dependencies
 
         pip install sorl-thumbnail
 
-#. Install signals-ahoy::
-
-        pip install django-signals-ahoy
-
 #. Install livesettings::
 
         pip install django-livesettings
