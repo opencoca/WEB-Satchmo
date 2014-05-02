@@ -45,15 +45,7 @@ Installing Dependencies
 
         pip install pycrypto
         pip install pyyaml
-
-#. Install Python Imaging Library. There are multiple options for installing
-   this application; please use one of the options below:
-
-   - Download the binary from the `PIL site`_ and install.
-
-   - Use your distribution's package manager. For Ubuntu::
-
-       sudo apt-get install python-imaging
+        pip install pillow
 
 #. Install django-threaded-multihost::
 
@@ -228,4 +220,4 @@ Useful Links
 .. _Django installation guide: http://www.djangoproject.com/documentation/install/
 .. _`Django Comment Utils`: http://code.google.com/p/django-comment-utils/
 .. _easy_install : http://peak.telecommunity.com/DevCenter/EasyInstall#installation-instructions
-.. _`PIL site`: http://www.pythonware.com/products/pil/
+.. _`Pillow`: http://pillow.readthedocs.org/en/latest/

@@ -19,7 +19,7 @@ features in Satchmo.
 
 - Satchmo's thumbnail capability is very robust and utilizes the following packages:
 
-  - `Python Imaging Library`_
+  - `Pillow`_
   - Sorl Thumbnail
   
     .. versionadded:: 0.9.3 - Use the latest version of Sorl Thumbnail
@@ -101,7 +101,7 @@ A valid Django cache backend (file, memcached or DB) is required for the config 
 Detailed steps for installing these dependencies is included in the :doc:`new_installation` section.
 
 .. _Django installation guide: http://www.djangoproject.com/documentation/install/
-.. _Python Imaging Library: http://www.pythonware.com/products/pil/
+.. _Pillow: http://pillow.readthedocs.org/en/latest/
 .. _Elementtree: http://effbot.org/zone/element-index.htm
 .. _Python cryptography toolkit: http://pypi.python.org/pypi/pycrypto/2.6
 .. _Windows binary: http://www.voidspace.org.uk/python/modules.shtml#pycrypto
