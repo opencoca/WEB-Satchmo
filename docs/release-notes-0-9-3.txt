@@ -12,10 +12,12 @@ New Features
  * Send email to gift certificate recipients
  * Rewrite PDF (document) generation, removed trml2pdf and Reportlab dependencies: please see :ref:`document_settings_trml2pdf` and the migration notes when upgrading
  * Updated to using django-registration 0.8
+  
 
 Translations
 ------------
  * Italian updates
+ * Russian updates
 
 Bug Fixes
 ---------
@@ -23,14 +25,18 @@ Bug Fixes
  * Javascript updates for newer jquery
  * Fix bug with required login not working
  * Ensure TRACK_INVENTORY is used in all payment modules
+ * Updated cache settings to use the new format
+ * Multiple minor bug cleanups and fixes
+ * Update views to use new class-based generic views
  
 Performance Improvements
 ------------------------
  * DB optimizations using new prefetch_related from Django 1.4 
  * Tweaks to product ratings
  
-Additional Packages
--------------------
+Additional Notes
+-----------------
+ * Remove django-signals-ahoy as a dependency
 
 Migration Notes
 ---------------
