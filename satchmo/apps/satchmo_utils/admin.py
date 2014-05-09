@@ -14,8 +14,10 @@ from django.contrib import admin
 from django.http import HttpResponse, HttpResponseNotFound
 from django.utils.encoding import smart_str
 from django.utils.safestring import mark_safe
-from django.utils.text import truncate_words
-from django.utils.functional import update_wrapper
+try:
+    from functools import update_wrapper
+except ImportError:
+    from django.utils.functional import update_wrapper
 # Commenting out for Django 1.3 compatibility
 # TODO: Need to find long term solution
 #from django.contrib.admin.templatetags.admin_static import static
@@ -28,7 +30,12 @@ class ForeignKeySearchInput(forms.HiddenInput):
     instead in a <select> box.
     """
 
-    to_string_function = lambda s: truncate_words(s, 14)
+    try:
+        from django.utils.text import truncate_words
+        to_string_function = lambda s: truncate_words(s, 14)
+    except ImportError:
+        from django.utils.text import Truncator
+        to_string_function = lambda s: Truncator(s).words(14)
 
     class Media:
         css = {
