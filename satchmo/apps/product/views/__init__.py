@@ -1,7 +1,6 @@
 from decimal import Decimal
 from django import http
 from django.contrib.messages import constants, get_messages
-from django.core.xheaders import populate_xheaders
 from django.shortcuts import get_object_or_404, render_to_response
 from django.template import RequestContext
 from django.template.loader import select_template
@@ -160,7 +159,11 @@ def get_product(request, product_slug=None, selected_options=(),
     context = RequestContext(request, extra_context)
 
     response = http.HttpResponse(template.render(context))
-    populate_xheaders(request, response, Product, product_id)
+    try:
+        from django.core.xheaders import populate_xheaders
+        populate_xheaders(request, response, Product, product_id)
+    except ImportError:
+        pass
     return response
 
 def get_price(request, product_slug):
