@@ -154,7 +154,7 @@ class CustomChargeForm(forms.Form):
     orderitem = forms.IntegerField(required=True, widget=forms.HiddenInput())
     amount = forms.DecimalField(label=_('New price'), required=False)
     shipping = forms.DecimalField(label=_('Shipping adjustment'), required=False)
-    notes = forms.CharField(_("Notes"), required=False, initial="Your custom item is ready.")
+    notes = forms.CharField(label=_('Notes'), required=False, initial="Your custom item is ready.")
 
     def __init__(self, *args, **kwargs):
         initial = kwargs.get('initial', {})
