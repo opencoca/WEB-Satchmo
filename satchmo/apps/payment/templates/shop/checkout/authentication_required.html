@@ -1,4 +1,4 @@
-{% extends "shop/base.html" %} 
+{% extends "shop/base.html" %} {% load url from future %}
 {% load i18n %} 
  
 {% block navbar %} 
@@ -15,8 +15,8 @@
     <li>{% trans "Confirmation" %}</li> 
 </ul> 
 </div> 
-<form method="post" action="{% if is_secure %}{% url auth_secure_login %}{% else %}{{ login_url }}{% endif %}">{% csrf_token %} 
-<input type="hidden" name="next" value="{% url satchmo_checkout-step1 %}" /> 
+<form method="post" action="{% if is_secure %}{% url 'auth_secure_login' %}{% else %}{{ login_url }}{% endif %}">{% csrf_token %} 
+<input type="hidden" name="next" value="{% url 'satchmo_checkout-step1' %}" /> 
 <table> 
                 <tr> 
                         <td colspan="2"> 
@@ -29,6 +29,6 @@
 </table> 
 </form> 
  
-<p>{% trans "If you do not have an account, please" %} <a href="{% url registration_register %}?next={% url satchmo_checkout-step1 %}">{% trans "click here" %}</a>.</p> 
-<p>{% trans "If you do not remember your password, please" %} <a href="{% url auth_password_reset %}">{% trans "click here</a> to have it reset." %}</p> 
+<p>{% trans "If you do not have an account, please" %} <a href="{% url 'registration_register' %}?next={% url 'satchmo_checkout-step1' %}">{% trans "click here" %}</a>.</p> 
+<p>{% trans "If you do not remember your password, please" %} <a href="{% url 'auth_password_reset' %}">{% trans "click here</a> to have it reset." %}</p> 
 {% endblock %} 

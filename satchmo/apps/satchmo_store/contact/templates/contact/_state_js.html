@@ -1,4 +1,4 @@
-{% if shop.options.SHOP.ENFORCE_STATE.value %}
+{% if shop.options.SHOP.ENFORCE_STATE.value %}{% load url from future %}
 <script type="text/javascript">
 /**
  * Populates state fields when the user selects a country.
@@ -47,7 +47,7 @@ jQuery(document).ready(function($) {
 
 			$.ajax({
 				type: "GET",
-				url: "{% url satchmo_contact_ajax_state %}",
+				url: "{% url 'satchmo_contact_ajax_state' %}",
 				data: data,
 				success: success,
 				error: error,

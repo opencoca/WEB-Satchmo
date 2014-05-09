@@ -174,7 +174,7 @@ need to tell Satchmo how to access these views.  This is where the ``urls.py`` f
 
 For most processors, a simple file would look like this::
 
-    from django.conf.urls.defaults import *
+    from django.conf.urls import *
     from livesettings import config_value, config_get_group
 
 

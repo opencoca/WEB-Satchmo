@@ -66,7 +66,7 @@ class ForeignKeySearchInput(forms.HiddenInput):
                 #lookup_%(name)s {
                     padding-right:16px;
                     background: url(
-                        %(admin_media_prefix)simg/admin/selector-search.gif
+                        %(static_url)sadmin/img/admin/selector-search.gif
                     ) no-repeat right;
                 }
                 #del_%(name)s {
@@ -75,7 +75,7 @@ class ForeignKeySearchInput(forms.HiddenInput):
             </style>
 <input type="text" id="lookup_%(name)s" value="%(label)s"/>
 <a href="#" id="del_%(name)s">
-<img src="%(admin_media_prefix)simg/admin/icon_deletelink.gif" />
+<img src="%(static_url)sadmin/img/admin/icon_deletelink.gif" />
 </a>
 <script type="text/javascript">
             var lookup = $('#lookup_%(name)s')
@@ -104,7 +104,7 @@ class ForeignKeySearchInput(forms.HiddenInput):
             </script>
         ''') % {
             'search_fields': ','.join(self.search_fields),
-            'admin_media_prefix': settings.ADMIN_MEDIA_PREFIX,
+            'static_url': settings.STATIC_URL,
             'model_name': self.rel.to._meta.module_name,
             'app_label': self.rel.to._meta.app_label,
             'label': label,
@@ -138,7 +138,7 @@ class AutocompleteAdmin(admin.ModelAdmin):
         return super(AutocompleteAdmin, self).__call__(request, url)
 
     def get_urls(self):
-        from django.conf.urls.defaults import url
+        from django.conf.urls import url
         
         def wrap(view):
             # This is needed to secure the view so that only admin users can access

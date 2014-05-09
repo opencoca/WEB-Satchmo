@@ -1,9 +1,9 @@
-{% extends "admin/base_site.html" %}
-{% load i18n admin_modify %}
+{% extends "admin/base_site.html" %}{% load url from future %}
+{% load i18n admin_static admin_modify %}
 
 {% block extrastyle %}
 {{ block.super }}
-<link rel="stylesheet" type="text/css" href="{% load adminmedia %}{% admin_media_prefix %}css/forms.css" />
+<link rel="stylesheet" type="text/css" href="{% static 'admin/css/forms.css' %}" />
 
 <style type="text/css">
 form#inventoryform input.text {
@@ -61,10 +61,10 @@ tr.ConfigurableProduct {
 
 {% block coltype %}colMS{% endblock %}
 {% block bodyclass %}dashboard{% endblock %}
-{% block userlinks %}<a href="{% url django-admindocs-docroot %}">{% trans 'Documentation' %}</a> / <a href="{% url admin:password_change %}">{% trans 'Change password' %}</a> / <a href="{% url admin:logout %}">{% trans 'Log out' %}</a>{% endblock %}
+{% block userlinks %}<a href="{% url 'django-admindocs-docroot' %}">{% trans 'Documentation' %}</a> / <a href="{% url 'admin:password_change' %}">{% trans 'Change password' %}</a> / <a href="{% url 'admin:logout' %}">{% trans 'Log out' %}</a>{% endblock %}
 {% block breadcrumbs %}{% if not is_popup %}
 <div class="breadcrumbs">
-     <a href="{% url admin:index %}">{% trans "Home" %}</a> &rsaquo;
+     <a href="{% url 'admin:index' %}">{% trans "Home" %}</a> &rsaquo;
      {% trans "Inventory Management" %}
 </div>
 {% endif %}{% endblock %}
@@ -95,7 +95,7 @@ tr.ConfigurableProduct {
         		</tr>
         		{% endif %}
                 <tr class="{{ field.field.subtypes }}">
-                    <td><a href="{% url admin:product_product_change field.field.product_id %}">{{ field.label_tag }}</a></td>
+                    <td><a href="{% url 'admin:product_product_change' field.field.product_id %}">{{ field.label_tag }}</a></td>
                     <td>{{ field.help_text}}</td>
             {% endifchanged %}
                     <td>

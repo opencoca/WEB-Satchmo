@@ -1,4 +1,4 @@
-{% extends "shop/base.html" %}
+{% extends "shop/base.html" %}{% load url from future %}
 {% load i18n %}
 {% load thumbnail %}
 {% load satchmo_category %}
@@ -27,11 +27,11 @@
                     <a href="{{ product.get_absolute_url }}">{{ product.translated_name }}</a> 
                     <span class="date">{% blocktrans with wish.create_date|date:"y-M-d" as create_date %}added on {{ create_date }}{% endblocktrans %}</span>
                 </div>
-                <form name="addform" action="{% url satchmo_wishlist_move_to_cart %}" method="POST">{% csrf_token %}
+                <form name="addform" action="{% url 'satchmo_wishlist_move_to_cart' %}" method="POST">{% csrf_token %}
                     <input type="hidden" name="id" value="{{ wish.id }}" />
                     <input type="submit" value="{% trans 'Add to cart' %}" />
                 </form>
-                <form name="addform" action="{% url satchmo_wishlist_remove %}" method="POST">{% csrf_token %}
+                <form name="addform" action="{% url 'satchmo_wishlist_remove' %}" method="POST">{% csrf_token %}
                     <input type="hidden" name="id" value="{{ wish.id }}" />
                     <input type="submit" value="{% trans 'Remove from wishlist' %}" />
                 </form>

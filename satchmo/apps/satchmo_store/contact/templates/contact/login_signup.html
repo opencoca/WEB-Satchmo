@@ -1,4 +1,4 @@
-{% extends "shop/base.html" %}
+{% extends "shop/base.html" %}{% load url from future %}
 {% load i18n %}
 
 {% block pagetitle %}Login{% endblock %}
@@ -14,9 +14,9 @@
 
 {% include "contact/_login_form.html" %}
 
-<form name="createform" method="post" action="{% url auth_login %}">{% csrf_token %}
+<form name="createform" method="post" action="{% url 'auth_login' %}">{% csrf_token %}
 <input type="hidden" name="action" value="create" />
-<input type="hidden" name="next" value="{% if next %}{{ next }}{% else %}{% url satchmo_account_info %}{% endif %}" />
+<input type="hidden" name="next" value="{% if next %}{{ next }}{% else %}{% url 'satchmo_account_info' %}{% endif %}" />
 <table class="form nohead">
     <thead>
         <tr>

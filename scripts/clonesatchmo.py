@@ -53,9 +53,9 @@ def check_skeleton_dir(skel_dir):
     if os.path.isdir(skel_dir):
         check_dir = os.path.join(skel_dir, 'localsite')
         if not os.path.isdir(check_dir):
-            return (False, "Skeleton directory does not contain localsite subdirectory. Path should be /path/to/satchmo/projects/skeleton")
+            return (False, "Skeleton directory does not contain localsite subdirectory. Use --skel=/path/to/satchmo/projects/skeleton")
     else:
-        return (False, "Invalid skeleton directory. Path should be /path/to/satchmo/projects/skeleton")
+        return (False, "Skeleton directory not found. Use --skel=/path/to/satchmo/projects/skeleton")
     return (True, "")
 
 def create_satchmo_site(site_name, skeleton_dir):
@@ -69,11 +69,15 @@ def create_satchmo_site(site_name, skeleton_dir):
         src_dir = os.path.abspath(skeleton_dir)
     else:
         clone_dir = os.path.dirname(__file__)
-        src_dir = os.path.abspath(os.path.join(clone_dir,'../satchmo/projects/skeleton'))
-        result,msg = check_skeleton_dir(src_dir)
+        src_dir = os.path.abspath(os.path.join(clone_dir, '../satchmo/projects/skeleton'))
+        result, msg = check_skeleton_dir(src_dir)
         if not result:
-            return (False, msg)
-    dest_dir = os.path.join('./',site_name)
+            try:
+                import satchmo_skeleton
+            except ImportError:
+                return (False, msg)
+            src_dir = os.path.dirname(satchmo_skeleton.__file__)
+    dest_dir = os.path.join('./', site_name)
     shutil.copytree(src_dir, dest_dir)
     return (True, "")
 
@@ -135,8 +139,11 @@ if __name__ == '__main__':
     
     errors = []
     dest_dir = os.path.join('./',opts.site_name)
-    
-    result, msg = check_skeleton_dir(opts.skeleton_dir)
+
+    skeleton_dir = opts.skeleton_dir
+    if skeleton_dir and skeleton_dir.startswith('~/'):
+        skeleton_dir = os.path.join(os.environ.get('HOME', ''), skeleton_dir[2:])
+    result, msg = check_skeleton_dir(skeleton_dir)
     if not result:
         errors.append(msg)
     if os.path.isdir(dest_dir):
@@ -145,23 +152,20 @@ if __name__ == '__main__':
         import PIL as Image
     except ImportError:
         errors.append("The Python Imaging Library is not installed. Install from your distribution binaries.")
+    if not errors:
+        print "Creating the Satchmo Application"
+        result, msg = create_satchmo_site(opts.site_name, skeleton_dir)
+        if not result:
+            print msg
+            sys.exit()
+        print "Customizing the files"
+        customize_files(opts.site_name, opts.local_site_name)
+        print "Performing initial data synching"
+        errors = setup_satchmo(opts.site_name, opts.local_site_name)
     if errors:
         for error in errors:
-            print error
+            print "Error: %s" % error
         sys.exit()
-    print "Creating the Satchmo Application"
-    result, msg = create_satchmo_site(opts.site_name, opts.skeleton_dir)
-    if not result:
-        print msg
-        sys.exit()
-    print "Customizing the files"
-    customize_files(opts.site_name, opts.local_site_name)
-    print "Performing initial data synching"
-    errors = setup_satchmo(opts.site_name, opts.local_site_name)
-    if errors:
-        print "Store setup had the following setup errors:"
-        for error in errors:
-            print "- %s" % error
-        sys.exit()
-    print "Store installation complete."
-    print "You may run the server by typying: \n cd %s \n python manage.py runserver" % opts.site_name
+    else:
+        print "Store installation complete."
+        print "You may run the server by typing: \n  cd %s \n  python manage.py runserver" % opts.site_name

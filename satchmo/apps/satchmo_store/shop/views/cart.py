@@ -26,6 +26,8 @@ import logging
 try:
     from django.utils.simplejson.encoder import JSONEncoder
 except ImportError:
+    from django.utils.simplejson import JSONEncoder
+except ImportError:
     from simplejson.encoder import JSONEncoder
 
 log = logging.getLogger('shop.views.cart')

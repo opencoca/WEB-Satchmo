@@ -36,8 +36,7 @@
     <tr class="shiprow"><td><label for="id_ship_postal_code">{% trans "Zipcode/Postcode" %} {% if form.ship_postal_code.field.required %}*{% endif %}</label></td><td>{{ form.ship_postal_code }}</td></tr>
     {% if form.ship_postal_code.errors %}<tr><td class="error" colspan="2">*** {{ form.ship_postal_code.errors|join:", " }}</td></tr>{% endif %}
 
-    {% if not country %}
     <tr class="shiprow"><td><label for="id_ship_country">{% trans "Country" %} {% if form.ship_country.field.required %}*{% endif %}</label></td><td> {{ form.ship_country }}</td></tr>
     {% if form.ship_country.errors %}<tr><td class="error" colspan="2">*** {{ form.ship_country.errors|join:", " }}</td></tr>{% endif %}
-    {% endif %}
+
 {% endblock %}

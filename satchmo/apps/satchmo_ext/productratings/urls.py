@@ -1,6 +1,6 @@
 """urlpatterns for productratings.  Note that you do not need to add these to your urls anywhere, they'll be automatically added by the collect_urls signals."""
 
-from django.conf.urls.defaults import *
+from django.conf.urls import *
 import logging
 
 log = logging.getLogger('productratings.urls')

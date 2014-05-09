@@ -1,4 +1,4 @@
-{% extends "shop/base.html" %}
+{% extends "shop/base.html" %}{% load url from future %}
 {% load i18n %}
 
 {% block extra-head %}
@@ -7,7 +7,7 @@
 
 {% block navbar %}
    <li class="first"><a href="{{ shop_base }}/">{% trans "Home" %}</a></li>
-   <li><a href="{% url satchmo_account_info %}">{% trans "Account" %}</a></li>
+   <li><a href="{% url 'satchmo_account_info' %}">{% trans "Account" %}</a></li>
    <li>{% trans "Add Address" %}</li>
 {% endblock %}
 
@@ -24,9 +24,9 @@
 {% endif %}
 
 {% if editing %}
-<form method="post" action="{% url satchmo_address_edit entry.id %}{% if next %}?next={{next}}{% endif%}">{% csrf_token %}
+<form method="post" action="{% url 'satchmo_address_edit' entry.id %}{% if next %}?next={{next}}{% endif%}">{% csrf_token %}
 {% else %}
-<form method="post" action="{% url satchmo_address_create %}{% if next %}?next={{next}}{% endif%}">{% csrf_token %}
+<form method="post" action="{% url 'satchmo_address_create' %}{% if next %}?next={{next}}{% endif%}">{% csrf_token %}
 {% endif %}
 <table>
     <tr><td colspan="2"><p>{% trans "You&apos;ll need to fill out at least the fields with a *" %}</p></td></tr>

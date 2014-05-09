@@ -6,7 +6,7 @@ from livesettings import config_value
 from satchmo_store.accounts.signals import satchmo_registration
 from satchmo_store.contact.signals import satchmo_contact_view
 from satchmo_utils import load_module
-from signals_ahoy.signals import form_initialdata
+from satchmo_utils.signals import form_initialdata
 import logging
 import signals
 

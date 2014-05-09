@@ -5,9 +5,9 @@ Satchmo is based on the Django framework, therefore you do need a fully function
 Django instance to use Satchmo.  The `Django installation guide`_ will step you
 through the process.
 
-You must use Django 1.4 or greater. 
+You must use Django 1.4.x. Satchmo is not compatible with Django 1.5.x at this time.
 
-Satchmo requires Python 2.5 or later and a database supported by Django.
+Satchmo requires Python 2.6 or later and a database supported by Django.
 
 There is always a challenge in deciding how many dependencies to include in a project. With
 Satchmo, we strongly believe in avoiding "Not Invented Here" syndrome and using the power
@@ -19,7 +19,7 @@ features in Satchmo.
 
 - Satchmo's thumbnail capability is very robust and utilizes the following packages:
 
-  - `Python Imaging Library`_
+  - `Pillow`_
   - Sorl Thumbnail
   
     .. versionadded:: 0.9.3 - Use the latest version of Sorl Thumbnail
@@ -33,10 +33,6 @@ features in Satchmo.
 
   - `ReportLab`_
   - Tiny RML2PDF (`download link`_)
-
-- In order to manage hierarchical data and use XML in shipping and payment modules, we use:
-
-  - `Elementtree`_ (included in Python 2.5+)
 
 There are also a number of other Django packages (mentioned below) that you will need to install.
 
@@ -62,10 +58,6 @@ There are also a number of other Django packages (mentioned below) that you will
   - `Django Keyedcache`_
 
   .. versionadded:: 0.9.1
-
-- For reusable, consistent signals:
-
-  - `Signals Ahoy`_
 
 - For the account registration process, you will need:
 
@@ -96,18 +88,12 @@ A valid Django cache backend (file, memcached or DB) is required for the config 
 
   .. versionadded:: 0.9.1
 
-- If you are using a version of python less than 2.6, you will have to install
-  the backport of the new SSL module to support accessing SSL 2.0 sites often
-  used by payment processors:
-
-  - `SSL Backport`_
-
 Detailed steps for installing these dependencies is included in the :doc:`new_installation` section.
 
 .. _Django installation guide: http://www.djangoproject.com/documentation/install/
-.. _Python Imaging Library: http://www.pythonware.com/products/pil/
+.. _Pillow: http://pillow.readthedocs.org/en/latest/
 .. _Elementtree: http://effbot.org/zone/element-index.htm
-.. _Python cryptography toolkit: http://www.amk.ca/python/code/crypto
+.. _Python cryptography toolkit: http://pypi.python.org/pypi/pycrypto/2.6
 .. _Windows binary: http://www.voidspace.org.uk/python/modules.shtml#pycrypto
 .. _ReportLab: http://www.reportlab.com/software/opensource/rl-toolkit/download/
 .. _Sphinx: http://sphinx.pocoo.org/
@@ -119,8 +105,6 @@ Detailed steps for installing these dependencies is included in the :doc:`new_in
 .. _snapshot: http://www.satchmoproject.com/snapshots/
 .. _`Django Threaded Multihost`: http://bitbucket.org/bkroeze/django-threaded-multihost
 .. _`Django App Plugins`: http://bitbucket.org/bkroeze/django-caching-app-plugins/
-.. _`SSL Backport`: http://pypi.python.org/pypi/ssl/
-.. _`Signals Ahoy`: http://bitbucket.org/bkroeze/django-signals-ahoy/
 .. _DocUtils: http://docutils.sourceforge.net/
 .. _Django Livesettings: http://bitbucket.org/bkroeze/django-livesettings
 .. _Django Keyedcache: http://bitbucket.org/bkroeze/django-keyedcache

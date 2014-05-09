@@ -1,4 +1,4 @@
-{% load i18n %}
+{% load i18n %}{% load url from future %}
 <fieldset class="module">
     <h2>{% trans "Custom Order Management" %}</h2>
     <ul>
@@ -7,7 +7,7 @@
             {% ifequal custom.unit_price custom.product.customproduct.full_price %}
                 [{% trans 'Fully charged' %}]
             {% else %}
-                [<a href="{% url satchmo_charge_remaining custom.id %}">{% trans 'Charge remaining amount' %}</a>]
+                [<a href="{% url 'satchmo_charge_remaining' custom.id %}">{% trans 'Charge remaining amount' %}</a>]
             {% endifequal %}
        
             <li>{% trans 'Product Details' %}</li>

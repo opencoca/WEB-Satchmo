@@ -1,9 +1,9 @@
-{% extends "shop/checkout/base_confirm.html" %}
+{% extends "shop/checkout/base_confirm.html" %}{% load url from future %}
 {% load i18n %}
 {% load satchmo_googlecheckout %}
 {# this is the Google confirm template #}
 
-{% block payment_step %}<a href="{% url GOOGLE_satchmo_checkout-step2 %}">{% trans "Payment" %}</a>{% endblock %}
+{% block payment_step %}<a href="{% url 'GOOGLE_satchmo_checkout-step2' %}">{% trans "Payment" %}</a>{% endblock %}
 
 {% block payment_display %}
 <h4>{% trans "Payment" %}</h4>
@@ -13,7 +13,7 @@
 
 {% block payment_form %}
 {% if order.paid_in_full %}
-<form action="{% url GOOGLE_satchmo_checkout_free-confirm %}">
+<form action="{% url 'GOOGLE_satchmo_checkout_free-confirm' %}">
     <input type="submit" value="{% trans "Purchase Items" %}" />
 </form>
 {% else %}

@@ -131,7 +131,7 @@ To enable, see `Enabling Modules`_.
 .. Note::
     Unlike most modules, settings for this module are not displayed in a separate section;
     they are displayed alongside settings that apply across all modules in the
-    :ref:`Shipping Settings section <shipping_settings>`.
+    :ref:`Shipping Settings section <shipping_settings>`. 
 
 .. _shipping_no:
 

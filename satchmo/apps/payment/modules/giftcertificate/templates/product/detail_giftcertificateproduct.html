@@ -1,4 +1,4 @@
-{% extends "product/product.html" %}
+{% extends "product/product.html" %}{% load url from future %}
 {% load i18n %}
 {% load thumbnail %}
 {% load satchmo_price %}
@@ -16,7 +16,7 @@
 {% endfor %}
 
 {% if error_message %}<p><strong>{{ error_message }}</strong></p>{% endif %}
-<form id="options" action="{% url satchmo_smart_add %}" method="post">{% csrf_token %}
+<form id="options" action="{% url 'satchmo_smart_add' %}" method="post">{% csrf_token %}
 
 <div>
 {% trans "Quantity (multiply the gift certificate by this amount)" %} <input type="text", size="4", name="quantity" id="quantity" value="1" class="priced" />

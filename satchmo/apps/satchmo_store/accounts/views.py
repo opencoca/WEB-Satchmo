@@ -7,6 +7,7 @@ from django.shortcuts import render_to_response
 from django.template import RequestContext
 from django.utils.translation import ugettext_lazy as _
 from django.views.decorators.cache import never_cache
+from django.views.generic.base import TemplateView
 from forms import RegistrationAddressForm, RegistrationForm, EmailAuthenticationForm
 from l10n.models import Country
 from livesettings import config_get_group, config_value
@@ -110,7 +111,7 @@ def _get_prev_cart(request):
         if saved_cart and len(saved_cart):
             if 'cart' in request.session:
                 existing_cart = Cart.objects.from_request(request, create=False)
-                if ( (len(existing_cart) == 0) or config_value('SHOP','PERSISTENT_CART_MERGE') ):
+                if existing_cart.pk != saved_cart.pk and ( (len(existing_cart) == 0) or config_value('SHOP','PERSISTENT_CART_MERGE') ):
                     # Merge the two carts together
                     saved_cart.merge_carts(existing_cart)
 
@@ -387,4 +388,13 @@ def register(request, redirect=None, template='registration/registration_form.ht
 
         context = RequestContext(request, ctx)
         return render_to_response(template, context_instance=context)
+
+
+class RegistrationComplete(TemplateView):
+
+    def get_context_data(self, **kwargs):
+        context = super(RegistrationComplete, self).get_context_data(**kwargs)
+        verify = (config_value('SHOP', 'ACCOUNT_VERIFICATION') == 'EMAIL')
+        context.update(verify=verify)
+        return context
 

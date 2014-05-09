@@ -1,4 +1,4 @@
-from django.conf.urls.defaults import *
+from django.conf.urls import *
 
 urlpatterns = patterns('product.views',
     (r'^(?P<parent_slugs>([-\w]+/)*)?(?P<slug>[-\w]+)/$',
