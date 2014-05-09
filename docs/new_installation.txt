@@ -11,7 +11,7 @@ This guide assumes you are working on a unix variant and that you are installing
 you have write access to. In the below example, we use :file:`/home/user/src`. You are expected to modify the path to fit your needs.
 
 .. warning::
-   You must have Django 1.4 or higher properly installed.
+   You must have Django 1.4.x properly installed. Satchmo is not compatible with Django 1.5 at this time.
 
 A Quick Note About Installing Dependencies
 ------------------------------------------
@@ -32,8 +32,7 @@ straightforward as possible, we show how to install the packages with either:
 .. note::
     The provided egg and tar files by the various dependencies may not be the
     most current installation, so you should ensure that the version recommended
-    by satchmo (see :doc:`requirements`) is available via
-    :command:`easy_install` before proceeding.
+    by satchmo (see :doc:`requirements`) is available via `easy_install` before proceeding.
 
 Installing Dependencies
 -----------------------
@@ -46,15 +45,7 @@ Installing Dependencies
 
         pip install pycrypto
         pip install pyyaml
-
-#. Install Python Imaging Library. There are multiple options for installing
-   this application; please use one of the options below:
-
-   - Download the binary from the `PIL site`_ and install.
-
-   - Use your distribution's package manager. For Ubuntu::
-
-       sudo apt-get install python-imaging
+        pip install pillow
 
 #. Install django-threaded-multihost::
 
@@ -67,10 +58,6 @@ Installing Dependencies
 #. Install sorl-thumbnail::
 
         pip install sorl-thumbnail
-
-#. Install signals-ahoy::
-
-        pip install django-signals-ahoy
 
 #. Install livesettings::
 
@@ -233,4 +220,4 @@ Useful Links
 .. _Django installation guide: http://www.djangoproject.com/documentation/install/
 .. _`Django Comment Utils`: http://code.google.com/p/django-comment-utils/
 .. _easy_install : http://peak.telecommunity.com/DevCenter/EasyInstall#installation-instructions
-.. _`PIL site`: http://www.pythonware.com/products/pil/
+.. _`Pillow`: http://pillow.readthedocs.org/en/latest/

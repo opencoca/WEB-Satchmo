@@ -1,15 +1,15 @@
-{% extends "admin/base_site.html" %}
-{% load i18n admin_modify %}
+{% extends "admin/base_site.html" %}{% load url from future %}
+{% load i18n admin_static admin_modify %}
 
-{% block stylesheet %}{% load adminmedia %}{% admin_media_prefix %}css/forms.css{% endblock %}
+{% block stylesheet %}{% static 'admin/css/forms.css' %}{% endblock %}
 
 {% block coltype %}colMS{% endblock %}
 {% block bodyclass %}dashboard{% endblock %}
-{% block userlinks %}<a href="{% url django-admindocs-docroot %}">{% trans 'Documentation' %}</a> / <a href="{% url admin:password_change %}">{% trans 'Change password' %}</a> / <a href="{% url admin:logout %}">{% trans 'Log out' %}</a>{% endblock %}
+{% block userlinks %}<a href="{% url 'django-admindocs-docroot' %}">{% trans 'Documentation' %}</a> / <a href="{% url 'admin:password_change' %}">{% trans 'Change password' %}</a> / <a href="{% url 'admin:logout' %}">{% trans 'Log out' %}</a>{% endblock %}
 {% block breadcrumbs %}{% if not is_popup %}
 <div class="breadcrumbs">
-     <a href="{% url admin:index %}">{% trans "Home" %}</a> &rsaquo;
-     <a href="{% url satchmo_admin_product_export %}">{% trans "Product import/export" %}</a> &rsaquo;
+     <a href="{% url 'admin:index' %}">{% trans "Home" %}</a> &rsaquo;
+     <a href="{% url 'satchmo_admin_product_export' %}">{% trans "Product import/export" %}</a> &rsaquo;
      {% trans "Results" %}
 </div>
 {% endif %}{% endblock %}

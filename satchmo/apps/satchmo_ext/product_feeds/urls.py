@@ -1,7 +1,7 @@
 """
 Urls for product feeds, note that this does not have to get added manually to the urls, it will be added automatically by satchmo core if this app is installed.
 """
-from django.conf.urls.defaults import *
+from django.conf.urls import *
 import logging
 log = logging.getLogger('product_feeds.urls')
 

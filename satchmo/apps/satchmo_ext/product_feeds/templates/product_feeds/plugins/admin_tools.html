@@ -1,4 +1,4 @@
-{% load i18n %}
+{% load i18n %}{% load url from future %}
 <li>
-	<a href="{% url satchmo_product_feed %}">{% trans 'Export Products as CSV' %}</a><br/>
+	<a href="{% url 'satchmo_product_feed' %}">{% trans 'Export Products as CSV' %}</a><br/>
 </li>

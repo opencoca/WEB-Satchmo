@@ -137,11 +137,14 @@ class Shipper(BaseShipper):
         # Shipper's address
         rate_request.RequestedShipment.Shipper.Address.PostalCode = shop_details.postal_code
         rate_request.RequestedShipment.Shipper.Address.CountryCode = shop_details.country.iso2_code
+        rate_request.RequestedShipment.Shipper.Address.StateOrProvinceCode = shop_details.country.state
+        
         rate_request.RequestedShipment.Shipper.Address.Residential = False
 
         # Recipient address
         rate_request.RequestedShipment.Recipient.Address.PostalCode = contact.shipping_address.postal_code
         rate_request.RequestedShipment.Recipient.Address.CountryCode = contact.shipping_address.country.iso2_code
+        rate_request.RequestedShipment.Recipient.Address.StateOrProvinceCode = contact.shipping_address.state
         # This flag is optional. When turned on, it limits flexibility in options you can select
         #rate_request.RequestedShipment.Recipient.Address.Residential = True
 

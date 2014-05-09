@@ -1,4 +1,4 @@
-{% extends "shop/base.html" %}
+{% extends "shop/base.html" %}{% load url from future %}
 {% load i18n %}
 {% load satchmo_currency %}
 {% load satchmo_checkout %}
@@ -6,7 +6,7 @@
 
 {% block navbar %}
    <li class="first"><a href="{{ shop_base }}/">{% trans "Home" %}</a></li>
-   <li><a href="{% url satchmo_account_info %}">{% trans "Account" %}</a></li>
+   <li><a href="{% url 'satchmo_account_info' %}">{% trans "Account" %}</a></li>
    <li>{% trans "Order History" %}</li>
 {% endblock %}
 
@@ -28,7 +28,7 @@
             {% for order in orders %}
             <tr>
                 <td class="ordernumber">
-                    <a href="{% url satchmo_order_tracking order.id %}">{{ order.id }}</a>
+                    <a href="{% url 'satchmo_order_tracking' order.id %}">{{ order.id }}</a>
                 </td>
                 <td class="orderstatus">
                     {{ order.status|status_label }}

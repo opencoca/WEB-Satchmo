@@ -214,7 +214,7 @@ which have been slightly optimized for direct printing
 Should this not be enough for you,
 Satchmo also includes two (optional) ways
 to export said documents in :abbr:`PDF (Portable Document Format)`:
-one based on trml2pdf_ and the other based on wkhtml2pdf_.
+one based on trml2pdf_ and the other based on _wkhtmltopdf.
 
 Which system to use is controlled by the ``'DOCUMENT_CONVERTER'`` key
 within the ``SATCHMO_SETTINGS`` dictionary,

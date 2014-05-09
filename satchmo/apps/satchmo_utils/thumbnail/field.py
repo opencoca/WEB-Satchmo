@@ -1,10 +1,12 @@
 from django.db.models import signals
-from django.db.models.fields.files import ImageField
+from sorl.thumbnail import ImageField
 from livesettings import config_value, SettingNotSet
-from satchmo_utils.thumbnail.utils import remove_file_thumbnails, rename_by_field
+from satchmo_utils.thumbnail.utils import rename_by_field
 from satchmo_utils import normalize_dir
 import logging
 import os
+from django.conf import settings
+from sorl import thumbnail
 
 #ensure config is loaded
 import satchmo_utils.thumbnail.config
@@ -40,12 +42,12 @@ class ImageWithThumbnailField(ImageField):
         self.auto_rename = auto_rename
 
         self.width_field, self.height_field = width_field, height_field
+        self.verbose_name, self.name = verbose_name, name
         if upload_to == "__DYNAMIC__":
             upload_to = upload_dir
-        super(ImageWithThumbnailField, self).__init__(verbose_name, name,
-                                                      width_field, height_field,
-                                                      upload_to=upload_to,
-                                                      **kwargs)
+        super(ImageWithThumbnailField, self).__init__(upload_to=upload_to,
+                **kwargs)
+
         self.name_field = name_field
         self.auto_rename = auto_rename
 
@@ -79,13 +81,23 @@ class ImageWithThumbnailField(ImageField):
                                         )
             setattr(instance, self.attname, image)
             self._renaming = True
+            # Remove current cached thumbnails as a new image will be used
+            self._delete_thumbnail(self, instance, delete_file=False)
             instance.save()
             self._renaming = False
 
-    def _delete_thumbnail(self, sender, instance=None, **kwargs):
+    def _delete_thumbnail(self, sender, instance=None, delete_file=True,
+            **kwargs):
         image = getattr(instance, self.attname)
         if hasattr(image, 'path'):
-            remove_file_thumbnails(image.path)
+            # Use sorl.thumbnail.delete to delete thumbnail
+            # Key Value Store references, cached files and optionally
+            # the source image file
+            if image.path.startswith(settings.MEDIA_ROOT):
+                thumbnail.delete(image.path[len(settings.MEDIA_ROOT):],
+                        delete_file)
+            else:
+                thumbnail.delete(image.path, delete_file)
 
     def contribute_to_class(self, cls, name):
         super(ImageWithThumbnailField, self).contribute_to_class(cls, name)

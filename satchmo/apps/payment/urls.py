@@ -1,4 +1,4 @@
-from django.conf.urls.defaults import patterns, url
+from django.conf.urls import patterns, url
 from django.db import models
 from livesettings import config_value
 from satchmo_store.shop.satchmo_settings import get_satchmo_setting

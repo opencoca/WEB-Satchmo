@@ -33,8 +33,6 @@
     <tr><td><label for="id_postal_code">{% trans "Zipcode/Postcode" %}{% if form.postal_code.field.required %}*{% endif %}</label></td><td> {{ form.postal_code }}</td></tr>
     {% if form.postal_code.errors %}<tr><td class="error" colspan="2">*** {{ form.postal_code.errors|join:", " }}</td></tr>{% endif %}
 
-    {% if not country %}
     <tr><td><label for="id_country">{% trans "Country" %}</label></td><td> {{ form.country }}</td></tr>
     {% if form.country.errors %}<tr><td class="error" colspan="2">*** {{ form.country.errors|join:", " }}</td></tr>{% endif %}
-    {% endif %}
 {% endblock %}

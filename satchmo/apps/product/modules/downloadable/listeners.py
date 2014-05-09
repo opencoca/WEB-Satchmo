@@ -1,4 +1,4 @@
-from django.conf.urls.defaults import patterns as patterns_func
+from django.conf.urls import patterns as patterns_func
 from django.utils.translation import ugettext
 import product
 from product import signals as product_signals
@@ -8,7 +8,7 @@ from satchmo_store.shop import notification
 from satchmo_store.shop import signals
 from satchmo_store.shop.listeners import recalc_total_on_contact_change, decrease_inventory_on_sale
 
-from signals_ahoy.signals import collect_urls
+from satchmo_utils.signals import collect_urls
 
 import logging
 

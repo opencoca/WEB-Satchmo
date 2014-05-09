@@ -1,8 +1,8 @@
 from category import urlpatterns as catpatterns
-from django.conf.urls.defaults import *
+from django.conf.urls import *
 from products import urlpatterns as prodpatterns
 import product
-from signals_ahoy.signals import collect_urls
+from satchmo_utils.signals import collect_urls
 from satchmo_store.shop import get_satchmo_setting
 
 catbase = r'^' + get_satchmo_setting('CATEGORY_SLUG') + '/'

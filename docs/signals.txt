@@ -93,10 +93,10 @@ Signal Descriptions
 External Signals Used in Satchmo
 --------------------------------
 
-Satchmo depends on signals in ``signals_ahoy.signals`` and triggers them at
+Satchmo depends on signals in ``satchmo_utils.signals`` and triggers them at
 various points of execution; below are some of them.
 
-.. currentmodule:: signals_ahoy.signals
+.. currentmodule:: satchmo_utils.signals
 
 .. function:: application_search
 
@@ -136,7 +136,7 @@ Arguments sent with this signal:
         The module having url patterns added to it
 
     ``patterns``
-        The url patterns to be added. This is an instance of ``django.conf.urls.defaults.patterns``
+        The url patterns to be added. This is an instance of ``django.conf.urls.patterns``
 
     ``section``
         The name of the section adding the urls (Note: this argument is not always provided). For example '__init__' or 'product'
@@ -258,7 +258,7 @@ base code.
 Ensuring Acceptance of Terms during Checkout
 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 
-The signal :func:`signals_ahoy.signals.form_init` can be combined with the ``payment.listeners.form_terms_listener`` to add a custom terms and
+The signal :func:`satchmo_utils.signals.form_init` can be combined with the ``payment.listeners.form_terms_listener`` to add a custom terms and
 conditions acceptance box into your checkout flow.
 
 First, add the terms view in your :file:`/localsite/urls.py` file::
@@ -292,7 +292,7 @@ Make sure you register the forms_terms_listener by adding the following code to 
 
     from payment.forms import SimplePayShipForm
     from payment.listeners import form_terms_listener
-    from signals_ahoy.signals import form_init
+    from satchmo_utils.signals import form_init
 
     form_init.connect(form_terms_listener, sender=SimplePayShipForm)
 

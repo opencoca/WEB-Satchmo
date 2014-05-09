@@ -1,4 +1,4 @@
-{% extends "admin/product/change_form.html" %}
+{% extends "admin/product/change_form.html" %}{% load url from future %}
 {% load i18n %}
 {% load satchmo_product_admin %}
 
@@ -12,7 +12,7 @@
 {% comment %} Edit form {% endcomment %}
 <fieldset class="module">
 <h2>{% trans "Helpers" %}</h2>
-<ul><li><a href="{% url satchmo_admin_variation_manager original.pk %}">{% trans "Variation Manager" %}</a></li></ul>
+<ul><li><a href="{% url 'satchmo_admin_variation_manager' original.pk %}">{% trans "Variation Manager" %}</a></li></ul>
 </fieldset>
 <fieldset class="module">
 <h2>{% trans "Variations" %}</h2>

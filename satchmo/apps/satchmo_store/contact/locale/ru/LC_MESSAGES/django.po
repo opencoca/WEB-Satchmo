@@ -717,7 +717,7 @@ msgstr "Регистрация"
 
 #: .\templates\registration\registration_form.html.py:10
 msgid "Please Enter Your Account Information"
-msgstr "Пожалуйств, введите информацию для вашей учетной записи"
+msgstr "Пожалуйста, введите информацию для вашей учетной записи"
 
 #: .\templates\registration\registration_form.html.py:38
 msgid "Create Account"

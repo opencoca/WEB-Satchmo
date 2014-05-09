@@ -1,8 +1,9 @@
-from django.conf.urls.defaults import patterns, include
+from django.conf.urls import patterns, include
+from django.views.generic.base import TemplateView
 from product.urls import urlpatterns as productpatterns
 from satchmo_store import shop
 from satchmo_store.shop.views.sitemaps import sitemaps
-from signals_ahoy.signals import collect_urls
+from satchmo_utils.signals import collect_urls
 
 urlpatterns = shop.get_satchmo_setting('SHOP_URLS')
 
@@ -29,8 +30,9 @@ urlpatterns += patterns('satchmo_store.shop.views',
 urlpatterns += productpatterns
 
 urlpatterns += patterns('',
-    (r'^contact/thankyou/$','django.views.generic.simple.direct_to_template',
-        {'template':'shop/contact_thanks.html'},'satchmo_contact_thanks'),
+    (r'^contact/thankyou/$',
+        TemplateView.as_view(template_name='shop/contact_thanks.html'), {},
+        'satchmo_contact_thanks'),
     (r'^sitemap\.xml$', 'django.contrib.sitemaps.views.sitemap',
         {'sitemaps': sitemaps},
         'satchmo_sitemap_xml'),

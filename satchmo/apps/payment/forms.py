@@ -21,7 +21,7 @@ from satchmo_utils.views import CreditCard
 from shipping.config import shipping_methods, shipping_method_by_key
 from shipping.signals import shipping_choices_query
 from shipping.utils import update_shipping
-from signals_ahoy.signals import form_init, form_initialdata, form_presave, form_postsave, form_validate
+from satchmo_utils.signals import form_init, form_initialdata, form_presave, form_postsave, form_validate
 from tax.templatetags.satchmo_tax import _get_taxprocessor
 from threaded_multihost import threadlocals
 import calendar

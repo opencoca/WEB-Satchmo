@@ -1,4 +1,4 @@
-{% extends "shop/base.html" %}
+{% extends "shop/base.html" %}{% load url from future %}
 {% load i18n %}
 {% load satchmo_currency %}
 {% load satchmo_order %}
@@ -12,7 +12,7 @@
 <h3>{% trans "Checkout" %}</h3>
 <div id="checkoutprogress">
 <ul>
-    <li class="first"><a href="{% url satchmo_checkout-step1 %}">{% trans "Ship/Bill" %}</a></li>
+    <li class="first"><a href="{% url 'satchmo_checkout-step1' %}">{% trans "Ship/Bill" %}</a></li>
     <li>{% block payment_step %}<a href="{{ checkout_step2 }}">{% trans "Payment" %}</a>{% endblock %}</li>
     <li class="active">{% trans "Confirmation" %}</li>
 </ul>
