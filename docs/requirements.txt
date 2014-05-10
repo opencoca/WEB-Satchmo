@@ -20,7 +20,7 @@ features in Satchmo.
 - Satchmo's thumbnail capability is very robust and utilizes the following packages:
 
   - `Pillow`_
-  - Sorl Thumbnail
+  - `Sorl Thumbnail`_
   
     .. versionadded:: 0.9.3 - Use the latest version of Sorl Thumbnail
     
@@ -29,7 +29,7 @@ features in Satchmo.
 
   - `Python cryptography toolkit`_ (`Windows binary`_)
 
-- Satchmo creates PDF output for shipping and invoicing using:
+- Satchmo defaults to using HTML but can create PDF output for shipping and invoicing using:
 
   - `ReportLab`_
   - Tiny RML2PDF (`download link`_)
@@ -109,4 +109,4 @@ Detailed steps for installing these dependencies is included in the :doc:`new_in
 .. _Django Livesettings: http://bitbucket.org/bkroeze/django-livesettings
 .. _Django Keyedcache: http://bitbucket.org/bkroeze/django-keyedcache
 .. _Akismet: http://www.voidspace.org.uk/python/akismet_python.html
-.. _`Sorl Thumbnail version 3.2.5`: http://pypi.python.org/packages/source/s/sorl-thumbnail/sorl-thumbnail-3.2.5.tar.gz
+.. _`Sorl Thumbnail`: http://sorl-thumbnail.readthedocs.org/en/latest/

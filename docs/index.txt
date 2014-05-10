@@ -1,7 +1,11 @@
-=======================
-Satchmo's Documentation
-=======================
+==================
+Welcome to Satchmo
+==================
 
+`Satchmo`_ is an eCommerce framework created in Django
+which allows you to develop unique and robust online stores.
+
+.. _Satchmo: http://satchmoproject.com/
 
 Overview
 ========

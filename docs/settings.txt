@@ -62,6 +62,7 @@ to add any pieces of satchmo.
                 'django.contrib.admindocs',
                 'django.contrib.contenttypes',
                 'django.contrib.comments',
+                'django.contrib.staticfiles',
                 'django.contrib.sessions',
                 'django.contrib.sitemaps',
                 'registration',

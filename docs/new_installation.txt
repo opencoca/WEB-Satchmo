@@ -94,7 +94,7 @@ Installing Dependencies
         pip install fedex
         pip install suds
 
-#. Install django-registration:
+#. Install django-registration::
 
         pip install django-registration
 
