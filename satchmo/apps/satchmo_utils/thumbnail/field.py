@@ -93,11 +93,7 @@ class ImageWithThumbnailField(ImageField):
             # Use sorl.thumbnail.delete to delete thumbnail
             # Key Value Store references, cached files and optionally
             # the source image file
-            if image.path.startswith(settings.MEDIA_ROOT):
-                thumbnail.delete(image.path[len(settings.MEDIA_ROOT):],
-                        delete_file)
-            else:
-                thumbnail.delete(image.path, delete_file)
+            thumbnail.delete(image.path, delete_file)
 
     def contribute_to_class(self, cls, name):
         super(ImageWithThumbnailField, self).contribute_to_class(cls, name)
