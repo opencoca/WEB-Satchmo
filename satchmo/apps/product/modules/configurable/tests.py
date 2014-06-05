@@ -1,9 +1,9 @@
 from decimal import Decimal
 from django.contrib.sites.models import Site
 from django.test import TestCase
+from django.utils import timezone
 from product.models import Option, OptionGroup, Product, Price
 from product.modules.configurable.models import ConfigurableProduct, ProductVariation
-import datetime
 import keyedcache
 from product.utils import serialize_options, productvariation_details
 
@@ -145,8 +145,8 @@ class ProductTest(TestCase):
         self.assertEqual(product.unit_price, Decimal("20.00"))
         self.assertEqual(product.unit_price, product.get_qty_price(Decimal('1')))
 
-        today = datetime.datetime.now()
-        aweek = datetime.timedelta(days=7)
+        today = timezone.now()
+        aweek = timezone.timedelta(days=7)
         nextwk = today + aweek
 
         # new price should override the old one

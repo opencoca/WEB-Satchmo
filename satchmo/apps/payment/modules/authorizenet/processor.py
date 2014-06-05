@@ -1,8 +1,8 @@
-from datetime import datetime
 from decimal import Decimal
 from django.template import loader, Context
 from django.utils.http import urlencode
 from django.utils.translation import ugettext_lazy as _
+from django.utils import timezone
 from payment.modules.base import BasePaymentProcessor, ProcessorResult
 from satchmo_store.shop.models import Config
 from satchmo_utils.numbers import trunc_decimal
@@ -360,7 +360,7 @@ class PaymentProcessor(BasePaymentProcessor):
 
         if not self.is_live():
             # add random test id to this, for testing repeatability
-            invoice = "%s_test_%s_%i" % (invoice,  datetime.now().strftime('%m%d%y'), random.randint(1,1000000))
+            invoice = "%s_test_%s_%i" % (invoice,  timezone.now().strftime('%m%d%y'), random.randint(1,1000000))
 
         cc = order.credit_card.decryptedCC
         ccv = order.credit_card.ccv

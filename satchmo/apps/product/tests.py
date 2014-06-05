@@ -5,6 +5,7 @@ from django.core import urlresolvers
 from django.forms.util import ValidationError
 from django.http import HttpResponse
 from django.test import TestCase
+from django.utils import timezone
 from product.forms import ProductExportForm
 from product.models import (
     Category,
@@ -463,7 +464,7 @@ class ProductTest(TestCase):
         product = Product.objects.get(slug='PY-Rocks')
         self.assertEqual(product.unit_price, Decimal("19.50"))
 
-        today = datetime.datetime.now()
+        today = timezone.now()
         aweek = datetime.timedelta(days=7)
         lastwk = today - aweek
         nextwk = today + aweek

@@ -11,6 +11,7 @@ from django.db import models
 from django.utils.encoding import force_unicode
 from django.utils.safestring import mark_safe
 from django.utils.translation import ugettext, ugettext_lazy as _
+from django.utils import timezone
 from l10n.models import Country
 from l10n.utils import moneyfmt
 from livesettings import ConfigurationSettings, config_value
@@ -23,7 +24,6 @@ import shipping.fields
 import payment.config
 from satchmo_utils.iterchoices import iterchoices_db
 from tax.utils import get_tax_processor
-import datetime
 import keyedcache
 import logging
 import operator
@@ -411,7 +411,7 @@ class Cart(models.Model):
     def save(self, **kwargs):
         """Ensure we have a date_time_created before saving the first time."""
         if not self.pk:
-            self.date_time_created = datetime.datetime.now()
+            self.date_time_created = timezone.now()
         try:
             site = self.site
         except Site.DoesNotExist:
@@ -899,7 +899,7 @@ class Order(models.Model):
         the create_date.
         """
         if not self.pk:
-            self.time_stamp = datetime.datetime.now()
+            self.time_stamp = timezone.now()
             self.copy_addresses()
         super(Order, self).save(**kwargs) # Call the "real" save() method.
 
@@ -1263,7 +1263,7 @@ class OrderStatus(models.Model):
 
     def save(self, **kwargs):
         if not self.pk and not self.time_stamp:
-            self.time_stamp = datetime.datetime.now()
+            self.time_stamp = timezone.now()
         super(OrderStatus, self).save(**kwargs)
         self.order.update_status(self.status)
 
@@ -1298,7 +1298,7 @@ class OrderPaymentBase(models.Model):
 
     def save(self, **kwargs):
         if not self.pk:
-            self.time_stamp = datetime.datetime.now()
+            self.time_stamp = timezone.now()
 
         super(OrderPaymentBase, self).save(**kwargs)
 

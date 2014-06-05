@@ -1,6 +1,6 @@
-from datetime import datetime
 from decimal import Decimal
 from django.test import TestCase
+from django.utils import timezone
 from models import Carrier, ShippingTier, Shipper
 
 def make_tiers(carrier, prices, expires=None):
@@ -86,7 +86,7 @@ class TieredCarrierExpiringTest(TestCase):
         make_tiers(self.carrier, base_prices)
         
     def testExpired(self):
-        dt = datetime(2000, 1, 1)
+        dt = timezone.datetime(2000, 1, 1)
         
         sale_prices = (
             (0, 1),
@@ -104,8 +104,8 @@ class TieredCarrierExpiringTest(TestCase):
 
     def testNotExpired(self):
         
-        now = datetime.now()
-        nextyear = datetime(now.year+1, now.month, now.day)
+        now = timezone.now()
+        nextyear = timezone.datetime(now.year+1, now.month, now.day)
         sale_prices = (
             (0, 1),
             (20, 2),

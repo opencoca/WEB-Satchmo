@@ -3,10 +3,12 @@ from django.contrib.sites.models import Site
 from django.core import urlresolvers
 from django.test import TestCase
 from django.test.client import Client
+from django.utils import timezone
 from product.models import *
 from satchmo_store.contact.models import *
 from satchmo_store.shop.models import *
 import keyedcache
+import datetime
 
 class TestRecurringBilling(TestCase):
     fixtures = ['l10n-data.yaml', 'test_shop.yaml', 'sub_products.yaml', 'config', 'initial_data.yaml']
@@ -15,7 +17,6 @@ class TestRecurringBilling(TestCase):
         self.customer = Contact.objects.create(first_name='Jane', last_name='Doe')
         US = Country.objects.get(iso2_code__iexact="US")
         self.customer.addressbook_set.create(street1='123 Main St', city='New York', state='NY', postal_code='12345', country=US)
-        import datetime
         site = Site.objects.get_current()
         for product in Product.objects.all():
             price, expire_length = self.getTerms(product)
@@ -27,7 +28,7 @@ class TestRecurringBilling(TestCase):
                 quantity=Decimal('1'),
                 unit_price=price,
                 line_item_price=price,
-                expire_date=datetime.datetime.now() + datetime.timedelta(days=expire_length),
+                expire_date=timezone.now() + datetime.timedelta(days=expire_length),
                 completed=True
             )
             order.recalculate_total()
@@ -71,7 +72,7 @@ class TestRecurringBilling(TestCase):
         self.assertEqual(self.response.content, '')
         self.assert_(order_count < OrderItem.objects.count())
         self.assertEqual(order_count, OrderItem.objects.count()/2.0)
-        for order in OrderItem.objects.filter(expire_date__gt=datetime.datetime.now()):
+        for order in OrderItem.objects.filter(expire_date__gt=timezone.now()):
             price, expire_length = self.getTerms(order.product, ignore_trial=True)
             if price is None:
                 continue

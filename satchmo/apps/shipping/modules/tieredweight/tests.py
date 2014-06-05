@@ -1,5 +1,5 @@
-from datetime import datetime
 from django.test import TestCase
+from django.utils import timezone
 from l10n.models import Country
 from shipping.modules.tieredweight.models import Carrier, TieredWeightException
 
@@ -61,7 +61,7 @@ class TieredWeightExpiringTest(TestCase):
 
 
     def testExpired(self):
-        expires = datetime(2000, 1, 1)
+        expires = timezone.datetime(2000, 1, 1)
         sale_prices = (
             (1, 1, 0),
             (20, 2, 1),
@@ -77,8 +77,8 @@ class TieredWeightExpiringTest(TestCase):
 
 
     def testNotExpired(self):
-        now = datetime.now()
-        nextyear = datetime(now.year+1, now.month, now.day)
+        now = timezone.now()
+        nextyear = timezone.datetime(now.year+1, now.month, now.day)
         sale_prices = (
             (1, 1, 0),
             (20, 2, 1),

@@ -6,6 +6,7 @@ from django.core.files.storage import default_storage
 from django.http import HttpResponse
 from django.test import TestCase
 from django.test.client import Client
+from django.utils import timezone
 from l10n.models import Country
 from livesettings import config_value
 from product.models import Product
@@ -17,7 +18,6 @@ from shipping.modules.flat.shipper import Shipper as flat
 from shipping.modules.per.shipper import Shipper as per
 from satchmo_store.shop import get_satchmo_setting
 
-import datetime
 from decimal import Decimal
 import keyedcache
 import os
@@ -117,7 +117,7 @@ class DownloadableProductTest(TestCase):
         self.product_link, _created = DownloadLink.objects.get_or_create(
             downloadable_product=self.product,
             order=o, key=self.key, num_attempts=0,
-            time_stamp=datetime.datetime.now()
+            time_stamp=timezone.now()
         )
 
         # setup client

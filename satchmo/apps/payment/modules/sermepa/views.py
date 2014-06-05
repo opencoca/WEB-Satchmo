@@ -10,13 +10,13 @@
 #   TODO: SERMEPA interface provides possibility of recurring payments, which
 #   could be probably used for SubscriptionProducts. This module doesn't support it.
 #
-from datetime import datetime
 from decimal import Decimal
 from django.core import urlresolvers
 from django.http import HttpResponse, HttpResponseRedirect, HttpResponseNotFound, HttpResponseBadRequest
 from django.shortcuts import render_to_response
 from django.template import RequestContext
 from django.utils.translation import ugettext_lazy as _
+from django.utils import timezone
 from django.views.decorators.cache import never_cache
 from livesettings import config_get_group, config_value
 from payment.utils import get_processor_by_key
@@ -97,7 +97,7 @@ def confirm_info(request):
     #   c:  123456789012
     #
     # The Satchmo's Order number is therefore limited to 10 million - 1.
-    now = datetime.now()
+    now = timezone.now()
     xchg_order_id = "%07dT%02d%02d" % (order.id, now.minute, now.second)
 
     amount = "%d" % (order.balance * 100,)    # in cents

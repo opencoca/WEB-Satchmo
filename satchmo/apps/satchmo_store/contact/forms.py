@@ -2,6 +2,7 @@ from django import forms
 from django.db.models import Q
 from django.forms.extras.widgets import SelectDateWidget
 from django.utils.translation import ugettext_lazy as _, ugettext
+from django.utils import timezone
 from l10n.models import Country
 from livesettings import config_value
 from satchmo_store.contact.models import Contact, AddressBook, PhoneNumber, Organization, ContactRole
@@ -457,7 +458,7 @@ class DateTextInput(forms.TextInput):
 
 class ExtendedContactInfoForm(ContactInfoForm):
     """Contact form which includes birthday and newsletter."""
-    years_to_display = range(datetime.datetime.now().year-100,datetime.datetime.now().year+1)
+    years_to_display = range(timezone.now().year-100,timezone.now().year+1)
     dob = forms.DateField(widget=SelectDateWidget(years=years_to_display), required=False)
     newsletter = forms.BooleanField(label=_('Newsletter'), widget=forms.CheckboxInput(), required=False)
 

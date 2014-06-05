@@ -1,7 +1,8 @@
-from datetime import datetime, timedelta
+from datetime import datetime
 from decimal import Decimal
 from django.http import HttpResponse
 from django.utils.translation import ugettext, ugettext_lazy as _
+from django.utils import timezone
 from livesettings import config_get_group, config_value
 from satchmo_store.shop.models import Order, OrderItem, OrderPayment
 from satchmo_utils.views import bad_or_missing
@@ -22,12 +23,12 @@ def cron_rebill(request=None):
         if 'key' not in request.GET or request.GET['key'] != config_value('PAYMENT','CRON_KEY'):
             return HttpResponse("Authentication Key Required")
 
-    expiring_subscriptions = OrderItem.objects.filter(expire_date__gte=datetime.now()).order_by('order', 'id', 'expire_date')
+    expiring_subscriptions = OrderItem.objects.filter(expire_date__gte=timezone.now()).order_by('order', 'id', 'expire_date')
     for item in expiring_subscriptions:
         if item.product.is_subscription:#TODO - need to add support for products with trial but non-recurring
             if item.product.subscriptionproduct.recurring_times and item.product.subscriptionproduct.recurring_times + item.product.subscriptionproduct.get_trial_terms().count() == OrderItem.objects.filter(order=item.order, product=item.product).count():
                 continue
-            if item.expire_date == datetime.date(datetime.now()) and item.completed:
+            if item.expire_date == datetime.date(timezone.now()) and item.completed:
                 if item.id == OrderItem.objects.filter(product=item.product, order=item.order).order_by('-id')[0].id:
                     #bill => add orderitem, recalculate total, porocess card
                     new_order_item = OrderItem(order=item.order, product=item.product, quantity=item.quantity, unit_price=item.unit_price, line_item_price=item.line_item_price)

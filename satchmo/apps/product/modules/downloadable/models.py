@@ -5,13 +5,13 @@ from django.db.models.fields.files import FileField
 from django.utils.encoding import smart_str
 from django.utils.hashcompat import sha_constructor
 from django.utils.translation import ugettext_lazy as _
+from django.utils import timezone
 from livesettings import config_value
 from product import signals
 from product.models import Product
 import product.modules.downloadable.config
 from satchmo_store.shop.models import Order
 from satchmo_utils import normalize_dir
-import datetime
 import os
 import random
 
@@ -89,8 +89,8 @@ class DownloadLink(models.Model):
         if maxattempts > 0 and self.num_attempts >= maxattempts:
             return (False, _("You have exceeded the number of allowed downloads."))
         expiremins = self.downloadable_product.expire_minutes
-        expire_time = datetime.timedelta(minutes=expiremins) + self.time_stamp
-        if expiremins > 0 and datetime.datetime.now() > expire_time:
+        expire_time = timezone.timedelta(minutes=expiremins) + self.time_stamp
+        if expiremins > 0 and timezone.now() > expire_time:
             return (False, _("This download link has expired."))
         return (True, "")
 
@@ -107,7 +107,7 @@ class DownloadLink(models.Model):
        Set the initial time stamp
         """
         if self.time_stamp is None:
-            self.time_stamp = datetime.datetime.now()
+            self.time_stamp = timezone.now()
         super(DownloadLink, self).save(**kwargs)
 
     def __unicode__(self):
