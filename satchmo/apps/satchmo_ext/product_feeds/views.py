@@ -1,8 +1,8 @@
-import datetime
 from django.contrib.auth.decorators import user_passes_test
 from django.core import urlresolvers
 from django.http import Http404
 from django.shortcuts import get_object_or_404, render_to_response
+from django.utils import timezone
 from payment.config import credit_choices
 from product.models import Product, Category
 from satchmo_store.shop.models import Config
@@ -47,6 +47,6 @@ def product_feed(request, category=None, template="product_feeds/googlebase_atom
         'url' : url,
         'shop' : shop_config,
         'payments' : payment_choices,
-        'date' : datetime.datetime.now(),
+        'date' : timezone.now(),
         },
         mimetype=mimetype)

@@ -3,6 +3,7 @@ from decimal import Decimal
 from django.contrib.sites.models import Site
 from django.db import models
 from django.utils.translation import ugettext_lazy as _
+from django.utils import timezone
 from l10n.utils import moneyfmt
 from payment.modules.giftcertificate.utils import generate_certificate_code
 from payment.utils import get_processor_by_key
@@ -82,7 +83,7 @@ class GiftCertificate(models.Model):
 
     def save(self, **kwargs):
         if not self.pk:
-            self.date_added = datetime.now()
+            self.date_added = timezone.now()
         if not self.code:
             self.code = generate_certificate_code()
         if not self.site:
@@ -114,7 +115,7 @@ class GiftCertificateUsage(models.Model):
 
     def save(self, **kwargs):
         if not self.pk:
-            self.usage_date = datetime.now()
+            self.usage_date = timezone.now()
         super(GiftCertificateUsage, self).save(**kwargs)
 
 

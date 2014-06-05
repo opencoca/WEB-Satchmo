@@ -15,11 +15,11 @@ unique needs.
 from decimal import Decimal
 from django.template import Context, loader
 from django.utils.translation import ugettext as _
+from django.utils import timezone
 from livesettings import config_get_group, config_value
 from keyedcache import cache_key, cache_get, cache_set, NotCachedError
 from shipping import signals
 from shipping.modules.base import BaseShipper
-import datetime
 import logging
 import urllib2
 
@@ -277,14 +277,14 @@ class Shipper(BaseShipper):
         delivery_days = None
 
         if pickup_date is None:
-            pickup_date = datetime.datetime.now() + datetime.timedelta(days=1)
+            pickup_date = timezone.now() + timezone.timedelta(days=1)
 
         # UPS doesn't pick up on weekends
         if pickup_date.day == 5:
-            pickup_date += datetime.timedelta(days=2)
+            pickup_date += timezone.timedelta(days=2)
 
         if pickup_date.day == 6:
-            pickup_date += datetime.timedelta(days=1)
+            pickup_date += timezone.timedelta(days=1)
 
         if price is None:
             price = Decimal('10.0')
