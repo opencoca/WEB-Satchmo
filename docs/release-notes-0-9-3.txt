@@ -30,6 +30,7 @@ Bug Fixes
  * Update views to use new class-based generic views
  * Update Satchmo to use Django's timezone support
  * Fixes to thumbnail widget paths
+ * Fix shipping tax config
  
 Performance Improvements
 ------------------------
