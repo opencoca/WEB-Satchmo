@@ -28,6 +28,8 @@ Bug Fixes
  * Updated cache settings to use the new format
  * Multiple minor bug cleanups and fixes
  * Update views to use new class-based generic views
+ * Update Satchmo to use Django's timezone support
+ * Fixes to thumbnail widget paths
  
 Performance Improvements
 ------------------------

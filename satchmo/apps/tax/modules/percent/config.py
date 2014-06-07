@@ -10,7 +10,8 @@ config_register(
         'PERCENT',
         description=_("Percent tax"),
         requires=TAX_MODULE,
-        requiresvalue='tax.modules.percent')
+        requiresvalue='tax.modules.percent',
+        default="0")
 )
 
 config_register(
