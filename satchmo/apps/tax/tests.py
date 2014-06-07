@@ -13,7 +13,7 @@ def _set_percent_taxer(percent):
     tax.update('tax.modules.percent')
     pcnt = config_get('TAX', 'PERCENT')
     pcnt.update(percent)
-    shp = config_get('TAX', 'TAX_SHIPPING')
+    shp = config_get('TAX', 'TAX_SHIPPING_PERCENT')
     shp.update(False)
 
     return shp

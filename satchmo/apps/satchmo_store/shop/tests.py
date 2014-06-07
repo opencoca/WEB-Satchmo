@@ -264,7 +264,7 @@ class ShopTest(TestCase):
         tax.update('tax.modules.percent')
         pcnt = config_get('TAX', 'PERCENT')
         pcnt.update('10')
-        shp = config_get('TAX', 'TAX_SHIPPING')
+        shp = config_get('TAX', 'TAX_SHIPPING_PERCENT')
         shp.update(False)
 
         self.test_cart_adding()
@@ -322,7 +322,7 @@ class ShopTest(TestCase):
         tax.update('tax.modules.percent')
         pcnt = config_get('TAX', 'PERCENT')
         pcnt.update('10')
-        shp = config_get('TAX', 'TAX_SHIPPING')
+        shp = config_get('TAX', 'TAX_SHIPPING_PERCENT')
         shp.update(False)
 
         # First checkout
