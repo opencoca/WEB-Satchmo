@@ -16,7 +16,7 @@ config_register(
 
 config_register(
     BooleanValue(TAX_GROUP,
-        'TAX_SHIPPING',
+        'TAX_SHIPPING_PERCENT',
         description=_("Tax Shipping?"),
         requires=TAX_MODULE,
         requiresvalue='tax.modules.percent',
