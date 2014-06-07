@@ -209,7 +209,7 @@ class Processor(object):
     #
     #    if subtotal:
     #        rate = None
-    #        if config_value('TAX','TAX_SHIPPING'):
+    #        if config_value('TAX','TAX_SHIPPING_SST'):
     #            try:
     #                tc = TaxClass.objects.get(title=config_value('TAX', 'TAX_CLASS'))
     #                rate = self.get_rate(taxclass=tc)
@@ -250,7 +250,7 @@ class Processor(object):
                 tc = item.product.taxClass
                 price = item.sub_total
             else:
-                if not config_value('TAX','TAX_SHIPPING'):
+                if not config_value('TAX','TAX_SHIPPING_SST'):
                     continue
 
                 try:

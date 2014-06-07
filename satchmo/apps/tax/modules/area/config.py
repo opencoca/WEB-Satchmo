@@ -7,7 +7,7 @@ TAX_GROUP = config_get_group('TAX')
         
 config_register(
      BooleanValue(TAX_GROUP,
-         'TAX_SHIPPING',
+         'TAX_SHIPPING_AREA',
          description=_("Tax Shipping?"),
          requires=TAX_MODULE,
          requiresvalue='tax.modules.area',

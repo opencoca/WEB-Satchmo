@@ -42,7 +42,7 @@ class Processor(object):
 
         if subtotal:
             subtotal = self.order.shipping_sub_total
-            if config_value('TAX','TAX_SHIPPING'):
+            if config_value('TAX','TAX_SHIPPING_PERCENT'):
                 percent = config_value('TAX','PERCENT')
                 t = subtotal * (percent/100)
             else:
@@ -70,7 +70,7 @@ class Processor(object):
         itemtax = sub_total * (percent/100)
         taxrates = {'%i%%' % percent :  itemtax}
         
-        if config_value('TAX','TAX_SHIPPING'):
+        if config_value('TAX','TAX_SHIPPING_PERCENT'):
             shipping = order.shipping_sub_total
             sub_total += shipping
             ship_tax = shipping * (percent/100)

@@ -10,7 +10,7 @@ TAX_GROUP = config_get_group('TAX')
 # varies state-to-state, so we need to support this being variable.
 config_register(
      BooleanValue(TAX_GROUP,
-         'TAX_SHIPPING',
+         'TAX_SHIPPING_SST',
          description=_("Tax Shipping in ANY jurisdiction?"),
          requires=TAX_MODULE,
          requiresvalue='tax.modules.us_sst',
