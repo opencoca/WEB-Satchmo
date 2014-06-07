@@ -40,7 +40,6 @@ class ContactInfoForm(ProxyContactForm):
     last_name = forms.CharField(max_length=30, label=_('Last Name'), required=False)
     phone = forms.CharField(max_length=30, label=_('Phone'), required=False)
     addressee = forms.CharField(max_length=61, label=_('Addressee'), required=False)
-    organization = forms.CharField(max_length=50, label=_('Organization'), required=False)
     street1 = forms.CharField(max_length=30, label=_('Street'), required=False)
     street2 = forms.CharField(max_length=30, required=False)
     city = forms.CharField(max_length=30, label=_('City'), required=False)
@@ -73,6 +72,8 @@ class ContactInfoForm(ProxyContactForm):
         self._local_only = shop.in_country_only
         self.enforce_state = config_value('SHOP','ENFORCE_STATE')
 
+        organization_name = self._contact and getattr(self._contact.organization, 'name', '')
+        self.fields['organization'] = forms.CharField(max_length=50, label=_('Organization'), required=False, initial=organization_name)
         self._default_country = shop.sales_country
         billing_country = (self._contact and getattr(self._contact.billing_address, 'country', None)) or self._default_country
         shipping_country = (self._contact and getattr(self._contact.shipping_address, 'country', None)) or self._default_country
