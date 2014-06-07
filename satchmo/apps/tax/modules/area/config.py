@@ -19,6 +19,8 @@ config_register(
          'TAX_CLASS',
          description=_("TaxClass for shipping"),
          help_text=_("Select a TaxClass that should be applied for shipments."),
+         requires=TAX_MODULE,
+         requiresvalue='tax.modules.area',
          #TODO: [BJK] make this dynamic - doesn't work to have it be preloaded.
          default='Shipping'
      )
