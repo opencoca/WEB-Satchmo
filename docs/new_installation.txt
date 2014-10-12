@@ -55,6 +55,10 @@ Installing Dependencies
 
         pip install django-app-plugins
 
+#. Install django-caching-app-plugins::
+
+        pip install django-caching-app-plugins
+
 #. Install sorl-thumbnail::
 
         pip install sorl-thumbnail
