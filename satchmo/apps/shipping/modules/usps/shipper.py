@@ -174,7 +174,7 @@ class Shipper(BaseShipper):
             if self.is_intl:
                 api = 'IntlRate'
             else:
-                api = 'RateV3'
+                api = 'RateV4'
 
         data = 'API=%s&XML=%s' % (api, request.encode('utf-8'))
 
@@ -262,7 +262,11 @@ class Shipper(BaseShipper):
         if settings.LIVE.value:
             connection = settings.CONNECTION.value
         else:
-            connection = settings.CONNECTION_TEST.value
+            # The USPS testing server does not support RateV3 or RateV4, and a
+            # successful query against that server is no longer (as of May 5,
+            # 2014) required for access to the production USPS server
+            #connection = settings.CONNECTION_TEST.value
+            connection = settings.CONNECTION.value
 
         cache_key_response = "usps-cart-%s-response" % int(cart.id)
         cache_key_request = "usps-cart-%s-request" % int(cart.id)
@@ -284,7 +288,7 @@ class Shipper(BaseShipper):
         # if USPS returned no error, return the prices
         if errors == None or len(errors) == 0:
             # check for domestic results first
-            all_packages = tree.getiterator('RateV3Response')
+            all_packages = tree.getiterator('RateV4Response')
 
             # if there are none, revert to international results
             if len(all_packages) == 0:
