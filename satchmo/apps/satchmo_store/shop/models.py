@@ -999,7 +999,7 @@ class Order(models.Model):
         if 'Shipping' in discounts:
             shipadjust += PriceAdjustment('discount', _('Discount'), discounts['Shipping'])
 
-        signals.satchmo_shipping_price_query.send(self, adjustment=shipadjust)
+        signals.satchmo_shipping_price_query.send(self, adjustment=shipadjust, item_discount=total_discount)
         shipdiscount = shipadjust.total_adjustment()
         self.shipping_discount = shipdiscount
         total_discount += shipdiscount
