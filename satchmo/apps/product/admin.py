@@ -50,10 +50,11 @@ class DiscountForm(models.ModelForm):
         return cleaned_data
 
 class DiscountOptions(admin.ModelAdmin):
-    list_display=('site', 'description','active')
+    list_display=('description','active')
     list_display_links = ('description',)
     raw_id_fields = ('valid_products',)
     form = DiscountForm
+    filter_horizontal = ('site',)
 
 class OptionGroupTranslation_Inline(admin.StackedInline):
     model = OptionGroupTranslation
@@ -140,17 +141,18 @@ class CategoryAdminForm(models.ModelForm):
 class CategoryOptions(admin.ModelAdmin):
 
     if config_value('SHOP','SHOW_SITE'):
-        list_display = ('site',)
+        list_display = ('which_site',)
+        list_filter = ('site__name',)
     else:
         list_display = ()
 
     list_display += ('name', '_parents_repr', 'is_active')
     list_display_links = ('name',)
-    ordering = ['site', 'parent__id', 'ordering', 'name']
+    ordering = ['parent__id', 'ordering', 'name']
     inlines = [CategoryAttributeInline, CategoryImage_Inline]
     if get_l10n_setting('show_admin_translations'):
         inlines.append(CategoryTranslation_Inline)
-    filter_horizontal = ('related_categories',)
+    filter_horizontal = ('related_categories', 'site')
     form = CategoryAdminForm
 
 
@@ -164,6 +166,11 @@ class CategoryOptions(admin.ModelAdmin):
         queryset.update(is_active=False)
         return HttpResponseRedirect('')
 
+    def which_site(self, obj):
+        return u', '.join(site.name for site in obj.site.all().order_by())
+    which_site.short_description = 'Site'
+        
+
 class CategoryImageOptions(admin.ModelAdmin):
     inlines = [CategoryImageTranslation_Inline]
 
@@ -172,11 +179,17 @@ class OptionGroupOptions(admin.ModelAdmin):
     if get_l10n_setting('show_admin_translations'):
         inlines.append(OptionGroupTranslation_Inline)
     if config_value('SHOP','SHOW_SITE'):
-        list_display = ('site',)
+        list_display = ('which_site',)
     else:
         list_display = ()
     list_display += ('name',)
+    filter_horizontal = ('site',)
 
+    def which_site(self, obj):
+        return u', '.join(site.name for site in obj.site.all().order_by())
+    which_site.short_description = 'Site'
+
+    
 class OptionOptions(admin.ModelAdmin):
     inlines = []
     if get_l10n_setting('show_admin_translations'):
@@ -239,7 +252,7 @@ class ProductOptions(admin.ModelAdmin):
     formatted_inventory.admin_order_field = "items_in_stock"
 
     if config_value('SHOP','SHOW_SITE'):
-        list_display = ('site',)
+        list_display = ('which_site',)
     else:
         list_display = ()
 
@@ -257,7 +270,7 @@ class ProductOptions(admin.ModelAdmin):
     inlines = [ProductAttribute_Inline, Price_Inline, ProductImage_Inline]
     if get_l10n_setting('show_admin_translations'):
         inlines.append(ProductTranslation_Inline)
-    filter_horizontal = ('category',)
+    filter_horizontal = ('category', 'site')
 
     def formfield_for_dbfield(self, db_field, **kwargs):
         field = super(ProductOptions, self).formfield_for_dbfield(db_field, **kwargs)
@@ -268,6 +281,11 @@ class ProductOptions(admin.ModelAdmin):
             field.initial = default_weight_unit()
         return field
 
+    def which_site(self, obj):
+        return u', '.join(site.name for site in obj.site.all().order_by())
+    which_site.short_description = 'Site'
+
+        
 admin.site.register(Category, CategoryOptions)
 #admin.site.register(CategoryImage, CategoryImageOptions)
 admin.site.register(Discount, DiscountOptions)
