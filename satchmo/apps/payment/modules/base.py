@@ -206,7 +206,8 @@ class PaymentRecorder(object):
 
     def _get_amount(self):
         if self._amount is None:
-            return self.order.balance
+            balance = self.order.balance
+            return balance if balance > 0 else Decimal("0")
         else:
             return self._amount
 
