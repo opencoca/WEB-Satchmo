@@ -256,6 +256,17 @@ class PaymentProcessor(BasePaymentProcessor):
                     self.log.warn("Trial expiration period is less than one recurring billing cycle. " +
                         "Authorize does not allow this, so the trial period has been adjusted to be equal to one recurring cycle.")
                     trial_occurrences = 1
+                    
+                # add discounts for trial_amount and amount for recurring subscriptions
+                trial_amount = subscription.total_with_tax
+                if sub.discount:
+                    discount = Discount.objects.by_code(self.order.discount_code)
+                    if discount.amount:
+                        amount = amount - discount.amount if amount > discount.amount else Decimal("0")
+                    elif discount.percentage:
+                        result = amount * discount.percentage / 100
+                        amount = result.quantize(Decimal("0.01"))
+                        
             else:
                 trial_occurrences = 0
                 trial_amount = Decimal('0.00')
@@ -408,6 +419,7 @@ class PaymentProcessor(BasePaymentProcessor):
                     results.append(ProcessorResult(self.key, success, response, payment=payment))
             else:
                 self.log.info("Failed to process recurring subscription, %s: %s", reason, response)
+                results.append(ProcessorResult(self.key, success, response))
                 break
 
         return success, results
