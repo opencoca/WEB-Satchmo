@@ -82,7 +82,7 @@ def _get_shipping_choices(request, paymentmodule, cart, contact, default_view_ta
 
     for method in methods:
         method.calculate(cart, contact)
-        if method.valid():
+        if method.valid(order=order):
             template = lookup_template(paymentmodule, 'shipping/options.html')
             t = loader.get_template(template)
             shipcost = finalcost = method.cost()

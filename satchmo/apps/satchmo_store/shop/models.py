@@ -981,20 +981,6 @@ class Order(models.Model):
             itemprices.append(lineitem.sub_total)
             fullprices.append(lineitem.line_item_price)
 
-        shipprice = Price()
-        shipprice.price = self.shipping_cost
-        shipadjust = PriceAdjustmentCalc(shipprice)
-        if 'Shipping' in discounts:
-            shipadjust += PriceAdjustment('discount', _('Discount'), discounts['Shipping'])
-
-        signals.satchmo_shipping_price_query.send(self, adjustment=shipadjust)
-        shipdiscount = shipadjust.total_adjustment()
-        self.shipping_discount = shipdiscount
-        total_discount += shipdiscount
-        #log.debug('total_discount (+ship): %s', total_discount)
-
-        self.discount = total_discount
-
         if itemprices:
             item_sub_total = reduce(operator.add, itemprices)
         else:
@@ -1006,6 +992,20 @@ class Order(models.Model):
             full_sub_total = zero
 
         self.sub_total = full_sub_total
+
+        shipprice = Price()
+        shipprice.price = self.shipping_cost
+        shipadjust = PriceAdjustmentCalc(shipprice)
+        if 'Shipping' in discounts:
+            shipadjust += PriceAdjustment('discount', _('Discount'), discounts['Shipping'])
+
+        signals.satchmo_shipping_price_query.send(self, adjustment=shipadjust, item_discount=total_discount)
+        shipdiscount = shipadjust.total_adjustment()
+        self.shipping_discount = shipdiscount
+        total_discount += shipdiscount
+        #log.debug('total_discount (+ship): %s', total_discount)
+
+        self.discount = total_discount
 
         taxProcessor = get_tax_processor(self)
         totaltax, taxrates = taxProcessor.process()
