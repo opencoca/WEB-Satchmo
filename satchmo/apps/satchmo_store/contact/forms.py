@@ -128,7 +128,7 @@ class ContactInfoForm(ProxyContactForm):
             self.fields[fname].required = True
 
         # if copy_address is on, turn of django's validation for required fields
-        if not (self.is_bound and clean_field(self, "copy_address")):
+        if self._shippable and not (self.is_bound and clean_field(self, "copy_address")):
             for fname in self.required_shipping_data:
                 if fname == 'country' and self._local_only:
                     continue
@@ -143,7 +143,7 @@ class ContactInfoForm(ProxyContactForm):
         form_init.send(ContactInfoForm, form=self)
 
     def _check_state(self, data, country):
-        if country and self.enforce_state and country.adminarea_set.filter(active=True).count() > 0:
+        if self._shippable and country and self.enforce_state and country.adminarea_set.filter(active=True).count() > 0:
             if not data or data == selection:
                 raise forms.ValidationError(
                     self._local_only and _('This field is required.') \
@@ -251,7 +251,7 @@ class ContactInfoForm(ProxyContactForm):
         else:
             val = clean_field(self, 'ship_' + field_name)
             # REQUIRED_SHIPPING_DATA doesn't contain 'ship_' prefix
-            if (not val) and field_name in self.required_shipping_data:
+            if self._shippable and (not val) and field_name in self.required_shipping_data:
                 raise forms.ValidationError(_('This field is required.'))
             return val
 

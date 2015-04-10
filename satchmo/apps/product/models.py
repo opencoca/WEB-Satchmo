@@ -117,7 +117,7 @@ class Category(models.Model):
     """
     Basic hierarchical category model for storing products
     """
-    site = models.ForeignKey(Site, verbose_name=_('Site'))
+    site = models.ManyToManyField(Site, verbose_name=_('Site'))
     name = models.CharField(_("Name"), max_length=200)
     slug = models.SlugField(_("Slug"), help_text=_("Used for URLs, auto-generated from name if blank"), blank=True)
     parent = models.ForeignKey('self', blank=True, null=True,
@@ -156,17 +156,19 @@ class Category(models.Model):
         """Variations determines whether or not product variations are included
         in most templates we are not returning all variations, just the parent product.
         """
+        site = Site.objects.get_current()
+        
         if not include_children:
-            qry = self.product_set.all()
+            qry = self.product_set.filter(site=site)
         else:
             cats = self.get_all_children(include_self=True)
-            qry = Product.objects.filter(category__in=cats)
+            qry = Product.objects.filter(site=site, category__in=cats)
 
         if variations:
-            slugs = qry.filter(site=self.site, active=True, **kwargs).values_list('slug',flat=True)
+            slugs = qry.filter(site=site, active=True, **kwargs).values_list('slug',flat=True)
             return Product.objects.filter(Q(productvariation__parent__product__slug__in = slugs)|Q(slug__in = slugs)).prefetch_related('productimage_set')
         else:
-            return qry.filter(site=self.site, active=True, productvariation__parent__isnull=True, **kwargs).prefetch_related('productimage_set')
+            return qry.filter(site=site, active=True, productvariation__parent__isnull=True, **kwargs).prefetch_related('productimage_set')
  
 
     def translated_attributes(self, language_code=None):
@@ -243,8 +245,9 @@ class Category(models.Model):
 
         if not self.slug:
             self.slug = slugify(self.name, instance=self)
-        cache_key = "cat-%s" % self.site.id
-        cache.delete(cache_key)
+        for site in self.site.all().only('id'):
+            cache_key = "cat-%s" % site.id
+            cache.delete(cache_key)
         super(Category, self).save(**kwargs)
 
     def _flatten(self, L):
@@ -284,10 +287,10 @@ class Category(models.Model):
         return flat_list
 
     class Meta:
-        ordering = ['site', 'parent__ordering', 'parent__name', 'ordering', 'name']
+        ordering = ['parent__ordering', 'parent__name', 'ordering', 'name']
         verbose_name = _("Category")
         verbose_name_plural = _("Categories")
-        unique_together = ('site', 'slug')
+        # unique_together = ('site', 'slug')
 
 class CategoryTranslation(models.Model):
     """A specific language translation for a `Category`.  This is intended for all descriptions which are not the
@@ -438,7 +441,7 @@ class Discount(models.Model):
     Allows for multiple types of discounts including % and dollar off.
     Also allows finite number of uses.
     """
-    site = models.ForeignKey(Site, verbose_name=_('site'))
+    site = models.ManyToManyField(Site, verbose_name=_('site'))
     description = models.CharField(_("Description"), max_length=100)
     code = models.CharField(_("Discount Code"), max_length=20, unique=True,
         help_text=_("Coupon Code"))
@@ -678,7 +681,7 @@ class OptionGroup(models.Model):
     A set of options that can be applied to an item.
     Examples - Size, Color, Shape, etc
     """
-    site = models.ForeignKey(Site, verbose_name=_('Site'))
+    site = models.ManyToManyField(Site, verbose_name=_('Site'))
     name = models.CharField(_("Name of Option Group"), max_length=50,
         help_text=_("This will be the text displayed on the product page."))
     description = models.CharField(_("Detailed Description"), max_length=100,
@@ -828,7 +831,7 @@ class Product(models.Model):
     """
     Root class for all Products
     """
-    site = models.ForeignKey(Site, verbose_name=_('Site'))
+    site = models.ManyToManyField(Site, verbose_name=_('Site'))
     name = models.CharField(_("Full Name"), max_length=255, blank=False,
         help_text=_("This is what the product will be called in the default site language.  To add non-default translations, use the Product Translation section below."))
     slug = models.SlugField(_("Slug Name"), blank=True,
@@ -1004,10 +1007,10 @@ class Product(models.Model):
             kwargs={'product_slug': self.slug})
 
     class Meta:
-        ordering = ('site', 'ordering', 'name')
+        ordering = ('ordering', 'name')
         verbose_name = _("Product")
         verbose_name_plural = _("Products")
-        unique_together = (('site', 'sku'),('site','slug'))
+        #unique_together = (('site', 'sku'),('site','slug'))
 
     def save(self, **kwargs):
         if not self.pk:
@@ -1229,16 +1232,17 @@ class ProductPriceLookupManager(models.Manager):
 
         objs = []
         for qty, price in pricelist:
-            obj = ProductPriceLookup(productslug=product.slug,
-                siteid=product.site_id,
-                active=product.active,
-                price=price,
-                quantity=qty,
-                discountable=product.is_discountable,
-                items_in_stock=product.items_in_stock,
-                productimage_set=product.productimage_set)
-            obj.save()
-            objs.append(obj)
+            for site in product.site.all():            
+                obj = ProductPriceLookup(productslug=product.slug,
+                                         siteid=site.pk,
+                                         active=product.active,
+                                         price=price,
+                                         quantity=qty,
+                                         discountable=product.is_discountable,
+                                         items_in_stock=product.items_in_stock,
+                                         productimage_set=product.productimage_set)
+                obj.save()
+                objs.append(obj)
         return objs
 
     def create_for_configurableproduct(self, configproduct):
@@ -1259,21 +1263,22 @@ class ProductPriceLookupManager(models.Manager):
 
         objs = []
         for qty, price in pricelist:
-            obj = ProductPriceLookup(productslug=product.slug,
-                parentid=parent.pk,
-                siteid=product.site_id,
-                active=product.active,
-                price=price,
-                quantity=qty,
-                key=variation.optionkey,
-                discountable=product.is_discountable,
-                items_in_stock=product.items_in_stock)
-            obj.save()
-            objs.append(obj)
+            for site in product.site.all():
+                obj = ProductPriceLookup(productslug=product.slug,
+                                         parentid=parent.pk,
+                                         siteid=site.pk,
+                                         active=product.active,
+                                         price=price,
+                                         quantity=qty,
+                                         key=variation.optionkey,
+                                         discountable=product.is_discountable,
+                                         items_in_stock=product.items_in_stock)
+                obj.save()
+                objs.append(obj)
         return objs
 
     def delete_for_product(self, product):
-        for obj in self.filter(productslug=product.slug, siteid=product.site.id):
+        for obj in self.filter(productslug=product.slug, siteid__in=list(product.site.all().values_list('pk', flat=True))):
             obj.delete()
 
     def rebuild_all(self, site=None):
