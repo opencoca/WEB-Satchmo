@@ -77,13 +77,11 @@ def check_balance(request):
             gc = GiftCertificate.objects.get(code=code, 
                 valid=True, 
                 site=Site.objects.get_current())
-            success = True
         except GiftCertificate.DoesNotExist:
-            success = False
+            gc = None
         
         ctx = RequestContext(request, {
             'code' : code,
-            'success' : success,
             'giftcertificate' : gc
         })
     else:
