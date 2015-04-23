@@ -9,7 +9,7 @@
 {% block content %}
 <div id="giftcertificate">
 	{% if code %}
-	{% if success %}
+	{% if giftcertificate %}
 	<h3>{% trans 'Gift Certificate' %}</h3>
 	<p>
 		{% trans 'Purchased on:' %} {{ giftcertificate.date_added|date:'y-M-d' }}
