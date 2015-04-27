@@ -20,7 +20,7 @@ except ImportError:
 
 log = logging.getLogger('satchmo_utils.thumbnail')
 
-image_cache = get_cache('locmem:///')
+image_cache = get_cache('default')
 
 _FILE_CACHE_TIMEOUT = 60 * 60 * 60 * 24 * 31 # 1 month
 _THUMBNAIL_GLOB = '%s_t*%s'

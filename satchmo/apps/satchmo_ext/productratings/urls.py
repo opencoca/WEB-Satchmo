@@ -13,8 +13,13 @@ productpatterns = patterns('satchmo_ext.productratings.views',
 # Override comments with our redirecting view. You can remove the next two
 # URLs if you aren't using ratings.
 #(r'^comments/post/$', 'comments.post_rating', {'maxcomments': 1 }, 'satchmo_rating_post'),
+try:
+    from django.contrib.comments.models import Comment
+    comment_urls = 'django.contrib.comments.urls'    
+except ImportError:
+    comment_urls = 'django_comments.urls'
 commentpatterns = patterns('',
-    (r'^comments/', include('django.contrib.comments.urls')),
+    (r'^comments/', include(comment_urls)),
 )
 
 def add_product_urls(sender, patterns=(), section="", **kwargs):
