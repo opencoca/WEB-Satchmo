@@ -6,7 +6,7 @@ from models import GiftCertificate
 from decimal import Decimal
 
 class GiftCertCodeForm(forms.Form):
-    code = forms.CharField(_('Code'), required=True)
+    code = forms.CharField(required=True)
        
 class GiftCertPayShipForm(SimplePayShipForm):
     giftcode = forms.CharField(max_length=100)

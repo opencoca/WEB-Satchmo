@@ -10,7 +10,10 @@ from django.db import models
 try:
     from django.utils import simplejson as json
 except ImportError:
-    import simplejson as json
+    try:
+        import simplejson as json
+    except ImportError:
+        import json
 from django.core.serializers.json import DateTimeAwareJSONEncoder
 from decimal import Decimal
 
