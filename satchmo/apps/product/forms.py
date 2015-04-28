@@ -498,7 +498,7 @@ class VariationManagerForm(forms.Form):
                 except KeyError:
                     pass
 
-    save = transaction.commit_on_success(_save)
+    #save = transaction.commit_on_success(_save)
 
     def _create_variation(self, opts, key, data, request):
         namekey = "name__" + key
