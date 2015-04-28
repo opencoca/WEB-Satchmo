@@ -68,6 +68,10 @@ class ForeignKeySearchInput(forms.HiddenInput):
             label = self.label_for_value(value)
         else:
             label = u''
+        try:
+            model_name = self.rel.to._meta.module_name
+        except AttributeError:
+            model_name = self.rel.to._meta.model_name            
         return rendered + mark_safe(u'''
             <style type="text/css" media="screen">
                 #lookup_%(name)s {
@@ -112,7 +116,7 @@ class ForeignKeySearchInput(forms.HiddenInput):
         ''') % {
             'search_fields': ','.join(self.search_fields),
             'static_url': settings.STATIC_URL,
-            'model_name': self.rel.to._meta.module_name,
+            'model_name': model_name,
             'app_label': self.rel.to._meta.app_label,
             'label': label,
             'name': name,
@@ -154,7 +158,11 @@ class AutocompleteAdmin(admin.ModelAdmin):
             return update_wrapper(wrapper, view)
 
         patterns = super(AutocompleteAdmin, self).get_urls()
-        info = self.admin_site.name, self.model._meta.app_label, self.model._meta.module_name
+        try:
+            model_name = self.model._meta.module_name
+        except AttributeError:
+            model_name = self.model._meta.model_name
+        info = self.admin_site.name, self.model._meta.app_label, model_name
         patterns.insert(
                 -1,     # insert just before (.+) rule (see django.contrib.admin.options.ModelAdmin.get_urls)
                 url(r'^search/$',
