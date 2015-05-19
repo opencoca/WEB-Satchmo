@@ -25,9 +25,9 @@ class SubscriptionProduct(models.Model):
     )
     expire_unit = models.CharField(_("Expire Unit"), max_length=5, choices=SUBSCRIPTION_UNITS, default="DAY", null=False)
     SHIPPING_CHOICES = (
-        ('0', _('No Shipping Charges')),
-        ('1', _('Pay Shipping Once')),
-        ('2', _('Pay Shipping Each Billing Cycle')),
+        (0, _('No Shipping Charges')),
+        (1, _('Pay Shipping Once')),
+        (2, _('Pay Shipping Each Billing Cycle')),
     )
     is_shippable = models.IntegerField(_("Shippable?"), help_text=_("Is this product shippable?"), max_length=1, choices=SHIPPING_CHOICES)
 
