@@ -4,6 +4,7 @@ from django.utils.http import urlencode
 from django.utils.translation import ugettext_lazy as _
 from django.utils import timezone
 from payment.modules.base import BasePaymentProcessor, ProcessorResult
+from product.models import Discount
 from satchmo_store.shop.models import Config
 from satchmo_utils.numbers import trunc_decimal
 from tax.utils import get_tax_processor
@@ -259,7 +260,7 @@ class PaymentProcessor(BasePaymentProcessor):
                     
                 # add discounts for trial_amount and amount for recurring subscriptions
                 trial_amount = subscription.total_with_tax
-                if sub.discount:
+                if subscription.discount:
                     discount = Discount.objects.by_code(self.order.discount_code)
                     if discount.amount:
                         amount = amount - discount.amount if amount > discount.amount else Decimal("0")
