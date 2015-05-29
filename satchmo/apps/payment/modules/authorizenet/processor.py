@@ -422,7 +422,7 @@ class PaymentProcessor(BasePaymentProcessor):
                     results.append(ProcessorResult(self.key, success, response, payment=payment))
             else:
                 self.log.info("Failed to process recurring subscription, %s: %s", reason, response)
-                results.append(ProcessorResult(self.key, success, response))
+                results = ProcessorResult(self.key, success, response)
                 break
 
         return success, results
