@@ -205,7 +205,7 @@ class AutocompleteAdmin(admin.ModelAdmin):
                     smart_str(field_name)): smart_str(bit)})
                         for field_name in search_fields.split(',')]
                 other_qs = QuerySet(model)
-                other_qs.dup_select_related(qs)
+                other_qs.query.select_related = qs.query.select_related
                 other_qs = other_qs.filter(reduce(operator.or_, or_queries))
                 qs = qs & other_qs
             data = ''.join([u'%s|%s\n' % (to_string_function(f), f.pk) for f in qs])
