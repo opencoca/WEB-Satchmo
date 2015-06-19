@@ -231,7 +231,8 @@ class PaymentProcessor(BasePaymentProcessor):
         }
         trans['order'] = self.order
         trans['card'] = self.order.credit_card
-        trans['card_expiration'] =  "%4i-%02i" % (self.order.credit_card.expire_year, self.order.credit_card.expire_month)
+        if self.order.credit_card:
+            trans['card_expiration'] =  "%4i-%02i" % (self.order.credit_card.expire_year, self.order.credit_card.expire_month)
 
         translist = []
         taxer = get_tax_processor(user = self.order.contact.user)
@@ -258,15 +259,17 @@ class PaymentProcessor(BasePaymentProcessor):
                         "Authorize does not allow this, so the trial period has been adjusted to be equal to one recurring cycle.")
                     trial_occurrences = 1
                     
-                # add discounts for trial_amount and amount for recurring subscriptions
-                trial_amount = subscription.total_with_tax
+                # add discounts for trial_amount and amount for recurring subscriptions                       
                 if subscription.discount:
                     discount = Discount.objects.by_code(self.order.discount_code)
                     if discount.amount:
                         amount = amount - discount.amount if amount > discount.amount else Decimal("0")
+                        trial_amount = trial_amount - discount.amount if trial_amount > discount.amount else Decimal("0")
                     elif discount.percentage:
-                        result = amount * discount.percentage / 100
-                        amount = result.quantize(Decimal("0.01"))
+                        discount_result = amount * discount.percentage / 100
+                        amount -= discount_result.quantize(Decimal("0.01"))
+                        discount_result = trial_amount * discount.percentage / 100
+                        trial_amount -= discount_result.quantize(Decimal("0.01"))                        
                         
             else:
                 trial_occurrences = 0
@@ -290,7 +293,8 @@ class PaymentProcessor(BasePaymentProcessor):
             charged_today = trunc_decimal(charged_today, 2)
 
             subtrans['charged_today'] = charged_today
-            translist.append(subtrans)
+            if trial_amount or amount:
+                translist.append(subtrans)
 
         return translist
 
