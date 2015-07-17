@@ -245,10 +245,10 @@ class Category(models.Model):
 
         if not self.slug:
             self.slug = slugify(self.name, instance=self)
+        super(Category, self).save(**kwargs)
         for site in self.site.all().only('id'):
             cache_key = "cat-%s" % site.id
-            cache.delete(cache_key)
-        super(Category, self).save(**kwargs)
+            cache.delete(cache_key)        
 
     def _flatten(self, L):
         """
