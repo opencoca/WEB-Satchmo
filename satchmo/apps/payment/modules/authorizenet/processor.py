@@ -7,6 +7,7 @@ from payment.modules.base import BasePaymentProcessor, ProcessorResult
 from product.models import Discount
 from satchmo_store.shop.models import Config
 from satchmo_utils.numbers import trunc_decimal
+from satchmo_utils import add_month
 from tax.utils import get_tax_processor
 from xml.dom import minidom
 import random
@@ -231,6 +232,7 @@ class PaymentProcessor(BasePaymentProcessor):
         }
         trans['order'] = self.order
         trans['card'] = self.order.credit_card
+        start_date = timezone.now().date()
         if self.order.credit_card:
             trans['card_expiration'] =  "%4i-%02i" % (self.order.credit_card.expire_year, self.order.credit_card.expire_month)
 
@@ -282,6 +284,13 @@ class PaymentProcessor(BasePaymentProcessor):
 
             subtrans['occurrences'] = occurrences
             subtrans['trial_occurrences'] = trial_occurrences
+            subtrans['start_date'] = start_date
+            if trial and not trial_amount:
+                if sub.expire_unit == "DAY":
+                    subtrans['start_date'] = start_date + timezone.timedelta(trial.expire_length)
+                else:
+                    subtrans['start_date'] = add_month(start_date, n=trial.expire_length)
+                trial = None            
             subtrans['trial'] = trial
             subtrans['trial_amount'] = trunc_decimal(trial_amount, 2)
             subtrans['amount'] = trunc_decimal(amount, 2)
