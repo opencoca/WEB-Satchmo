@@ -1064,7 +1064,7 @@ class Order(models.Model):
 
     def _paid_in_full(self):
         """True if total has been paid"""
-        return self.balance == Decimal('0.00')
+        return self.balance <= Decimal('0.00')
     paid_in_full = property(fget=_paid_in_full)
 
     def _has_downloads(self):
