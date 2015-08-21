@@ -45,12 +45,21 @@ def discount_cart_total(cart, discount):
 
 register.filter('discount_cart_total', discount_cart_total)
 
+def discount_amount_cart(total_amount, discount):
+    if discount and discount.amount and not discount.percentage:
+        if total_amount > discount.amount:
+            total_amount -= discount.amount
+        else:
+            total_amount = Decimal('1.00')  
+    return total_amount
+    
 def untaxed_discount_cart_total(cart, discount):
     """Returns the discounted total for this cart"""
     total = Decimal('0.00')
 
     for item in cart:
         total += untaxed_discount_line_total(item, discount)
+    total = discount_amount_cart(total, discount)
     return total
 
 register.filter('untaxed_discount_cart_total', untaxed_discount_cart_total)
@@ -61,7 +70,7 @@ def taxed_discount_cart_total(cart, discount):
 
     for item in cart:
         total += taxed_discount_line_total(item, discount)
-
+    total = discount_amount_cart(total, discount)
     return total
 
 register.filter('taxed_discount_cart_total', taxed_discount_cart_total)
