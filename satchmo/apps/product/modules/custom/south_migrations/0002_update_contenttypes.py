@@ -4,11 +4,11 @@ from south.db import db
 from south.v2 import DataMigration
 from django.db import models
 
-from product.migrations import UpdateContentTypeMigration
+from product.south_migrations import UpdateContentTypeMigration
 
 class Migration(UpdateContentTypeMigration):
 
-    _app_label = 'configurable'
+    _app_label = 'custom'
 
     depends_on = (
         ('product', '0011_split_products'),
@@ -19,17 +19,30 @@ class Migration(UpdateContentTypeMigration):
     )
 
     models = {
-        'configurable.configurableproduct': {
-            'Meta': {'object_name': 'ConfigurableProduct'},
-            'create_subs': ('django.db.models.fields.BooleanField', [], {'default': 'False', 'blank': 'True'}),
+        'custom.customproduct': {
+            'Meta': {'object_name': 'CustomProduct'},
+            'deferred_shipping': ('django.db.models.fields.BooleanField', [], {'default': 'False', 'blank': 'True'}),
+            'downpayment': ('django.db.models.fields.IntegerField', [], {'default': '20'}),
             'option_group': ('django.db.models.fields.related.ManyToManyField', [], {'to': "orm['product.OptionGroup']", 'symmetrical': 'False', 'blank': 'True'}),
             'product': ('django.db.models.fields.related.OneToOneField', [], {'to': "orm['product.Product']", 'unique': 'True', 'primary_key': 'True'})
         },
-        'configurable.productvariation': {
-            'Meta': {'object_name': 'ProductVariation'},
-            'options': ('django.db.models.fields.related.ManyToManyField', [], {'to': "orm['product.Option']", 'symmetrical': 'False'}),
-            'parent': ('django.db.models.fields.related.ForeignKey', [], {'to': "orm['configurable.ConfigurableProduct']"}),
-            'product': ('django.db.models.fields.related.OneToOneField', [], {'to': "orm['product.Product']", 'unique': 'True', 'primary_key': 'True'})
+        'custom.customtextfield': {
+            'Meta': {'unique_together': "(('slug', 'products'),)", 'object_name': 'CustomTextField'},
+            'id': ('django.db.models.fields.AutoField', [], {'primary_key': 'True'}),
+            'name': ('django.db.models.fields.CharField', [], {'max_length': '40'}),
+            'price_change': ('satchmo_utils.fields.CurrencyField', [], {'null': 'True', 'max_digits': '14', 'decimal_places': '6', 'blank': 'True'}),
+            'products': ('django.db.models.fields.related.ForeignKey', [], {'related_name': "'custom_text_fields'", 'to': "orm['custom.CustomProduct']"}),
+            'slug': ('django.db.models.fields.SlugField', [], {'db_index': 'True', 'max_length': '50', 'blank': 'True'}),
+            'sort_order': ('django.db.models.fields.IntegerField', [], {'default': '0'})
+        },
+        'custom.customtextfieldtranslation': {
+            'Meta': {'unique_together': "(('customtextfield', 'languagecode', 'version'),)", 'object_name': 'CustomTextFieldTranslation'},
+            'active': ('django.db.models.fields.BooleanField', [], {'default': 'True', 'blank': 'True'}),
+            'customtextfield': ('django.db.models.fields.related.ForeignKey', [], {'related_name': "'translations'", 'to': "orm['custom.CustomTextField']"}),
+            'id': ('django.db.models.fields.AutoField', [], {'primary_key': 'True'}),
+            'languagecode': ('django.db.models.fields.CharField', [], {'max_length': '10'}),
+            'name': ('django.db.models.fields.CharField', [], {'max_length': '255'}),
+            'version': ('django.db.models.fields.IntegerField', [], {'default': '1'})
         },
         'product.category': {
             'Meta': {'unique_together': "(('site', 'slug'),)", 'object_name': 'Category'},
@@ -43,15 +56,6 @@ class Migration(UpdateContentTypeMigration):
             'related_categories': ('django.db.models.fields.related.ManyToManyField', [], {'related_name': "'related_categories'", 'blank': 'True', 'null': 'True', 'to': "orm['product.Category']"}),
             'site': ('django.db.models.fields.related.ForeignKey', [], {'to': "orm['sites.Site']"}),
             'slug': ('django.db.models.fields.SlugField', [], {'db_index': 'True', 'max_length': '50', 'blank': 'True'})
-        },
-        'product.option': {
-            'Meta': {'unique_together': "(('option_group', 'value'),)", 'object_name': 'Option'},
-            'id': ('django.db.models.fields.AutoField', [], {'primary_key': 'True'}),
-            'name': ('django.db.models.fields.CharField', [], {'max_length': '50'}),
-            'option_group': ('django.db.models.fields.related.ForeignKey', [], {'to': "orm['product.OptionGroup']"}),
-            'price_change': ('satchmo_utils.fields.CurrencyField', [], {'null': 'True', 'max_digits': '14', 'decimal_places': '6', 'blank': 'True'}),
-            'sort_order': ('django.db.models.fields.IntegerField', [], {'default': '0'}),
-            'value': ('django.db.models.fields.CharField', [], {'max_length': '50'})
         },
         'product.optiongroup': {
             'Meta': {'object_name': 'OptionGroup'},
@@ -106,4 +110,4 @@ class Migration(UpdateContentTypeMigration):
         }
     }
 
-    complete_apps = ['configurable']
+    complete_apps = ['custom']

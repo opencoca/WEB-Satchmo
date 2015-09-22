@@ -4,11 +4,11 @@ from south.db import db
 from south.v2 import DataMigration
 from django.db import models
 
-from product.migrations import UpdateContentTypeMigration
+from product.south_migrations import UpdateContentTypeMigration
 
 class Migration(UpdateContentTypeMigration):
 
-    _app_label = 'custom'
+    _app_label = 'subscription'
 
     depends_on = (
         ('product', '0011_split_products'),
@@ -19,31 +19,6 @@ class Migration(UpdateContentTypeMigration):
     )
 
     models = {
-        'custom.customproduct': {
-            'Meta': {'object_name': 'CustomProduct'},
-            'deferred_shipping': ('django.db.models.fields.BooleanField', [], {'default': 'False', 'blank': 'True'}),
-            'downpayment': ('django.db.models.fields.IntegerField', [], {'default': '20'}),
-            'option_group': ('django.db.models.fields.related.ManyToManyField', [], {'to': "orm['product.OptionGroup']", 'symmetrical': 'False', 'blank': 'True'}),
-            'product': ('django.db.models.fields.related.OneToOneField', [], {'to': "orm['product.Product']", 'unique': 'True', 'primary_key': 'True'})
-        },
-        'custom.customtextfield': {
-            'Meta': {'unique_together': "(('slug', 'products'),)", 'object_name': 'CustomTextField'},
-            'id': ('django.db.models.fields.AutoField', [], {'primary_key': 'True'}),
-            'name': ('django.db.models.fields.CharField', [], {'max_length': '40'}),
-            'price_change': ('satchmo_utils.fields.CurrencyField', [], {'null': 'True', 'max_digits': '14', 'decimal_places': '6', 'blank': 'True'}),
-            'products': ('django.db.models.fields.related.ForeignKey', [], {'related_name': "'custom_text_fields'", 'to': "orm['custom.CustomProduct']"}),
-            'slug': ('django.db.models.fields.SlugField', [], {'db_index': 'True', 'max_length': '50', 'blank': 'True'}),
-            'sort_order': ('django.db.models.fields.IntegerField', [], {'default': '0'})
-        },
-        'custom.customtextfieldtranslation': {
-            'Meta': {'unique_together': "(('customtextfield', 'languagecode', 'version'),)", 'object_name': 'CustomTextFieldTranslation'},
-            'active': ('django.db.models.fields.BooleanField', [], {'default': 'True', 'blank': 'True'}),
-            'customtextfield': ('django.db.models.fields.related.ForeignKey', [], {'related_name': "'translations'", 'to': "orm['custom.CustomTextField']"}),
-            'id': ('django.db.models.fields.AutoField', [], {'primary_key': 'True'}),
-            'languagecode': ('django.db.models.fields.CharField', [], {'max_length': '10'}),
-            'name': ('django.db.models.fields.CharField', [], {'max_length': '255'}),
-            'version': ('django.db.models.fields.IntegerField', [], {'default': '1'})
-        },
         'product.category': {
             'Meta': {'unique_together': "(('site', 'slug'),)", 'object_name': 'Category'},
             'description': ('django.db.models.fields.TextField', [], {'blank': 'True'}),
@@ -56,14 +31,6 @@ class Migration(UpdateContentTypeMigration):
             'related_categories': ('django.db.models.fields.related.ManyToManyField', [], {'related_name': "'related_categories'", 'blank': 'True', 'null': 'True', 'to': "orm['product.Category']"}),
             'site': ('django.db.models.fields.related.ForeignKey', [], {'to': "orm['sites.Site']"}),
             'slug': ('django.db.models.fields.SlugField', [], {'db_index': 'True', 'max_length': '50', 'blank': 'True'})
-        },
-        'product.optiongroup': {
-            'Meta': {'object_name': 'OptionGroup'},
-            'description': ('django.db.models.fields.CharField', [], {'max_length': '100', 'blank': 'True'}),
-            'id': ('django.db.models.fields.AutoField', [], {'primary_key': 'True'}),
-            'name': ('django.db.models.fields.CharField', [], {'max_length': '50'}),
-            'site': ('django.db.models.fields.related.ForeignKey', [], {'to': "orm['sites.Site']"}),
-            'sort_order': ('django.db.models.fields.IntegerField', [], {'default': '0'})
         },
         'product.product': {
             'Meta': {'unique_together': "(('site', 'sku'), ('site', 'slug'))", 'object_name': 'Product'},
@@ -107,7 +74,23 @@ class Migration(UpdateContentTypeMigration):
             'domain': ('django.db.models.fields.CharField', [], {'max_length': '100'}),
             'id': ('django.db.models.fields.AutoField', [], {'primary_key': 'True'}),
             'name': ('django.db.models.fields.CharField', [], {'max_length': '50'})
+        },
+        'subscription.subscriptionproduct': {
+            'Meta': {'object_name': 'SubscriptionProduct'},
+            'expire_length': ('django.db.models.fields.IntegerField', [], {'null': 'True', 'blank': 'True'}),
+            'expire_unit': ('django.db.models.fields.CharField', [], {'default': "'DAY'", 'max_length': '5'}),
+            'is_shippable': ('django.db.models.fields.IntegerField', [], {'max_length': '1'}),
+            'product': ('django.db.models.fields.related.OneToOneField', [], {'to': "orm['product.Product']", 'unique': 'True', 'primary_key': 'True'}),
+            'recurring': ('django.db.models.fields.BooleanField', [], {'default': 'False', 'blank': 'True'}),
+            'recurring_times': ('django.db.models.fields.IntegerField', [], {'null': 'True', 'blank': 'True'})
+        },
+        'subscription.trial': {
+            'Meta': {'object_name': 'Trial'},
+            'expire_length': ('django.db.models.fields.IntegerField', [], {'null': 'True', 'blank': 'True'}),
+            'id': ('django.db.models.fields.AutoField', [], {'primary_key': 'True'}),
+            'price': ('satchmo_utils.fields.CurrencyField', [], {'null': 'True', 'max_digits': '10', 'decimal_places': '2'}),
+            'subscription': ('django.db.models.fields.related.ForeignKey', [], {'to': "orm['subscription.SubscriptionProduct']"})
         }
     }
 
-    complete_apps = ['custom']
+    complete_apps = ['subscription']
