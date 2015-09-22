@@ -2,9 +2,9 @@ from django.conf import settings
 from django.db import models
 from django.utils.translation import ugettext_lazy as _
 if 'django_comments' in settings.INSTALLED_APPS:
-    from django.contrib.comments.models import Comment
+    from django_comments.models import Comment    
 else:
-    from django_comments.models import Comment
+    from django.contrib.comments.models import Comment
 from satchmo_utils.signals import collect_urls
 import product
 import satchmo_store
