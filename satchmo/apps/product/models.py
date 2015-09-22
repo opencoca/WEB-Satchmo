@@ -581,7 +581,8 @@ class Discount(models.Model):
     def save(self, **kwargs):
         if self.automatic:
             today = datetime.date.today()
-            keyedcache.cache_delete('discount', 'sale', self.site, today)
+            for site in self.site.all():
+                keyedcache.cache_delete('discount', 'sale', self.site, today)
         super(Discount, self).save(**kwargs)
 
 

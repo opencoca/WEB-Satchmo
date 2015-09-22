@@ -5,7 +5,7 @@ from south.v2 import DataMigration
 from django.db import models
 from django.utils import timezone
 
-from product.migrations import UpdateContentTypeMigration
+from product.south_migrations import UpdateContentTypeMigration
 
 class Migration(UpdateContentTypeMigration):
 
