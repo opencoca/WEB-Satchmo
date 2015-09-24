@@ -828,6 +828,10 @@ class ProductManager(models.Manager):
         return query
 
 
+def get_taxable():
+    return config_value('TAX', 'PRODUCTS_TAXABLE_BY_DEFAULT')
+    
+
 class Product(models.Model):
     """
     Root class for all Products
@@ -859,7 +863,7 @@ class Product(models.Model):
     related_items = models.ManyToManyField('self', blank=True, null=True, verbose_name=_('Related Items'), related_name='related_products')
     also_purchased = models.ManyToManyField('self', blank=True, null=True, verbose_name=_('Previously Purchased'), related_name='also_products')
     total_sold = models.DecimalField(_("Total sold"),  max_digits=18, decimal_places=6, default='0')
-    taxable = models.BooleanField(_("Taxable"), default=lambda: config_value('TAX', 'PRODUCTS_TAXABLE_BY_DEFAULT'))
+    taxable = models.BooleanField(_("Taxable"), default=get_taxable)
     taxClass = models.ForeignKey('TaxClass', verbose_name=_('Tax Class'), blank=True, null=True, help_text=_("If it is taxable, what kind of tax?"))
     shipclass = models.CharField(_('Shipping'), choices=SHIP_CLASS_CHOICES, default="DEFAULT", max_length=10,
         help_text=_("If this is 'Default', then we'll use the product type to determine if it is shippable."))
