@@ -1,8 +1,9 @@
 """Product queries using ratings."""
-try:
-    from django.contrib.comments.models import Comment
-except ImportError:
+from django.conf import settings
+if 'django_comments' in settings.INSTALLED_APPS:
     from django_comments.models import Comment
+else:
+    from django.contrib.comments.models import Comment
 from django.contrib.sites.models import Site
 from keyedcache import cache_get, cache_set, NotCachedError
 from livesettings import config_value
