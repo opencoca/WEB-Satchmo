@@ -106,7 +106,7 @@ class FileRenderMixin(BaseRenderer):
     def render(self, request, context):
         filename = self.get_filename(request, context)
         content = self.convert(self.get_content(request, context))
-        response = HttpResponse(mimetype=self.mimetype)
+        response = HttpResponse(content_type=self.mimetype)
         if config_value('SHIPPING','DOWNLOAD_PDFS'):
             content_disposition = 'attachment; filename=%s' % filename
             response['Content-Disposition'] = content_disposition
