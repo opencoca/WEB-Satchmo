@@ -445,7 +445,7 @@ class Discount(models.Model):
     description = models.CharField(_("Description"), max_length=100)
     code = models.CharField(_("Discount Code"), max_length=20, unique=True,
         help_text=_("Coupon Code"))
-    active = models.BooleanField(_("Active"))
+    active = models.BooleanField(_("Active"), default=False)
     amount = CurrencyField(_("Discount Amount"), decimal_places=2,
         max_digits=8, blank=True, null=True,
         help_text=_("Enter absolute discount amount OR percentage."))
@@ -1320,8 +1320,8 @@ class ProductPriceLookup(models.Model):
     productslug = models.CharField(max_length=255, db_index = True)
     price = models.DecimalField(max_digits=14, decimal_places=6)
     quantity = models.DecimalField(max_digits=18, decimal_places=6)
-    active = models.BooleanField()
-    discountable = models.BooleanField()
+    active = models.BooleanField(default=False)
+    discountable = models.BooleanField(default=False)
     items_in_stock = models.DecimalField(max_digits=18, decimal_places=6)
 
     objects = ProductPriceLookupManager()

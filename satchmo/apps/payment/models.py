@@ -27,7 +27,7 @@ class PaymentOption(models.Model):
     configuration.
     """
     description = models.CharField(_("Description"), max_length=20)
-    active = models.BooleanField(_("Active"), 
+    active = models.BooleanField(_("Active"), default=False,
         help_text=_("Should this be displayed as an option for the user?"))
     optionName = models.CharField(_("Option Name"), max_length=20, choices=iterchoices_db(payment.config.labelled_gateway_choices),
         unique=True, 
