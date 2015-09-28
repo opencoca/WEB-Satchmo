@@ -153,7 +153,6 @@ def update_orderitems(new_order, cart, update=False):
                     cartitem=item,
                     order=new_order, orderitem=new_order_item
                     )
-
     new_order.recalculate_total()
 
 def send_gift_certificate_by_email(gc):
