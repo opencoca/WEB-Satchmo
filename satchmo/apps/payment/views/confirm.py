@@ -119,7 +119,6 @@ class ConfirmController(object):
         payment_module.
         """
         template = controller.lookup_template('CONFIRM')
-        print "_onForm"
         controller.order.recalculate_total()
         
         base_env = {
