@@ -12,7 +12,7 @@
 				<length>{{ product.subscriptionproduct.expire_length }}</length>
 				<unit>{% ifequal product.subscriptionproduct.expire_unit "DAY" %}days{% else %}months{% endifequal %}</unit>
 			</interval>
-			<startDate>{% start_date:date"Y-m-d" %}</startDate>
+			<startDate>{{ start_date:date"Y-m-d" }}</startDate>
 			<totalOccurrences>{{ occurrences }}</totalOccurrences>{% if trial %}
 			<trialOccurrences>{{ trial_occurrences }}</trialOccurrences>{% endif %}
 		</paymentSchedule>
