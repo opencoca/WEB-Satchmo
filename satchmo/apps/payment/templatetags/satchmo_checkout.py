@@ -1,6 +1,6 @@
 from django import template
 from django.utils import translation
-from livesettings import config_get_group, config_get
+from livesettings import config_get_group
 from satchmo_store.shop.models import ORDER_STATUS 
 
 register = template.Library()

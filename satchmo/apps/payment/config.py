@@ -1,5 +1,6 @@
 from django.utils.translation import ugettext_lazy, ugettext
-from livesettings import *
+from livesettings.values import StringValue,ConfigurationGroup,BooleanValue,DecimalValue,PositiveIntegerValue
+from livesettings.functions import config_register,config_register_list,config_get_group,config_choice_values,config_value
 from payment import signals, active_gateways
 from satchmo_utils import is_string_like
 import logging

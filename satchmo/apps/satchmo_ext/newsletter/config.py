@@ -1,6 +1,7 @@
 from django.conf import settings
 from django.utils.translation import ugettext_lazy as _
-from livesettings import *
+from livesettings.values import StringValue,ConfigurationGroup
+from livesettings.functions import config_register
 from satchmo_utils import load_module
 from satchmo_store.shop import get_satchmo_setting
 
