@@ -1,4 +1,5 @@
-from livesettings import *
+from livesettings.values import IntegerValue
+from livesettings.functions import config_register
 from django.utils.translation import ugettext_lazy as _
 from product.config import PRODUCT_GROUP
 config_register(

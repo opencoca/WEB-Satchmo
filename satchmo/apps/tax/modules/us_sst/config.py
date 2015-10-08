@@ -1,6 +1,7 @@
 from django.utils.translation import ugettext_lazy as _
 
-from livesettings import *
+from livesettings.values import StringValue,BooleanValue
+from livesettings.functions import config_register,config_get,config_get_group
 import tax.config
 
 TAX_MODULE = config_get('TAX', 'MODULE')

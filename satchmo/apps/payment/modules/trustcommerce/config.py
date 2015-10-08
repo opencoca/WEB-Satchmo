@@ -1,4 +1,5 @@
-from livesettings import *
+from livesettings.values import StringValue,ConfigurationGroup,BooleanValue,DecimalValue,PositiveIntegerValue,ModuleValue,MultipleStringValue,LongStringValue,IntegerValue
+from livesettings.functions import config_register_list
 from django.utils.translation import ugettext_lazy as _
 
 gettext = lambda s:s

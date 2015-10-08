@@ -3,7 +3,8 @@ Canada Post Shipping Module
 v0.1.1
 '''
 from django.utils.translation import ugettext_lazy as _
-from livesettings import *
+from livesettings.values import StringValue,ConfigurationGroup,BooleanValue,MultipleStringValue
+from livesettings.functions import config_register_list,config_get
 
 SHIP_MODULES = config_get('SHIPPING', 'MODULES')
 SHIP_MODULES.add_choice(('shipping.modules.canadapost', 'Canada Post'))

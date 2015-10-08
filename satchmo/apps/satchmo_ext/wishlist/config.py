@@ -1,5 +1,6 @@
 from django.utils.translation import ugettext_lazy as _
-from livesettings import *
+from livesettings.values import StringValue
+from livesettings.functions import config_register
 from satchmo_store.shop.config import SHOP_GROUP
 
 config_register(
