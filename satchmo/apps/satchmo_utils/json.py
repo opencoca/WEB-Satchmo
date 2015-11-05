@@ -13,7 +13,7 @@ except ImportError:
     try:
         import simplejson as json
     except ImportError:
-        import json
+        from django.core.serializers.json import json
 from django.core.serializers.json import DateTimeAwareJSONEncoder
 from decimal import Decimal
 
