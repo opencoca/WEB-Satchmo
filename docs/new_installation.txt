@@ -117,7 +117,7 @@ Installing Satchmo into your path
 
 2. Install satchmo onto your system::
 
-        cd /home/user/src/satchmo-trunk
+        cd /home/user/src/satchmo
         sudo python setup.py install
 
    .. note::
@@ -153,7 +153,7 @@ get a new sample store up and running quickly.
 
 1. Build a starter store using :command:`clonesatchmo`::
 
-    python /home/user/src/satchmo-trunk/scripts/clonesatchmo.py
+    python /home/user/src/satchmo/scripts/clonesatchmo.py
 
 The clonesatchmo program will do everything described in :doc:`settings`. At a high level it:
 
