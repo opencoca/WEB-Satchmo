@@ -1,6 +1,7 @@
 from django.db.models import signals
 from sorl.thumbnail import ImageField
-from livesettings import config_value, SettingNotSet
+from livesettings.functions import config_value
+from livesettings.models import SettingNotSet
 from satchmo_utils.thumbnail.utils import rename_by_field
 from satchmo_utils import normalize_dir
 import logging

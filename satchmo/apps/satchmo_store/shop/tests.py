@@ -12,7 +12,7 @@ from django.core.cache import cache
 from keyedcache import cache_delete
 from l10n.models import Country
 from l10n.utils import moneyfmt
-from livesettings import config_get
+from livesettings.functions import config_get
 from payment import active_gateways
 from product.models import Product
 from product.utils import rebuild_pricing, find_auto_discounts

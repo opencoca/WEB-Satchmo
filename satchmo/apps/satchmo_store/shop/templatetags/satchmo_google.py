@@ -1,7 +1,7 @@
 from django.template import Library, RequestContext
 from django.conf import settings
 from satchmo_store.contact.models import Contact
-from livesettings import config_value
+from livesettings.functions import config_value
 import sys
 
 register = Library()

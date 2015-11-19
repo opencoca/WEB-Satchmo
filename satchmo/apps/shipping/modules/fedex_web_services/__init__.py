@@ -1,5 +1,5 @@
 import shipper
-from livesettings import config_choice_values, config_get_group
+from livesettings.functions import config_choice_values, config_get_group
 from fedex.config import FedexConfig
 import logging
 

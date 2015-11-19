@@ -1,4 +1,5 @@
-from livesettings import config_register, StringValue, IntegerValue, BooleanValue, MultipleStringValue
+from livesettings.functions import config_register
+from livesettings.values import StringValue, IntegerValue, BooleanValue, MultipleStringValue
 from satchmo_store.shop.config import SHOP_GROUP
 
 from django.utils.translation import ugettext_lazy as _

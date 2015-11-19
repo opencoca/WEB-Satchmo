@@ -5,7 +5,7 @@ except:
 
 from django.core.exceptions import ImproperlyConfigured
 from django.db.models import Q
-from livesettings import config_value
+from livesettings.functions import config_value
 from satchmo_store.contact.models import Contact
 from l10n.models import AdminArea, Country
 from satchmo_utils import is_string_like

@@ -9,7 +9,7 @@ from django.utils.datastructures import MultiValueDictKeyError
 from django.utils.safestring import mark_safe
 from django.utils.translation import ugettext as _
 from django.views.decorators.cache import never_cache
-from livesettings import config_value
+from livesettings.functions import config_value
 from product.models import Product, OptionManager
 from product.utils import find_best_auto_discount
 from product.views import optionids_from_post

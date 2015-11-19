@@ -1,7 +1,7 @@
 from decimal import Decimal
 from django.contrib.sites.models import Site
 from django.db.models import Q
-from livesettings import config_value
+from livesettings.functions import config_value
 from l10n.utils import moneyfmt
 from product.models import Option, ProductPriceLookup, OptionGroup, Discount, Product, split_option_unique_id
 from satchmo_utils.numbers import round_decimal

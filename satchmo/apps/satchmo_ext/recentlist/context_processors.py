@@ -1,4 +1,4 @@
-from livesettings import config_value
+from livesettings.functions import config_value
 from product.models import Product
 
 def recent_products(request):

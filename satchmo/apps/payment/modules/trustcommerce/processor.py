@@ -127,7 +127,7 @@ if __name__ == "__main__":
     # This is for testing - enabling you to run from the command line & make sure everything is ok
     #####
     import os
-    from livesettings import config_get_group
+    from livesettings.functions import config_get_group
     from decimal import Decimal
 
     # Set up some dummy classes to mimic classes being passed through Satchmo

@@ -9,7 +9,7 @@ from django.shortcuts import render_to_response
 from django.template import RequestContext
 from django.views.generic import FormView
 from satchmo_utils.signals import form_initialdata
-from livesettings import config_get_group, config_value
+from livesettings.functions import config_get_group, config_value
 from satchmo_store.contact import CUSTOMER_ID
 from satchmo_store.contact.models import Contact
 from satchmo_store.shop.models import Cart, Config, Order

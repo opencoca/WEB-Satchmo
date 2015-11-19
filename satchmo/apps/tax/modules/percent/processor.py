@@ -1,5 +1,5 @@
 from decimal import Decimal
-from livesettings import config_value
+from livesettings.functions import config_value
 
 class Processor(object):
     

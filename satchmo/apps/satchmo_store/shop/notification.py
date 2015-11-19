@@ -1,5 +1,5 @@
 from django.utils.translation import ugettext as _
-from livesettings import config_value
+from livesettings.functions import config_value
 from product.models import Discount
 from satchmo_store.mail import NoRecipientsException, send_store_mail, send_store_mail_template_decorator
 from satchmo_store.shop.signals import order_confirmation_sender, order_notice_sender, ship_notice_sender

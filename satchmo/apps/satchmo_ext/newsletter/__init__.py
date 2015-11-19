@@ -2,7 +2,7 @@
 
 from django import forms
 from django.utils.translation import ugettext_lazy as _
-from livesettings import config_value
+from livesettings.functions import config_value
 from satchmo_store.accounts.signals import satchmo_registration
 from satchmo_store.contact.signals import satchmo_contact_view
 from satchmo_utils import load_module

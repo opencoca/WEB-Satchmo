@@ -20,7 +20,7 @@ def cart_has_minimum_order(template="product/minimum_order.html", min_order="PAY
         def _checkorder(request, template=template, min_order=min_order, *args, **kwargs):
             # resolve the min order
             if is_string_like(min_order):
-                from livesettings import config_value
+                from livesettings.functions import config_value
                 min_order = config_value(*min_order.split('.'))
             
             cart = Cart.objects.from_request(request)

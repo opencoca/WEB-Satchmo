@@ -1,7 +1,7 @@
 """Sage Pay Form"""
 from django import forms
 from django.utils.translation import ugettext as _
-from livesettings import config_value
+from livesettings.functions import config_value
 from payment.forms import CreditPayShipForm, MONTHS
 from payment.modules.sagepay.config import REQUIRES_ISSUE_NUMBER
 import datetime

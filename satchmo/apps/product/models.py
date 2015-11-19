@@ -14,7 +14,8 @@ from django.db.models import Q
 from django.utils.encoding import smart_str
 from django.utils.translation import get_language, ugettext, ugettext_lazy as _
 from l10n.utils import moneyfmt, lookup_translation
-from livesettings import config_value, SettingNotSet, config_value_safe
+from livesettings.functions import config_value, config_value_safe
+from livesettings.models import SettingNotSet
 from prices import get_product_quantity_price, get_product_quantity_adjustments
 from product import active_product_types
 from product.prices import PriceAdjustmentCalc

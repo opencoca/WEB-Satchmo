@@ -8,7 +8,7 @@ from django.shortcuts import render_to_response
 from django.template import RequestContext
 from django.utils.translation import ugettext_lazy as _
 
-from livesettings import config_value
+from livesettings.functions import config_value
 from satchmo_store.contact.models import Contact
 from payment.config import gateway_live
 from payment.forms import CreditPayShipForm, SimplePayShipForm

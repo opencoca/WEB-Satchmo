@@ -18,7 +18,7 @@ from django.core.cache import cache
 from django.template import Context, loader
 from django.utils.translation import ugettext as _
 from l10n.models import Country
-from livesettings import config_get_group, config_value
+from livesettings.functions import config_get_group, config_value
 from shipping.modules.base import BaseShipper
 import logging
 import urllib2

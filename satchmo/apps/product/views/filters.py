@@ -2,7 +2,7 @@ from django import http
 from django.core.paginator import Paginator, InvalidPage
 from django.shortcuts import get_object_or_404, render_to_response
 from django.template import RequestContext
-from livesettings import config_value
+from livesettings.functions import config_value
 from product.models import Product
 from product.queries import bestsellers
 import logging

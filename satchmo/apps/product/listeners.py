@@ -1,7 +1,7 @@
 from decimal import Decimal, InvalidOperation
 from django.contrib.sites.models import Site
 from django.db.models import Q
-from livesettings import config_value
+from livesettings.functions import config_value
 from product.models import Product, Category, Discount
 import logging
 

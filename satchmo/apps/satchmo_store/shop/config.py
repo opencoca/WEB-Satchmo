@@ -6,9 +6,8 @@ import urlparse
 from decimal import Decimal
 from django.conf import settings
 from django.utils.translation import ugettext_lazy as _
-from livesettings import config_register, BooleanValue, StringValue, \
-    ConfigurationGroup, PositiveIntegerValue, \
-    DecimalValue
+from livesettings.functions import config_register
+from livesettings.values import BooleanValue, StringValue, ConfigurationGroup, PositiveIntegerValue, DecimalValue
 
 
 SHOP_GROUP = ConfigurationGroup('SHOP', _('Satchmo Shop Settings'), ordering=0)

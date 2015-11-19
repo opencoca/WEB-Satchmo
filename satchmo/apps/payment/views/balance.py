@@ -6,7 +6,7 @@ from django.http import HttpResponse, HttpResponseRedirect
 from django.shortcuts import render_to_response
 from django.template import RequestContext
 from django.utils.translation import ugettext_lazy as _
-from livesettings import config_get_group, config_value
+from livesettings.functions import config_get_group
 from payment import active_gateways
 from payment.forms import PaymentMethodForm, CustomChargeForm
 from payment.views import contact

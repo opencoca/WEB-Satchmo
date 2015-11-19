@@ -1,6 +1,5 @@
 from django import template
 from django.template.loader import render_to_string
-from livesettings import config_value
 from satchmo_ext.productratings.utils import get_product_rating_string, get_product_rating
 import logging
 

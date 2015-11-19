@@ -1,6 +1,6 @@
 from django import template
 
-from livesettings import config_get_group
+from livesettings.functions import config_get_group
 from satchmo_utils.templatetags import get_filter_args
 
 register = template.Library()

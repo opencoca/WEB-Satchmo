@@ -1,6 +1,5 @@
-from livesettings import (ConfigurationGroup, config_register_list,
-                          BooleanValue, ModuleValue, StringValue,
-                          MultipleStringValue)
+from livesettings.functions import config_register_list
+from livesettings.values import ConfigurationGroup, BooleanValue, ModuleValue, StringValue, MultipleStringValue
 from django.utils.translation import ugettext_lazy as _
 
 # this is so that the translation utility will pick up the string

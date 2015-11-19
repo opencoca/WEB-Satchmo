@@ -1,7 +1,8 @@
 # -*- coding: utf-8 -*-
 
 from django.utils.translation import ugettext_lazy as _
-from livesettings import ConfigurationGroup, StringValue, config_register
+from livesettings.values import ConfigurationGroup, StringValue
+from livesettings.functions import config_register
 
 PRODUCT_GROUP = ConfigurationGroup('PRODUCT', _('Product Settings'))
 

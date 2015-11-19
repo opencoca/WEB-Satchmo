@@ -1,6 +1,6 @@
 from django.conf import settings
 from django.template import loader, Context, TemplateDoesNotExist
-from livesettings import config_value
+from livesettings.functions import config_value
 from satchmo_store.shop.signals import rendering_store_mail, sending_store_mail
 
 from socket import error as SocketError

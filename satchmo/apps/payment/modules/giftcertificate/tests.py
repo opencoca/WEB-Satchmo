@@ -3,7 +3,7 @@ from django.contrib.sites.models import Site
 from django.test import TestCase
 from keyedcache import cache_delete
 from l10n.models import Country
-from livesettings import config_value
+from livesettings.functions import config_value
 from models import *
 from product.models import Product
 from satchmo_store.contact.models import AddressBook, Contact, ContactRole

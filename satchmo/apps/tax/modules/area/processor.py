@@ -2,7 +2,7 @@ from decimal import Decimal
 from django.core.exceptions import ImproperlyConfigured
 from django.db.models import Q
 from l10n.models import AdminArea, Country
-from livesettings import config_value
+from livesettings.functions import config_value
 from models import TaxRate
 from product.models import TaxClass
 from satchmo_store.contact.models import Contact

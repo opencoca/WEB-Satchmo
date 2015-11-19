@@ -9,7 +9,7 @@ from django.template import RequestContext
 from django.utils.translation import ugettext as _
 from django.contrib import messages
 from django.views.decorators.cache import never_cache
-from livesettings import config_value
+from livesettings.functions import config_value
 from satchmo_store.shop.models import Order, OrderStatus
 from payment.config import gateway_live
 from satchmo_utils.dynamic import lookup_url, lookup_template

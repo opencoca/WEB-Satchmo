@@ -1,7 +1,6 @@
 from django import forms
 from django.utils.safestring import mark_safe
 from l10n.l10n_settings import get_l10n_default_currency_symbol
-from livesettings import config_value
 from satchmo_utils.numbers import round_decimal
 import logging
 from django.utils.html import escape

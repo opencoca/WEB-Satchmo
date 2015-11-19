@@ -13,7 +13,7 @@ from django.core.management.color import no_style
 from django.db import transaction
 from django.http import HttpResponse
 from django.utils.translation import ugettext as _
-from livesettings import config_value
+from livesettings.functions import config_value
 from product.models import Product, Price, Option
 from satchmo_utils.unique_id import slugify
 import logging

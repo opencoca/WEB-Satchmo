@@ -1,7 +1,7 @@
 from django.conf import settings
 from django.core.cache import get_cache
 from django.db.models.fields.files import ImageField
-from livesettings import config_value
+from livesettings.functions import config_value
 from satchmo_utils.thumbnail.text import URLify
 
 #ensure config is loaded

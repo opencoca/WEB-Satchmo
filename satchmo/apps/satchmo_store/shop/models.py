@@ -14,7 +14,7 @@ from django.utils.translation import ugettext, ugettext_lazy as _
 from django.utils import timezone
 from l10n.models import Country
 from l10n.utils import moneyfmt
-from livesettings import ConfigurationSettings, config_value
+from livesettings.functions import ConfigurationSettings, config_value
 from product.models import Discount, Product, Price, get_product_quantity_adjustments
 from product.prices import PriceAdjustmentCalc, PriceAdjustment
 from satchmo_store.contact.models import Contact

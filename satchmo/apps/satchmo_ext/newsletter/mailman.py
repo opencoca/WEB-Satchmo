@@ -7,7 +7,7 @@ in the admin settings page.
 from django.utils.translation import ugettext as _
 from Mailman import MailList, Errors
 from models import Subscription
-from livesettings import config_value
+from livesettings.functions import config_value
 import logging
 import sys
 

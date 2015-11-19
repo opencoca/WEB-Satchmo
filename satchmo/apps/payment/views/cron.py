@@ -3,7 +3,7 @@ from decimal import Decimal
 from django.http import HttpResponse
 from django.utils.translation import ugettext, ugettext_lazy as _
 from django.utils import timezone
-from livesettings import config_get_group, config_value
+from livesettings.functions import config_get_group, config_value
 from satchmo_store.shop.models import Order, OrderItem, OrderPayment
 from satchmo_utils.views import bad_or_missing
 import logging

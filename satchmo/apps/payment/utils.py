@@ -1,5 +1,5 @@
 from decimal import Decimal
-from livesettings import config_get_group, config_value
+from livesettings.functions import config_get_group, config_value
 from satchmo_store.shop.models import Order, OrderItem, OrderItemDetail, OrderCart
 from satchmo_store.shop.signals import satchmo_post_copy_item_to_order
 from shipping.utils import update_shipping

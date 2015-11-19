@@ -51,7 +51,7 @@ class PaymentProcessor(BasePaymentProcessor):
         Process the transaction and return a ProcessorResult:
 
         Example:
-        >>> from livesettings import config_get_group
+        >>> from livesettings.functions import config_get_group
         >>> settings = config_get_group('PAYMENT_DUMMY')
         >>> from payment.modules.dummy.processor import PaymentProcessor
         >>> processor = PaymentProcessor(settings)

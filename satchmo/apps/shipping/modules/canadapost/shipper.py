@@ -10,7 +10,7 @@ from django.core.cache import cache
 from django.template import loader, Context
 from django.utils.safestring import mark_safe 
 from django.utils.translation import ugettext as _
-from livesettings import config_get_group, config_value
+from livesettings.functions import config_get_group, config_value
 from shipping.modules.base import BaseShipper
 import datetime
 import logging

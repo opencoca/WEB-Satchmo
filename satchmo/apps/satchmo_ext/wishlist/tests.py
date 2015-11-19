@@ -6,7 +6,6 @@ from django.test.client import Client
 from django.utils.encoding import smart_str
 from keyedcache import cache_delete
 from l10n.models import Country
-from livesettings import config_value, config_get
 from product.models import Product
 from product.utils import rebuild_pricing
 from satchmo_ext.wishlist.models import *

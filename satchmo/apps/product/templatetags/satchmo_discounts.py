@@ -1,6 +1,6 @@
 from decimal import Decimal
 from django import template
-from livesettings import config_value
+from livesettings.functions import config_value
 from product.utils import calc_discounted_by_percentage, find_best_auto_discount
 from tax.templatetags import satchmo_tax
 

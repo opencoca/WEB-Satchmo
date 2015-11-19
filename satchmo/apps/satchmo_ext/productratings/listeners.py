@@ -6,7 +6,7 @@ except ImportError:
 from django.contrib.sites.models import Site
 from django.core import urlresolvers
 from django.utils.encoding import smart_str
-from livesettings import config_value
+from livesettings.functions import config_value
 from models import ProductRating
 from product.models import Product
 from satchmo_utils import url_join
