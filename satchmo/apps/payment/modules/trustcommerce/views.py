@@ -1,4 +1,4 @@
-from livesettings import config_get_group
+from livesettings.functions import config_get_group
 from payment.views import confirm, payship
     
 def pay_ship_info(request):

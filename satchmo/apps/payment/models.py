@@ -9,7 +9,7 @@ from decimal import Decimal
 from django.conf import settings
 from django.db import models
 from django.utils.translation import ugettext_lazy as _
-from livesettings import config_value, config_choice_values, SettingNotSet
+from livesettings.functions import config_value
 from satchmo_utils.iterchoices import iterchoices_db
 import payment.config
 from satchmo_store.contact.models import Contact

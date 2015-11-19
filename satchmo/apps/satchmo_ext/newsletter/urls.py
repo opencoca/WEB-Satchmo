@@ -5,7 +5,7 @@ This will get automatically added by satchmo_store, under the url given in your 
 """
 
 from django.conf.urls import *
-from livesettings import config_value
+from livesettings.functions import config_value
 import logging
 log = logging.getLogger('newsletter.urls')
 

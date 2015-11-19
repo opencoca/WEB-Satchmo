@@ -4,7 +4,7 @@ from django import http
 from django.shortcuts import render_to_response
 from django.template import RequestContext
 from django.utils.translation import ugettext as _
-from livesettings import config_get_group
+from livesettings.functions import config_get_group
 from payment.views import payship, confirm
 import logging
 from satchmo_utils.dynamic import lookup_template

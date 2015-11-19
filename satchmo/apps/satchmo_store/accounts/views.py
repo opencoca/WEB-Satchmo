@@ -10,7 +10,7 @@ from django.views.decorators.cache import never_cache
 from django.views.generic.base import TemplateView
 from forms import RegistrationAddressForm, RegistrationForm, EmailAuthenticationForm
 from l10n.models import Country
-from livesettings import config_get_group, config_value
+from livesettings.functions import config_get_group, config_value
 from satchmo_store.accounts.mail import send_welcome_email
 from satchmo_store.accounts import signals
 from satchmo_store.contact import CUSTOMER_ID

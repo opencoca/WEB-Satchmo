@@ -1,5 +1,5 @@
 import shipper
-from livesettings import config_choice_values
+from livesettings.functions import config_choice_values
 
 def get_methods():
   '''

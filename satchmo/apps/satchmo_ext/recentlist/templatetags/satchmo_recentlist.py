@@ -2,7 +2,7 @@ from django.template import Node, NodeList
 from django.template import TemplateSyntaxError
 from django.template import Library
 from product.models import Product
-from livesettings import config_value
+from livesettings.functions import config_value
 
 register = Library()
 

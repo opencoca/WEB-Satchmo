@@ -4,6 +4,9 @@ from livesettings.values import StringValue,ConfigurationGroup,BooleanValue,Deci
 from livesettings.functions import config_register_list,config_register
 from satchmo_store.shop import get_satchmo_setting
 from satchmo_utils import is_string_like, load_module
+import logging
+
+log = logging.getLogger('shipping.config')
 
 SHIPPING_GROUP = ConfigurationGroup('SHIPPING', _('Shipping Settings'))
 

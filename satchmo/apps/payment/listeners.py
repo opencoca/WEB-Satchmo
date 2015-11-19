@@ -2,7 +2,6 @@ from django import forms
 from django.core import urlresolvers
 from django.utils.translation import ugettext, ugettext_lazy as _
 from payment.utils import capture_authorizations
-from livesettings import config_value
 import logging
 
 log = logging.getLogger('payment.listeners')

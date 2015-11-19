@@ -1,7 +1,7 @@
 from django import template
 from django.template import Node, Variable
 from django.template import TemplateSyntaxError
-from livesettings import config_value
+from livesettings.functions import config_value
 from product.models import Product
 from product.queries import bestsellers
 from satchmo_utils.templatetags import get_filter_args

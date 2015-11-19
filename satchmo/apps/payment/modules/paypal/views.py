@@ -7,7 +7,7 @@ from django.template import RequestContext
 from django.utils.http import urlencode
 from django.utils.translation import ugettext as _
 from django.views.decorators.cache import never_cache
-from livesettings import config_get_group, config_value
+from livesettings.functions import config_get_group, config_value
 from payment.config import gateway_live
 from payment.utils import get_processor_by_key
 from payment.views import payship

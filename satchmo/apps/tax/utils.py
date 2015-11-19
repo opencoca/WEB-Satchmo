@@ -1,4 +1,4 @@
-from livesettings import config_value
+from livesettings.functions import config_value
 from satchmo_utils import load_module
 import decimal
 

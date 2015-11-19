@@ -1,4 +1,4 @@
-from livesettings import config_value
+from livesettings.functions import config_value
 from payment.listeners import capture_on_ship_listener
 from product.models import Product
 from product.listeners import default_product_search_listener, discount_used_listener

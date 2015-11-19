@@ -4,7 +4,7 @@ Created on 3 Mar 2009
 @author: dalore
 '''
 from django.utils.translation import ugettext as _
-from livesettings import config_get_group, config_value
+from livesettings.functions import config_get_group, config_value
 from payment.utils import get_processor_by_key
 from satchmo_store.shop.models import Cart, Order, OrderPayment
 import re

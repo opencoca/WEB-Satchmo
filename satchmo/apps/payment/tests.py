@@ -6,7 +6,7 @@ from django.core.urlresolvers import reverse as url
 from django.test import TestCase
 from django.test.client import Client
 from l10n.models import *
-from livesettings import config_get, config_get_group
+from livesettings.functions import config_get, config_get_group
 from payment import utils
 from product.models import *
 from satchmo_store.contact.models import *

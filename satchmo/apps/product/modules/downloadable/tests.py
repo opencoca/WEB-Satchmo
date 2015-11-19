@@ -8,7 +8,7 @@ from django.test import TestCase
 from django.test.client import Client
 from django.utils import timezone
 from l10n.models import Country
-from livesettings import config_value
+from livesettings.functions import config_value
 from product.models import Product
 from product.modules.downloadable.models import DownloadLink, DownloadableProduct
 from satchmo_store.contact.models import AddressBook, Contact

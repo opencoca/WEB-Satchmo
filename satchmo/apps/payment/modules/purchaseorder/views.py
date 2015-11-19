@@ -2,7 +2,7 @@
 
 from django import http
 from forms import PurchaseorderPayShipForm
-from livesettings import config_get_group
+from livesettings.functions import config_get_group
 from payment.views import confirm, payship
 from satchmo_utils.dynamic import lookup_url
 import logging

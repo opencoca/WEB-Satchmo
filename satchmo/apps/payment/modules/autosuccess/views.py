@@ -3,7 +3,7 @@ from django.shortcuts import render_to_response
 from django.template import RequestContext
 from django.utils.translation import ugettext
 from django.views.decorators.cache import never_cache
-from livesettings import config_get_group
+from livesettings.functions import config_get_group
 from payment.utils import pay_ship_save, get_processor_by_key
 from satchmo_store.shop.models import Cart
 from satchmo_store.shop.models import Order, Contact, OrderPayment

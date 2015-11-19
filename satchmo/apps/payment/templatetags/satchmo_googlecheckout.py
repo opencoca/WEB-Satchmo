@@ -1,6 +1,6 @@
 from django import template
 from django.utils import translation
-from livesettings import config_get_group
+from livesettings.functions import config_get_group
 from payment.modules.google import CHECKOUT_BUTTON_SIZES
 from django.utils.http import urlencode
 

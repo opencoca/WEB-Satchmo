@@ -3,7 +3,7 @@ Each shipping option uses the data in an Order object to calculate the shipping 
 """
 from decimal import Decimal
 from django.utils.translation import ugettext, ugettext_lazy
-from livesettings import config_value
+from livesettings.functions import config_value
 _ = ugettext_lazy
 from shipping.modules.base import BaseShipper
 

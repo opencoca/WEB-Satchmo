@@ -21,7 +21,7 @@ from django.utils.importlib import import_module
 from django.views.decorators.cache import never_cache
 from satchmo_store.shop.models import Order
 from satchmo_store.shop.models import Config
-from livesettings import config_value
+from livesettings.functions import config_value
 
 
 class ConverterError(Exception):

@@ -5,7 +5,7 @@ from django.template import RequestContext
 from django.utils.translation import ugettext_lazy as _
 from forms import GiftCertCodeForm, GiftCertPayShipForm
 from models import GiftCertificate, GIFTCODE_KEY
-from livesettings import config_get_group
+from livesettings.functions import config_get_group
 from satchmo_store.shop.models import Order
 from payment.utils import pay_ship_save, get_or_create_order
 from payment.views import confirm, payship

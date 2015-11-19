@@ -1,6 +1,6 @@
 from django.shortcuts import render_to_response
 from django.template import RequestContext
-from livesettings import config_value
+from livesettings.functions import config_value
 from satchmo_ext.productratings.queries import highest_rated
 
 def display_bestratings(request, count=0, template='product/best_ratings.html'):

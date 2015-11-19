@@ -5,7 +5,7 @@ from django.contrib.auth.models import User
 from django.contrib.sites.models import Site
 from django.utils.translation import ugettext_lazy as _, ugettext
 from satchmo_store.accounts.mail import send_welcome_email
-from livesettings import config_value
+from livesettings.functions import config_value
 from satchmo_store.contact.forms import ContactInfoForm
 from satchmo_store.contact.models import Contact, ContactRole
 from satchmo_utils.unique_id import generate_id

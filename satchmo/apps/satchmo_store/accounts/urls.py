@@ -7,7 +7,6 @@ root URLConf to include this URLConf for any URL beginning with
 
 """
 from django.conf.urls import patterns
-from livesettings import config_value
 
 from satchmo_store.accounts.views import RegistrationComplete
 # extending the urls in contacts

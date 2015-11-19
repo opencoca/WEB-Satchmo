@@ -1,5 +1,5 @@
 from django import template
-from livesettings import config_value
+from livesettings.functions import config_value
 from l10n.utils import moneyfmt
 from tax.templatetags.satchmo_tax import CartitemLineTaxedTotalNode, CartTaxedTotalNode
 import logging

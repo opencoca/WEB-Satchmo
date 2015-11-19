@@ -313,7 +313,7 @@ if __name__ == "__main__":
     sure everything is ok
     """
     import os
-    from livesettings import config_get_group
+    from livesettings.functions import config_get_group
 
     # Set up some dummy classes to mimic classes being passed through Satchmo
     class testContact(object):

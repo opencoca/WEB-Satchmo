@@ -2,7 +2,7 @@ from django.core.paginator import Paginator, InvalidPage
 from django.shortcuts import render_to_response
 from django.template import RequestContext
 from django.utils.translation import ugettext as _
-from livesettings import config_value
+from livesettings.functions import config_value
 from product.views import display_featured
 from satchmo_utils.views import bad_or_missing
 

@@ -1,5 +1,5 @@
 from django.http import HttpResponse
-from livesettings import config_get_group
+from livesettings.functions import config_get_group
 from payment.config import gateway_live
 
 def auth_required(request):

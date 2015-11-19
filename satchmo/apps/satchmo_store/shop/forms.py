@@ -1,7 +1,7 @@
 from decimal import Decimal
 from django import forms
 from django.contrib.sites.models import Site
-from livesettings import config_value
+from livesettings.functions import config_value
 from product.models import Product
 from satchmo_store.shop.signals import satchmo_cart_details_query, satchmo_cart_add_complete
 from satchmo_utils.numbers import RoundedDecimalError, round_decimal, PositiveRoundedDecimalField

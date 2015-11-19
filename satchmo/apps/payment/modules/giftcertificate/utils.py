@@ -1,5 +1,5 @@
 import random
-from livesettings import config_value
+from livesettings.functions import config_value
 
 def generate_certificate_code():
     """Creates a code, formatted according to the shop owner's preference as set in the config system."""

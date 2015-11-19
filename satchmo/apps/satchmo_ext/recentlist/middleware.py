@@ -1,5 +1,5 @@
 from django.core.urlresolvers import NoReverseMatch, reverse
-from livesettings import config_value
+from livesettings.functions import config_value
 import logging
 import re
 

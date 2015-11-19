@@ -4,7 +4,7 @@ from django.template import loader
 from django.template import RequestContext
 from django.utils.translation import ugettext_lazy as _
 from l10n.utils import moneyfmt
-from livesettings import config_value, config_value_safe
+from livesettings.functions import config_value, config_value_safe
 from payment import signals
 from payment.config import labelled_gateway_choices
 from payment.models import CreditCardDetail

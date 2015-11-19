@@ -2,7 +2,7 @@ from django.core import urlresolvers
 from django.test import TestCase
 from django.test.client import Client
 import keyedcache
-from livesettings import config_get
+from livesettings.functions import config_get
 from satchmo_ext.newsletter import *
 from satchmo_ext.newsletter.models import get_contact_or_fake, Subscription
 import logging

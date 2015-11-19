@@ -5,7 +5,7 @@ from django.template.loader import get_template
 from django.utils.translation import ugettext as _
 from django.views.decorators.cache import never_cache
 from django.views.decorators.csrf import csrf_exempt
-from livesettings import config_get_group, config_value
+from livesettings.functions import config_get_group, config_value
 from payment.config import gateway_live
 from payment.views import confirm, payship
 from satchmo_store.shop.models import Order

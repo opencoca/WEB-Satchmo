@@ -1,7 +1,7 @@
 """Simple wrapper for standard checkout as implemented in payment.views"""
 
 from django.views.decorators.cache import never_cache
-from livesettings import config_get_group
+from livesettings.functions import config_get_group
 from payment.views import confirm, payship
     
 dummy = config_get_group('PAYMENT_DUMMY')
