@@ -29,7 +29,7 @@ class SubscriptionProduct(models.Model):
         (1, _('Pay Shipping Once')),
         (2, _('Pay Shipping Each Billing Cycle')),
     )
-    is_shippable = models.IntegerField(_("Shippable?"), help_text=_("Is this product shippable?"), max_length=1, choices=SHIPPING_CHOICES)
+    is_shippable = models.IntegerField(_("Shippable?"), help_text=_("Is this product shippable?"), choices=SHIPPING_CHOICES)
 
     is_subscription = True
 
