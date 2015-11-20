@@ -8,9 +8,10 @@ from django.utils.safestring import mark_safe
 try:
     from django.utils.simplejson.encoder import JSONEncoder
 except ImportError:
-    from django.utils.simplejson import JSONEncoder
-except ImportError:
-    from simplejson.encoder import JSONEncoder
+    try:
+        from simplejson.encoder import JSONEncoder        
+    except ImportError:
+        from json import JSONEncoder
 from django.utils.translation import ugettext as _
 from satchmo_store.contact.models import Contact
 from satchmo_store.shop.signals import order_success
