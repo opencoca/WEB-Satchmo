@@ -129,7 +129,7 @@ class Category(models.Model):
         help_text="Optional")
     ordering = models.IntegerField(_("Ordering"), default=0, help_text=_("Override alphabetical order in category display"))
     is_active = models.BooleanField(_("Active"), default=True, blank=True)
-    related_categories = models.ManyToManyField('self', blank=True, null=True,
+    related_categories = models.ManyToManyField('self', blank=True,
         verbose_name=_('Related Categories'), related_name='related_categories')
     objects = CategoryManager()
 
@@ -467,10 +467,8 @@ class Discount(models.Model):
         default='NONE', blank=True, null=True, max_length=10)
     allValid = models.BooleanField(_("All products?"), default=False,
         help_text=_('Apply this discount to all discountable products? If this is false you must select products below in the "Valid Products" section.'))
-    valid_products = models.ManyToManyField('Product', verbose_name=_("Valid Products"),
-        blank=True, null=True)
-    valid_categories = models.ManyToManyField('Category', verbose_name=_("Valid Categories"),
-        blank=True, null=True)
+    valid_products = models.ManyToManyField('Product', verbose_name=_("Valid Products"), blank=True)
+    valid_categories = models.ManyToManyField('Category', verbose_name=_("Valid Categories"), blank=True)
 
     objects = DiscountManager()
 
@@ -861,8 +859,8 @@ class Product(models.Model):
     width_units = models.CharField(_("Width units"), max_length=3, null=True, blank=True)
     height = models.DecimalField(_("Height"), max_digits=6, decimal_places=2, null=True, blank=True)
     height_units = models.CharField(_("Height units"), max_length=3, null=True, blank=True)
-    related_items = models.ManyToManyField('self', blank=True, null=True, verbose_name=_('Related Items'), related_name='related_products')
-    also_purchased = models.ManyToManyField('self', blank=True, null=True, verbose_name=_('Previously Purchased'), related_name='also_products')
+    related_items = models.ManyToManyField('self', blank=True, verbose_name=_('Related Items'), related_name='related_products')
+    also_purchased = models.ManyToManyField('self', blank=True, verbose_name=_('Previously Purchased'), related_name='also_products')
     total_sold = models.DecimalField(_("Total sold"),  max_digits=18, decimal_places=6, default='0')
     taxable = models.BooleanField(_("Taxable"), default=get_taxable)
     taxClass = models.ForeignKey('TaxClass', verbose_name=_('Tax Class'), blank=True, null=True, help_text=_("If it is taxable, what kind of tax?"))
