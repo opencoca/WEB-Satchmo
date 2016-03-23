@@ -5,7 +5,7 @@ from product.models import Product
 from satchmo_store.shop.models import Cart, Config
 from satchmo_store.contact.models import Contact
 from shipping.modules.fedex_web_services.shipper import Shipper, convert_weight
-from shipping.modules.fedex_web_services import get_config_obj, get_methods
+from shipping.modules.fedex_web_services.methods import get_config_obj, get_methods
 from livesettings.functions import config_get_group
 import keyedcache
 
