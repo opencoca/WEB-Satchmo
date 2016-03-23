@@ -1,5 +1,4 @@
 from django.conf.urls import patterns, url
-from django.db import models
 from livesettings.functions import config_value
 from satchmo_store.shop.satchmo_settings import get_satchmo_setting
 import logging
@@ -23,7 +22,13 @@ urlpatterns = patterns('payment.views',
 
 def make_urlpatterns():
     patterns = []
-    for app in models.get_apps():
+    try:
+        from django.apps import apps
+        app_list = [app_config.models_module for app_config in apps.get_app_configs() if app_config.models_module is not None]
+    except ImportError:
+        from django.db import models
+        app_list = models.get_apps()
+    for app in app_list:
         if hasattr(app, 'PAYMENT_PROCESSOR'):
             parts = app.__name__.split('.')
             key = parts[-2].upper()

@@ -22,10 +22,15 @@ def add_month(date, n=1):
 
 def app_enabled(appname):
     """Check the app list to see if a named app is installed."""
-    from django.db import models
+    try:
+        from django.apps import apps
+        app_list = [app_config.models_module for app_config in apps.get_app_configs() if app_config.models_module is not None]
+    except ImportError:
+        from django.db import models
+        app_list = models.get_apps()
 
     all_apps = {}
-    for app in models.get_apps():
+    for app in app_list:
         n = app.__name__.split('.')[-2]
         if n  == appname:
             return True
