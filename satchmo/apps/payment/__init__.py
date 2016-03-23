@@ -4,22 +4,17 @@ def active_gateways():
     """
     try:
         from django.apps import apps
-        gateways = []
-        app_configs = apps.get_app_configs()
-        for app_config in app_configs:
-            if app_config.models_module is not None and hasattr(app_config.models_module, 'PAYMENT_PROCESSOR'):
-                parts = app_config.models_module.__name__.split('.')[:-1]
-                module = ".".join(parts)
-                group = 'PAYMENT_%s' % parts[-1].upper()
-                gateways.append((module, group))
-        return gateways
-    except ImportError:                
+        app_list = [app_config.models_module for app_config in apps.get_app_configs() if app_config.models_module is not None]
+    except ImportError:
         from django.db import models
-        gateways = []
-        for app in models.get_apps():
-            if hasattr(app, 'PAYMENT_PROCESSOR'):
-                parts = app.__name__.split('.')[:-1]
-                module = ".".join(parts)
-                group = 'PAYMENT_%s' % parts[-1].upper()
-                gateways.append((module, group))
-        return gateways
+        app_list = models.get_apps()
+              
+    from django.db import models
+    gateways = []
+    for app in app_list:
+        if hasattr(app, 'PAYMENT_PROCESSOR'):
+            parts = app.__name__.split('.')[:-1]
+            module = ".".join(parts)
+            group = 'PAYMENT_%s' % parts[-1].upper()
+            gateways.append((module, group))
+    return gateways
