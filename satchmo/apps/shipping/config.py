@@ -79,7 +79,7 @@ def shipping_methods():
     modules = config_value('SHIPPING', 'MODULES')
     log.debug('Getting shipping methods: %s', modules)
     for m in modules:
-        module = load_module(m)
+        module = load_module(".".join([m, 'methods']))
         methods.extend(module.get_methods())
     return methods
 

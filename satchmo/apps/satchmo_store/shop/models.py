@@ -1166,7 +1166,9 @@ class OrderItem(models.Model):
         return self.product.translated_name()
 
     def _get_category(self):
-        return(self.product.get_category.translated_name())
+        category = self.product.get_category
+        if category:
+            return category.translated_name()            
     category = property(_get_category)
 
     def _is_shippable(self):
