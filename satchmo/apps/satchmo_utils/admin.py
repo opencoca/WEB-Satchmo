@@ -72,21 +72,24 @@ class ForeignKeySearchInput(forms.HiddenInput):
             model_name = self.rel.to._meta.module_name
         except AttributeError:
             model_name = self.rel.to._meta.model_name            
-        return rendered + mark_safe(u'''
+        return mark_safe(rendered + u'''
             <style type="text/css" media="screen">
                 #lookup_%(name)s {
                     padding-right:16px;
                     background: url(
-                        %(static_url)sadmin/img/admin/selector-search.gif
+                        %(static_url)sadmin/img/selector-search.gif
                     ) no-repeat right;
                 }
                 #del_%(name)s {
                     display: none;
+                } 
+                .field-%(name)s {
+                    display: block;
                 }
             </style>
 <input type="text" id="lookup_%(name)s" value="%(label)s"/>
 <a href="#" id="del_%(name)s">
-<img src="%(static_url)sadmin/img/admin/icon_deletelink.gif" />
+<img src="%(static_url)sadmin/img/icon_deletelink.gif" />
 </a>
 <script type="text/javascript">
             var lookup = $('#lookup_%(name)s')
@@ -113,14 +116,14 @@ class ForeignKeySearchInput(forms.HiddenInput):
                 $('#lookup_%(name)s').val('');
             });
             </script>
-        ''') % {
+        ''' % {
             'search_fields': ','.join(self.search_fields),
             'static_url': settings.STATIC_URL,
             'model_name': model_name,
             'app_label': self.rel.to._meta.app_label,
             'label': label,
             'name': name,
-        }
+        })
 
 class AutocompleteAdmin(admin.ModelAdmin):
     """Admin class for models using the autocomplete feature.
