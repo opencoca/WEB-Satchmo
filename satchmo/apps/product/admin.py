@@ -95,7 +95,7 @@ class ProductAttribute_Inline(admin.TabularInline):
 
 class Price_Inline(admin.TabularInline):
     model = Price
-    extra = 2
+    extra = 0
 
 class ProductImage_Inline(admin.StackedInline):
     model = ProductImage
