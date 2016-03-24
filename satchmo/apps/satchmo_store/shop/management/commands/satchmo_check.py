@@ -22,8 +22,7 @@ log = logging.getLogger('satchmo_check')
 class Command(NoArgsCommand):
     help = "Check the system to see if the Satchmo components are installed correctly."
 
-    # These settings help to not import some dependencies before they are necessary.
-    can_import_settings = False
+    can_import_settings = True
     requires_model_validation = False
 
     def handle_noargs(self, **options):
