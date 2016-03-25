@@ -81,6 +81,7 @@ class AdminArea(models.Model):
         verbose_name = _('Administrative Area')
         verbose_name_plural = _('Administrative Areas')
         ordering = ('name',)
+        unique_together = ('country', 'name')
 
     def __unicode__(self):
         return self.name
