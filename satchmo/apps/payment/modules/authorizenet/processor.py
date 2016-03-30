@@ -278,7 +278,8 @@ class PaymentProcessor(BasePaymentProcessor):
                 trial_amount = Decimal('0.00')
                 amount = subscription.total_with_tax
 
-            occurrences = sub.recurring_times + trial_occurrences
+            occurrences = sub.recurring_times or 9999
+            occurrences += trial_occurrences
             if occurrences > 9999:
                 occurrences = 9999
 

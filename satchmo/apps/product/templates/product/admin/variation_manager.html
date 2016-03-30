@@ -119,7 +119,7 @@
 		            var key = parts.join("__");
 					if (!dirty[key]) {
 						var oldval = satchmo.initial_vals[this.id];
-						if ($(this).is('input[@type=text]')) {
+						if ($(this).is('input[type=text]')) {
 							var newval = $(this).fieldValue();
 							var changed = (oldval + "" != newval + "");
 						}
@@ -166,7 +166,7 @@
 		// Get initial values
 		$('form #variation_products input').each(
 			function() {
-				if ($(this).is('input[@type=text]')) {
+				if ($(this).is('input[type=text]')) {
 					val = $(this).fieldValue();
 				}
 				else {
@@ -329,7 +329,7 @@
             {% endif %}
         </td>
         <td>
-	    <img src="{% static 'admin/img/admin/' %}icon-{% if form.existing|lookup:varkey %}yes.gif" alt="{% trans "yes" %}"{% else %}no.gif" alt="{% trans "no" %}"{% endif %} />
+	    <img src="{% static 'admin/img/' %}icon-{% if form.existing|lookup:varkey %}yes.gif" alt="{% trans "yes" %}"{% else %}no.gif" alt="{% trans "no" %}"{% endif %} />
         </td>
         <td class="checkbox">
             {{ field }}
