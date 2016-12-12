@@ -477,9 +477,9 @@ class CreditPayShipForm(SimplePayShipForm):
                     cc.ccv = data['ccv']
                     self.cc = cc
                     results = processor.authorize_and_release(order=self.order)
-                if not results.success:
-                    log.debug('Payment module error: %s', results)
-                    raise forms.ValidationError(results.message)
+                    if not results.success:
+                        log.debug('Payment module error: %s', results)
+                        raise forms.ValidationError(results.message)
                 else:
                     log.debug('Payment module capture/release success for %s', self.order)
             else:
