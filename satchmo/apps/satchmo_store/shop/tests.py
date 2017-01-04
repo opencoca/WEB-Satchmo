@@ -61,7 +61,7 @@ def make_order_payment(order, paytype=None, amount=None):
     return pmt
 
 class ShopTest(TestCase):
-    fixtures = ['l10n-data.yaml', 'sample-store-data.yaml', 'products.yaml', 'test-config.yaml', 'initial_data.yaml']
+    fixtures = ['initial_data.yaml', 'l10n-data.yaml', 'sample-store-data.yaml', 'products.yaml', 'test-config.yaml']
 
     def setUp(self):
         # Every test needs a client
@@ -114,8 +114,7 @@ class ShopTest(TestCase):
         shop_config = Config.objects.get_current()
         subject = u"Welcome to %s" % shop_config.store_name
         response = self.client.get('/accounts/register/')
-        self.assertContains(response, "Please Enter Your Account Information",
-                            count=1, status_code=200)
+        self.assertContains(response, "Please Enter Your Account Information", count=1, status_code=200)
         response = self.client.post('/accounts/register/', {'email': 'someone@test.com',
                                     'first_name': 'Paul',
                                     'last_name' : 'Test',
@@ -210,7 +209,8 @@ class ShopTest(TestCase):
         """
         Get the page of a Product that is not in a Category.
         """
-        Product.objects.create(name="Orphaned Product", slug="orphaned-product", site=Site.objects.get_current())
+        product = Product.objects.create(name="Orphaned Product", slug="orphaned-product")
+        product.site.add(Site.objects.get_current())
         response = self.client.get(prefix + '/product/orphaned-product/')
         self.assertContains(response, 'Orphaned Product')
         self.assertContains(response, 'Software')
@@ -275,7 +275,7 @@ class ShopTest(TestCase):
             'credit_type': 'Visa',
             'credit_number': '4485079141095836',
             'month_expires': '1',
-            'year_expires': '2015',
+            'year_expires': '2020',
             'ccv': '552',
             'shipping': 'FlatRate'}
         response = self.client.post(url('DUMMY_satchmo_checkout-step2'), data)
@@ -334,7 +334,7 @@ class ShopTest(TestCase):
             'credit_type': 'Visa',
             'credit_number': '4485079141095836',
             'month_expires': '1',
-            'year_expires': '2015',
+            'year_expires': '2020',
             'ccv': '552',
             'shipping': 'FlatRate'}
         response = self.client.post(url('DUMMY_satchmo_checkout-step2'), data)
@@ -363,7 +363,7 @@ class ShopTest(TestCase):
             'credit_type': 'Visa',
             'credit_number': '4485079141095836',
             'month_expires': '1',
-            'year_expires': '2015',
+            'year_expires': '2020',
             'ccv': '552',
             'shipping': 'FlatRate'}
         response = self.client.post(url('DUMMY_satchmo_checkout-step2'), data)
@@ -512,14 +512,11 @@ class ShopTest(TestCase):
         self.assertContains(response, "Python Rocks shirt", count=1)
 
 class AdminTest(TestCase):
-    fixtures = ['l10n-data.yaml', 'sample-store-data.yaml', 'products.yaml', 'initial_data.yaml']
+    fixtures = ['initial_data.yaml', 'l10n-data.yaml', 'sample-store-data.yaml', 'products.yaml']
 
     def setUp(self):
         self.client = Client()
-        user = User.objects.create_user('fredsu', 'fred@root.org', 'passwd')
-        user.is_staff = True
-        user.is_superuser = True
-        user.save()
+        user = User.objects.create_superuser('fredsu', 'fred@root.org', 'passwd')
         self.client.login(username='fredsu', password='passwd')
 
     def tearDown(self):
@@ -530,11 +527,11 @@ class AdminTest(TestCase):
         self.assertContains(response, "contact/contact/", status_code=200)
 
     #def test_product(self):
-        response = self.client.get('/admin/product/product/1/')
+        response = self.client.get(url('admin:product_product_change',args=(1,)))
         self.assertContains(response, "Django Rocks shirt", status_code=200)
 
     #def test_configurableproduct(self):
-        response = self.client.get('/admin/configurable/configurableproduct/1/')
+        response = self.client.get(url('admin:configurable_configurableproduct_change',args=(1,)))
         self.assertContains(response, "Small, Black", status_code=200)
 
     #def test_productimage_list(self):
@@ -598,7 +595,7 @@ class FilterUtilTest(TestCase):
         self.assertEqual(kwargs['one'], '"test"')
 
 class CartTest(TestCase):
-    fixtures = ['l10n-data.yaml', 'sample-store-data.yaml', 'products.yaml', 'test-config.yaml']
+    fixtures = ['initial_data.yaml', 'l10n-data.yaml', 'sample-store-data.yaml', 'products.yaml', 'test-config.yaml']
 
     def tearDown(self):
         cache_delete()
@@ -625,7 +622,7 @@ class CartTest(TestCase):
         self.assertEqual(cart.total, Decimal("43.00"))
 
 class ConfigTest(TestCase):
-    fixtures = ['l10n-data.yaml', 'sample-store-data.yaml', 'test-config.yaml']
+    fixtures = ['initial_data.yaml', 'l10n-data.yaml', 'sample-store-data.yaml', 'test-config.yaml']
 
     def tearDown(self):
         cache_delete()

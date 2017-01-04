@@ -1,22 +1,25 @@
-from django.conf.urls import patterns, url
+from django.conf.urls import url
+
 from livesettings.functions import config_value
 from satchmo_store.shop.satchmo_settings import get_satchmo_setting
 import logging
+
+from .views import contact, checkout, balance, cron
 
 log = logging.getLogger('payment.urls')
 
 ssl = get_satchmo_setting('SSL', default_value=False)
 
-urlpatterns = patterns('payment.views',
-     (r'^$', 'contact.contact_info_view', {'SSL': ssl}, 'satchmo_checkout-step1'),
-     (r'^success/$', 'checkout.success', {'SSL' : ssl}, 'satchmo_checkout-success'),
-     (r'custom/charge/(?P<orderitem_id>\d+)/$', 'balance.charge_remaining', {}, 'satchmo_charge_remaining'),
-     (r'custom/charge/$', 'balance.charge_remaining_post', {}, 'satchmo_charge_remaining_post'),
-     (r'^balance/(?P<order_id>\d+)/$', 'balance.balance_remaining_order', {'SSL' : ssl}, 'satchmo_balance_remaining_order'),
-     (r'^balance/$', 'balance.balance_remaining', {'SSL' : ssl}, 'satchmo_balance_remaining'),
-     (r'^cron/$', 'cron.cron_rebill', {}, 'satchmo_cron_rebill'),
-     (r'^mustlogin/$', 'contact.authentication_required', {'SSL' : ssl}, 'satchmo_checkout_auth_required'),
-)
+urlpatterns = [
+     url(r'^$', contact.contact_info_view, {'SSL': ssl}, name='satchmo_checkout-step1'),
+     url(r'^success/$', checkout.success, {'SSL' : ssl}, name='satchmo_checkout-success'),
+     url(r'custom/charge/(?P<orderitem_id>\d+)/$', balance.charge_remaining, name='satchmo_charge_remaining'),
+     url(r'custom/charge/$', balance.charge_remaining_post, name="satchmo_charge_remaining_post"),
+     url(r'^balance/(?P<order_id>\d+)/$', balance.balance_remaining_order, {'SSL' : ssl}, name='satchmo_balance_remaining_order'),
+     url(r'^balance/$', balance.balance_remaining, {'SSL' : ssl}, name="satchmo_balance_remaining"),
+     url(r'^cron/$', cron.cron_rebill, name='satchmo_cron_rebill'),
+     url(r'^mustlogin/$', contact.authentication_required, {'SSL' : ssl}, name='satchmo_checkout_auth_required'),
+]
 
 # now add all enabled module payment settings
 
@@ -47,6 +50,6 @@ def make_urlpatterns():
             urlbase = config_value(modulename, 'URL_BASE')
             log.debug('Found payment processor: %s, adding urls at %s', key, urlbase)
             patterns.append(url(urlbase, [urlmodule, '', '']))
-    return tuple(patterns)
+    return patterns
 
 urlpatterns += make_urlpatterns()

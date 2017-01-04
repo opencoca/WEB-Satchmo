@@ -11,7 +11,7 @@
 {% block content %}
 <h2>{% trans "Recently Added" %}</h2>
 {% if page %}
-	{% for product in page.object_list %}
+	{% for product in object_list %}
 		<div class="recentlyadded">
 	    <div class = "productImage">    
 	   		{% if product.main_image %}

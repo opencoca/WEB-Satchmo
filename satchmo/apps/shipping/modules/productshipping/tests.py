@@ -24,7 +24,7 @@ class ProductShippingPricingTest(TestCase):
     fixtures = ['products.yaml']
 
     def setUp(self):
-        self.carrier = Carrier(name="pricing", active=True)
+        self.carrier = Carrier(key="pricing", active=True)
         self.carrier.save()
         self.product = Product.objects.get(slug='dj-rocks')
         t = ProductShippingPrice(carrier=self.carrier,
@@ -37,7 +37,7 @@ class ProductShippingPricingTest(TestCase):
         self.assertEqual(self.carrier.price(self.product), Decimal("10.00"))
         
     def test2Prices(self):
-        c2 = Carrier(name="test2", active=True)
+        c2 = Carrier(key="test2", active=True)
         c2.save()
         t = ProductShippingPrice(carrier=c2,
             product=self.product,

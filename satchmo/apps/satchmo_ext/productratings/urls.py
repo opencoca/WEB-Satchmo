@@ -1,14 +1,15 @@
 """urlpatterns for productratings.  Note that you do not need to add these to your urls anywhere, they'll be automatically added by the collect_urls signals."""
 
-from django.conf.urls import *
+from django.conf.urls import url, include
+
+from satchmo_ext.productratings.views import display_bestratings
 import logging
 
 log = logging.getLogger('productratings.urls')
 
-productpatterns = patterns('satchmo_ext.productratings.views',
-    (r'^view/bestrated/$', 
-        'display_bestratings', {}, 'satchmo_product_best_rated'),
-)
+productpatterns = [
+    url(r'^view/bestrated/$', display_bestratings, name='satchmo_product_best_rated'),
+]
 
 # Override comments with our redirecting view. You can remove the next two
 # URLs if you aren't using ratings.
@@ -18,9 +19,9 @@ try:
     comment_urls = 'django.contrib.comments.urls'    
 except ImportError:
     comment_urls = 'django_comments.urls'
-commentpatterns = patterns('',
-    (r'^comments/', include(comment_urls)),
-)
+commentpatterns = [
+    url(r'^comments/', include(comment_urls)),
+]
 
 def add_product_urls(sender, patterns=(), section="", **kwargs):
     if section=="product":

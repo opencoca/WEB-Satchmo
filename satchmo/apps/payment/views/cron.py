@@ -52,7 +52,6 @@ def cron_rebill(request=None):
                     if not payments.payment in ipn_based and item.order.balance > 0:
                         #run card
                         #Do the credit card processing here & if successful, execute the success_handler
-                        from livesettings import config_get_group
                         payment_module = config_get_group('PAYMENT_%s' % payments.payment)
                         credit_processor = payment_module.MODULE.load_module('processor')
                         processor = credit_processor.PaymentProcessor(payment_module)

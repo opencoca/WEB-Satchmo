@@ -257,12 +257,12 @@ class ProductExportForm(forms.Form):
             zf.close()
 
             raw = buf.getvalue()
-            mimetype = "application/zip"
+            content_type = "application/zip"
             format = "zip"
         else:
-            mimetype = "text/" + format
+            content_type = "text/" + format
 
-        response = HttpResponse(mimetype=mimetype, content=raw)
+        response = HttpResponse(content_type=content_type, content=raw)
         response['Content-Disposition'] = 'attachment; filename="products-%s.%s"' % (time.strftime('%Y%m%d-%H%M'), format)
 
         return response

@@ -1,6 +1,7 @@
-from django.conf.urls import *
+from django.conf.urls import url
 
+from simple.localsite.views import example
 
-urlpatterns = patterns('',
-    (r'example/', 'simple.localsite.views.example', {}),
-)
+urlpatterns = [
+    url(r'example/', example),
+]

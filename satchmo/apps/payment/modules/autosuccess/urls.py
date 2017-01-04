@@ -1,8 +1,12 @@
-from django.conf.urls import patterns
+from django.conf.urls import url
+
 from satchmo_store.shop.satchmo_settings import get_satchmo_setting
+from payment.views.checkout import success
+from payment.modules.autosuccess.views import one_step
+
 ssl = get_satchmo_setting('SSL', default_value=False)
 
-urlpatterns = patterns('',
-     (r'^$', 'payment.modules.autosuccess.views.one_step', {'SSL': ssl}, 'AUTOSUCCESS_satchmo_checkout-step2'),
-     (r'^success/$', 'payment.views.checkout.success', {'SSL': ssl}, 'AUTOSUCCESS_satchmo_checkout-success'),
-)
+urlpatterns = [
+    url(r'^$', one_step, {'SSL': ssl}, name='AUTOSUCCESS_satchmo_checkout-step2'),
+    url(r'^success/$', success, {'SSL': ssl}, name='AUTOSUCCESS_satchmo_checkout-success'),
+]

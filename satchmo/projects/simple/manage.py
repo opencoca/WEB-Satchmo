@@ -8,6 +8,7 @@ _parent = lambda x: os.path.normpath(os.path.join(x, '..'))
 
 SATCHMO_DIRNAME = _parent(_parent(DIRNAME))
 SATCHMO_APPS = os.path.join(SATCHMO_DIRNAME, 'apps')
+PROJECTS = os.path.join(SATCHMO_DIRNAME, 'projects')
 
 if not SATCHMO_APPS in sys.path:
     sys.path.append(SATCHMO_APPS)
@@ -15,13 +16,10 @@ if not SATCHMO_APPS in sys.path:
 if not DIRNAME in sys.path:
     sys.path.append(DIRNAME)
 
-from django.core.management import execute_manager
-try:
-    import settings # Assumed to be in the same directory.
-except ImportError:
-    import sys
-    sys.stderr.write("Error: Can't find the file 'settings.py' in the directory containing %r. It appears you've customized things.\nYou'll have to run django-admin.py, passing it your settings module.\n(If the file settings.py does indeed exist, it's causing an ImportError somehow.)\n" % __file__)
-    sys.exit(1)
+if not PROJECTS in sys.path:
+    sys.path.append(PROJECTS)
 
 if __name__ == "__main__":
-    execute_manager(settings)
+    os.environ.setdefault("DJANGO_SETTINGS_MODULE", "simple.settings")
+    from django.core.management import execute_from_command_line
+    execute_from_command_line(sys.argv)

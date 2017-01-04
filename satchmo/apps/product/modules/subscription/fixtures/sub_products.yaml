@@ -23,7 +23,7 @@
     weight_units: ''
     width: null
     width_units: ''
-    site: 1
+    site: [1]
   model: product.product
   pk: 1
 - fields:
@@ -51,7 +51,7 @@
     weight_units: ''
     width: null
     width_units: ''
-    site: 1
+    site: [1]
   model: product.product
   pk: 2
 - fields: {expire_length: 21, expire_unit: 'DAY', is_shippable: 0, recurring: 'True', recurring_times: null}

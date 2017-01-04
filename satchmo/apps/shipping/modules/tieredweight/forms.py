@@ -14,6 +14,7 @@ class CarrierAdminForm(forms.ModelForm):
 
     class Meta:
         model = Carrier
+        fields = "__all__"
 
 
 class ZoneAdminForm(forms.ModelForm):
@@ -41,3 +42,4 @@ class ZoneAdminForm(forms.ModelForm):
 
     class Meta:
         model = Zone
+        fields = "__all__"

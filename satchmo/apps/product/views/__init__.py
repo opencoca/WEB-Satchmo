@@ -1,8 +1,7 @@
 from decimal import Decimal
 from django import http
 from django.contrib.messages import constants, get_messages
-from django.shortcuts import get_object_or_404, render_to_response
-from django.template import RequestContext
+from django.shortcuts import get_object_or_404, render
 from django.template.loader import select_template
 from django.utils.translation import ugettext as _
 from l10n.utils import moneyfmt
@@ -47,10 +46,7 @@ def category_index(request, template="product/category_index.html", root_only=Tr
     - root_only: If true, then only show root categories.
     """
     cats = Category.objects.root_categories()
-    ctx = {
-        'categorylist' : cats,
-    }
-    return render_to_response(template, context_instance=RequestContext(request, ctx))
+    return render(request, template, { 'categorylist' : cats })
 
 def category_view(request, slug, parent_slugs='', template='product/category.html'):
     """Display the category, its child categories, and its products.
@@ -76,7 +72,7 @@ def category_view(request, slug, parent_slugs='', template='product/category.htm
         'products' : products,
     }
     index_prerender.send(Product, request=request, context=ctx, category=category, object_list=products)
-    return render_to_response(template, context_instance=RequestContext(request, ctx))
+    return render(request, template, ctx)
 
 
 def display_featured(num_to_display=None, random_display=None):
@@ -104,7 +100,7 @@ def get_configurable_product_options(request, id):
             options += '<option value="%s">%s</option>' % (opt.id, str(opt))
     if not options:
         return '<option>No valid options found in "%s"</option>' % cp.product.slug
-    return http.HttpResponse(options, mimetype="text/html")
+    return http.HttpResponse(options, content_type="text/html")
 
 
 def get_product(request, product_slug=None, selected_options=(),
@@ -154,11 +150,8 @@ def get_product(request, product_slug=None, selected_options=(),
     extra_context = product.add_template_context(context=extra_context,
         request=request, selected_options=selected_options,
         default_view_tax=default_view_tax)
-
     template = find_product_template(product, producttypes=subtype_names)
-    context = RequestContext(request, extra_context)
-
-    response = http.HttpResponse(template.render(context))
+    response = render(request, template.template.name, extra_context)
     try:
         from django.core.xheaders import populate_xheaders
         populate_xheaders(request, response, Product, product_id)
@@ -173,7 +166,7 @@ def get_price(request, product_slug):
     try:
         product = Product.objects.get_by_site(active=True, slug=product_slug)
     except Product.DoesNotExist:
-        return http.HttpResponseNotFound(json_encode(('', _("not available"))), mimetype="text/javascript")
+        return http.HttpResponseNotFound(json_encode(('', _("not available"))), content_type="text/javascript")
 
     prod_slug = product.slug
 
@@ -190,16 +183,16 @@ def get_price(request, product_slug):
         pvp = cp.get_product_from_options(chosen_options)
 
         if not pvp:
-            return http.HttpResponse(json_encode(('', _("not available"))), mimetype="text/javascript")
+            return http.HttpResponse(json_encode(('', _("not available"))), content_type="text/javascript")
         prod_slug = pvp.slug
         price = moneyfmt(pvp.get_qty_price(quantity))
     else:
         price = moneyfmt(product.get_qty_price(quantity))
 
     if not price:
-        return http.HttpResponse(json_encode(('', _("not available"))), mimetype="text/javascript")
+        return http.HttpResponse(json_encode(('', _("not available"))), content_type="text/javascript")
 
-    return http.HttpResponse(json_encode((prod_slug, price)), mimetype="text/javascript")
+    return http.HttpResponse(json_encode((prod_slug, price)), content_type="text/javascript")
 
 
 def get_price_detail(request, product_slug):
@@ -248,6 +241,6 @@ def get_price_detail(request, product_slug):
 
     data = json_encode(results)
     if found:
-        return http.HttpResponse(data, mimetype="text/javascript")
+        return http.HttpResponse(data, content_type="text/javascript")
     else:
-        return http.HttpResponseNotFound(data, mimetype="text/javascript")
+        return http.HttpResponseNotFound(data, content_type="text/javascript")

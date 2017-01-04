@@ -26,10 +26,11 @@ LANGUAGE_CODE = 'en-us'
 SITE_ID = 1
 
 # Absolute path to the directory that holds media.
-MEDIA_ROOT = os.path.join(DIRNAME, 'static/')
+MEDIA_ROOT = os.path.join(DIRNAME, 'media/')
 MEDIA_URL = "/media/"
 
 # Absolute path to the directory that holds static files.
+STATIC_ROOT = os.path.join(DIRNAME, 'static/')
 STATIC_URL="/static/"
 STATICFILES_DIRS = (
     os.path.join(DIRNAME, 'static'),
@@ -43,12 +44,7 @@ ADMIN_MEDIA_PREFIX = '/media/'
 # Make this unique, and don't share it with anybody.
 SECRET_KEY = ''
 
-# List of callables that know how to import templates from various sources.
-TEMPLATE_LOADERS = (
-    'django.template.loaders.filesystem.Loader',
-    'django.template.loaders.app_directories.Loader',
-#     'django.template.loaders.eggs.Loader',
-)
+LOGOUT_URL = '/accounts/logout/'
 
 MIDDLEWARE_CLASSES = (
     "django.middleware.common.CommonMiddleware",
@@ -56,7 +52,7 @@ MIDDLEWARE_CLASSES = (
     "django.middleware.csrf.CsrfViewMiddleware",
     "django.middleware.locale.LocaleMiddleware",
     "django.contrib.auth.middleware.AuthenticationMiddleware",
-    "django.middleware.doc.XViewMiddleware",
+    #"django.middleware.doc.XViewMiddleware",
     "django.contrib.messages.middleware.MessageMiddleware",
     "threaded_multihost.middleware.ThreadLocalMiddleware",
     "satchmo_store.shop.SSLMiddleware.SSLRedirect",
@@ -68,10 +64,33 @@ MIDDLEWARE_CLASSES = (
 # NOTE: overridden in local_settings.py
 # NOTE: If you enable the recent_products context_processor, you MUST have the
 # 'satchmo_ext.recentlist' app installed.
-TEMPLATE_CONTEXT_PROCESSORS = ('satchmo_store.shop.context_processors.settings',
-                               'django.contrib.auth.context_processors.auth',
-                               #'satchmo_ext.recentlist.context_processors.recent_products',
-                               )
+TEMPLATES = [
+    {
+        'BACKEND': 'django.template.backends.django.DjangoTemplates',
+        'APP_DIRS': True,
+        #'DIRS': [
+            # Put strings here, like "/home/html/django_templates" or "C:/www/django/templates".
+            # Always use forward slashes, even on Windows.
+            # Don't forget to use absolute paths, not relative paths.
+            #os.path.join(DIRNAME, 'templates', ''),
+        #],
+        'OPTIONS': {
+            'context_processors': [
+                'satchmo_store.shop.context_processors.settings',
+                'django.contrib.auth.context_processors.auth',
+                #'satchmo_ext.recentlist.context_processors.recent_products',
+                # do not forget following. Maybe not so important currently
+                # but will be
+                'django.template.context_processors.debug',
+                'django.template.context_processors.i18n',
+                'django.template.context_processors.media',   # MEDIA_URL
+                'django.template.context_processors.static',  # STATIC_URL
+                'django.template.context_processors.tz',
+                'django.contrib.messages.context_processors.messages',              
+            ],    
+        },
+    },
+]
 
 #ROOT_URLCONF = 'satchmo.urls'
 ROOT_URLCONF = 'simple.urls'
@@ -83,51 +102,74 @@ INSTALLED_APPS = (
     'django.contrib.admindocs',
     'django.contrib.auth',
     'django.contrib.contenttypes',
-    'django.contrib.comments',
+    #'django.contrib.comments',
     'django.contrib.staticfiles',
     'django.contrib.sessions',
     'django.contrib.sitemaps',
-    'registration',
+    'django_comments',
     'sorl.thumbnail',
-    'south',
+    #'south',
     'keyedcache',
     'livesettings',
     'l10n',
-    'satchmo_utils.thumbnail',
     'satchmo_store.contact',
+    'satchmo_store.contact.supplier',
+    #'testimonials',         # dependency on  http://www.assembla.com/spaces/django-testimonials/
+    'product',
+    'product.modules.configurable',
+    'product.modules.custom',
+    'product.modules.downloadable',
+    'product.modules.subscription',
+    'satchmo_ext.brand',
+    'satchmo_ext.newsletter',
+    'satchmo_ext.product_feeds',    
+    'satchmo_ext.productratings',    
+    'satchmo_ext.recentlist',
+    'satchmo_ext.satchmo_toolbar',
+    'satchmo_ext.tieredpricing',
+    'satchmo_ext.upsell',
+    'satchmo_ext.wishlist',
+    'satchmo_utils',
+    'satchmo_utils.satchmo_thumbnail',    
+    'payment',
+    'payment.modules.authorizenet',
+    'payment.modules.autosuccess',
+    'payment.modules.cod',
+    'payment.modules.cybersource',
+    'payment.modules.dummy',
+    'payment.modules.giftcertificate',
+    'payment.modules.google',
+    'payment.modules.payflowpro',
+    'payment.modules.paypal',    
+    'payment.modules.purchaseorder',
+    'payment.modules.sagepay',        
+    'payment.modules.sermepa',
+    'payment.modules.trustcommerce',
+    'shipping',
+    'shipping.modules.canadapost',
+    #'shipping.modules.dummy',
+    'shipping.modules.fedex_web_services',
+    'shipping.modules.flat',
+    #'shipping.modules.no',
+    'shipping.modules.per',
+    'shipping.modules.productshipping',    
+    'shipping.modules.tiered',
+    'shipping.modules.tieredquantity',
+    'shipping.modules.tieredweight',
+    'shipping.modules.ups',
+    'shipping.modules.usps',
     'tax',
     'tax.modules.no',
     'tax.modules.area',
     'tax.modules.percent',
-    'shipping',
-    #'satchmo_store.contact.supplier',
-    #'shipping.modules.tiered',
-    #'satchmo_ext.newsletter',
-    #'satchmo_ext.recentlist',
-    #'testimonials',         # dependency on  http://www.assembla.com/spaces/django-testimonials/
-    'product',
-    'product.modules.configurable',
-    #'product.modules.custom',
-    #'product.modules.downloadable',
-    #'product.modules.subscription',
-    #'satchmo_ext.product_feeds',
-    #'satchmo_ext.brand',
-    'payment',
-    'payment.modules.dummy',
-    'payment.modules.paypal',
-    #'payment.modules.giftcertificate',
-    #'satchmo_ext.wishlist',
-    #'satchmo_ext.upsell',
-    #'satchmo_ext.productratings',
-    'satchmo_ext.satchmo_toolbar',
-    'satchmo_utils',
-    #'shipping.modules.tieredquantity',
-    #'django_extensions',    # dependency on  https://github.com/django-extensions/django-extensions/
-    #'satchmo_ext.tieredpricing',
+    'tax.modules.us_sst',    
+    'django_extensions',    # dependency on  https://github.com/django-extensions/django-extensions/
     #'typogrify',            # dependency on  http://code.google.com/p/typogrify/
     #'debug_toolbar',
     'app_plugins',
+    'simple',
     'simple.localsite',
+    'registration',
 )
 
 AUTHENTICATION_BACKENDS = (

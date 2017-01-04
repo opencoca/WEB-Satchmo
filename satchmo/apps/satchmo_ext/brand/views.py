@@ -1,7 +1,6 @@
 from django.contrib.sites.models import Site
 from django.http import HttpResponse, Http404
-from django.shortcuts import get_object_or_404, render_to_response
-from django.template import RequestContext
+from django.shortcuts import get_object_or_404, render
 from django.utils.translation import ugettext_lazy as _
 from models import Brand, BrandCategory, BrandProduct
 from product import signals
@@ -18,9 +17,7 @@ def brand_list(request):
         'brands' : brands,
     }
     signals.index_prerender.send(Brand, request=request, context=ctx, object_list=brands)
-    requestctx = RequestContext(request, ctx)
-    return render_to_response('brand/index.html',
-                              context_instance=requestctx)
+    return render(request, 'brand/index.html')
 
 def brand_page(request, brandname):
     try:
@@ -38,12 +35,9 @@ def brand_page(request, brandname):
         'products': products,
         'sale' : sale,
     }
-
-    ctx = RequestContext(request, ctx)
     signals.index_prerender.send(BrandProduct, request=request, context=ctx, brand=brand, object_list=products)
 
-    return render_to_response('brand/view_brand.html',
-                              context_instance=ctx)
+    return render(request, 'brand/view_brand.html', ctx)
 
 
 def brand_category_page(request, brandname, catname):
@@ -59,8 +53,8 @@ def brand_category_page(request, brandname, catname):
     products = list(cat.active_products())
     sale = find_best_auto_discount(products)
     
-    ctx = RequestContext(request, {
+    ctx = {
         'brand' : cat,
         'sale' : sale,
-    })
-    return render_to_response('brand/view_brand.html', context_instance=ctx)
+    }
+    return render(request, 'brand/view_brand.html', ctx)

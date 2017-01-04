@@ -26,3 +26,7 @@ build
 *.egg
 .git
 .emacs.desktop*
+simple.db
+satchmo.log
+.ropeproject
+satchmo/media
