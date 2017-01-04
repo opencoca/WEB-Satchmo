@@ -21,7 +21,7 @@ from product import active_product_types
 from product.prices import PriceAdjustmentCalc
 from satchmo_utils import get_flat_list
 from satchmo_utils.fields import CurrencyField
-from satchmo_utils.thumbnail.field import ImageWithThumbnailField
+from satchmo_utils.satchmo_thumbnail.field import ImageWithThumbnailField
 from satchmo_utils.unique_id import slugify
 import config   #This import is required to make sure livesettings picks up the config values
 import datetime
@@ -817,7 +817,6 @@ class ProductManager(models.Manager):
             site = Site.objects.get_current()
         return self.get(site = site, **kwargs)
 
-
     def recent_by_site(self, **kwargs):
         query = self.active_by_site(**kwargs)
         if query.count() == 0:
@@ -1243,8 +1242,8 @@ class ProductPriceLookupManager(models.Manager):
                                          price=price,
                                          quantity=qty,
                                          discountable=product.is_discountable,
-                                         items_in_stock=product.items_in_stock,
-                                         productimage_set=product.productimage_set)
+                                         items_in_stock=product.items_in_stock)
+                                         #productimage_set=product.productimage_set)
                 obj.save()
                 objs.append(obj)
         return objs

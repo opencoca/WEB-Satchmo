@@ -6,7 +6,7 @@
 from django import template
 from django.conf import settings
 from django.template import TemplateSyntaxError
-from satchmo_utils.thumbnail.utils import make_thumbnail, get_image_size
+from satchmo_utils.satchmo_thumbnail.utils import make_thumbnail, get_image_size
 from django.utils.safestring import mark_safe
 register = template.Library()
 ##################################################

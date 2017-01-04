@@ -1,8 +1,9 @@
-from django.conf.urls import patterns as patterns_func
+from django.conf.urls import url
 from django.utils.translation import ugettext
 import product
 from product import signals as product_signals
 from product.modules.downloadable.models import DownloadLink
+from product.modules.downloadable import views
 from satchmo_store.contact import signals as contact_signals
 from satchmo_store.shop import notification
 from satchmo_store.shop import signals
@@ -20,10 +21,10 @@ def add_download_urls(sender=None, patterns=None, section=None, **kwargs):
     if not section == '__init__':
         return
 
-    urlpatterns = patterns_func('product.modules.downloadable.views',
-        (r'^download/process/(?P<download_key>\w+)/$', 'process', {}, 'satchmo_download_process'),
-        (r'^download/send/(?P<download_key>\w+)/$', 'send_file', {}, 'satchmo_download_send'),
-    )
+    urlpatterns = [
+        url(r'^download/process/(?P<download_key>\w+)/$', views.process, name='satchmo_download_process'),
+        url(r'^download/send/(?P<download_key>\w+)/$', views.send_file, name='satchmo_download_send'),
+    ]
 
     if patterns:
         patterns += urlpatterns

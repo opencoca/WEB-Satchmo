@@ -5,7 +5,6 @@ import os, os.path
 
 LOCAL_DEV = True
 DEBUG = True
-TEMPLATE_DEBUG = DEBUG
 
 if LOCAL_DEV:
     INTERNAL_IPS = ('127.0.0.1',)

@@ -1,8 +1,7 @@
 """Sage Pay checkout custom views"""
 
 from django import http
-from django.shortcuts import render_to_response
-from django.template import RequestContext
+from django.shortcuts import render
 from django.utils.translation import ugettext as _
 from livesettings.functions import config_get_group
 from payment.views import payship, confirm
@@ -45,8 +44,7 @@ def confirm_secure3d(request, secure3d_template='shop/checkout/sagepay/secure3d_
             returnMD = request.POST.get('MD', None)
             if not returnMD:
                 template = lookup_template(payment_module, secure3d_template)
-                ctx = RequestContext(request, {'order': controller.order, 'auth': auth3d })
-                return render_to_response(template, context_instance=ctx)
+                return render(request, template, { 'order': controller.order, 'auth': auth3d })
 
             elif returnMD == auth3d['MD']:
                 pares = request.POST.get('PaRes', None)
@@ -58,10 +56,7 @@ def confirm_secure3d(request, secure3d_template='shop/checkout/sagepay/secure3d_
                     controller.processorMessage = _('3D Secure transaction was not approved by payment gateway. Please contact us.')
         else:
             template = lookup_template(payment_module, secure3d_template)
-            ctx =RequestContext(request, {
-                'order': controller.order, 'auth': auth3d 
-                })
-            return render_to_response(template, context_instance=ctx)
+            return render(request, template, { 'order': controller.order, 'auth': auth3d })
 
     return secure3d_form_handler(controller)
 

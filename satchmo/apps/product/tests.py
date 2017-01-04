@@ -2,7 +2,7 @@ from decimal import Decimal
 from django.conf import settings
 from django.contrib.sites.models import Site
 from django.core import urlresolvers
-from django.forms.util import ValidationError
+from django.core.exceptions import ValidationError
 from django.http import HttpResponse
 from django.test import TestCase
 from django.utils import timezone
@@ -28,10 +28,12 @@ class OptionGroupTest(TestCase):
 
     def setUp(self):
         self.site=Site.objects.get_current()
-        sizes = OptionGroup.objects.create(name="sizes", sort_order=1, site=self.site)
+        sizes = OptionGroup.objects.create(name="sizes", sort_order=1)
+        sizes.site.add(self.site)
         option_small = Option.objects.create(option_group=sizes, name="Small", value="small", sort_order=1)
         option_large = Option.objects.create(option_group=sizes, name="Large", value="large", sort_order=2, price_change=1)
-        colors = OptionGroup.objects.create(name="colors", sort_order=2, site=self.site)
+        colors = OptionGroup.objects.create(name="colors", sort_order=2)
+        colors.site.add(self.site)
         option_black = Option.objects.create(option_group=colors, name="Black", value="black", sort_order=1)
         option_white = Option.objects.create(option_group=colors, name="White", value="white", sort_order=2, price_change=3)
 
@@ -73,11 +75,13 @@ class CategoryTest(TestCase):
 
         # setup simple categories
         self.pet_jewelry, _created = Category.objects.get_or_create(
-            slug="pet-jewelry", name="Pet Jewelry", parent=None, site=self.site
+            slug="pet-jewelry", name="Pet Jewelry", parent=None
         )
+        self.pet_jewelry.site.add(self.site)
         self.womens_jewelry, _created = Category.objects.get_or_create(
-            slug="womens-jewelry", name="Women's Jewelry", parent=None, site=self.site
+            slug="womens-jewelry", name="Women's Jewelry", parent=None
         )
+        self.womens_jewelry.site.add(self.site)
 
     def tearDown(self):
         keyedcache.cache_delete()
@@ -136,7 +140,8 @@ class DiscountTest(TestCase):
         start = datetime.date(2006, 10, 1)
         end = datetime.date(5000, 10, 1)
         self.discount = Discount.objects.create(description="New Sale", code="BUYME", amount="5.00", allowedUses=10,
-            numUses=0, minOrder=5, active=True, startDate=start, endDate=end, shipping='NONE', site=self.site)
+            numUses=0, minOrder=5, active=True, startDate=start, endDate=end, shipping='NONE')
+        self.discount.site.add(self.site)
         self.old_language_code = settings.LANGUAGE_CODE
         settings.LANGUAGE_CODE = 'en-us'
 
@@ -437,7 +442,7 @@ class ProductExportTest(TestCase):
 
 class ProductTest(TestCase):
     """Test Product functions"""
-    fixtures = ['l10n-data.yaml','sample-store-data.yaml', 'products.yaml', 'test-config.yaml']
+    fixtures = ['initial_data.yaml', 'l10n-data.yaml','sample-store-data.yaml', 'products.yaml', 'test-config.yaml']
 
     def tearDown(self):
         keyedcache.cache_delete()

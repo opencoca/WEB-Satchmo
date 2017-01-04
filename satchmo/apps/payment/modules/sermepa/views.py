@@ -13,8 +13,7 @@
 from decimal import Decimal
 from django.core import urlresolvers
 from django.http import HttpResponse, HttpResponseRedirect, HttpResponseNotFound, HttpResponseBadRequest
-from django.shortcuts import render_to_response
-from django.template import RequestContext
+from django.shortcuts import render
 from django.utils.translation import ugettext_lazy as _
 from django.utils import timezone
 from django.views.decorators.cache import never_cache
@@ -64,13 +63,11 @@ def confirm_info(request):
     tempCart = Cart.objects.from_request(request)
     if tempCart.numItems == 0:
         template = lookup_template(payment_module, 'shop/checkout/empty_cart.html')
-        return render_to_response(template,
-                                  context_instance=RequestContext(request))
+        return render(request, template)
 
     # Check if the order is still valid
     if not order.validate(request):
-        context = RequestContext(request, {'message': _('Your order is no longer valid.')})
-        return render_to_response('shop/404.html', context_instance=context)
+        return render(request, 'shop/404.html', {'message': _('Your order is no longer valid.')})
 
     # Check if we are in test or real mode
     live = payment_module.LIVE.value
@@ -150,7 +147,7 @@ def confirm_info(request):
         'signature': signature,
         'default_view_tax': config_value('TAX', 'DEFAULT_VIEW_TAX'),
     }
-    return render_to_response(template, ctx, context_instance=RequestContext(request))
+    return render(request, template, ctx)
 confirm_info = never_cache(confirm_info)
 
 @csrf_exempt
@@ -243,8 +240,7 @@ def success(request):
 
     del request.session['orderID']
     log.warning(request.session)
-    context = RequestContext(request, {'order': order})
-    return render_to_response('shop/checkout/success.html', context)
+    return render(request, 'shop/checkout/success.html', {'order': order})
 
 success = never_cache(success)
 

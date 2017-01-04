@@ -4,8 +4,7 @@
 
 from django.core import urlresolvers
 from django.http import HttpResponseRedirect
-from django.shortcuts import render_to_response
-from django.template import RequestContext
+from django.shortcuts import render
 from django.utils.translation import ugettext as _
 from django.contrib import messages
 from django.views.decorators.cache import never_cache
@@ -121,17 +120,16 @@ class ConfirmController(object):
         template = controller.lookup_template('CONFIRM')
         controller.order.recalculate_total()
         
-        base_env = {
+        context = {
             'PAYMENT_LIVE' : gateway_live(controller.paymentModule),
             'default_view_tax' : controller.viewTax,
             'order': controller.order,
             'errors': controller.processorMessage,
             'checkout_step2': controller.lookup_url('satchmo_checkout-step2')}
         if controller.extra_context:
-            base_env.update(controller.extra_context)
+            context.update(controller.extra_context)
             
-        context = RequestContext(self.request, base_env)
-        return render_to_response(template, context_instance=context)
+        return render(self.request, template, context)
 
     def _onSuccess(self, controller):
         """Handles a success in payment.  If the order is paid-off, sends success, else return page to pay remaining."""
@@ -196,22 +194,18 @@ class ConfirmController(object):
             self.cart = Cart.objects.from_request(self.request)
             if self.cart.numItems == 0 and not self.order.is_partially_paid:
                 template = self.lookup_template('EMPTY_CART')
-                self.invalidate(render_to_response(template,
-                                                   context_instance=RequestContext(self.request)))
+                self.invalidate(render(self.request, template))
                 return False
                 
         except Cart.DoesNotExist:
             template = self.lookup_template('EMPTY_CART')
-            self.invalidate(render_to_response(template,
-                                               context_instance=RequestContext(self.request)))
+            self.invalidate(render(self.request, template))
             return False
 
         # Check if the order is still valid
         if not self.order.validate(self.request):
-            context = RequestContext(self.request, 
-                {'message': _('Your order is no longer valid.')})
-            self.invalidate(render_to_response(self.templates['404'],
-                                               context_instance=context))
+            context = {'message': _('Your order is no longer valid.')}
+            self.invalidate(render(self.request, self.templates['404'], context))
         #Do a check to make sure we don't have products that are no longer valid
         #or have sold out since the user started the process
         not_enough_qty = False

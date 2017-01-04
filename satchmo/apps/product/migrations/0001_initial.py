@@ -4,7 +4,7 @@ from __future__ import unicode_literals
 from django.db import models, migrations
 import satchmo_utils.fields
 import product.models
-import satchmo_utils.thumbnail.field
+import satchmo_utils.satchmo_thumbnail.field
 
 
 class Migration(migrations.Migration):
@@ -70,7 +70,7 @@ class Migration(migrations.Migration):
             name='CategoryImage',
             fields=[
                 ('id', models.AutoField(verbose_name='ID', serialize=False, auto_created=True, primary_key=True)),
-                ('picture', satchmo_utils.thumbnail.field.ImageWithThumbnailField(max_length=200, upload_to=satchmo_utils.thumbnail.field.upload_dir)),
+                ('picture', satchmo_utils.satchmo_thumbnail.field.ImageWithThumbnailField(max_length=200, upload_to=satchmo_utils.satchmo_thumbnail.field.upload_dir)),
                 ('caption', models.CharField(max_length=100, null=True, verbose_name='Optional caption', blank=True)),
                 ('sort', models.IntegerField(default=0, verbose_name='Sort Order')),
                 ('category', models.ForeignKey(related_name='images', blank=True, to='product.Category', null=True)),
@@ -283,7 +283,7 @@ class Migration(migrations.Migration):
             name='ProductImage',
             fields=[
                 ('id', models.AutoField(verbose_name='ID', serialize=False, auto_created=True, primary_key=True)),
-                ('picture', satchmo_utils.thumbnail.field.ImageWithThumbnailField(max_length=200, upload_to=satchmo_utils.thumbnail.field.upload_dir)),
+                ('picture', satchmo_utils.satchmo_thumbnail.field.ImageWithThumbnailField(max_length=200, upload_to=satchmo_utils.satchmo_thumbnail.field.upload_dir)),
                 ('caption', models.CharField(max_length=100, null=True, verbose_name='Optional caption', blank=True)),
                 ('sort', models.IntegerField(default=0, verbose_name='Sort Order')),
                 ('product', models.ForeignKey(blank=True, to='product.Product', null=True)),

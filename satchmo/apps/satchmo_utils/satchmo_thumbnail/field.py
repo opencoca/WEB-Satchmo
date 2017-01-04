@@ -2,7 +2,7 @@ from django.db.models import signals
 from sorl.thumbnail import ImageField
 from livesettings.functions import config_value
 from livesettings.models import SettingNotSet
-from satchmo_utils.thumbnail.utils import rename_by_field
+from satchmo_utils.satchmo_thumbnail.utils import rename_by_field
 from satchmo_utils import normalize_dir
 import logging
 import os
@@ -10,7 +10,7 @@ from django.conf import settings
 from sorl import thumbnail
 
 #ensure config is loaded
-import satchmo_utils.thumbnail.config
+import satchmo_utils.satchmo_thumbnail.config
 
 log = logging.getLogger('thumbnail.fields')
 

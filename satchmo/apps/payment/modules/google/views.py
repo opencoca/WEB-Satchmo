@@ -1,6 +1,6 @@
 from django import http
-from django.shortcuts import render_to_response
-from django.template import Context, RequestContext
+from django.shortcuts import render
+from django.template import Context
 from django.template.loader import get_template
 from django.utils.translation import ugettext as _
 from django.views.decorators.cache import never_cache
@@ -152,7 +152,5 @@ def success(request):
         cart.delete()
 
     del request.session['orderID']
-    context = RequestContext(request, {'order': order})
-    return render_to_response('shop/checkout/success.html',
-                              context_instance=context)
+    return render(request, 'shop/checkout/success.html', {'order': order})
 

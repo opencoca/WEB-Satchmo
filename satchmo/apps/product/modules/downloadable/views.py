@@ -1,8 +1,7 @@
 from django.conf import settings
 from django.core import urlresolvers
 from django.http import HttpResponse, HttpResponseRedirect
-from django.shortcuts import render_to_response
-from django.template import RequestContext
+from django.shortcuts import render
 from django.utils.translation import ugettext_lazy as _
 from product.modules.downloadable.models import DownloadLink
 from satchmo_store.shop.signals import sendfile_url_for_file
@@ -46,17 +45,14 @@ def process(request, download_key):
     """
     valid, msg, dl_product = _validate_key(download_key)
     if not valid:
-        context = RequestContext(request, {'error_message': msg})
-        return render_to_response('shop/download.html',
-                                  context_instance=context)
+        return render(request, 'shop/download.html', {'error_message': msg})
     else:
         # The key is valid so let's set the session variable and redirect to the
         # download view
         request.session['download_key'] = download_key
         url = urlresolvers.reverse('satchmo_download_send', kwargs= {'download_key': download_key})
-        context = RequestContext(request, {'download_product': dl_product,
-                                            'dl_url' : url})
-        return render_to_response('shop/download.html', context_instance=context)
+        context = {'download_product': dl_product, 'dl_url' : url}
+        return render(request, 'shop/download.html', context)
 
 def send_file(request, download_key):
     """

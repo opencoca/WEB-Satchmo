@@ -168,6 +168,7 @@ class NullCart(object):
     customer = None
     total = Decimal("0")
     numItems = 0
+    is_shippable = False
 
     def add_item(self, *args, **kwargs):
         pass
@@ -210,8 +211,6 @@ class OrderCart(NullCart):
         return self._order.balance
 
     total = property(_total)
-
-    is_shippable = False
 
     def __str__(self):
         return "OrderCart (%i) = %i" % (self._order.id, len(self))
@@ -374,7 +373,10 @@ class Cart(models.Model):
             details=details)
 
         if not alreadyInCart:
-            self.cartitem_set.add(item_to_modify)
+            try:
+                self.cartitem_set.add(item_to_modify, bulk=False)
+            except TypeError:
+                self.cartitem_set.add(item_to_modify)
 
         item_to_modify.quantity += number_added
         item_to_modify.save()

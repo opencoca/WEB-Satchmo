@@ -6,7 +6,8 @@ root URLConf to include this URLConf for any URL beginning with
 '/accounts/'.
 
 """
-from django.conf.urls import patterns
+from django.contrib.auth import views as auth_views
+from django.conf.urls import url
 
 from satchmo_store.accounts.views import RegistrationComplete
 # extending the urls in contacts
@@ -17,27 +18,24 @@ from satchmo_store import accounts
 # because it is sometimes indirectly important for loading config_value('SHOP', 'ACCOUNT_VERIFICATION')
 import satchmo_store.contact.config
 
-
 # Activation keys get matched by \w+ instead of the more specific
 # [a-fA-F0-9]+ because a bad activation key should still get to the view;
 # that way it can return a sensible "invalid key" message instead of a
 # confusing 404.
-urlpatterns += patterns('satchmo_store.accounts.views',
-    (r'^activate/(?P<activation_key>\w+)/$', 'activate', {}, 'registration_activate'),
-    (r'^login/$', 'emaillogin', {'template_name': 'registration/login.html'}, 'auth_login'),
-    (r'^register/$', 'register', {}, 'registration_register'),
-    (r'^secure/login/$', 'emaillogin', {'SSL' : True, 'template_name': 'registration/login.html'}, 'auth_secure_login'),
-)
+urlpatterns += [
+    url(r'^activate/(?P<activation_key>\w+)/$', accounts.views.activate, name='registration_activate'),
+    url(r'^login/$', accounts.views.emaillogin, {'template_name': 'registration/login.html'}, name='auth_login'),
+    url(r'^register/$', accounts.views.register, name='registration_register'),
+    url(r'^secure/login/$', accounts.views.emaillogin, {'SSL' : True, 'template_name': 'registration/login.html'}, name='auth_secure_login'),
+]
 
-urlpatterns += patterns('',
-    ('^logout/$','django.contrib.auth.views.logout', {'template_name': 'registration/logout.html'}, 'auth_logout'),
-    )
+urlpatterns += [
+    url('^logout/$', auth_views.logout, {'template_name': 'registration/logout.html'}, name='auth_logout'),
+]
 
-urlpatterns += patterns('',
-    (r'^register/complete/$',
-        RegistrationComplete.as_view(template_name='registration/registration_complete.html'), {},
-        'registration_complete'),
-)
+urlpatterns += [
+    url(r'^register/complete/$', RegistrationComplete.as_view(template_name='registration/registration_complete.html'), name='registration_complete'),
+]
 
 #Dictionary for authentication views
 password_reset_dict = {
@@ -46,13 +44,15 @@ password_reset_dict = {
 }
 
 # the "from email" in password reset is problematic... it is hard coded as None
-urlpatterns += patterns('django.contrib.auth.views',
-    (r'^password_reset/$', 'password_reset', password_reset_dict, 'auth_password_reset'),
-    (r'^password_reset/done/$', 'password_reset_done', {'template_name':'registration/password_reset_done.html'}, 'auth_password_reset_done'),
-    (r'^password_change/$', 'password_change', {'template_name':'registration/password_change_form.html'}, 'auth_password_change'),
-    (r'^password_change/done/$', 'password_change_done', {'template_name':'registration/password_change_done.html'}, 'auth_change_done'),
-    (r'^reset/(?P<uidb36>[0-9A-Za-z]+)-(?P<token>.+)/$', 'password_reset_confirm'),
-    (r'^reset/done/$', 'password_reset_complete'),
-)
+urlpatterns += [
+    url(r'^password_reset/$', auth_views.password_reset, password_reset_dict, name='auth_password_reset'),
+    url(r'^password_reset/done/$', auth_views.password_reset_done, {'template_name':'registration/password_reset_done.html'}, name='password_reset_done'),
+    url(r'^password_change/$', auth_views.password_change, {'template_name':'registration/password_change_form.html'}, name='auth_password_change'),
+    url(r'^password_change/done/$', auth_views.password_change_done, {'template_name':'registration/password_change_done.html'}, name='auth_change_done'),
+    url(r'^reset/(?P<uidb36>[0-9A-Za-z]+)-(?P<token>.+)/$', auth_views.password_reset_confirm),
+    #url(r'^reset/(?P<uidb64>[0-9A-Za-z_\-]+)/(?P<token>[0-9A-Za-z]{1,13}-[0-9A-Za-z]{1,20})/$',
+    #    auth_views.password_reset_confirm, name='password_reset_confirm'),
+    url(r'^reset/done/$', auth_views.password_reset_complete),
+]
 
 collect_urls.send(sender=accounts, patterns=urlpatterns)

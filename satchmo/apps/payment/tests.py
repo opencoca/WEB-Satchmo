@@ -132,7 +132,7 @@ class TestModulesSettings(TestCase):
 #         self.assertEqual(gc.usages.count(), 1)
 
 class TestMinimumOrder(TestCase):
-    fixtures = ['l10n-data.yaml', 'sample-store-data.yaml', 'products.yaml', 'test-config.yaml']
+    fixtures = ['initial_data.yaml', 'l10n-data.yaml', 'sample-store-data.yaml', 'products.yaml', 'test-config.yaml']
 
     def setUp(self):
         # Every test needs a client
@@ -184,7 +184,7 @@ class TestMinimumOrder(TestCase):
         self.assertContains(response, "Billing Information", count=1, status_code=200)
 
 class TestPaymentHandling(TestCase):
-    fixtures = ['l10n-data.yaml', 'sample-store-data.yaml', 'products.yaml', 'test-config.yaml', 'initial_data.yaml']
+    fixtures = ['initial_data.yaml', 'l10n-data.yaml', 'sample-store-data.yaml', 'products.yaml', 'test-config.yaml']
 
     def setUp(self):
         self.client = Client()

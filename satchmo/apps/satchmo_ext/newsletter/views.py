@@ -1,5 +1,4 @@
-from django.shortcuts import render_to_response
-from django.template import RequestContext
+from django.shortcuts import render
 from django.utils.translation import ugettext_lazy as _, ugettext
 from satchmo_ext.newsletter.forms import NewsletterForm
 
@@ -42,12 +41,9 @@ def _update(request, state, template, result_template, form=NewsletterForm):
     else:
         workform = form()
 
-    ctx = RequestContext(request, {
+    ctx = {
         'result' : result,
         'form' : workform
-    })
-
-    if success:
-        return render_to_response(result_template, context_instance=ctx)
-    else:
-        return render_to_response(template, context_instance=ctx)
+    }
+    t = result_template if success else template
+    return render(request, t, ctx)

@@ -11,7 +11,7 @@ import keyedcache
 
 class FedexBaseTest(TestCase):
 
-    fixtures = ['l10n-data.yaml','test_shop.yaml', 'sample-store-data.yaml']
+    fixtures = ['initial_data.yaml', 'l10n-data.yaml','test_shop.yaml', 'sample-store-data.yaml']
 
     def setUp(self):
         self.site = Site.objects.get_current()
@@ -40,9 +40,8 @@ class FedexBaseTest(TestCase):
             slug='p%s' % self.prod_counter,
             name='p%s' % self.prod_counter,
             weight=weight,
-            weight_units=weight_units,
-            site=self.site)
-        prod.save()
+            weight_units=weight_units)
+        prod.site.add(self.site)
         self.prod_counter += 1
         return prod
 

@@ -1,19 +1,19 @@
-- fields: {site: 1, description: '', name: sizes, sort_order: !!int '1'}
+- fields: {site: [1], description: '', name: sizes, sort_order: !!int '1'}
   model: product.optiongroup
   pk: '1'
-- fields: {site: 1, description: '', name: Book type, sort_order: !!int '1'}
+- fields: {site: [1], description: '', name: Book type, sort_order: !!int '1'}
   model: product.optiongroup
   pk: '3'
-- fields: {site: 1, description: '', name: colors, sort_order: !!int '2'}
+- fields: {site: [1], description: '', name: colors, sort_order: !!int '2'}
   model: product.optiongroup
   pk: '2'
-- fields: {site: 1, description: '', name: Full/Upgrade, sort_order: !!int '5'}
+- fields: {site: [1], description: '', name: Full/Upgrade, sort_order: !!int '5'}
   model: product.optiongroup
   pk: '4'
-- fields: {site: 1, description: Internal RAM, name: Memory, sort_order: 2}
+- fields: {site: [1], description: Internal RAM, name: Memory, sort_order: 2}
   model: product.optiongroup
   pk: 5
-- fields: {site: 1, description: External Case, name: Case, sort_order: 3}
+- fields: {site: [1], description: External Case, name: Case, sort_order: 3}
   model: product.optiongroup
   pk: 6
 - fields: {sort_order: !!int '1', name: Small, option_group: !!int '1',
@@ -72,37 +72,37 @@
     price_change: null, value: upgrade}
   model: product.option
   pk: '11'
-- fields: {site: 1, description: Women's Shirts, meta: null, name: Shirts, parent: null, slug: shirts, is_active: true}
+- fields: {site: [1], description: Women's Shirts, meta: null, name: Shirts, parent: null, slug: shirts, is_active: true}
   model: product.category
   pk: '1'
-- fields: {site: 1, description: Short sleeve shirts, meta: null, name: Short Sleeve, parent: !!int '1',
+- fields: {site: [1], description: Short sleeve shirts, meta: null, name: Short Sleeve, parent: !!int '1',
     slug: shortsleev, is_active: true }
   model: product.category
   pk: '2'
-- fields: {site: 1, description: Books, meta: null, name: Books, parent: null, slug: book, is_active: true}
+- fields: {site: [1], description: Books, meta: null, name: Books, parent: null, slug: book, is_active: true}
   model: product.category
   pk: '3'
-- fields: {site: 1, description: Fiction Books, meta: null, name: Fiction, parent: !!int '3',
+- fields: {site: [1], description: Fiction Books, meta: null, name: Fiction, parent: !!int '3',
     slug: fiction, is_active: true}
   model: product.category
   pk: '4'
-- fields: {site: 1, description: Science Fiction, meta: null, name: Science Fiction, parent: !!int '4',
+- fields: {site: [1], description: Science Fiction, meta: null, name: Science Fiction, parent: !!int '4',
     slug: scifi, is_active: true}
   model: product.category
   pk: '5'
-- fields: {site: 1, description: Non Fiction, meta: null, name: Non Fiction, parent: !!int '3',
+- fields: {site: [1], description: Non Fiction, meta: null, name: Non Fiction, parent: !!int '3',
     slug: nonfiction, is_active: true}
   model: product.category
   pk: '6'
-- fields: {site: 1, description: '', meta: null, name: Software, parent: null, slug: software, is_active: true}
+- fields: {site: [1], description: '', meta: null, name: Software, parent: null, slug: software, is_active: true}
   model: product.category
   pk: '7'
-- fields: {site: 1, description: '', meta: You know what a computer is, name: Computer, ordering: 0,
+- fields: {site: [1], description: '', meta: You know what a computer is, name: Computer, ordering: 0,
     parent: null, slug: computer, is_active: true}
   model: product.category
   pk: 8
 - fields:
-    site: 1
+    site: [1]
     active: true
     also_purchased: []
     category: [!!int '1']
@@ -124,7 +124,7 @@
   model: product.product
   pk: '1'
 - fields:
-    site: 1
+    site: [1]
     active: true
     also_purchased: []
     category: []
@@ -146,7 +146,7 @@
   model: product.product
   pk: '12'
 - fields:
-    site: 1
+    site: [1]
     active: true
     also_purchased: []
     category: []
@@ -168,7 +168,7 @@
   model: product.product
   pk: '14'
 - fields:
-    site: 1
+    site: [1]
     active: true
     also_purchased: []
     category: []
@@ -190,7 +190,7 @@
   model: product.product
   pk: '13'
 - fields:
-    site: 1
+    site: [1]
     active: true
     also_purchased: []
     category: []
@@ -212,7 +212,7 @@
   model: product.product
   pk: '9'
 - fields:
-    site: 1
+    site: [1]
     active: true
     also_purchased: []
     category: []
@@ -234,7 +234,7 @@
   model: product.product
   pk: '11'
 - fields:
-    site: 1
+    site: [1]
     active: true
     also_purchased: []
     category: []
@@ -256,7 +256,7 @@
   model: product.product
   pk: '10'
 - fields:
-    site: 1
+    site: [1]
     active: true
     also_purchased: []
     category: []
@@ -278,7 +278,7 @@
   model: product.product
   pk: '6'
 - fields:
-    site: 1
+    site: [1]
     active: true
     also_purchased: []
     category: []
@@ -300,7 +300,7 @@
   model: product.product
   pk: '8'
 - fields:
-    site: 1
+    site: [1]
     active: true
     also_purchased: []
     category: []
@@ -322,7 +322,7 @@
   model: product.product
   pk: '7'
 - fields:
-    site: 1
+    site: [1]
     active: true
     also_purchased: []
     category: [!!int '4']
@@ -344,7 +344,7 @@
   model: product.product
   pk: '3'
 - fields:
-    site: 1
+    site: [1]
     active: true
     also_purchased: []
     category: []
@@ -366,7 +366,7 @@
   model: product.product
   pk: '15'
 - fields:
-    site: 1
+    site: [1]
     active: true
     also_purchased: []
     category: []
@@ -388,7 +388,7 @@
   model: product.product
   pk: '16'
 - fields:
-    site: 1
+    site: [1]
     active: true
     also_purchased: []
     category: []
@@ -431,7 +431,7 @@
 #  model: product.product
 #  pk: '5'
 - fields:
-    site: 1
+    site: [1]
     active: true
     also_purchased: []
     category: []
@@ -453,7 +453,7 @@
   model: product.product
   pk: '21'
 - fields:
-    site: 1
+    site: [1]
     active: true
     also_purchased: []
     category: []
@@ -475,7 +475,7 @@
   model: product.product
   pk: '22'
 - fields:
-    site: 1
+    site: [1]
     active: true
     also_purchased: []
     category: [!!int '2']
@@ -497,7 +497,7 @@
   model: product.product
   pk: '2'
 - fields:
-    site: 1
+    site: [1]
     active: true
     also_purchased: []
     category: [!!int '5']
@@ -519,7 +519,7 @@
   model: product.product
   pk: '4'
 - fields:
-    site: 1
+    site: [1]
     active: true
     also_purchased: []
     category: []
@@ -541,7 +541,7 @@
   model: product.product
   pk: '18'
 - fields:
-    site: 1
+    site: [1]
     active: true
     also_purchased: []
     category: []
@@ -563,7 +563,7 @@
   model: product.product
   pk: '19'
 - fields:
-    site: 1
+    site: [1]
     active: true
     also_purchased: []
     category: []
@@ -696,7 +696,7 @@
   model: product.productimage
   pk: '1'
 - fields:
-    site: 1
+    site: [1]
     active: true
     also_purchased: []
     category: [8]

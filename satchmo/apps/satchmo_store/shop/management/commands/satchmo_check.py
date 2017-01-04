@@ -1,8 +1,8 @@
 from decimal import Decimal
 from distutils.version import LooseVersion
-from django.core.management.base import NoArgsCommand
+from django.core.management.base import BaseCommand
 from django.core import urlresolvers
-from django.utils.importlib import import_module
+from importlib import import_module
 import django
 import imp
 import logging
@@ -19,14 +19,14 @@ logging.getLogger('satchmo_check').setLevel(logging.DEBUG)
 log = logging.getLogger('satchmo_check')
 
 
-class Command(NoArgsCommand):
+class Command(BaseCommand):
     help = "Check the system to see if the Satchmo components are installed correctly."
 
     # These settings help to not import some dependencies before they are necessary.
-    can_import_settings = False
-    requires_model_validation = False
+    #can_import_settings = False
+    requires_system_checks = False
 
-    def handle_noargs(self, **options):
+    def handle(self, **options):
         """Checks Satchmo installation and configuration.
 
         Tests, catches and shortly summarizes many common installation errors, without tracebacks.
@@ -79,7 +79,7 @@ class Command(NoArgsCommand):
 
         verbose_check_install('reportlab', 'reportlab', '2.3')
 
-        verbose_check_install('TRML2PDF', 'trml2pdf', '1.0', verbose_name='Tiny RML2PDF')
+        verbose_check_install('TRML2PDF', 'trml2pdf', verbose_name='Tiny RML2PDF')
 
         verbose_check_install('django_registration', 'registration', '0.7.1', 'eedf14249b89')
 
@@ -101,7 +101,7 @@ class Command(NoArgsCommand):
         verbose_check_install('mercurial', 'mercurial', required=False)
 
         try:
-            cache_avail = settings.CACHE_BACKEND
+            cache_avail = settings.CACHES.get("default").get("BACKEND")
         except AttributeError:
             error_out("A CACHE_BACKEND must be configured.")
         # Try looking up a url to see if there's a misconfiguration there

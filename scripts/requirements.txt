@@ -1,12 +1,12 @@
 pillow
-django>=1.4,<1.5
+django>=1.8
 pycrypto
-http://www.satchmoproject.com/snapshots/trml2pdf-1.2.tar.gz
+trml2pdf
 PyYAML
 reportlab
-south
 sorl-thumbnail
-django-registration
+django-registration-redux
+django-contrib-comments
 django-livesettings
 django-threaded-multihost
 django-caching-app-plugins
