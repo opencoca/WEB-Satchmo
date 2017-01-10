@@ -3466,12 +3466,6 @@
         <field type="CharField" name="abbrev"></field>
         <field type="BooleanField" name="active">1</field>
     </object>
-    <object pk="2162" model="l10n.adminarea">
-        <field to="l10n.country" name="country" rel="ManyToOneRel">112</field>
-        <field type="CharField" name="name">Al Mafraq</field>
-        <field type="CharField" name="abbrev"></field>
-        <field type="BooleanField" name="active">1</field>
-    </object>
     <object pk="4411" model="l10n.adminarea">
         <field to="l10n.country" name="country" rel="ManyToOneRel">222</field>
         <field type="CharField" name="name">Al Mahdīyah</field>
@@ -4084,19 +4078,7 @@
         <field type="CharField" name="abbrev"></field>
         <field type="BooleanField" name="active">1</field>
     </object>
-    <object pk="3883" model="l10n.adminarea">
-        <field to="l10n.country" name="country" rel="ManyToOneRel">195</field>
-        <field type="CharField" name="name">Anse Boileau</field>
-        <field type="CharField" name="abbrev"></field>
-        <field type="BooleanField" name="active">1</field>
-    </object>
     <object pk="3861" model="l10n.adminarea">
-        <field to="l10n.country" name="country" rel="ManyToOneRel">195</field>
-        <field type="CharField" name="name">Anse Etoile</field>
-        <field type="CharField" name="abbrev"></field>
-        <field type="BooleanField" name="active">1</field>
-    </object>
-    <object pk="3884" model="l10n.adminarea">
         <field to="l10n.country" name="country" rel="ManyToOneRel">195</field>
         <field type="CharField" name="name">Anse Etoile</field>
         <field type="CharField" name="abbrev"></field>
@@ -4114,19 +4096,7 @@
         <field type="CharField" name="abbrev"></field>
         <field type="BooleanField" name="active">1</field>
     </object>
-    <object pk="3885" model="l10n.adminarea">
-        <field to="l10n.country" name="country" rel="ManyToOneRel">195</field>
-        <field type="CharField" name="name">Anse Royale</field>
-        <field type="CharField" name="abbrev"></field>
-        <field type="BooleanField" name="active">1</field>
-    </object>
     <object pk="3882" model="l10n.adminarea">
-        <field to="l10n.country" name="country" rel="ManyToOneRel">195</field>
-        <field type="CharField" name="name">Anse aux Pins</field>
-        <field type="CharField" name="abbrev"></field>
-        <field type="BooleanField" name="active">1</field>
-    </object>
-    <object pk="3859" model="l10n.adminarea">
         <field to="l10n.country" name="country" rel="ManyToOneRel">195</field>
         <field type="CharField" name="name">Anse aux Pins</field>
         <field type="CharField" name="abbrev"></field>
@@ -4558,12 +4528,6 @@
         <field type="CharField" name="abbrev"></field>
         <field type="BooleanField" name="active">1</field>
     </object>
-    <object pk="4596" model="l10n.adminarea">
-        <field to="l10n.country" name="country" rel="ManyToOneRel">227</field>
-        <field type="CharField" name="name">Arua</field>
-        <field type="CharField" name="abbrev"></field>
-        <field type="BooleanField" name="active">1</field>
-    </object>
     <object pk="2012" model="l10n.adminarea">
         <field to="l10n.country" name="country" rel="ManyToOneRel">101</field>
         <field type="CharField" name="name">Arunāchal Pradesh</field>
@@ -4571,12 +4535,6 @@
         <field type="BooleanField" name="active">1</field>
     </object>
     <object pk="4538" model="l10n.adminarea">
-        <field to="l10n.country" name="country" rel="ManyToOneRel">215</field>
-        <field type="CharField" name="name">Arusha</field>
-        <field type="CharField" name="abbrev"></field>
-        <field type="BooleanField" name="active">1</field>
-    </object>
-    <object pk="4563" model="l10n.adminarea">
         <field to="l10n.country" name="country" rel="ManyToOneRel">215</field>
         <field type="CharField" name="name">Arusha</field>
         <field type="CharField" name="abbrev"></field>
@@ -4702,12 +4660,6 @@
         <field type="CharField" name="abbrev"></field>
         <field type="BooleanField" name="active">1</field>
     </object>
-    <object pk="3665" model="l10n.adminarea">
-        <field to="l10n.country" name="country" rel="ManyToOneRel">172</field>
-        <field type="CharField" name="name">Asunción</field>
-        <field type="CharField" name="abbrev"></field>
-        <field type="BooleanField" name="active">1</field>
-    </object>
     <object pk="1160" model="l10n.adminarea">
         <field to="l10n.country" name="country" rel="ManyToOneRel">64</field>
         <field type="CharField" name="name">Aswān</field>
@@ -4744,12 +4696,6 @@
         <field type="CharField" name="abbrev"></field>
         <field type="BooleanField" name="active">1</field>
     </object>
-    <object pk="467" model="l10n.adminarea">
-        <field to="l10n.country" name="country" rel="ManyToOneRel">24</field>
-        <field type="CharField" name="name">Atakora</field>
-        <field type="CharField" name="abbrev"></field>
-        <field type="BooleanField" name="active">1</field>
-    </object>
     <object pk="4288" model="l10n.adminarea">
         <field to="l10n.country" name="country" rel="ManyToOneRel">218</field>
         <field type="CharField" name="name">Atakpame</field>
@@ -4757,12 +4703,6 @@
         <field type="BooleanField" name="active">1</field>
     </object>
     <object pk="475" model="l10n.adminarea">
-        <field to="l10n.country" name="country" rel="ManyToOneRel">24</field>
-        <field type="CharField" name="name">Atlantique</field>
-        <field type="CharField" name="abbrev"></field>
-        <field type="BooleanField" name="active">1</field>
-    </object>
-    <object pk="468" model="l10n.adminarea">
         <field to="l10n.country" name="country" rel="ManyToOneRel">24</field>
         <field type="CharField" name="name">Atlantique</field>
         <field type="CharField" name="abbrev"></field>
@@ -5014,12 +4954,6 @@
         <field type="CharField" name="abbrev"></field>
         <field type="BooleanField" name="active">1</field>
     </object>
-    <object pk="2169" model="l10n.adminarea">
-        <field to="l10n.country" name="country" rel="ManyToOneRel">112</field>
-        <field type="CharField" name="name">Aţ Ţafīlah</field>
-        <field type="CharField" name="abbrev"></field>
-        <field type="BooleanField" name="active">1</field>
-    </object>
     <object pk="4870" model="l10n.adminarea">
         <field to="l10n.country" name="country" rel="ManyToOneRel">242</field>
         <field type="CharField" name="name">Aḑ Ḑāli‘</field>
@@ -5183,12 +5117,6 @@
         <field type="BooleanField" name="active">1</field>
     </object>
     <object pk="3864" model="l10n.adminarea">
-        <field to="l10n.country" name="country" rel="ManyToOneRel">195</field>
-        <field type="CharField" name="name">Baie Lazare</field>
-        <field type="CharField" name="abbrev"></field>
-        <field type="BooleanField" name="active">1</field>
-    </object>
-    <object pk="3886" model="l10n.adminarea">
         <field to="l10n.country" name="country" rel="ManyToOneRel">195</field>
         <field type="CharField" name="name">Baie Lazare</field>
         <field type="CharField" name="abbrev"></field>
@@ -5393,12 +5321,6 @@
         <field type="BooleanField" name="active">1</field>
     </object>
     <object pk="1201" model="l10n.adminarea">
-        <field to="l10n.country" name="country" rel="ManyToOneRel">69</field>
-        <field type="CharField" name="name">Bale</field>
-        <field type="CharField" name="abbrev"></field>
-        <field type="BooleanField" name="active">1</field>
-    </object>
-    <object pk="1234" model="l10n.adminarea">
         <field to="l10n.country" name="country" rel="ManyToOneRel">69</field>
         <field type="CharField" name="name">Bale</field>
         <field type="CharField" name="abbrev"></field>
@@ -5692,12 +5614,6 @@
         <field type="CharField" name="abbrev"></field>
         <field type="BooleanField" name="active">1</field>
     </object>
-    <object pk="3486" model="l10n.adminarea">
-        <field to="l10n.country" name="country" rel="ManyToOneRel">174</field>
-        <field type="CharField" name="name">Basilan</field>
-        <field type="CharField" name="abbrev"></field>
-        <field type="BooleanField" name="active">1</field>
-    </object>
     <object pk="1196" model="l10n.adminarea">
         <field to="l10n.country" name="country" rel="ManyToOneRel">204</field>
         <field type="CharField" name="name">Basque Country</field>
@@ -5735,12 +5651,6 @@
         <field type="BooleanField" name="active">1</field>
     </object>
     <object pk="3487" model="l10n.adminarea">
-        <field to="l10n.country" name="country" rel="ManyToOneRel">174</field>
-        <field type="CharField" name="name">Batangas</field>
-        <field type="CharField" name="abbrev"></field>
-        <field type="BooleanField" name="active">1</field>
-    </object>
-    <object pk="3418" model="l10n.adminarea">
         <field to="l10n.country" name="country" rel="ManyToOneRel">174</field>
         <field type="CharField" name="name">Batangas</field>
         <field type="CharField" name="abbrev"></field>
@@ -5866,12 +5776,6 @@
         <field type="CharField" name="abbrev"></field>
         <field type="BooleanField" name="active">1</field>
     </object>
-    <object pk="3887" model="l10n.adminarea">
-        <field to="l10n.country" name="country" rel="ManyToOneRel">195</field>
-        <field type="CharField" name="name">Beau Vallon</field>
-        <field type="CharField" name="abbrev"></field>
-        <field type="BooleanField" name="active">1</field>
-    </object>
     <object pk="1345" model="l10n.adminarea">
         <field to="l10n.country" name="country" rel="ManyToOneRel">230</field>
         <field type="CharField" name="name">Bedfordshire</field>
@@ -5903,12 +5807,6 @@
         <field type="BooleanField" name="active">1</field>
     </object>
     <object pk="3868" model="l10n.adminarea">
-        <field to="l10n.country" name="country" rel="ManyToOneRel">195</field>
-        <field type="CharField" name="name">Bel Ombre</field>
-        <field type="CharField" name="abbrev"></field>
-        <field type="BooleanField" name="active">1</field>
-    </object>
-    <object pk="3888" model="l10n.adminarea">
         <field to="l10n.country" name="country" rel="ManyToOneRel">195</field>
         <field type="CharField" name="name">Bel Ombre</field>
         <field type="CharField" name="abbrev"></field>
@@ -6484,12 +6382,6 @@
         <field type="CharField" name="abbrev"></field>
         <field type="BooleanField" name="active">1</field>
     </object>
-    <object pk="875" model="l10n.adminarea">
-        <field to="l10n.country" name="country" rel="ManyToOneRel">48</field>
-        <field type="CharField" name="name">Bolívar</field>
-        <field type="CharField" name="abbrev"></field>
-        <field type="BooleanField" name="active">1</field>
-    </object>
     <object pk="1107" model="l10n.adminarea">
         <field to="l10n.country" name="country" rel="ManyToOneRel">63</field>
         <field type="CharField" name="name">Bolívar</field>
@@ -6551,12 +6443,6 @@
         <field type="BooleanField" name="active">1</field>
     </object>
     <object pk="476" model="l10n.adminarea">
-        <field to="l10n.country" name="country" rel="ManyToOneRel">24</field>
-        <field type="CharField" name="name">Borgou</field>
-        <field type="CharField" name="abbrev"></field>
-        <field type="BooleanField" name="active">1</field>
-    </object>
-    <object pk="469" model="l10n.adminarea">
         <field to="l10n.country" name="country" rel="ManyToOneRel">24</field>
         <field type="CharField" name="name">Borgou</field>
         <field type="CharField" name="abbrev"></field>
@@ -6695,12 +6581,6 @@
         <field type="BooleanField" name="active">1</field>
     </object>
     <object pk="876" model="l10n.adminarea">
-        <field to="l10n.country" name="country" rel="ManyToOneRel">48</field>
-        <field type="CharField" name="name">Boyacá</field>
-        <field type="CharField" name="abbrev"></field>
-        <field type="BooleanField" name="active">1</field>
-    </object>
-    <object pk="847" model="l10n.adminarea">
         <field to="l10n.country" name="country" rel="ManyToOneRel">48</field>
         <field type="CharField" name="name">Boyacá</field>
         <field type="CharField" name="abbrev"></field>
@@ -7180,12 +7060,6 @@
         <field type="CharField" name="abbrev"></field>
         <field type="BooleanField" name="active">1</field>
     </object>
-    <object pk="2397" model="l10n.adminarea">
-        <field to="l10n.country" name="country" rel="ManyToOneRel">122</field>
-        <field type="CharField" name="name">Béqaa</field>
-        <field type="CharField" name="abbrev"></field>
-        <field type="BooleanField" name="active">1</field>
-    </object>
     <object pk="4812" model="l10n.adminarea">
         <field to="l10n.country" name="country" rel="ManyToOneRel">237</field>
         <field type="CharField" name="name">Bình Dương</field>
@@ -7397,12 +7271,6 @@
         <field type="BooleanField" name="active">1</field>
     </object>
     <object pk="848" model="l10n.adminarea">
-        <field to="l10n.country" name="country" rel="ManyToOneRel">48</field>
-        <field type="CharField" name="name">Caldas</field>
-        <field type="CharField" name="abbrev"></field>
-        <field type="BooleanField" name="active">1</field>
-    </object>
-    <object pk="877" model="l10n.adminarea">
         <field to="l10n.country" name="country" rel="ManyToOneRel">48</field>
         <field type="CharField" name="name">Caldas</field>
         <field type="CharField" name="abbrev"></field>
@@ -7745,12 +7613,6 @@
         <field type="BooleanField" name="active">1</field>
     </object>
     <object pk="3429" model="l10n.adminarea">
-        <field to="l10n.country" name="country" rel="ManyToOneRel">174</field>
-        <field type="CharField" name="name">Cavite</field>
-        <field type="CharField" name="abbrev"></field>
-        <field type="BooleanField" name="active">1</field>
-    </object>
-    <object pk="3495" model="l10n.adminarea">
         <field to="l10n.country" name="country" rel="ManyToOneRel">174</field>
         <field type="CharField" name="name">Cavite</field>
         <field type="CharField" name="abbrev"></field>
@@ -9352,12 +9214,6 @@
         <field type="CharField" name="abbrev"></field>
         <field type="BooleanField" name="active">1</field>
     </object>
-    <object pk="3501" model="l10n.adminarea">
-        <field to="l10n.country" name="country" rel="ManyToOneRel">174</field>
-        <field type="CharField" name="name">Davao</field>
-        <field type="CharField" name="abbrev"></field>
-        <field type="BooleanField" name="active">1</field>
-    </object>
     <object pk="3435" model="l10n.adminarea">
         <field to="l10n.country" name="country" rel="ManyToOneRel">174</field>
         <field type="CharField" name="name">Davao Oriental</field>
@@ -9658,12 +9514,6 @@
         <field type="CharField" name="abbrev"></field>
         <field type="BooleanField" name="active">1</field>
     </object>
-    <object pk="987" model="l10n.adminarea">
-        <field to="l10n.country" name="country" rel="ManyToOneRel">60</field>
-        <field type="CharField" name="name">Dikhil</field>
-        <field type="CharField" name="abbrev"></field>
-        <field type="BooleanField" name="active">1</field>
-    </object>
     <object pk="4261" model="l10n.adminarea">
         <field to="l10n.country" name="country" rel="ManyToOneRel">212</field>
         <field type="CharField" name="name">Dimashq</field>
@@ -9742,12 +9592,6 @@
         <field type="CharField" name="abbrev"></field>
         <field type="BooleanField" name="active">1</field>
     </object>
-    <object pk="4735" model="l10n.adminarea">
-        <field to="l10n.country" name="country" rel="ManyToOneRel">236</field>
-        <field type="CharField" name="name">Distrito Federal</field>
-        <field type="CharField" name="abbrev"></field>
-        <field type="BooleanField" name="active">1</field>
-    </object>
     <object pk="1051" model="l10n.adminarea">
         <field to="l10n.country" name="country" rel="ManyToOneRel">62</field>
         <field type="CharField" name="name">Distrito Nacional</field>
@@ -9796,12 +9640,6 @@
         <field type="CharField" name="abbrev"></field>
         <field type="BooleanField" name="active">1</field>
     </object>
-    <object pk="984" model="l10n.adminarea">
-        <field to="l10n.country" name="country" rel="ManyToOneRel">60</field>
-        <field type="CharField" name="name">Djibouti</field>
-        <field type="CharField" name="abbrev"></field>
-        <field type="BooleanField" name="active">1</field>
-    </object>
     <object pk="981" model="l10n.adminarea">
         <field to="l10n.country" name="country" rel="ManyToOneRel">60</field>
         <field type="CharField" name="name">Djibouti (general)</field>
@@ -9821,12 +9659,6 @@
         <field type="BooleanField" name="active">1</field>
     </object>
     <object pk="2495" model="l10n.adminarea">
-        <field to="l10n.country" name="country" rel="ManyToOneRel">121</field>
-        <field type="CharField" name="name">Dobeles Rajons</field>
-        <field type="CharField" name="abbrev"></field>
-        <field type="BooleanField" name="active">1</field>
-    </object>
-    <object pk="2487" model="l10n.adminarea">
         <field to="l10n.country" name="country" rel="ManyToOneRel">121</field>
         <field type="CharField" name="name">Dobeles Rajons</field>
         <field type="CharField" name="abbrev"></field>
@@ -11248,12 +11080,6 @@
         <field type="CharField" name="abbrev"></field>
         <field type="BooleanField" name="active">1</field>
     </object>
-    <object pk="1203" model="l10n.adminarea">
-        <field to="l10n.country" name="country" rel="ManyToOneRel">69</field>
-        <field type="CharField" name="name">Gamo Gofa</field>
-        <field type="CharField" name="abbrev"></field>
-        <field type="BooleanField" name="active">1</field>
-    </object>
     <object pk="2416" model="l10n.adminarea">
         <field to="l10n.country" name="country" rel="ManyToOneRel">126</field>
         <field type="CharField" name="name">Gamprin</field>
@@ -11285,12 +11111,6 @@
         <field type="BooleanField" name="active">1</field>
     </object>
     <object pk="2821" model="l10n.adminarea">
-        <field to="l10n.country" name="country" rel="ManyToOneRel">135</field>
-        <field type="CharField" name="name">Gao</field>
-        <field type="CharField" name="abbrev"></field>
-        <field type="BooleanField" name="active">1</field>
-    </object>
-    <object pk="2814" model="l10n.adminarea">
         <field to="l10n.country" name="country" rel="ManyToOneRel">135</field>
         <field type="CharField" name="name">Gao</field>
         <field type="CharField" name="abbrev"></field>
@@ -11578,12 +11398,6 @@
         <field type="CharField" name="abbrev"></field>
         <field type="BooleanField" name="active">1</field>
     </object>
-    <object pk="3870" model="l10n.adminarea">
-        <field to="l10n.country" name="country" rel="ManyToOneRel">195</field>
-        <field type="CharField" name="name">Glacis</field>
-        <field type="CharField" name="abbrev"></field>
-        <field type="BooleanField" name="active">1</field>
-    </object>
     <object pk="679" model="l10n.adminarea">
         <field to="l10n.country" name="country" rel="ManyToOneRel">211</field>
         <field type="CharField" name="name">Glarus</field>
@@ -11830,12 +11644,6 @@
         <field type="CharField" name="abbrev"></field>
         <field type="BooleanField" name="active">1</field>
     </object>
-    <object pk="3872" model="l10n.adminarea">
-        <field to="l10n.country" name="country" rel="ManyToOneRel">195</field>
-        <field type="CharField" name="name">Grand Anse Praslin</field>
-        <field type="CharField" name="abbrev"></field>
-        <field type="BooleanField" name="active">1</field>
-    </object>
     <object pk="2442" model="l10n.adminarea">
         <field to="l10n.country" name="country" rel="ManyToOneRel">124</field>
         <field type="CharField" name="name">Grand Bassa County</field>
@@ -11843,12 +11651,6 @@
         <field type="BooleanField" name="active">1</field>
     </object>
     <object pk="2443" model="l10n.adminarea">
-        <field to="l10n.country" name="country" rel="ManyToOneRel">124</field>
-        <field type="CharField" name="name">Grand Cape Mount</field>
-        <field type="CharField" name="abbrev"></field>
-        <field type="BooleanField" name="active">1</field>
-    </object>
-    <object pk="2437" model="l10n.adminarea">
         <field to="l10n.country" name="country" rel="ManyToOneRel">124</field>
         <field type="CharField" name="name">Grand Cape Mount</field>
         <field type="CharField" name="abbrev"></field>
@@ -12419,12 +12221,6 @@
         <field type="BooleanField" name="active">1</field>
     </object>
     <object pk="488" model="l10n.adminarea">
-        <field to="l10n.country" name="country" rel="ManyToOneRel">25</field>
-        <field type="CharField" name="name">Hamilton</field>
-        <field type="CharField" name="abbrev"></field>
-        <field type="BooleanField" name="active">1</field>
-    </object>
-    <object pk="487" model="l10n.adminarea">
         <field to="l10n.country" name="country" rel="ManyToOneRel">25</field>
         <field type="CharField" name="name">Hamilton</field>
         <field type="CharField" name="abbrev"></field>
@@ -13120,18 +12916,6 @@
         <field type="CharField" name="abbrev"></field>
         <field type="BooleanField" name="active">1</field>
     </object>
-    <object pk="4647" model="l10n.adminarea">
-        <field to="l10n.country" name="country" rel="ManyToOneRel">227</field>
-        <field type="CharField" name="name">Iganga</field>
-        <field type="CharField" name="abbrev"></field>
-        <field type="BooleanField" name="active">1</field>
-    </object>
-    <object pk="4601" model="l10n.adminarea">
-        <field to="l10n.country" name="country" rel="ManyToOneRel">227</field>
-        <field type="CharField" name="name">Iganga</field>
-        <field type="CharField" name="abbrev"></field>
-        <field type="BooleanField" name="active">1</field>
-    </object>
     <object pk="3203" model="l10n.adminarea">
         <field to="l10n.country" name="country" rel="ManyToOneRel">153</field>
         <field type="CharField" name="name">Ijuw</field>
@@ -13198,19 +12982,7 @@
         <field type="CharField" name="abbrev"></field>
         <field type="BooleanField" name="active">1</field>
     </object>
-    <object pk="3439" model="l10n.adminarea">
-        <field to="l10n.country" name="country" rel="ManyToOneRel">174</field>
-        <field type="CharField" name="name">Iloilo</field>
-        <field type="CharField" name="abbrev"></field>
-        <field type="BooleanField" name="active">1</field>
-    </object>
     <object pk="1236" model="l10n.adminarea">
-        <field to="l10n.country" name="country" rel="ManyToOneRel">69</field>
-        <field type="CharField" name="name">Ilubabor</field>
-        <field type="CharField" name="abbrev"></field>
-        <field type="BooleanField" name="active">1</field>
-    </object>
-    <object pk="1206" model="l10n.adminarea">
         <field to="l10n.country" name="country" rel="ManyToOneRel">69</field>
         <field type="CharField" name="name">Ilubabor</field>
         <field type="CharField" name="abbrev"></field>
@@ -13337,12 +13109,6 @@
         <field type="BooleanField" name="active">1</field>
     </object>
     <object pk="2170" model="l10n.adminarea">
-        <field to="l10n.country" name="country" rel="ManyToOneRel">112</field>
-        <field type="CharField" name="name">Irbid</field>
-        <field type="CharField" name="abbrev"></field>
-        <field type="BooleanField" name="active">1</field>
-    </object>
-    <object pk="2166" model="l10n.adminarea">
         <field to="l10n.country" name="country" rel="ManyToOneRel">112</field>
         <field type="CharField" name="name">Irbid</field>
         <field type="CharField" name="abbrev"></field>
@@ -13942,12 +13708,6 @@
         <field type="CharField" name="abbrev"></field>
         <field type="BooleanField" name="active">1</field>
     </object>
-    <object pk="4604" model="l10n.adminarea">
-        <field to="l10n.country" name="country" rel="ManyToOneRel">227</field>
-        <field type="CharField" name="name">Kabarole</field>
-        <field type="CharField" name="abbrev"></field>
-        <field type="BooleanField" name="active">1</field>
-    </object>
     <object pk="4649" model="l10n.adminarea">
         <field to="l10n.country" name="country" rel="ManyToOneRel">227</field>
         <field type="CharField" name="name">Kaberamaido</field>
@@ -14512,12 +14272,6 @@
         <field type="CharField" name="abbrev"></field>
         <field type="BooleanField" name="active">1</field>
     </object>
-    <object pk="1237" model="l10n.adminarea">
-        <field to="l10n.country" name="country" rel="ManyToOneRel">69</field>
-        <field type="CharField" name="name">Kefa</field>
-        <field type="CharField" name="abbrev"></field>
-        <field type="BooleanField" name="active">1</field>
-    </object>
     <object pk="1743" model="l10n.adminarea">
         <field to="l10n.country" name="country" rel="ManyToOneRel">84</field>
         <field type="CharField" name="name">Kefallinía</field>
@@ -14650,12 +14404,6 @@
         <field type="CharField" name="abbrev"></field>
         <field type="BooleanField" name="active">1</field>
     </object>
-    <object pk="2366" model="l10n.adminarea">
-        <field to="l10n.country" name="country" rel="ManyToOneRel">120</field>
-        <field type="CharField" name="name">Khammouan</field>
-        <field type="CharField" name="abbrev"></field>
-        <field type="BooleanField" name="active">1</field>
-    </object>
     <object pk="3758" model="l10n.adminarea">
         <field to="l10n.country" name="country" rel="ManyToOneRel">182</field>
         <field type="CharField" name="name">Khanty-Mansiyskiy Avtonomnyy Okrug</field>
@@ -14729,12 +14477,6 @@
         <field type="BooleanField" name="active">1</field>
     </object>
     <object pk="3050" model="l10n.adminarea">
-        <field to="l10n.country" name="country" rel="ManyToOneRel">152</field>
-        <field type="CharField" name="name">Khomas</field>
-        <field type="CharField" name="abbrev"></field>
-        <field type="BooleanField" name="active">1</field>
-    </object>
-    <object pk="3069" model="l10n.adminarea">
         <field to="l10n.country" name="country" rel="ManyToOneRel">152</field>
         <field type="CharField" name="name">Khomas</field>
         <field type="CharField" name="abbrev"></field>
@@ -15004,12 +14746,6 @@
         <field type="CharField" name="abbrev"></field>
         <field type="BooleanField" name="active">1</field>
     </object>
-    <object pk="4653" model="l10n.adminarea">
-        <field to="l10n.country" name="country" rel="ManyToOneRel">227</field>
-        <field type="CharField" name="name">Kitgum</field>
-        <field type="CharField" name="abbrev"></field>
-        <field type="BooleanField" name="active">1</field>
-    </object>
     <object pk="633" model="l10n.adminarea">
         <field to="l10n.country" name="country" rel="ManyToOneRel">51</field>
         <field type="CharField" name="name">Kivu Région du</field>
@@ -15149,12 +14885,6 @@
         <field type="BooleanField" name="active">1</field>
     </object>
     <object pk="4766" model="l10n.adminarea">
-        <field to="l10n.country" name="country" rel="ManyToOneRel">237</field>
-        <field type="CharField" name="name">Kon Tum</field>
-        <field type="CharField" name="abbrev"></field>
-        <field type="BooleanField" name="active">1</field>
-    </object>
-    <object pk="4792" model="l10n.adminarea">
         <field to="l10n.country" name="country" rel="ManyToOneRel">237</field>
         <field type="CharField" name="name">Kon Tum</field>
         <field type="CharField" name="abbrev"></field>
@@ -16402,12 +16132,6 @@
         <field type="CharField" name="abbrev"></field>
         <field type="BooleanField" name="active">1</field>
     </object>
-    <object pk="2392" model="l10n.adminarea">
-        <field to="l10n.country" name="country" rel="ManyToOneRel">122</field>
-        <field type="CharField" name="name">Liban-Nord</field>
-        <field type="CharField" name="abbrev"></field>
-        <field type="BooleanField" name="active">1</field>
-    </object>
     <object pk="2395" model="l10n.adminarea">
         <field to="l10n.country" name="country" rel="ManyToOneRel">122</field>
         <field type="CharField" name="name">Liban-Sud</field>
@@ -16690,12 +16414,6 @@
         <field type="CharField" name="abbrev"></field>
         <field type="BooleanField" name="active">1</field>
     </object>
-    <object pk="2438" model="l10n.adminarea">
-        <field to="l10n.country" name="country" rel="ManyToOneRel">124</field>
-        <field type="CharField" name="name">Lofa</field>
-        <field type="CharField" name="abbrev"></field>
-        <field type="BooleanField" name="active">1</field>
-    </object>
     <object pk="4017" model="l10n.adminarea">
         <field to="l10n.country" name="country" rel="ManyToOneRel">199</field>
         <field type="CharField" name="name">Logatec</field>
@@ -16852,12 +16570,6 @@
         <field type="CharField" name="abbrev"></field>
         <field type="BooleanField" name="active">1</field>
     </object>
-    <object pk="4779" model="l10n.adminarea">
-        <field to="l10n.country" name="country" rel="ManyToOneRel">237</field>
-        <field type="CharField" name="name">Long An</field>
-        <field type="CharField" name="abbrev"></field>
-        <field type="BooleanField" name="active">1</field>
-    </object>
     <object pk="548" model="l10n.adminarea">
         <field to="l10n.country" name="country" rel="ManyToOneRel">17</field>
         <field type="CharField" name="name">Long Island</field>
@@ -16943,12 +16655,6 @@
         <field type="BooleanField" name="active">1</field>
     </object>
     <object pk="4191" model="l10n.adminarea">
-        <field to="l10n.country" name="country" rel="ManyToOneRel">193</field>
-        <field type="CharField" name="name">Louga</field>
-        <field type="CharField" name="abbrev"></field>
-        <field type="BooleanField" name="active">1</field>
-    </object>
-    <object pk="4196" model="l10n.adminarea">
         <field to="l10n.country" name="country" rel="ManyToOneRel">193</field>
         <field type="CharField" name="name">Louga</field>
         <field type="CharField" name="abbrev"></field>
@@ -17122,12 +16828,6 @@
         <field type="CharField" name="abbrev"></field>
         <field type="BooleanField" name="active">1</field>
     </object>
-    <object pk="4617" model="l10n.adminarea">
-        <field to="l10n.country" name="country" rel="ManyToOneRel">227</field>
-        <field type="CharField" name="name">Luwero</field>
-        <field type="CharField" name="abbrev"></field>
-        <field type="BooleanField" name="active">1</field>
-    </object>
     <object pk="2486" model="l10n.adminarea">
         <field to="l10n.country" name="country" rel="ManyToOneRel">128</field>
         <field type="CharField" name="name">Luxembourg</field>
@@ -17230,12 +16930,6 @@
         <field type="CharField" name="abbrev"></field>
         <field type="BooleanField" name="active">1</field>
     </object>
-    <object pk="252" model="l10n.adminarea">
-        <field to="l10n.country" name="country" rel="ManyToOneRel">16</field>
-        <field type="CharField" name="name">Lǝnkǝran</field>
-        <field type="CharField" name="abbrev"></field>
-        <field type="BooleanField" name="active">1</field>
-    </object>
     <object pk="4777" model="l10n.adminarea">
         <field to="l10n.country" name="country" rel="ManyToOneRel">237</field>
         <field type="CharField" name="name">Lạng Sơn</field>
@@ -17243,12 +16937,6 @@
         <field type="BooleanField" name="active">1</field>
     </object>
     <object pk="2930" model="l10n.adminarea">
-        <field to="l10n.country" name="country" rel="ManyToOneRel">134</field>
-        <field type="CharField" name="name">Maale</field>
-        <field type="CharField" name="abbrev"></field>
-        <field type="BooleanField" name="active">1</field>
-    </object>
-    <object pk="2900" model="l10n.adminarea">
         <field to="l10n.country" name="country" rel="ManyToOneRel">134</field>
         <field type="CharField" name="name">Maale</field>
         <field type="CharField" name="abbrev"></field>
@@ -17309,12 +16997,6 @@
         <field type="BooleanField" name="active">1</field>
     </object>
     <object pk="1997" model="l10n.adminarea">
-        <field to="l10n.country" name="country" rel="ManyToOneRel">101</field>
-        <field type="CharField" name="name">Madhya Pradesh</field>
-        <field type="CharField" name="abbrev"></field>
-        <field type="BooleanField" name="active">1</field>
-    </object>
-    <object pk="2017" model="l10n.adminarea">
         <field to="l10n.country" name="country" rel="ManyToOneRel">101</field>
         <field type="CharField" name="name">Madhya Pradesh</field>
         <field type="CharField" name="abbrev"></field>
@@ -17381,12 +17063,6 @@
         <field type="BooleanField" name="active">1</field>
     </object>
     <object pk="878" model="l10n.adminarea">
-        <field to="l10n.country" name="country" rel="ManyToOneRel">48</field>
-        <field type="CharField" name="name">Magdalena</field>
-        <field type="CharField" name="abbrev"></field>
-        <field type="BooleanField" name="active">1</field>
-    </object>
-    <object pk="858" model="l10n.adminarea">
         <field to="l10n.country" name="country" rel="ManyToOneRel">48</field>
         <field type="CharField" name="name">Magdalena</field>
         <field type="CharField" name="abbrev"></field>
@@ -17866,12 +17542,6 @@
         <field type="CharField" name="abbrev"></field>
         <field type="BooleanField" name="active">1</field>
     </object>
-    <object pk="2062" model="l10n.adminarea">
-        <field to="l10n.country" name="country" rel="ManyToOneRel">103</field>
-        <field type="CharField" name="name">Markazi</field>
-        <field type="CharField" name="abbrev"></field>
-        <field type="BooleanField" name="active">1</field>
-    </object>
     <object pk="2072" model="l10n.adminarea">
         <field to="l10n.country" name="country" rel="ManyToOneRel">103</field>
         <field type="CharField" name="name">Markazi Province</field>
@@ -17969,12 +17639,6 @@
         <field type="BooleanField" name="active">1</field>
     </object>
     <object pk="4618" model="l10n.adminarea">
-        <field to="l10n.country" name="country" rel="ManyToOneRel">227</field>
-        <field type="CharField" name="name">Masaka</field>
-        <field type="CharField" name="abbrev"></field>
-        <field type="BooleanField" name="active">1</field>
-    </object>
-    <object pk="4640" model="l10n.adminarea">
         <field to="l10n.country" name="country" rel="ManyToOneRel">227</field>
         <field type="CharField" name="name">Masaka</field>
         <field type="CharField" name="abbrev"></field>
@@ -18227,12 +17891,6 @@
         <field type="BooleanField" name="active">1</field>
     </object>
     <object pk="4656" model="l10n.adminarea">
-        <field to="l10n.country" name="country" rel="ManyToOneRel">227</field>
-        <field type="CharField" name="name">Mbale</field>
-        <field type="CharField" name="abbrev"></field>
-        <field type="BooleanField" name="active">1</field>
-    </object>
-    <object pk="4620" model="l10n.adminarea">
         <field to="l10n.country" name="country" rel="ManyToOneRel">227</field>
         <field type="CharField" name="name">Mbale</field>
         <field type="CharField" name="abbrev"></field>
@@ -18778,12 +18436,6 @@
         <field type="CharField" name="abbrev"></field>
         <field type="BooleanField" name="active">1</field>
     </object>
-    <object pk="481" model="l10n.adminarea">
-        <field to="l10n.country" name="country" rel="ManyToOneRel">24</field>
-        <field type="CharField" name="name">Mono</field>
-        <field type="CharField" name="abbrev"></field>
-        <field type="BooleanField" name="active">1</field>
-    </object>
     <object pk="1048" model="l10n.adminarea">
         <field to="l10n.country" name="country" rel="ManyToOneRel">62</field>
         <field type="CharField" name="name">Monseñor Nouel</field>
@@ -18797,12 +18449,6 @@
         <field type="BooleanField" name="active">1</field>
     </object>
     <object pk="3876" model="l10n.adminarea">
-        <field to="l10n.country" name="country" rel="ManyToOneRel">195</field>
-        <field type="CharField" name="name">Mont Fleuri</field>
-        <field type="CharField" name="abbrev"></field>
-        <field type="BooleanField" name="active">1</field>
-    </object>
-    <object pk="3894" model="l10n.adminarea">
         <field to="l10n.country" name="country" rel="ManyToOneRel">195</field>
         <field type="CharField" name="name">Mont Fleuri</field>
         <field type="CharField" name="abbrev"></field>
@@ -18946,12 +18592,6 @@
         <field type="CharField" name="abbrev"></field>
         <field type="BooleanField" name="active">1</field>
     </object>
-    <object pk="4657" model="l10n.adminarea">
-        <field to="l10n.country" name="country" rel="ManyToOneRel">227</field>
-        <field type="CharField" name="name">Moroto</field>
-        <field type="CharField" name="abbrev"></field>
-        <field type="BooleanField" name="active">1</field>
-    </object>
     <object pk="3774" model="l10n.adminarea">
         <field to="l10n.country" name="country" rel="ManyToOneRel">182</field>
         <field type="CharField" name="name">Moskva</field>
@@ -19030,12 +18670,6 @@
         <field type="CharField" name="abbrev"></field>
         <field type="BooleanField" name="active">1</field>
     </object>
-    <object pk="4623" model="l10n.adminarea">
-        <field to="l10n.country" name="country" rel="ManyToOneRel">227</field>
-        <field type="CharField" name="name">Moyo</field>
-        <field type="CharField" name="abbrev"></field>
-        <field type="BooleanField" name="active">1</field>
-    </object>
     <object pk="3018" model="l10n.adminarea">
         <field to="l10n.country" name="country" rel="ManyToOneRel">150</field>
         <field type="CharField" name="name">Mozambique (general)</field>
@@ -19049,12 +18683,6 @@
         <field type="BooleanField" name="active">1</field>
     </object>
     <object pk="4658" model="l10n.adminarea">
-        <field to="l10n.country" name="country" rel="ManyToOneRel">227</field>
-        <field type="CharField" name="name">Mpigi</field>
-        <field type="CharField" name="abbrev"></field>
-        <field type="BooleanField" name="active">1</field>
-    </object>
-    <object pk="4624" model="l10n.adminarea">
         <field to="l10n.country" name="country" rel="ManyToOneRel">227</field>
         <field type="CharField" name="name">Mpigi</field>
         <field type="CharField" name="abbrev"></field>
@@ -19402,12 +19030,6 @@
         <field type="CharField" name="abbrev"></field>
         <field type="BooleanField" name="active">1</field>
     </object>
-    <object pk="4385" model="l10n.adminarea">
-        <field to="l10n.country" name="country" rel="ManyToOneRel">216</field>
-        <field type="CharField" name="name">Nakhon Phanom</field>
-        <field type="CharField" name="abbrev"></field>
-        <field type="BooleanField" name="active">1</field>
-    </object>
     <object pk="4339" model="l10n.adminarea">
         <field to="l10n.country" name="country" rel="ManyToOneRel">216</field>
         <field type="CharField" name="name">Nakhon Ratchasima</field>
@@ -19523,12 +19145,6 @@
         <field type="BooleanField" name="active">1</field>
     </object>
     <object pk="1126" model="l10n.adminarea">
-        <field to="l10n.country" name="country" rel="ManyToOneRel">63</field>
-        <field type="CharField" name="name">Napo</field>
-        <field type="CharField" name="abbrev"></field>
-        <field type="BooleanField" name="active">1</field>
-    </object>
-    <object pk="1120" model="l10n.adminarea">
         <field to="l10n.country" name="country" rel="ManyToOneRel">63</field>
         <field type="CharField" name="name">Napo</field>
         <field type="CharField" name="abbrev"></field>
@@ -21592,12 +21208,6 @@
         <field type="CharField" name="abbrev"></field>
         <field type="BooleanField" name="active">1</field>
     </object>
-    <object pk="103" model="l10n.adminarea">
-        <field to="l10n.country" name="country" rel="ManyToOneRel">1</field>
-        <field type="CharField" name="name">Parvān</field>
-        <field type="CharField" name="abbrev"></field>
-        <field type="BooleanField" name="active">1</field>
-    </object>
     <object pk="527" model="l10n.adminarea">
         <field to="l10n.country" name="country" rel="ManyToOneRel">31</field>
         <field type="CharField" name="name">Pará</field>
@@ -22036,12 +21646,6 @@
         <field type="CharField" name="abbrev"></field>
         <field type="BooleanField" name="active">1</field>
     </object>
-    <object pk="3895" model="l10n.adminarea">
-        <field to="l10n.country" name="country" rel="ManyToOneRel">195</field>
-        <field type="CharField" name="name">Plaisance</field>
-        <field type="CharField" name="abbrev"></field>
-        <field type="BooleanField" name="active">1</field>
-    </object>
     <object pk="2418" model="l10n.adminarea">
         <field to="l10n.country" name="country" rel="ManyToOneRel">126</field>
         <field type="CharField" name="name">Planken</field>
@@ -22162,12 +21766,6 @@
         <field type="CharField" name="abbrev"></field>
         <field type="BooleanField" name="active">1</field>
     </object>
-    <object pk="3878" model="l10n.adminarea">
-        <field to="l10n.country" name="country" rel="ManyToOneRel">195</field>
-        <field type="CharField" name="name">Pointe Larue</field>
-        <field type="CharField" name="abbrev"></field>
-        <field type="BooleanField" name="active">1</field>
-    </object>
     <object pk="1300" model="l10n.adminarea">
         <field to="l10n.country" name="country" rel="ManyToOneRel">74</field>
         <field type="CharField" name="name">Poitou-Charentes</field>
@@ -22223,12 +21821,6 @@
         <field type="BooleanField" name="active">1</field>
     </object>
     <object pk="3879" model="l10n.adminarea">
-        <field to="l10n.country" name="country" rel="ManyToOneRel">195</field>
-        <field type="CharField" name="name">Port Glaud</field>
-        <field type="CharField" name="abbrev"></field>
-        <field type="BooleanField" name="active">1</field>
-    </object>
-    <object pk="3897" model="l10n.adminarea">
         <field to="l10n.country" name="country" rel="ManyToOneRel">195</field>
         <field type="CharField" name="name">Port Glaud</field>
         <field type="CharField" name="abbrev"></field>
@@ -22349,12 +21941,6 @@
         <field type="BooleanField" name="active">1</field>
     </object>
     <object pk="920" model="l10n.adminarea">
-        <field to="l10n.country" name="country" rel="ManyToOneRel">40</field>
-        <field type="CharField" name="name">Praia</field>
-        <field type="CharField" name="abbrev"></field>
-        <field type="BooleanField" name="active">1</field>
-    </object>
-    <object pk="912" model="l10n.adminarea">
         <field to="l10n.country" name="country" rel="ManyToOneRel">40</field>
         <field type="CharField" name="name">Praia</field>
         <field type="CharField" name="abbrev"></field>
@@ -22499,12 +22085,6 @@
         <field type="BooleanField" name="active">1</field>
     </object>
     <object pk="4231" model="l10n.adminarea">
-        <field to="l10n.country" name="country" rel="ManyToOneRel">191</field>
-        <field type="CharField" name="name">Príncipe</field>
-        <field type="CharField" name="abbrev"></field>
-        <field type="BooleanField" name="active">1</field>
-    </object>
-    <object pk="4230" model="l10n.adminarea">
         <field to="l10n.country" name="country" rel="ManyToOneRel">191</field>
         <field type="CharField" name="name">Príncipe</field>
         <field type="CharField" name="abbrev"></field>
@@ -22775,12 +22355,6 @@
         <field type="BooleanField" name="active">1</field>
     </object>
     <object pk="3543" model="l10n.adminarea">
-        <field to="l10n.country" name="country" rel="ManyToOneRel">174</field>
-        <field type="CharField" name="name">Quezon</field>
-        <field type="CharField" name="abbrev"></field>
-        <field type="BooleanField" name="active">1</field>
-    </object>
-    <object pk="3527" model="l10n.adminarea">
         <field to="l10n.country" name="country" rel="ManyToOneRel">174</field>
         <field type="CharField" name="name">Quezon</field>
         <field type="CharField" name="abbrev"></field>
@@ -23656,12 +23230,6 @@
         <field type="CharField" name="abbrev"></field>
         <field type="BooleanField" name="active">1</field>
     </object>
-    <object pk="4662" model="l10n.adminarea">
-        <field to="l10n.country" name="country" rel="ManyToOneRel">227</field>
-        <field type="CharField" name="name">Rukungiri</field>
-        <field type="CharField" name="abbrev"></field>
-        <field type="BooleanField" name="active">1</field>
-    </object>
     <object pk="4561" model="l10n.adminarea">
         <field to="l10n.country" name="country" rel="ManyToOneRel">215</field>
         <field type="CharField" name="name">Rukwa</field>
@@ -24340,12 +23908,6 @@
         <field type="CharField" name="abbrev"></field>
         <field type="BooleanField" name="active">1</field>
     </object>
-    <object pk="4188" model="l10n.adminarea">
-        <field to="l10n.country" name="country" rel="ManyToOneRel">193</field>
-        <field type="CharField" name="name">Saint-Louis</field>
-        <field type="CharField" name="abbrev"></field>
-        <field type="BooleanField" name="active">1</field>
-    </object>
     <object pk="2210" model="l10n.adminarea">
         <field to="l10n.country" name="country" rel="ManyToOneRel">110</field>
         <field type="CharField" name="name">Saitama</field>
@@ -24797,12 +24359,6 @@
         <field type="BooleanField" name="active">1</field>
     </object>
     <object pk="921" model="l10n.adminarea">
-        <field to="l10n.country" name="country" rel="ManyToOneRel">40</field>
-        <field type="CharField" name="name">Santa Catarina</field>
-        <field type="CharField" name="abbrev"></field>
-        <field type="BooleanField" name="active">1</field>
-    </object>
-    <object pk="915" model="l10n.adminarea">
         <field to="l10n.country" name="country" rel="ManyToOneRel">40</field>
         <field type="CharField" name="name">Santa Catarina</field>
         <field type="CharField" name="abbrev"></field>
@@ -25426,12 +24982,6 @@
         <field type="CharField" name="abbrev"></field>
         <field type="BooleanField" name="active">1</field>
     </object>
-    <object pk="1209" model="l10n.adminarea">
-        <field to="l10n.country" name="country" rel="ManyToOneRel">69</field>
-        <field type="CharField" name="name">Sidamo</field>
-        <field type="CharField" name="abbrev"></field>
-        <field type="BooleanField" name="active">1</field>
-    </object>
     <object pk="1078" model="l10n.adminarea">
         <field to="l10n.country" name="country" rel="ManyToOneRel">4</field>
         <field type="CharField" name="name">Sidi Bel Abbès</field>
@@ -25871,18 +25421,6 @@
         <field type="BooleanField" name="active">1</field>
     </object>
     <object pk="4664" model="l10n.adminarea">
-        <field to="l10n.country" name="country" rel="ManyToOneRel">227</field>
-        <field type="CharField" name="name">Soroti</field>
-        <field type="CharField" name="abbrev"></field>
-        <field type="BooleanField" name="active">1</field>
-    </object>
-    <object pk="4632" model="l10n.adminarea">
-        <field to="l10n.country" name="country" rel="ManyToOneRel">227</field>
-        <field type="CharField" name="name">Soroti</field>
-        <field type="CharField" name="abbrev"></field>
-        <field type="BooleanField" name="active">1</field>
-    </object>
-    <object pk="4644" model="l10n.adminarea">
         <field to="l10n.country" name="country" rel="ManyToOneRel">227</field>
         <field type="CharField" name="name">Soroti</field>
         <field type="CharField" name="abbrev"></field>
@@ -27034,12 +26572,6 @@
         <field type="CharField" name="abbrev"></field>
         <field type="BooleanField" name="active">1</field>
     </object>
-    <object pk="3881" model="l10n.adminarea">
-        <field to="l10n.country" name="country" rel="ManyToOneRel">195</field>
-        <field type="CharField" name="name">Takamaka</field>
-        <field type="CharField" name="abbrev"></field>
-        <field type="BooleanField" name="active">1</field>
-    </object>
     <object pk="106" model="l10n.adminarea">
         <field to="l10n.country" name="country" rel="ManyToOneRel">1</field>
         <field type="CharField" name="name">Takhār</field>
@@ -27221,12 +26753,6 @@
         <field type="BooleanField" name="active">1</field>
     </object>
     <object pk="918" model="l10n.adminarea">
-        <field to="l10n.country" name="country" rel="ManyToOneRel">40</field>
-        <field type="CharField" name="name">Tarrafal</field>
-        <field type="CharField" name="abbrev"></field>
-        <field type="BooleanField" name="active">1</field>
-    </object>
-    <object pk="926" model="l10n.adminarea">
         <field to="l10n.country" name="country" rel="ManyToOneRel">40</field>
         <field type="CharField" name="name">Tarrafal</field>
         <field type="CharField" name="abbrev"></field>
@@ -27646,18 +27172,6 @@
         <field type="CharField" name="abbrev"></field>
         <field type="BooleanField" name="active">1</field>
     </object>
-    <object pk="1233" model="l10n.adminarea">
-        <field to="l10n.country" name="country" rel="ManyToOneRel">69</field>
-        <field type="CharField" name="name">Tigray</field>
-        <field type="CharField" name="abbrev"></field>
-        <field type="BooleanField" name="active">1</field>
-    </object>
-    <object pk="1210" model="l10n.adminarea">
-        <field to="l10n.country" name="country" rel="ManyToOneRel">69</field>
-        <field type="CharField" name="name">Tigray</field>
-        <field type="CharField" name="abbrev"></field>
-        <field type="BooleanField" name="active">1</field>
-    </object>
     <object pk="3080" model="l10n.adminarea">
         <field to="l10n.country" name="country" rel="ManyToOneRel">160</field>
         <field type="CharField" name="name">Tillabéri</field>
@@ -27923,12 +27437,6 @@
         <field type="BooleanField" name="active">1</field>
     </object>
     <object pk="4645" model="l10n.adminarea">
-        <field to="l10n.country" name="country" rel="ManyToOneRel">227</field>
-        <field type="CharField" name="name">Tororo</field>
-        <field type="CharField" name="abbrev"></field>
-        <field type="BooleanField" name="active">1</field>
-    </object>
-    <object pk="4633" model="l10n.adminarea">
         <field to="l10n.country" name="country" rel="ManyToOneRel">227</field>
         <field type="CharField" name="name">Tororo</field>
         <field type="CharField" name="abbrev"></field>
@@ -28630,12 +28138,6 @@
         <field type="CharField" name="abbrev"></field>
         <field type="BooleanField" name="active">1</field>
     </object>
-    <object pk="2009" model="l10n.adminarea">
-        <field to="l10n.country" name="country" rel="ManyToOneRel">101</field>
-        <field type="CharField" name="name">Uttar Pradesh</field>
-        <field type="CharField" name="abbrev"></field>
-        <field type="BooleanField" name="active">1</field>
-    </object>
     <object pk="4322" model="l10n.adminarea">
         <field to="l10n.country" name="country" rel="ManyToOneRel">216</field>
         <field type="CharField" name="name">Uttaradit</field>
@@ -29044,12 +28546,6 @@
         <field type="CharField" name="abbrev"></field>
         <field type="BooleanField" name="active">1</field>
     </object>
-    <object pk="1904" model="l10n.adminarea">
-        <field to="l10n.country" name="country" rel="ManyToOneRel">99</field>
-        <field type="CharField" name="name">Veszprém</field>
-        <field type="CharField" name="abbrev"></field>
-        <field type="BooleanField" name="active">1</field>
-    </object>
     <object pk="2799" model="l10n.adminarea">
         <field to="l10n.country" name="country" rel="ManyToOneRel">130</field>
         <field type="CharField" name="name">Vevčani</field>
@@ -29063,12 +28559,6 @@
         <field type="BooleanField" name="active">1</field>
     </object>
     <object pk="2388" model="l10n.adminarea">
-        <field to="l10n.country" name="country" rel="ManyToOneRel">120</field>
-        <field type="CharField" name="name">Viangchan</field>
-        <field type="CharField" name="abbrev"></field>
-        <field type="BooleanField" name="active">1</field>
-    </object>
-    <object pk="2385" model="l10n.adminarea">
         <field to="l10n.country" name="country" rel="ManyToOneRel">120</field>
         <field type="CharField" name="name">Viangchan</field>
         <field type="CharField" name="abbrev"></field>
@@ -30070,12 +29560,6 @@
         <field type="CharField" name="abbrev"></field>
         <field type="BooleanField" name="active">1</field>
     </object>
-    <object pk="2069" model="l10n.adminarea">
-        <field to="l10n.country" name="country" rel="ManyToOneRel">103</field>
-        <field type="CharField" name="name">Yazd</field>
-        <field type="CharField" name="abbrev"></field>
-        <field type="BooleanField" name="active">1</field>
-    </object>
     <object pk="1250" model="l10n.adminarea">
         <field to="l10n.country" name="country" rel="ManyToOneRel">69</field>
         <field type="CharField" name="name">YeDebub Bihēroch Bihēreseboch na Hizboch</field>
@@ -30095,12 +29579,6 @@
         <field type="BooleanField" name="active">1</field>
     </object>
     <object pk="290" model="l10n.adminarea">
-        <field to="l10n.country" name="country" rel="ManyToOneRel">16</field>
-        <field type="CharField" name="name">Yevlax</field>
-        <field type="CharField" name="abbrev"></field>
-        <field type="BooleanField" name="active">1</field>
-    </object>
-    <object pk="289" model="l10n.adminarea">
         <field to="l10n.country" name="country" rel="ManyToOneRel">16</field>
         <field type="CharField" name="name">Yevlax</field>
         <field type="CharField" name="abbrev"></field>
@@ -30310,12 +29788,6 @@
         <field type="CharField" name="abbrev"></field>
         <field type="BooleanField" name="active">1</field>
     </object>
-    <object pk="2065" model="l10n.adminarea">
-        <field to="l10n.country" name="country" rel="ManyToOneRel">103</field>
-        <field type="CharField" name="name">Zanjan</field>
-        <field type="CharField" name="abbrev"></field>
-        <field type="BooleanField" name="active">1</field>
-    </object>
     <object pk="2074" model="l10n.adminarea">
         <field to="l10n.country" name="country" rel="ManyToOneRel">103</field>
         <field type="CharField" name="name">Zanjan Province</field>
@@ -30473,12 +29945,6 @@
         <field type="BooleanField" name="active">1</field>
     </object>
     <object pk="484" model="l10n.adminarea">
-        <field to="l10n.country" name="country" rel="ManyToOneRel">24</field>
-        <field type="CharField" name="name">Zou</field>
-        <field type="CharField" name="abbrev"></field>
-        <field type="BooleanField" name="active">1</field>
-    </object>
-    <object pk="472" model="l10n.adminarea">
         <field to="l10n.country" name="country" rel="ManyToOneRel">24</field>
         <field type="CharField" name="name">Zou</field>
         <field type="CharField" name="abbrev"></field>
@@ -30898,12 +30364,6 @@
         <field type="CharField" name="abbrev"></field>
         <field type="BooleanField" name="active">1</field>
     </object>
-    <object pk="277" model="l10n.adminarea">
-        <field to="l10n.country" name="country" rel="ManyToOneRel">16</field>
-        <field type="CharField" name="name">Şuşa</field>
-        <field type="CharField" name="abbrev"></field>
-        <field type="BooleanField" name="active">1</field>
-    </object>
     <object pk="4504" model="l10n.adminarea">
         <field to="l10n.country" name="country" rel="ManyToOneRel">223</field>
         <field type="CharField" name="name">Şırnak Province</field>
@@ -30911,12 +30371,6 @@
         <field type="BooleanField" name="active">1</field>
     </object>
     <object pk="269" model="l10n.adminarea">
-        <field to="l10n.country" name="country" rel="ManyToOneRel">16</field>
-        <field type="CharField" name="name">Şǝki</field>
-        <field type="CharField" name="abbrev"></field>
-        <field type="BooleanField" name="active">1</field>
-    </object>
-    <object pk="270" model="l10n.adminarea">
         <field to="l10n.country" name="country" rel="ManyToOneRel">16</field>
         <field type="CharField" name="name">Şǝki</field>
         <field type="CharField" name="abbrev"></field>

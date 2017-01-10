@@ -1,63 +1,58 @@
 # -*- coding: utf-8 -*-
-from south.db import db
-from south.v2 import SchemaMigration
+from __future__ import unicode_literals
+
+from django.db import models, migrations
 
 
-class Migration(SchemaMigration):
+class Migration(migrations.Migration):
 
-    def forwards(self, orm):
-        # Adding model 'Country'
-        db.create_table('l10n_country', (
-            ('id', self.gf('django.db.models.fields.AutoField')(primary_key=True)),
-            ('iso2_code', self.gf('django.db.models.fields.CharField')(unique=True, max_length=2)),
-            ('name', self.gf('django.db.models.fields.CharField')(max_length=128)),
-            ('printable_name', self.gf('django.db.models.fields.CharField')(max_length=128)),
-            ('iso3_code', self.gf('django.db.models.fields.CharField')(unique=True, max_length=3)),
-            ('numcode', self.gf('django.db.models.fields.PositiveSmallIntegerField')(null=True, blank=True)),
-            ('active', self.gf('django.db.models.fields.BooleanField')(default=True)),
-            ('continent', self.gf('django.db.models.fields.CharField')(max_length=2)),
-            ('admin_area', self.gf('django.db.models.fields.CharField')(max_length=2, null=True, blank=True)),
-        ))
-        db.send_create_signal('l10n', ['Country'])
+    dependencies = [
+    ]
 
-        # Adding model 'AdminArea'
-        db.create_table('l10n_adminarea', (
-            ('id', self.gf('django.db.models.fields.AutoField')(primary_key=True)),
-            ('country', self.gf('django.db.models.fields.related.ForeignKey')(to=orm['l10n.Country'])),
-            ('name', self.gf('django.db.models.fields.CharField')(max_length=60)),
-            ('abbrev', self.gf('django.db.models.fields.CharField')(max_length=3, null=True, blank=True)),
-            ('active', self.gf('django.db.models.fields.BooleanField')(default=True)),
-        ))
-        db.send_create_signal('l10n', ['AdminArea'])
-
-    def backwards(self, orm):
-        # Deleting model 'Country'
-        db.delete_table('l10n_country')
-
-        # Deleting model 'AdminArea'
-        db.delete_table('l10n_adminarea')
-
-    models = {
-        'l10n.adminarea': {
-            'Meta': {'ordering': "('name',)", 'object_name': 'AdminArea'},
-            'abbrev': ('django.db.models.fields.CharField', [], {'max_length': '3', 'null': 'True', 'blank': 'True'}),
-            'active': ('django.db.models.fields.BooleanField', [], {'default': 'True'}),
-            'country': ('django.db.models.fields.related.ForeignKey', [], {'to': "orm['l10n.Country']"}),
-            'id': ('django.db.models.fields.AutoField', [], {'primary_key': 'True'}),
-            'name': ('django.db.models.fields.CharField', [], {'max_length': '60'})
-        },
-        'l10n.country': {
-            'Meta': {'ordering': "('name',)", 'object_name': 'Country'},
-            'active': ('django.db.models.fields.BooleanField', [], {'default': 'True'}),
-            'admin_area': ('django.db.models.fields.CharField', [], {'max_length': '2', 'null': 'True', 'blank': 'True'}),
-            'continent': ('django.db.models.fields.CharField', [], {'max_length': '2'}),
-            'id': ('django.db.models.fields.AutoField', [], {'primary_key': 'True'}),
-            'iso2_code': ('django.db.models.fields.CharField', [], {'unique': 'True', 'max_length': '2'}),
-            'iso3_code': ('django.db.models.fields.CharField', [], {'unique': 'True', 'max_length': '3'}),
-            'name': ('django.db.models.fields.CharField', [], {'max_length': '128'}),
-            'numcode': ('django.db.models.fields.PositiveSmallIntegerField', [], {'null': 'True', 'blank': 'True'}),
-            'printable_name': ('django.db.models.fields.CharField', [], {'max_length': '128'})
-        }
-    }
-
-    complete_apps = ['l10n']
+    operations = [
+        migrations.CreateModel(
+            name='AdminArea',
+            fields=[
+                ('id', models.AutoField(verbose_name='ID', serialize=False, auto_created=True, primary_key=True)),
+                ('name', models.CharField(max_length=60, verbose_name='Admin Area name')),
+                ('abbrev', models.CharField(max_length=3, null=True, verbose_name='Postal Abbreviation', blank=True)),
+                ('active', models.BooleanField(default=True, verbose_name='Area is active')),
+            ],
+            options={
+                'ordering': ('name',),
+                'verbose_name': 'Administrative Area',
+                'verbose_name_plural': 'Administrative Areas',
+            },
+            bases=(models.Model,),
+        ),
+        migrations.CreateModel(
+            name='Country',
+            fields=[
+                ('id', models.AutoField(verbose_name='ID', serialize=False, auto_created=True, primary_key=True)),
+                ('iso2_code', models.CharField(unique=True, max_length=2, verbose_name='ISO alpha-2')),
+                ('name', models.CharField(max_length=128, verbose_name='Official name (CAPS)')),
+                ('printable_name', models.CharField(max_length=128, verbose_name='Country name')),
+                ('iso3_code', models.CharField(unique=True, max_length=3, verbose_name='ISO alpha-3')),
+                ('numcode', models.PositiveSmallIntegerField(null=True, verbose_name='ISO numeric', blank=True)),
+                ('active', models.BooleanField(default=True, verbose_name='Country is active')),
+                ('continent', models.CharField(max_length=2, verbose_name='Continent', choices=[(b'AF', 'Africa'), (b'NA', 'North America'), (b'EU', 'Europe'), (b'AS', 'Asia'), (b'OC', 'Oceania'), (b'SA', 'South America'), (b'AN', 'Antarctica')])),
+                ('admin_area', models.CharField(blank=True, max_length=2, null=True, verbose_name='Administrative Area', choices=[(b'a', 'Another'), (b'i', 'Island'), (b'ar', 'Arrondissement'), (b'at', 'Atoll'), (b'ai', 'Autonomous island'), (b'ca', 'Canton'), (b'cm', 'Commune'), (b'co', 'County'), (b'dp', 'Department'), (b'de', 'Dependency'), (b'dt', 'District'), (b'dv', 'Division'), (b'em', 'Emirate'), (b'gv', 'Governorate'), (b'ic', 'Island council'), (b'ig', 'Island group'), (b'ir', 'Island region'), (b'kd', 'Kingdom'), (b'mu', 'Municipality'), (b'pa', 'Parish'), (b'pf', 'Prefecture'), (b'pr', 'Province'), (b'rg', 'Region'), (b'rp', 'Republic'), (b'sh', 'Sheading'), (b'st', 'State'), (b'sd', 'Subdivision'), (b'sj', 'Subject'), (b'ty', 'Territory')])),
+            ],
+            options={
+                'ordering': ('name',),
+                'verbose_name': 'Country',
+                'verbose_name_plural': 'Countries',
+            },
+            bases=(models.Model,),
+        ),
+        migrations.AddField(
+            model_name='adminarea',
+            name='country',
+            field=models.ForeignKey(to='l10n.Country'),
+            preserve_default=True,
+        ),
+        migrations.AlterUniqueTogether(
+            name='adminarea',
+            unique_together=set([('country', 'name')]),
+        ),
+    ]
