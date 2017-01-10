@@ -6,7 +6,7 @@ This will get automatically added by satchmo_store, under the url given in your 
 
 from django.conf.urls import url, include
 
-from livesettings.functions import config_value
+from livesettings.functions import config_value_safe
 from . import views
 import logging
 
@@ -23,7 +23,7 @@ urlpatterns = [
 ]
 
 def add_newsletter_urls(sender, patterns=(), **kwargs):
-    newsbase = r'^' + config_value('NEWSLETTER','NEWSLETTER_SLUG') + '/'    
+    newsbase = r'^' + config_value_safe('NEWSLETTER', 'NEWSLETTER_SLUG', "newsletter") + '/'    
     log.debug("Adding newsletter urls at %s", newsbase)
     newspatterns = [
         url(newsbase, include('satchmo_ext.newsletter.urls'))

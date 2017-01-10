@@ -102,7 +102,7 @@ TEMPLATES = [
 ]
 
 
-ROOT_URLCONF = ''
+ROOT_URLCONF = 'simple.urls'
 
 
 INSTALLED_APPS = (

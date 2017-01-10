@@ -1,12 +1,14 @@
 from decimal import Decimal
+
 from django import forms
 from django.template import loader
 from django.template import RequestContext
 from django.utils.translation import ugettext_lazy as _
+
 from l10n.utils import moneyfmt
 from livesettings.functions import config_value, config_value_safe
 from payment import signals
-from payment.config import labelled_gateway_choices
+from payment.config import labelled_gateway_choices, credit_choices
 from payment.models import CreditCardDetail
 from payment.utils import get_or_create_order
 from product.models import Discount, TaxClass, Price
@@ -168,6 +170,7 @@ class CustomChargeForm(forms.Form):
         form_validate.send(CustomChargeForm, form=self)
         return self.cleaned_data
 
+        
 class PaymentMethodForm(ProxyContactForm):
     paymentmethod = forms.ChoiceField(
             label=_('Payment method'),
@@ -542,3 +545,15 @@ class CreditPayShipForm(SimplePayShipForm):
             cc.ccv = data['ccv']
             self.cc = cc
         form_postsave.send(CreditPayShipForm, form=self)
+
+        
+class CreditCardDetailAdminForm(forms.ModelForm):
+    credit_type = forms.ChoiceField()
+    
+    class Meta:
+        model = CreditCardDetail
+        fields = '__all__'
+    
+    def __init__(self, *args, **kwargs):
+        super(CreditCardDetailAdminForm, self).__init__(*args, **kwargs)
+        self.fields['credit_type'].choices = credit_choices()

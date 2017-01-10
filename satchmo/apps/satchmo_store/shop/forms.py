@@ -6,8 +6,10 @@ from django.utils.translation import ugettext_lazy as _
 
 from livesettings.functions import config_value
 from product.models import Product
+from satchmo_store.shop.models import OrderPaymentFailure, OrderPayment, OrderAuthorization
 from satchmo_store.shop.signals import satchmo_cart_details_query, satchmo_cart_add_complete
 from satchmo_utils.numbers import RoundedDecimalError, round_decimal, PositiveRoundedDecimalField
+from payment.config import labelled_gateway_choices
 import logging
 
 log = logging.getLogger('shop.forms')
@@ -97,4 +99,11 @@ class ContactForm(forms.Form):
     subject = forms.CharField(label=_("Subject"))
     inquiry = forms.ChoiceField(label=_("Inquiry"), choices=EMAIL_CHOICES)
     contents = forms.CharField(label=_("Contents"), widget=forms.widgets.Textarea(attrs={'cols': 40, 'rows': 5}))
-                
+
+
+class OrderPaymentBaseAdminForm(forms.ModelForm):
+    payment = forms.ChoiceField(required=False)        
+    
+    def __init__(self, *args, **kwargs):
+        super(OrderPaymentBaseAdminForm, self).__init__(*args, **kwargs)
+        self.fields['payment'].choices = [('','--------')] + labelled_gateway_choices()
