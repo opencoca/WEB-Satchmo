@@ -17,7 +17,10 @@ from django.http import HttpResponse
 from django.template import loader, RequestContext
 from django.shortcuts import get_object_or_404
 from django.utils.encoding import smart_str
-from django.utils.importlib import import_module
+try: 
+    from importlib import import_module
+except ImportError:
+    from django.utils.importlib import import_module    
 from django.views.decorators.cache import never_cache
 from satchmo_store.shop.models import Order
 from satchmo_store.shop.models import Config

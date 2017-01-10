@@ -1,13 +1,19 @@
 from decimal import Decimal
+
 from django import forms
 from django.contrib.sites.models import Site
+from django.utils.translation import ugettext_lazy as _
+
 from livesettings.functions import config_value
 from product.models import Product
+from satchmo_store.shop.models import OrderPaymentFailure, OrderPayment, OrderAuthorization
 from satchmo_store.shop.signals import satchmo_cart_details_query, satchmo_cart_add_complete
 from satchmo_utils.numbers import RoundedDecimalError, round_decimal, PositiveRoundedDecimalField
+from payment.config import labelled_gateway_choices
 import logging
 
 log = logging.getLogger('shop.forms')
+
 
 class MultipleProductForm(forms.Form):
     """A form used to add multiple products to the cart."""
@@ -80,3 +86,24 @@ class MultipleProductForm(forms.Form):
                 added_item = cart.add_item(product, number_added=quantity, details=details)
                 satchmo_cart_add_complete.send(cart, cart=cart, cartitem=added_item,
                     product=product, request=request, form=formdata)
+
+
+EMAIL_CHOICES = (
+    ("General Question", _("General question")),
+    ("Order Problem", _("Order problem")),
+)
+
+class ContactForm(forms.Form):
+    name = forms.CharField(label=_("Name"), max_length=100)
+    sender = forms.EmailField(label=_("Email address"), max_length=75)
+    subject = forms.CharField(label=_("Subject"))
+    inquiry = forms.ChoiceField(label=_("Inquiry"), choices=EMAIL_CHOICES)
+    contents = forms.CharField(label=_("Contents"), widget=forms.widgets.Textarea(attrs={'cols': 40, 'rows': 5}))
+
+
+class OrderPaymentBaseAdminForm(forms.ModelForm):
+    payment = forms.ChoiceField(required=False)        
+    
+    def __init__(self, *args, **kwargs):
+        super(OrderPaymentBaseAdminForm, self).__init__(*args, **kwargs)
+        self.fields['payment'].choices = [('','--------')] + labelled_gateway_choices()

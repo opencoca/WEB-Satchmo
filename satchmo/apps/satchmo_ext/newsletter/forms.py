@@ -2,7 +2,7 @@
 
 from django import forms
 from django.utils.translation import ugettext_lazy as _
-from satchmo_ext.newsletter import update_subscription
+from satchmo_ext.newsletter.utils import update_subscription
 from satchmo_ext.newsletter.models import get_contact_or_fake
 
 _NOTSET = object()

@@ -2,8 +2,7 @@ from decimal import Decimal
 from django.conf import settings
 from django.core import urlresolvers
 from django.http import HttpResponse, HttpResponseRedirect
-from django.shortcuts import render_to_response
-from django.template import RequestContext
+from django.shortcuts import render
 from django.utils.http import urlencode
 from django.utils.translation import ugettext as _
 from django.views.decorators.cache import never_cache
@@ -44,14 +43,11 @@ def confirm_info(request):
     tempCart = Cart.objects.from_request(request)
     if tempCart.numItems == 0 and not order.is_partially_paid:
         template = lookup_template(payment_module, 'shop/checkout/empty_cart.html')
-        return render_to_response(template,
-                                  context_instance=RequestContext(request))
+        return render(request, template)
 
     # Check if the order is still valid
     if not order.validate(request):
-        context = RequestContext(request,
-                                 {'message': _('Your order is no longer valid.')})
-        return render_to_response('shop/404.html', context_instance=context)
+        return render(request, 'shop/404.html', {'message': _('Your order is no longer valid.')})
 
     template = lookup_template(payment_module, 'shop/checkout/paypal/confirm.html')
     if payment_module.LIVE.value:
@@ -114,7 +110,7 @@ def confirm_info(request):
                     recurring['trial2']['expire_unit'] = trial1.subscription.expire_unit[0]
                     recurring['trial2']['price'] = trial1.price
 
-    ctx = RequestContext(request, {'order': order,
+    ctx = {'order': order,
      'post_url': url,
      'default_view_tax': default_view_tax,
      'business': account,
@@ -123,9 +119,9 @@ def confirm_info(request):
      'invoice': order.id,
      'subscription': recurring,
      'PAYMENT_LIVE' : gateway_live(payment_module)
-    })
+    }
 
-    return render_to_response(template, context_instance=ctx)
+    return render(request, template, ctx)
 confirm_info = never_cache(confirm_info)
 
 @csrf_exempt
@@ -236,7 +232,6 @@ def success(request):
         cart.empty()
 
     del request.session['orderID']
-    context = RequestContext(request, {'order': order})
-    return render_to_response('shop/checkout/success.html', context)
+    return render(request, 'shop/checkout/success.html', {'order': order})
 
 success = never_cache(success)

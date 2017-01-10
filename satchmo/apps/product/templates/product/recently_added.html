@@ -10,8 +10,8 @@
 
 {% block content %}
 <h2>{% trans "Recently Added" %}</h2>
-{% if page %}
-	{% for product in page.object_list %}
+{% if is_paginated %}
+	{% for product in object_list %}
 		<div class="recentlyadded">
 	    <div class = "productImage">    
 	   		{% if product.main_image %}
@@ -25,16 +25,16 @@
 		</div>
 		</div>
 	{% endfor %}
-	{% if page.has_other_pages %}
+	{% if page_obj.has_other_pages %}
 	<div id = "pagination">
 	<ul>
-	    {% if page.has_previous %}
-	        <li> <a href="{{ request.path }}?page={{page.previous_page_number}}">{% trans "Previous" %}</a> </li>
+	    {% if page_obj.has_previous %}
+	        <li> <a href="{{ request.path }}?page={{page_obj.previous_page_number}}">{% trans "Previous" %}</a> </li>
 	    {% else %}
 	        <li> {% trans "Previous" %} </li>
 	    {% endif %}
-	    {% if page.has_next %}
-	        <li> <a href="{{ request.path }}?page={{page.next_page_number}}">{% trans "Next" %}</a></li>
+	    {% if page_obj.has_next %}
+	        <li> <a href="{{ request.path }}?page={{page_obj.next_page_number}}">{% trans "Next" %}</a></li>
 	    {% else %}
 	        <li> {% trans "Next" %} </li>
 	    {% endif %}

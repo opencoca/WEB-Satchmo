@@ -19,27 +19,27 @@ earlier in your custom urls.py file, and you want the shop at "store/"::
 
     [ ... your code here, which includes admin.autodiscover() ... ]
 
-    urlpatterns += basepatterns + patterns('',
-        (r'^store/', include('satchmo_store.shop.urls')),
-    )
+    urlpatterns += basepatterns + [
+        url(r'^store/', include('satchmo_store.shop.urls')),
+    ]
 
 """
 from base import urlpatterns as basepatterns
 from default import urlpatterns as defaultpatterns
-from django.conf.urls import patterns, include
+from django.conf.urls import include, url
 from satchmo_utils import urlhelper
 
 from satchmo_store.shop import get_satchmo_setting
-from satchmo_store.shop.views.sitemaps import sitemaps
+
 
 shop_base = get_satchmo_setting('SHOP_BASE')
 if shop_base in ('', '/'):
     from satchmo_store.shop.urls import urlpatterns as shoppatterns
 else:
     shopregex = '^' + shop_base[1:] + '/'
-    shoppatterns = patterns('',
-        (shopregex, include('satchmo_store.shop.urls')),
-    )
+    shoppatterns = [
+        url(shopregex, include('satchmo_store.shop.urls')),
+    ]
 
 urlpatterns = basepatterns + shoppatterns + defaultpatterns
 urlhelper.remove_duplicate_urls(urlpatterns, [])

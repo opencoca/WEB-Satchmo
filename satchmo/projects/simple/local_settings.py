@@ -5,7 +5,6 @@ import os, os.path
 
 LOCAL_DEV = True
 DEBUG = True
-TEMPLATE_DEBUG = DEBUG
 
 if LOCAL_DEV:
     INTERNAL_IPS = ('127.0.0.1',)
@@ -18,7 +17,7 @@ _parent = lambda x: os.path.normpath(os.path.join(x, '..'))
 SATCHMO_DIRNAME = _parent(_parent(DIRNAME))
     
 # since we don't have any custom media for this project, lets just use Satchmo's
-MEDIA_ROOT = os.path.join(SATCHMO_DIRNAME, 'static/')
+MEDIA_ROOT = os.path.join(SATCHMO_DIRNAME, 'media/')
 
 gettext_noop = lambda s:s
 
@@ -30,13 +29,11 @@ LANGUAGES = (
 # Only set these if Satchmo is part of another Django project
 #These are used when loading the test data
 SITE_NAME = "simple"
-MEDIA_ROOT = os.path.join(SATCHMO_DIRNAME, 'static/')
 DJANGO_PROJECT = 'simple'
 DJANGO_SETTINGS_MODULE = 'simple.settings'
 
-# "simple" doesn't have any custom templates, usually you'd have one here for your site.
-TEMPLATE_DIRS = (
-    os.path.join(DIRNAME, "templates"),
+STATICFILES_DIRS = (
+    os.path.join(SATCHMO_DIRNAME, 'static'),
 )
 
 DATABASES = {

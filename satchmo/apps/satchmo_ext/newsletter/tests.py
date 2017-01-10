@@ -3,7 +3,7 @@ from django.test import TestCase
 from django.test.client import Client
 import keyedcache
 from livesettings.functions import config_get
-from satchmo_ext.newsletter import *
+from satchmo_ext.newsletter.utils import *
 from satchmo_ext.newsletter.models import get_contact_or_fake, Subscription
 import logging
 
@@ -55,7 +55,7 @@ class NewsletterTest(TestCase):
         
 class NewsletterTestViews(TestCase):
     
-    fixtures = ['l10n-data.yaml', 'sample-store-data.yaml']
+    fixtures = ['initial_data.yaml', 'l10n-data.yaml', 'sample-store-data.yaml']
     
     def setUp(self):
         cfg = config_get('NEWSLETTER', 'MODULE')

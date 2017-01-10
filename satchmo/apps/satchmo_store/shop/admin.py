@@ -1,17 +1,22 @@
-from satchmo_store.shop.models import Config, Cart, CartItem, CartItemDetails, Order, OrderItem, OrderItemDetail, OrderStatus, OrderPayment, OrderPaymentFailure, OrderAuthorization, OrderVariable, OrderTaxDetail
 from django.contrib import admin
 from django.utils.translation import ugettext_lazy as _
+
+from satchmo_store.shop.models import Config, Cart, CartItem, CartItemDetails, Order, OrderItem, OrderItemDetail, OrderStatus, OrderPayment, OrderPaymentFailure, OrderAuthorization, OrderVariable, OrderTaxDetail
+from satchmo_store.shop.forms import OrderPaymentBaseAdminForm
 from satchmo_utils.admin import AutocompleteAdmin
+
 
 class CartItem_Inline(admin.TabularInline):
     model = CartItem
     extra = 3
     raw_id_fields = ('product',)
 
+    
 class CartItemDetails_Inline(admin.StackedInline):
     model = CartItemDetails
     extra = 1
 
+    
 class ConfigOptions(admin.ModelAdmin):
     list_display = ('site', 'store_name')
     filter_horizontal = ('shipping_countries',)
@@ -28,13 +33,16 @@ class ConfigOptions(admin.ModelAdmin):
             })
     )
 
+    
 class CartOptions(admin.ModelAdmin):
     list_display = ('date_time_created','numItems','total')
     inlines = [CartItem_Inline]
 
+    
 class CartItemOptions(admin.ModelAdmin):
     inlines = [CartItemDetails_Inline]
 
+    
 class OrderItem_Inline(admin.TabularInline):
     model = OrderItem
     extra = 3
@@ -46,35 +54,49 @@ class OrderItem_Inline(admin.TabularInline):
     def product_sku(self, order_item):
         return order_item.product.sku
 
+        
 class OrderItemDetail_Inline(admin.TabularInline):
     model = OrderItemDetail
     extra = 3
 
+    
 class OrderAuthorizationDetail_Inline(admin.TabularInline):
     model = OrderAuthorization
     extra = 0
-
+    #form = OrderAuthorizationAdminForm
+    form = OrderPaymentBaseAdminForm
+    
+    
 class OrderPaymentDetail_Inline(admin.TabularInline):
     model = OrderPayment
     extra = 0
-
+    #form = OrderPaymentAdminForm
+    form = OrderPaymentBaseAdminForm
+    
+    
 class OrderPaymentFailureDetail_Inline(admin.TabularInline):
     model = OrderPaymentFailure
     extra = 0
-
+    #form = OrderPaymentFailureAdminForm
+    form = OrderPaymentBaseAdminForm
+    
+    
 class OrderStatus_Inline(admin.StackedInline):
     model = OrderStatus
     extra = 1
 
+    
 class OrderVariable_Inline(admin.TabularInline):
     model = OrderVariable
     extra = 1
 
+    
 class OrderTaxDetail_Inline(admin.TabularInline):
     model = OrderTaxDetail
     extra = 1
 
-class OrderOptions(AutocompleteAdmin):
+    
+class OrderOptions(admin.ModelAdmin):
     fieldsets = (
         (None, {'fields': ('site', 'contact', 'method', 'status', 'discount_code', 'notes')}), (_('Shipping Method'), {'fields':
             ('shipping_method', 'shipping_description')}), (_('Shipping Address'), {'classes': ('collapse',), 'fields':
@@ -85,29 +107,34 @@ class OrderOptions(AutocompleteAdmin):
     list_filter = ['time_stamp', 'status']
     date_hierarchy = 'time_stamp'
     search_fields = ('contact__first_name', 'contact__last_name', 'contact__email')
-    related_search_fields = {'contact': ('first_name', 'last_name', 'email')}
-    related_string_functions = {'contact': lambda c: u"%s &lt;%s&gt;" % (c.full_name, c.email)}
+    # related_search_fields = {'contact': ('first_name', 'last_name', 'email')}
+    # related_string_functions = {'contact': lambda c: u"%s &lt;%s&gt;" % (c.full_name, c.email)}
     inlines = [OrderItem_Inline, OrderStatus_Inline, OrderVariable_Inline,
         OrderTaxDetail_Inline, OrderAuthorizationDetail_Inline,
         OrderPaymentDetail_Inline, OrderPaymentFailureDetail_Inline]
     readonly_fields = ('status',)
 
+    
 class OrderItemOptions(admin.ModelAdmin):
     inlines = [OrderItemDetail_Inline]
 
+    
 class OrderPaymentOptions(admin.ModelAdmin):
     list_filter = ['payment']
     list_display = ['id', 'order', 'payment', 'amount_total', 'time_stamp']
     fieldsets = (
         (None, {'fields': ('order', 'payment', 'amount', 'transaction_id', 'time_stamp')}), )
     raw_id_fields = ['order']
+    form = OrderPaymentBaseAdminForm
 
 
 class OrderAuthorizationOptions(OrderPaymentOptions):
+    form = OrderPaymentBaseAdminForm
     list_display = ['id', 'order', 'capture', 'payment', 'amount_total', 'complete', 'time_stamp']
     fieldsets = (
         (None, {'fields': ('order', 'capture', 'payment', 'amount', 'transaction_id', 'complete', 'time_stamp')}), )
 
+    
 admin.site.register(Cart, CartOptions)
 admin.site.register(CartItem, CartItemOptions)
 admin.site.register(Config, ConfigOptions)

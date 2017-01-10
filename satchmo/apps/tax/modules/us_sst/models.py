@@ -134,10 +134,8 @@ class TaxRate(models.Model):
     Records for tax rates in the default SST format as defined at:
     http://www.streamlinedsalestax.org/Technology/RatesandBoundariesClean082605.pdf
     """
-    state = models.IntegerField(max_length=2,
-        verbose_name=_('FIPS State Code'), db_index=True)
-    jurisdictionType = models.IntegerField(max_length=2, choices=JURISDICTION_CHOICES,
-        verbose_name=_('Type'))
+    state = models.IntegerField(verbose_name=_('FIPS State Code'), db_index=True)
+    jurisdictionType = models.IntegerField(choices=JURISDICTION_CHOICES, verbose_name=_('Type'))
     jurisdictionFipsCode = models.CharField(max_length=5,
         verbose_name=_('FIPS Code'), db_index=True)
     generalRateIntrastate = models.DecimalField(max_digits=8, decimal_places=7,
@@ -212,7 +210,7 @@ class TaxBoundry(models.Model):
         verbose_name=_('Address Secondary - Abbr.'))
     addressSecondaryLow = models.IntegerField(blank=True, null=True,
         verbose_name=_('Address Secondary - Low'))
-    addressSecondaryHigh = models.IntegerField(max_length=8, blank=True, null=True,
+    addressSecondaryHigh = models.IntegerField(blank=True, null=True,
         verbose_name=_('Address Secondary - High'))
     addressSecondaryOddEven = models.CharField(max_length=1, blank=True, null=True,
         choices=ODD_EVEN_CHOICES, verbose_name=_('Address Secondary - Odd/Even'))

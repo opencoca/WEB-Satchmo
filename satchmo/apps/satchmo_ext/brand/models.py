@@ -5,7 +5,7 @@ from django.utils.translation import ugettext_lazy as _
 from l10n.mixins import TranslatedObjectMixin
 import product
 from product.models import Product
-from satchmo_utils.thumbnail.field import ImageWithThumbnailField
+from satchmo_utils.satchmo_thumbnail.field import ImageWithThumbnailField
 from satchmo_utils.signals import collect_urls
 import logging
 

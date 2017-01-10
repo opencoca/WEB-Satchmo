@@ -5,8 +5,7 @@
 import logging
 from django import http
 from django.core import urlresolvers
-from django.shortcuts import render_to_response
-from django.template import RequestContext
+from django.shortcuts import render
 from django.views.generic import FormView
 from satchmo_utils.signals import form_initialdata
 from livesettings.functions import config_get_group, config_value
@@ -19,12 +18,8 @@ from payment.forms import PaymentContactInfoForm
 
 log = logging.getLogger('satchmo_store.contact.contact')
 
-def authentication_required(
-        request,
-        template='shop/checkout/authentication_required.html'):
-    return render_to_response(
-        template, {}, context_instance = RequestContext(request)
-    )
+def authentication_required(request, template='shop/checkout/authentication_required.html'):
+    return render(request, template)
 
 
 class CheckoutForm(FormView):
@@ -143,8 +138,7 @@ class CheckoutForm(FormView):
 
         tempCart = self.get_cart()
         if (not tempCart) or (tempCart.numItems == 0):
-            return render_to_response('shop/checkout/empty_cart.html',
-                            context_instance=RequestContext(self.request))
+            return render(self.request, 'shop/checkout/empty_cart.html')
 
         shop = self.get_shop()
 

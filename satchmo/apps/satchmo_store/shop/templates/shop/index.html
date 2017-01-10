@@ -10,9 +10,9 @@
 {% block content %}
 {% trans "Welcome to the shop." %}
 
-{% if all_products_list %}
+{% if object_list %}
     <h4>{% trans "Featured Items" %}</h4>
-    {% for product in all_products_list %} 
+    {% for product in object_list %} 
             <div class = "productImage">    
            {% if product.main_image %}
               <center>

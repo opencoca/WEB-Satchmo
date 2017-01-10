@@ -60,7 +60,7 @@ def iterchoices_db(func):
     # It would be better to find a solution inot here but by fix in Livesettings
     # (it looks not possible without a change in django.db)
     command = introspect_management_command()
-    if command in ('syncdb', 'test', 'satchmo_store.shop.management.commands.satchmo_copy_static') \
+    if command in ('syncdb', 'test', 'satchmo_store.shop.management.commands.satchmo_copy_static', 'migrate') \
                 or command.startswith('south.'):
         log.info('Skipped model choices initialization function <%s> because'
                  ' of syncdb or other database management command' % str(func).split()[1])
@@ -99,7 +99,7 @@ def introspect_management_command():
                 # django.core is usually in '/django/core/' but it can be e.g. in /Django-x.y.z/core/ for some installation
                 if filename.find('/core/management/base.',) >= 0:
                     name = co.co_name
-                    if name in (('validate', 'handle'), ('execute',), ('run_from_argv',))[nidentify]:
+                    if name in (('validate', 'handle', 'check'), ('execute',), ('run_from_argv',))[nidentify]:
                         nidentify += 1
                         # analyze first argument of execute(self, *args, **options)
                         if name == 'execute' and co.co_argcount == 1 and (co.co_flags & 0xC == 0xC):

@@ -3,8 +3,7 @@ from decimal import Decimal
 from django.contrib import messages
 from django.core import urlresolvers
 from django.http import HttpResponse, HttpResponseRedirect
-from django.shortcuts import render_to_response
-from django.template import RequestContext
+from django.shortcuts import render
 from django.utils.translation import ugettext_lazy as _
 from livesettings.functions import config_get_group
 from payment import active_gateways
@@ -55,12 +54,12 @@ def balance_remaining(request):
     else:
         form = PaymentMethodForm(order=order)
         
-    ctx = RequestContext(request, {'form' : form, 
+    ctx = {
+        'form' : form, 
         'order' : order,
         'paymentmethod_ct': len(active_gateways())
-    })
-    return render_to_response('shop/checkout/balance_remaining.html',
-                              context_instance=ctx)
+    }
+    return render(request, 'shop/checkout/balance_remaining.html', ctx)
 
 
 def charge_remaining(request, orderitem_id):
@@ -78,9 +77,7 @@ def charge_remaining(request, orderitem_id):
         'amount' : amount,
         }
     form = CustomChargeForm(data)
-    ctx = RequestContext(request, {'form' : form})
-    return render_to_response('payment/admin/charge_remaining_confirm.html',
-                              context_instance=ctx)
+    return render(request, 'payment/admin/charge_remaining_confirm.html', {'form' : form})
 
 def charge_remaining_post(request):
     if not request.method == 'POST':
@@ -123,6 +120,4 @@ def charge_remaining_post(request):
         
         return HttpResponseRedirect('/admin/shop/order/%i' % order.id)
     else:
-        ctx = RequestContext(request, {'form': form})
-        return render_to_response('admin/charge_remaining_confirm.html',
-                                  context_instance=ctx)
+        return render(request, 'admin/charge_remaining_confirm.html', {'form': form})

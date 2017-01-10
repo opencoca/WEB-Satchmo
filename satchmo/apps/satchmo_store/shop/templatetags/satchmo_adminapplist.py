@@ -1,5 +1,4 @@
 from django import template
-from django.db import models
 register = template.Library()
 
 try:
@@ -44,8 +43,14 @@ class FilterAdminApplistNode(template.Node):
         self.varname = varname
 
     def render(self, context):
+        try:
+            from django.apps import apps
+            app_list = [app_config.models_module for app_config in apps.get_app_configs() if app_config.models_module is not None]
+        except ImportError:
+            from django.db import models
+            app_list = models.get_apps()
         all_apps = {}
-        for app in models.get_apps():
+        for app in app_list:
             name = len(rsplit(app.__name__, '.', 0))>1 and rsplit(app.__name__, '.', 0)[-2] or app.__name__
             all_apps[name] = app.__name__
 

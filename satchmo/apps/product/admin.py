@@ -11,8 +11,8 @@ from product.models import Category, CategoryTranslation, CategoryImage, Categor
                                    default_dimension_unit, ProductTranslation, Discount, TaxClass, AttributeOption, \
                                    CategoryAttribute
 from product.utils import import_validator, validate_attribute_value
-from satchmo_utils.thumbnail.field import ImageWithThumbnailField
-from satchmo_utils.thumbnail.widgets import AdminImageWithThumbnailWidget
+from satchmo_utils.satchmo_thumbnail.field import ImageWithThumbnailField
+from satchmo_utils.satchmo_thumbnail.widgets import AdminImageWithThumbnailWidget
 from django.http import HttpResponseRedirect
 import re
 

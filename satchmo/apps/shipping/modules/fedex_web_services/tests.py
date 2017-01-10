@@ -5,13 +5,13 @@ from product.models import Product
 from satchmo_store.shop.models import Cart, Config
 from satchmo_store.contact.models import Contact
 from shipping.modules.fedex_web_services.shipper import Shipper, convert_weight
-from shipping.modules.fedex_web_services import get_config_obj, get_methods
+from shipping.modules.fedex_web_services.methods import get_config_obj, get_methods
 from livesettings.functions import config_get_group
 import keyedcache
 
 class FedexBaseTest(TestCase):
 
-    fixtures = ['l10n-data.yaml','test_shop.yaml', 'sample-store-data.yaml']
+    fixtures = ['initial_data.yaml', 'l10n-data.yaml','test_shop.yaml', 'sample-store-data.yaml']
 
     def setUp(self):
         self.site = Site.objects.get_current()
@@ -40,9 +40,8 @@ class FedexBaseTest(TestCase):
             slug='p%s' % self.prod_counter,
             name='p%s' % self.prod_counter,
             weight=weight,
-            weight_units=weight_units,
-            site=self.site)
-        prod.save()
+            weight_units=weight_units)
+        prod.site.add(self.site)
         self.prod_counter += 1
         return prod
 
