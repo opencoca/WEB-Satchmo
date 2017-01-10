@@ -9,7 +9,7 @@ domain = 'http://example.com'
 class GoogleBaseTest(TestCase):
     """Test Google Base feed."""
 
-    fixtures = ['l10n-data.yaml','sample-store-data.yaml', 'products.yaml', 'test-config.yaml']
+    fixtures = ['initial_data.yaml', 'l10n-data.yaml','sample-store-data.yaml', 'products.yaml', 'test-config.yaml']
 
     def tearDown(self):
         keyedcache.cache_delete

@@ -132,12 +132,12 @@ class Shipper(BaseShipper):
 
         # No idea what this is.
         # INDIVIDUAL_PACKAGES, PACKAGE_GROUPS, PACKAGE_SUMMARY 
-        rate_request.RequestedShipment.PackageDetail = 'INDIVIDUAL_PACKAGES'
+        # rate_request.RequestedShipment.PackageDetail = 'INDIVIDUAL_PACKAGES'
 
         # Shipper's address
         rate_request.RequestedShipment.Shipper.Address.PostalCode = shop_details.postal_code
         rate_request.RequestedShipment.Shipper.Address.CountryCode = shop_details.country.iso2_code
-        rate_request.RequestedShipment.Shipper.Address.StateOrProvinceCode = shop_details.country.state
+        rate_request.RequestedShipment.Shipper.Address.StateOrProvinceCode = shop_details.state
         
         rate_request.RequestedShipment.Shipper.Address.Residential = False
 

@@ -1,7 +1,6 @@
 # -*- coding: utf-8 -*-
 __docformat__="restructuredtext"
-from django.shortcuts import render_to_response
-from django.template import RequestContext
+from django.shortcuts import render
 from satchmo_utils import is_string_like
 from satchmo_store.shop.models import Cart
 
@@ -27,8 +26,7 @@ def cart_has_minimum_order(template="product/minimum_order.html", min_order="PAY
             if cart.total >= min_order:
                 return view_func(request, *args, **kwargs)
             else:
-                ctx = RequestContext(request, {'minimum_order' : min_order})
-                return render_to_response(template, context_instance=ctx)
+                return render(request, template, {'minimum_order' : min_order})
 
         _checkorder.__doc__ = view_func.__doc__
         _checkorder.__dict__ = view_func.__dict__

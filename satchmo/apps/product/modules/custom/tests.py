@@ -20,7 +20,7 @@ if prefix == '/':
     prefix = ''
 
 class ShopTest(TestCase):
-    fixtures = ['l10n-data.yaml', 'sample-store-data.yaml', 'products.yaml', 'test-config.yaml', 'initial_data.yaml']
+    fixtures = ['initial_data.yaml', 'l10n-data.yaml', 'sample-store-data.yaml', 'products.yaml', 'test-config.yaml']
 
     def setUp(self):
         # Every test needs a client
@@ -73,7 +73,7 @@ class ShopTest(TestCase):
             'credit_type': 'Visa',
             'credit_number': '4485079141095836',
             'month_expires': '1',
-            'year_expires': '2015',
+            'year_expires': '2020',
             'ccv': '552',
             'shipping': 'FlatRate'}
         response = self.client.post(url('DUMMY_satchmo_checkout-step2'), data)

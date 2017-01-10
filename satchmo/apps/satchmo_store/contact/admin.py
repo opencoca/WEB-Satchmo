@@ -19,13 +19,13 @@ class OrganizationOptions(admin.ModelAdmin):
     list_filter = ['type', 'role']
     list_display = ['name', 'type', 'role']
 
-class ContactOptions(AutocompleteAdmin):
+class ContactOptions(admin.ModelAdmin):
     list_display = ('last_name', 'first_name', 'organization', 'role')
     list_filter = ['create_date', 'role', 'organization']
     ordering = ['last_name']
     search_fields = ('first_name', 'last_name', 'email')
-    related_search_fields = {'user': ('username', 'first_name', 'last_name', 'email')}
-    related_string_functions = {'user': lambda u: u"%s (%s)" % (u.username, u.get_full_name())}
+    # related_search_fields = {'user': ('username', 'first_name', 'last_name', 'email')}
+    # related_string_functions = {'user': lambda u: u"%s (%s)" % (u.username, u.get_full_name())}
     inlines = [PhoneNumber_Inline, AddressBook_Inline]
 
 class InteractionOptions(admin.ModelAdmin):

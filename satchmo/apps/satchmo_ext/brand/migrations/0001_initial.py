@@ -2,7 +2,7 @@
 from __future__ import unicode_literals
 
 from django.db import models, migrations
-import satchmo_utils.thumbnail.field
+import satchmo_utils.satchmo_thumbnail.field
 import l10n.mixins
 
 
@@ -66,7 +66,7 @@ class Migration(migrations.Migration):
                 ('name', models.CharField(max_length=100, verbose_name='title')),
                 ('short_description', models.CharField(max_length=200, verbose_name='Short Description', blank=True)),
                 ('description', models.TextField(verbose_name='Description', blank=True)),
-                ('picture', satchmo_utils.thumbnail.field.ImageWithThumbnailField(max_length=200, null=True, upload_to=satchmo_utils.thumbnail.field.upload_dir, blank=True)),
+                ('picture', satchmo_utils.satchmo_thumbnail.field.ImageWithThumbnailField(max_length=200, null=True, upload_to=satchmo_utils.satchmo_thumbnail.field.upload_dir, blank=True)),
                 ('brandcategory', models.ForeignKey(related_name='translations', to='brand.BrandCategory')),
             ],
             options={
@@ -96,7 +96,7 @@ class Migration(migrations.Migration):
                 ('name', models.CharField(max_length=100, verbose_name='title')),
                 ('short_description', models.CharField(max_length=200, verbose_name='Short Description', blank=True)),
                 ('description', models.TextField(verbose_name='Full Description', blank=True)),
-                ('picture', satchmo_utils.thumbnail.field.ImageWithThumbnailField(max_length=200, null=True, upload_to=satchmo_utils.thumbnail.field.upload_dir, blank=True)),
+                ('picture', satchmo_utils.satchmo_thumbnail.field.ImageWithThumbnailField(max_length=200, null=True, upload_to=satchmo_utils.satchmo_thumbnail.field.upload_dir, blank=True)),
                 ('brand', models.ForeignKey(related_name='translations', to='brand.Brand')),
             ],
             options={

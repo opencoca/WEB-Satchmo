@@ -12,6 +12,7 @@ from django.utils.encoding import force_unicode
 from django.utils.safestring import mark_safe
 from django.utils.translation import ugettext, ugettext_lazy as _
 from django.utils import timezone
+
 from l10n.models import Country
 from l10n.utils import moneyfmt
 from livesettings.functions import ConfigurationSettings, config_value
@@ -22,7 +23,7 @@ from satchmo_utils.fields import CurrencyField
 from satchmo_utils.numbers import trunc_decimal
 import shipping.fields
 import payment.config
-from satchmo_utils.iterchoices import iterchoices_db
+#from satchmo_utils.iterchoices import iterchoices_db
 from tax.utils import get_tax_processor
 import keyedcache
 import logging
@@ -168,6 +169,7 @@ class NullCart(object):
     customer = None
     total = Decimal("0")
     numItems = 0
+    is_shippable = False
 
     def add_item(self, *args, **kwargs):
         pass
@@ -210,8 +212,6 @@ class OrderCart(NullCart):
         return self._order.balance
 
     total = property(_total)
-
-    is_shippable = False
 
     def __str__(self):
         return "OrderCart (%i) = %i" % (self._order.id, len(self))
@@ -374,7 +374,10 @@ class Cart(models.Model):
             details=details)
 
         if not alreadyInCart:
-            self.cartitem_set.add(item_to_modify)
+            try:
+                self.cartitem_set.add(item_to_modify, bulk=False)
+            except TypeError:
+                self.cartitem_set.add(item_to_modify)
 
         item_to_modify.quantity += number_added
         item_to_modify.save()
@@ -682,8 +685,7 @@ class Order(models.Model):
         max_length=200, blank=True, null=True)
     shipping_method = models.CharField(_("Shipping Method"),
         max_length=200, blank=True, null=True)
-    shipping_model = models.CharField(_("Shipping Models"), choices=iterchoices_db(shipping.fields.shipping_choices),
-        max_length=30, blank=True, null=True)
+    shipping_model = models.CharField(_("Shipping Models"), max_length=30, blank=True, null=True) # choices=iterchoices_db(shipping.fields.shipping_choices),
     shipping_cost = CurrencyField(_("Shipping Cost"),
         max_digits=18, decimal_places=10, blank=True, null=True)
     shipping_discount = CurrencyField(_("Shipping Discount"),
@@ -1166,7 +1168,9 @@ class OrderItem(models.Model):
         return self.product.translated_name()
 
     def _get_category(self):
-        return(self.product.get_category.translated_name())
+        category = self.product.get_category
+        if category:
+            return category.translated_name()            
     category = property(_get_category)
 
     def _is_shippable(self):
@@ -1274,10 +1278,8 @@ class OrderStatus(models.Model):
         get_latest_by = 'time_stamp'
 
 class OrderPaymentBase(models.Model):
-    payment = models.CharField(_("Payment Method"), choices=iterchoices_db(payment.config.labelled_gateway_choices),
-        max_length=25, blank=True)
-    amount = CurrencyField(_("amount"),
-        max_digits=18, decimal_places=10, blank=True, null=True)
+    payment = models.CharField(_("Payment Method"), max_length=25, blank=True) # choices=iterchoices_db(payment.config.labelled_gateway_choices),
+    amount = CurrencyField(_("amount"), max_digits=18, decimal_places=10, blank=True, null=True)
     time_stamp = models.DateTimeField(_("timestamp"), blank=True, null=True)
     transaction_id = models.CharField(_("Transaction ID"), max_length=45, blank=True, null=True)
     details = models.CharField(_("Details"), max_length=255, blank=True, null=True)

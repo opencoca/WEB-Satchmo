@@ -35,7 +35,7 @@ class TieredCarrierPricingTest(TestCase):
     fixtures = []
 
     def setUp(self):
-        self.carrier = Carrier(name="pricing", active=True)
+        self.carrier = Carrier(key="pricing", active=True)
         self.carrier.save()
         t = QuantityTier(carrier=self.carrier, 
             quantity=Decimal('1'),
@@ -66,7 +66,7 @@ class TieredCarrierExpiringTest(TestCase):
     fixtures = []
 
     def setUp(self):
-        self.carrier = Carrier(name="pricing", active=True)
+        self.carrier = Carrier(key="pricing", active=True)
         self.carrier.save()
 
         base_prices = (

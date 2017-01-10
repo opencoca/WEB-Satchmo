@@ -1,4 +1,4 @@
-{% load i18n satchmo_category satchmo_google satchmo_util satchmo_currency satchmo_discounts app_plugins normalize_decimal %}{% load url from future %}
+{% load i18n satchmo_category satchmo_google satchmo_util satchmo_currency satchmo_discounts app_plugins normalize_decimal %}
 {% block doctype %}<?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE html
      PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
@@ -35,6 +35,7 @@
 			<h3>{% trans "Shop Categories" %}</h3>
 			{% block sidebar-categories %}
 			<div id="menu_container">
+              {% autoescape off %}
                 {% if category.id %}
                     {% category_tree category.id %}
                 {% else %}
@@ -44,6 +45,7 @@
                         {% category_tree %}
                     {% endif %}
                 {% endif %}
+              {% endautoescape %}
 			</div>
 			{% endblock sidebar-categories %}
 			

@@ -10,22 +10,20 @@
 #   TODO: SERMEPA interface provides possibility of recurring payments, which
 #   could be probably used for SubscriptionProducts. This module doesn't support it.
 #
-from django.conf.urls import patterns
+from django.conf.urls import url
+
 from satchmo_store.shop.satchmo_settings import get_satchmo_setting
+from payment.views.confirm import confirm_free_order
+from payment.views.checkout import success, failure
+from . import views
 
 ssl = get_satchmo_setting('SSL', default_value=False)
 
-urlpatterns = patterns('',
-    (r'^$', 'payment.modules.sermepa.views.pay_ship_info', {'SSL': ssl}, 'SERMEPA_satchmo_checkout-step2'),
-    (r'^confirm/$', 'payment.modules.sermepa.views.confirm_info', {'SSL': ssl}, 'SERMEPA_satchmo_checkout-step3'),
-    (r'^success/$', 'payment.modules.sermepa.views.success', {'SSL': ssl}, 'SERMEPA_satchmo_checkout-success'),
-    (r'^failure/$', 'payment.views.checkout.failure', {'SSL': ssl}, 'SERMEPA_satchmo_checkout-failure'),
-    (
-        r'^notify/$',
-        'payment.modules.sermepa.views.notify_callback',
-        {'SSL': ssl},
-        'SERMEPA_satchmo_checkout-notify_callback'
-        ),
-    (r'^confirmorder/$', 'payment.views.confirm.confirm_free_order',
-       {'SSL' : ssl, 'key' : 'SERMEPA'}, 'SERMEPA_satchmo_checkout_free-confirm')
-)
+urlpatterns = [
+    url(r'^$', views.pay_ship_info, {'SSL': ssl}, name='SERMEPA_satchmo_checkout-step2'),
+    url(r'^confirm/$', views.confirm_info, {'SSL': ssl}, name='SERMEPA_satchmo_checkout-step3'),
+    url(r'^success/$', success, {'SSL': ssl}, name='SERMEPA_satchmo_checkout-success'),
+    url(r'^failure/$', failure, {'SSL': ssl}, name='SERMEPA_satchmo_checkout-failure'),
+    url(r'^notify/$', views.notify_callback, {'SSL': ssl}, name='SERMEPA_satchmo_checkout-notify_callback'),
+    url(r'^confirmorder/$', confirm_free_order, {'SSL': ssl, 'key': 'SERMEPA'}, name='SERMEPA_satchmo_checkout_free-confirm')
+]

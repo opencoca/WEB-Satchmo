@@ -113,7 +113,7 @@ class Migration(migrations.Migration):
                 ('method', models.CharField(blank=True, max_length=50, verbose_name='Order method', choices=[(b'Online', 'Online'), (b'In Person', 'In Person'), (b'Show', 'Show')])),
                 ('shipping_description', models.CharField(max_length=200, null=True, verbose_name='Shipping Description', blank=True)),
                 ('shipping_method', models.CharField(max_length=200, null=True, verbose_name='Shipping Method', blank=True)),
-                ('shipping_model', models.CharField(blank=True, max_length=30, null=True, verbose_name='Shipping Models', choices=[(b'shipping.modules.per', 'Per piece')])),
+                ('shipping_model', models.CharField(blank=True, max_length=30, null=True, verbose_name='Shipping Models')),
                 ('shipping_cost', satchmo_utils.fields.CurrencyField(null=True, verbose_name='Shipping Cost', max_digits=18, decimal_places=10, blank=True)),
                 ('shipping_discount', satchmo_utils.fields.CurrencyField(null=True, verbose_name='Shipping Discount', max_digits=18, decimal_places=10, blank=True)),
                 ('tax', satchmo_utils.fields.CurrencyField(null=True, verbose_name='Tax', max_digits=18, decimal_places=10, blank=True)),
@@ -132,7 +132,7 @@ class Migration(migrations.Migration):
             name='OrderAuthorization',
             fields=[
                 ('id', models.AutoField(verbose_name='ID', serialize=False, auto_created=True, primary_key=True)),
-                ('payment', models.CharField(blank=True, max_length=25, verbose_name='Payment Method', choices=[('AUTHORIZENET', 'Credit Cards'), ('GIFTCERTIFICATE', 'Gift Certificate'), ('DUMMY', 'Payment test module')])),
+                ('payment', models.CharField(blank=True, max_length=25, verbose_name='Payment Method')),
                 ('amount', satchmo_utils.fields.CurrencyField(null=True, verbose_name='amount', max_digits=18, decimal_places=10, blank=True)),
                 ('time_stamp', models.DateTimeField(null=True, verbose_name='timestamp', blank=True)),
                 ('transaction_id', models.CharField(max_length=45, null=True, verbose_name='Transaction ID', blank=True)),
@@ -189,7 +189,7 @@ class Migration(migrations.Migration):
             name='OrderPayment',
             fields=[
                 ('id', models.AutoField(verbose_name='ID', serialize=False, auto_created=True, primary_key=True)),
-                ('payment', models.CharField(blank=True, max_length=25, verbose_name='Payment Method', choices=[('AUTHORIZENET', 'Credit Cards'), ('GIFTCERTIFICATE', 'Gift Certificate'), ('DUMMY', 'Payment test module')])),
+                ('payment', models.CharField(blank=True, max_length=25, verbose_name='Payment Method')),
                 ('amount', satchmo_utils.fields.CurrencyField(null=True, verbose_name='amount', max_digits=18, decimal_places=10, blank=True)),
                 ('time_stamp', models.DateTimeField(null=True, verbose_name='timestamp', blank=True)),
                 ('transaction_id', models.CharField(max_length=45, null=True, verbose_name='Transaction ID', blank=True)),
@@ -207,7 +207,7 @@ class Migration(migrations.Migration):
             name='OrderPaymentFailure',
             fields=[
                 ('id', models.AutoField(verbose_name='ID', serialize=False, auto_created=True, primary_key=True)),
-                ('payment', models.CharField(blank=True, max_length=25, verbose_name='Payment Method', choices=[('AUTHORIZENET', 'Credit Cards'), ('GIFTCERTIFICATE', 'Gift Certificate'), ('DUMMY', 'Payment test module')])),
+                ('payment', models.CharField(blank=True, max_length=25, verbose_name='Payment Method')),
                 ('amount', satchmo_utils.fields.CurrencyField(null=True, verbose_name='amount', max_digits=18, decimal_places=10, blank=True)),
                 ('time_stamp', models.DateTimeField(null=True, verbose_name='timestamp', blank=True)),
                 ('transaction_id', models.CharField(max_length=45, null=True, verbose_name='Transaction ID', blank=True)),
@@ -224,7 +224,7 @@ class Migration(migrations.Migration):
             name='OrderPendingPayment',
             fields=[
                 ('id', models.AutoField(verbose_name='ID', serialize=False, auto_created=True, primary_key=True)),
-                ('payment', models.CharField(blank=True, max_length=25, verbose_name='Payment Method', choices=[('AUTHORIZENET', 'Credit Cards'), ('GIFTCERTIFICATE', 'Gift Certificate'), ('DUMMY', 'Payment test module')])),
+                ('payment', models.CharField(blank=True, max_length=25, verbose_name='Payment Method')),
                 ('amount', satchmo_utils.fields.CurrencyField(null=True, verbose_name='amount', max_digits=18, decimal_places=10, blank=True)),
                 ('time_stamp', models.DateTimeField(null=True, verbose_name='timestamp', blank=True)),
                 ('transaction_id', models.CharField(max_length=45, null=True, verbose_name='Transaction ID', blank=True)),

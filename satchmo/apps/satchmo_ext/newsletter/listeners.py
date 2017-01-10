@@ -1,4 +1,4 @@
-from satchmo_ext.newsletter import update_subscription
+from satchmo_ext.newsletter.utils import update_subscription
 from satchmo_ext.newsletter.models import Subscription
 from satchmo_store.contact.forms import ContactInfoForm
 from satchmo_utils.signals import collect_urls, form_postsave

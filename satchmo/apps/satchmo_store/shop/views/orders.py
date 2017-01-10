@@ -1,6 +1,5 @@
 from django.contrib.auth.decorators import login_required
-from django.shortcuts import render_to_response
-from django.template import RequestContext
+from django.shortcuts import render
 from django.utils.translation import ugettext_lazy as _
 from satchmo_store.contact.models import Contact
 from satchmo_store.shop.models import Order
@@ -16,12 +15,13 @@ def order_history(request):
     except Contact.DoesNotExist:
         contact = None
         
-    ctx = RequestContext(request, {
+    ctx = {
         'contact' : contact,
         'default_view_tax': config_value('TAX', 'DEFAULT_VIEW_TAX'),
-        'orders' : orders})
+        'orders' : orders
+    }
 
-    return render_to_response('shop/order_history.html', context_instance=ctx)
+    return render(request, 'shop/order_history.html', ctx)
 
 order_history = login_required(order_history)
 
@@ -39,11 +39,12 @@ def order_tracking(request, order_id):
     if order is None:
         return bad_or_missing(request, _("The order you have requested doesn't exist, or you don't have access to it."))
 
-    ctx = RequestContext(request, {
+    ctx = {
         'default_view_tax': config_value('TAX', 'DEFAULT_VIEW_TAX'),
         'contact' : contact,
-        'order' : order})
+        'order' : order
+    }
 
-    return render_to_response('shop/order_tracking.html', context_instance=ctx)
+    return render(request, 'shop/order_tracking.html', ctx)
 
 order_tracking = login_required(order_tracking)

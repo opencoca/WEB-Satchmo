@@ -53,10 +53,12 @@ class OptionGroupTest(TestCase):
 
     def setUp(self):
         self.site=Site.objects.get_current()
-        sizes = OptionGroup.objects.create(name="sizes", sort_order=1, site=self.site)
+        sizes = OptionGroup.objects.create(name="sizes", sort_order=1)
+        sizes.site.add(self.site)
         option_small = Option.objects.create(option_group=sizes, name="Small", value="small", sort_order=1)
         option_large = Option.objects.create(option_group=sizes, name="Large", value="large", sort_order=2, price_change=1)
-        colors = OptionGroup.objects.create(name="colors", sort_order=2, site=self.site)
+        colors = OptionGroup.objects.create(name="colors", sort_order=2)
+        colors.site.add(self.site)
         option_black = Option.objects.create(option_group=colors, name="Black", value="black", sort_order=1)
         option_white = Option.objects.create(option_group=colors, name="White", value="white", sort_order=2, price_change=3)
 
@@ -74,7 +76,8 @@ class OptionGroupTest(TestCase):
 
     def testConfigurable(self):
         """Create a configurable product, testing ordering and price"""
-        django_shirt = Product.objects.create(slug="django-shirt", name="Django shirt", site=self.site)
+        django_shirt = Product.objects.create(slug="django-shirt", name="Django shirt")
+        django_shirt.site.add(self.site)
         shirt_price = Price.objects.create(product=django_shirt, price="10.5")
         django_config = ConfigurableProduct.objects.create(product=django_shirt)
         django_config.option_group.add(self.sizes, self.colors)
@@ -85,7 +88,8 @@ class OptionGroupTest(TestCase):
 
         # Create a product variation
         white_shirt = Product.objects.create(slug="django-shirt_small_white",
-            name="Django Shirt (White/Small)", site=self.site)
+            name="Django Shirt (White/Small)")
+        white_shirt.site.add(self.site)
         pv_white = ProductVariation.objects.create(product=white_shirt, parent=django_config)
         pv_white.options.add(self.option_white, self.option_small)
         self.assertEqual(pv_white.unit_price, Decimal("15.50"))
@@ -94,7 +98,8 @@ class OptionGroupTest(TestCase):
         """Create a product with a slug that could conflict with an
         automatically generated product's slug."""
 
-        django_shirt = Product.objects.create(slug="django-shirt", name="Django shirt", site=self.site)
+        django_shirt = Product.objects.create(slug="django-shirt", name="Django shirt")
+        django_shirt.site.add(self.site)
         shirt_price = Price.objects.create(product=django_shirt, price="10.5")
         django_config = ConfigurableProduct.objects.create(product=django_shirt)
         django_config.option_group.add(self.sizes, self.colors)
@@ -103,7 +108,8 @@ class OptionGroupTest(TestCase):
         # Create a product with a slug that could conflict with an automatically
         # generated product's slug.
         clash_shirt = Product.objects.create(slug="django-shirt_small_black",
-            name="Django Shirt (Black/Small)", site=self.site)
+            name="Django Shirt (Black/Small)")
+        clash_shirt.site.add(self.site)
 
         # Automatically create the rest of the product variations
         django_config.create_subs = True
@@ -113,7 +119,7 @@ class OptionGroupTest(TestCase):
 
 class ProductTest(TestCase):
     """Test Product functions"""
-    fixtures = ['l10n-data.yaml','sample-store-data.yaml', 'products.yaml', 'test-config.yaml']
+    fixtures = ['initial_data.yaml', 'l10n-data.yaml','sample-store-data.yaml', 'products.yaml', 'test-config.yaml']
 
     def tearDown(self):
         keyedcache.cache_delete()

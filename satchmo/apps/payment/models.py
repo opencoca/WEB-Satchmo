@@ -6,12 +6,14 @@ Also stores credit card info in an encrypted format.
 from Crypto.Cipher import Blowfish
 from datetime import datetime
 from decimal import Decimal
+
 from django.conf import settings
 from django.db import models
 from django.utils.translation import ugettext_lazy as _
+
 from livesettings.functions import config_value
-from satchmo_utils.iterchoices import iterchoices_db
-import payment.config
+#from satchmo_utils.iterchoices import iterchoices_db
+#import payment.config
 from satchmo_store.contact.models import Contact
 import base64
 import config
@@ -29,9 +31,8 @@ class PaymentOption(models.Model):
     description = models.CharField(_("Description"), max_length=20)
     active = models.BooleanField(_("Active"), default=False,
         help_text=_("Should this be displayed as an option for the user?"))
-    optionName = models.CharField(_("Option Name"), max_length=20, choices=iterchoices_db(payment.config.labelled_gateway_choices),
-        unique=True, 
-        help_text=_("The class name as defined in payment.py"))
+    optionName = models.CharField(_("Option Name"), max_length=20, unique=True, 
+        help_text=_("The class name as defined in payment.py")) # choices=iterchoices_db(payment.config.labelled_gateway_choices),
     sortOrder = models.IntegerField(_("Sort Order"))
     
     class Meta:
@@ -45,7 +46,7 @@ class CreditCardDetail(models.Model):
     """
     orderpayment = models.ForeignKey('shop.OrderPayment', unique=True, 
         related_name="creditcards")
-    credit_type = models.CharField(_("Credit Card Type"), max_length=16, choices=iterchoices_db(payment.config.credit_choices))
+    credit_type = models.CharField(_("Credit Card Type"), max_length=16) #, choices=iterchoices_db(payment.config.credit_choices))
     display_cc = models.CharField(_("CC Number (Last 4 digits)"),
         max_length=4, )
     encrypted_cc = models.CharField(_("Encrypted Credit Card"),

@@ -9,12 +9,12 @@ from satchmo_store.shop.models import Config
 from django.utils.translation import ugettext_lazy as _
 
 @user_passes_test(lambda u: u.is_authenticated() and u.is_staff, login_url='/accounts/login/')
-def admin_product_feed(request, category=None, template="product_feeds/product_feed.csv", mimetype="text/csv"):
+def admin_product_feed(request, category=None, template="product_feeds/product_feed.csv", content_type="text/csv"):
     """Admin authenticated feed - same as product feed but for different types of feeds.
     """
-    return product_feed(request, category=category, template=template, mimetype=mimetype)
+    return product_feed(request, category=category, template=template, content_type=content_type)
 
-def product_feed(request, category=None, template="product_feeds/googlebase_atom.xml", mimetype="application/atom+xml"):
+def product_feed(request, category=None, template="product_feeds/googlebase_atom.xml", content_type="application/atom+xml"):
     """Build a feed of all active products.
     """
 
@@ -48,5 +48,4 @@ def product_feed(request, category=None, template="product_feeds/googlebase_atom
         'shop' : shop_config,
         'payments' : payment_choices,
         'date' : timezone.now(),
-        },
-        mimetype=mimetype)
+    }, content_type=content_type)

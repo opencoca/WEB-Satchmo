@@ -30,7 +30,7 @@ SITE_ID = 1
 #
 # If you are using Windows, recommend using normalize_path() here
 #
-# from satchmo_utils.thumbnail import normalize_path
+# from satchmo_utils.satchmo_thumbnail import normalize_path
 # MEDIA_ROOT = normalize_path(os.path.join(DIRNAME, 'static/'))
 MEDIA_ROOT = os.path.join(DIRNAME, 'static/')
 
@@ -54,12 +54,7 @@ ADMIN_MEDIA_PREFIX = '/media/'  # remove for Django 1.4 as deprecated
 # Make this unique, and don't share it with anybody.
 SECRET_KEY = ''
 
-# List of callables that know how to import templates from various sources.
-TEMPLATE_LOADERS = (
-    'django.template.loaders.filesystem.Loader',
-    'django.template.loaders.app_directories.Loader',
-#     'django.template.loaders.eggs.Loader',
-)
+LOGOUT_URL = '/accounts/logout/'
 
 MIDDLEWARE_CLASSES = (
     "django.middleware.common.CommonMiddleware",
@@ -67,7 +62,7 @@ MIDDLEWARE_CLASSES = (
     "django.middleware.csrf.CsrfViewMiddleware",
     "django.middleware.locale.LocaleMiddleware",
     "django.contrib.auth.middleware.AuthenticationMiddleware",
-    "django.middleware.doc.XViewMiddleware",
+    #"django.middleware.doc.XViewMiddleware",
     "django.contrib.messages.middleware.MessageMiddleware",
     "threaded_multihost.middleware.ThreadLocalMiddleware",
     "satchmo_store.shop.SSLMiddleware.SSLRedirect",
@@ -78,25 +73,37 @@ MIDDLEWARE_CLASSES = (
 #this is used to add additional config variables to each request
 # NOTE: If you enable the recent_products context_processor, you MUST have the
 # 'satchmo_ext.recentlist' app installed.
-TEMPLATE_CONTEXT_PROCESSORS = (
-        'satchmo_store.shop.context_processors.settings',
-        'django.contrib.auth.context_processors.auth',
-        #'satchmo_ext.recentlist.context_processors.recent_products',
-        # do not forget following. Maybe not so important currently
-        # but will be
-        'django.core.context_processors.media',   # MEDIA_URL
-        'django.core.context_processors.static',  # STATIC_URL
-        'django.contrib.messages.context_processors.messages',
-)
+TEMPLATES = [
+    {
+        'BACKEND': 'django.template.backends.django.DjangoTemplates',
+        'APP_DIRS': True,
+        'DIRS': [
+            # Put strings here, like "/home/html/django_templates" or "C:/www/django/templates".
+            # Always use forward slashes, even on Windows.
+            # Don't forget to use absolute paths, not relative paths.
+            os.path.join(DIRNAME, 'templates', ''),
+        ],
+        'OPTIONS': {
+            'context_processors': [
+                'satchmo_store.shop.context_processors.settings',
+                'django.contrib.auth.context_processors.auth',
+                #'satchmo_ext.recentlist.context_processors.recent_products',
+                # do not forget following. Maybe not so important currently
+                # but will be
+                'django.template.context_processors.debug',
+                'django.template.context_processors.i18n',
+                'django.template.context_processors.media',   # MEDIA_URL
+                'django.template.context_processors.static',  # STATIC_URL
+                'django.template.context_processors.tz',
+                'django.contrib.messages.context_processors.messages',              
+            ],    
+        },
+    },
+]
 
-ROOT_URLCONF = ''
 
-TEMPLATE_DIRS = (
-    # Put strings here, like "/home/html/django_templates" or "C:/www/django/templates".
-    # Always use forward slashes, even on Windows.
-    # Don't forget to use absolute paths, not relative paths.
-    os.path.join(DIRNAME,'templates'),
-)
+ROOT_URLCONF = 'simple.urls'
+
 
 INSTALLED_APPS = (
     'django.contrib.sites',
@@ -105,17 +112,18 @@ INSTALLED_APPS = (
     'django.contrib.admindocs',
     'django.contrib.auth',
     'django.contrib.contenttypes',
-    'django.contrib.comments',
+    #'django.contrib.comments',
     'django.contrib.sessions',
     'django.contrib.sitemaps',
     'django.contrib.staticfiles',
     'django.contrib.messages',
+    'django_comments',
     'registration',
     'sorl.thumbnail',
     'keyedcache',
     'livesettings',
     'l10n',
-    'satchmo_utils.thumbnail',
+    'satchmo_utils.satchmo_thumbnail',
     'satchmo_store.contact',
     'tax',
     'tax.modules.no',
@@ -146,7 +154,9 @@ INSTALLED_APPS = (
     #'satchmo_ext.tieredpricing',
     #'debug_toolbar',
     'app_plugins',
+    'simple',
     'simple.localsite',
+    'skeleton',
 )
 
 AUTHENTICATION_BACKENDS = (
