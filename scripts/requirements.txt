@@ -7,7 +7,7 @@ reportlab
 sorl-thumbnail
 django-registration-redux
 django-contrib-comments
-django-livesettings
-django-threaded-multihost
-django-caching-app-plugins
-django-keyedcache
+hg+https://bitbucket.org/bkroeze/django-livesettings/
+hg+https://bitbucket.org/predatell/django-threaded-multihost/
+hg+https://bitbucket.org/predatell/django-caching-app-plugins/
+hg+https://bitbucket.org/bkroeze/django-keyedcache/

@@ -9,7 +9,6 @@ def active_gateways():
         from django.db import models
         app_list = models.get_apps()
               
-    from django.db import models
     gateways = []
     for app in app_list:
         if hasattr(app, 'PAYMENT_PROCESSOR'):

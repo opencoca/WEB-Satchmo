@@ -1,6 +1,6 @@
 from django.conf.urls import url
 
-from livesettings.functions import config_value
+from livesettings.functions import config_value_safe
 from satchmo_store.shop.satchmo_settings import get_satchmo_setting
 import logging
 
@@ -47,7 +47,7 @@ def make_urlpatterns():
             #     interface = name[:name.rfind('.')]
             # urlmodule = "%s.urls" % interface
             urlmodule = '.'.join(parts[:-1]) + '.urls'
-            urlbase = config_value(modulename, 'URL_BASE')
+            urlbase = config_value_safe(modulename, 'URL_BASE', key.lower())
             log.debug('Found payment processor: %s, adding urls at %s', key, urlbase)
             patterns.append(url(urlbase, [urlmodule, '', '']))
     return patterns

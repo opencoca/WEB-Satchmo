@@ -3,7 +3,7 @@ Urls for wishlists, note that this does not have to get added manually to the ur
 """
 from django.conf.urls import url, include
 
-from livesettings.functions import config_value
+from livesettings.functions import config_value_safe
 from . import views
 import logging
 
@@ -19,7 +19,7 @@ urlpatterns = [
 ]
 
 def add_wishlist_urls(sender, patterns=(), **kwargs):
-    wishbase = r'^' + config_value('SHOP','WISHLIST_SLUG') + '/'    
+    wishbase = r'^' + config_value_safe('SHOP', 'WISHLIST_SLUG', "wishlist") + '/'    
     log.debug('adding wishlist urls at %s', wishbase)
     wishpatterns = [
         url(wishbase, include('satchmo_ext.wishlist.urls'))

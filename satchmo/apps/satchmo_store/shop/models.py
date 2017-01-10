@@ -12,6 +12,7 @@ from django.utils.encoding import force_unicode
 from django.utils.safestring import mark_safe
 from django.utils.translation import ugettext, ugettext_lazy as _
 from django.utils import timezone
+
 from l10n.models import Country
 from l10n.utils import moneyfmt
 from livesettings.functions import ConfigurationSettings, config_value
@@ -22,7 +23,7 @@ from satchmo_utils.fields import CurrencyField
 from satchmo_utils.numbers import trunc_decimal
 import shipping.fields
 import payment.config
-from satchmo_utils.iterchoices import iterchoices_db
+#from satchmo_utils.iterchoices import iterchoices_db
 from tax.utils import get_tax_processor
 import keyedcache
 import logging
@@ -684,8 +685,7 @@ class Order(models.Model):
         max_length=200, blank=True, null=True)
     shipping_method = models.CharField(_("Shipping Method"),
         max_length=200, blank=True, null=True)
-    shipping_model = models.CharField(_("Shipping Models"), choices=iterchoices_db(shipping.fields.shipping_choices),
-        max_length=30, blank=True, null=True)
+    shipping_model = models.CharField(_("Shipping Models"), max_length=30, blank=True, null=True) # choices=iterchoices_db(shipping.fields.shipping_choices),
     shipping_cost = CurrencyField(_("Shipping Cost"),
         max_digits=18, decimal_places=10, blank=True, null=True)
     shipping_discount = CurrencyField(_("Shipping Discount"),
@@ -1278,10 +1278,8 @@ class OrderStatus(models.Model):
         get_latest_by = 'time_stamp'
 
 class OrderPaymentBase(models.Model):
-    payment = models.CharField(_("Payment Method"), choices=iterchoices_db(payment.config.labelled_gateway_choices),
-        max_length=25, blank=True)
-    amount = CurrencyField(_("amount"),
-        max_digits=18, decimal_places=10, blank=True, null=True)
+    payment = models.CharField(_("Payment Method"), max_length=25, blank=True) # choices=iterchoices_db(payment.config.labelled_gateway_choices),
+    amount = CurrencyField(_("amount"), max_digits=18, decimal_places=10, blank=True, null=True)
     time_stamp = models.DateTimeField(_("timestamp"), blank=True, null=True)
     transaction_id = models.CharField(_("Transaction ID"), max_length=45, blank=True, null=True)
     details = models.CharField(_("Details"), max_length=255, blank=True, null=True)
