@@ -1,4 +1,3 @@
-from django.conf import settings
 from django.contrib.sitemaps import Sitemap
 from django.core import urlresolvers
 from product.models import Category, Product
@@ -12,12 +11,14 @@ class CategorySitemap(Sitemap):
     def items(self):
         return Category.objects.by_site()
 
+        
 class ProductSitemap(Sitemap):
     changefreq = 'weekly'
 
     def items(self):
         return Product.objects.active_by_site(variations=False)
 
+        
 class MainSitemap(Sitemap):
     urls = []
 
@@ -40,6 +41,7 @@ class MainSitemap(Sitemap):
     def changefreq(self, obj):
         return obj['changefreq']
 
+        
 def satchmo_main():
     base = get_satchmo_setting('SHOP_BASE')
     rv = urlresolvers.reverse
@@ -56,6 +58,7 @@ def satchmo_main():
         sitemap.add_url(*url)
     return sitemap
 
+    
 sitemaps = {
     'satchmo_main': satchmo_main,
     'category': CategorySitemap,

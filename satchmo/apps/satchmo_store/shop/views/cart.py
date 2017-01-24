@@ -1,4 +1,5 @@
 from decimal import Decimal
+
 from django.contrib import messages
 from django.core import urlresolvers
 from django.core.exceptions import ObjectDoesNotExist
@@ -9,6 +10,8 @@ from django.utils.datastructures import MultiValueDictKeyError
 from django.utils.safestring import mark_safe
 from django.utils.translation import ugettext as _
 from django.views.decorators.cache import never_cache
+from django.views.generic import DetailView, FormView
+
 from livesettings.functions import config_value
 from product.models import Product, OptionManager
 from product.utils import find_best_auto_discount
@@ -104,34 +107,62 @@ def _set_quantity(request, force_delete=False):
     satchmo_cart_changed.send(cart, cart=cart, request=request)
     return (True, cart, cartitem, "")
 
-def display(request, cart=None, error_message='', default_view_tax=None):
-    """Display the items in the cart."""
 
-    if default_view_tax is None:
-        default_view_tax = config_value('TAX', 'DEFAULT_VIEW_TAX')
+class DisplayView(DetailView):
+    model = Cart
+    template_name = "shop/cart.html"
+    context_object_name = "cart"
+    default_view_tax = None
+    error_message = ""
+    
+    def get_object(self, queryset=None):
+        return self.model.objects.from_request(self.request)
 
-    if not cart:
-        cart = Cart.objects.from_request(request)
+    def get_context_data(self, **kwargs):
+        context = super(DisplayView, self).get_context_data(**kwargs)
+        if self.object.numItems > 0:
+            products = [item.product for item in self.object.cartitem_set.all()]
+            context['sale'] = find_best_auto_discount(products)
+        context['error_message'] = self.get_error_message()
+        context['default_view_tax'] = self.get_default_view_tax()
+        satchmo_cart_view.send(self.object, cart=self.object, request=self.request)
+        return context
 
-    if cart.numItems > 0:
-        products = [item.product for item in cart.cartitem_set.all()]
-        sale = find_best_auto_discount(products)
-    else:
-        sale = None
+    def get_error_message(self):
+        return self.error_message
+        
+    def get_default_view_tax(self):
+        return self.default_view_tax or config_value('TAX', 'DEFAULT_VIEW_TAX')
 
-    satchmo_cart_view.send(cart,
-                           cart=cart,
-                           request=request)
+display = never_cache(DisplayView.as_view())
+        
+# def display(request, cart=None, error_message='', default_view_tax=None):
+#     """Display the items in the cart."""
 
-    context = {
-        'cart': cart,
-        'error_message': error_message,
-        'default_view_tax' : default_view_tax,
-        'sale' : sale,
-    }
-    return render(request, 'shop/cart.html', context)
+#     if default_view_tax is None:
+#         default_view_tax = config_value('TAX', 'DEFAULT_VIEW_TAX')
 
-display = never_cache(display)
+#     if not cart:
+#         cart = Cart.objects.from_request(request)
+
+#     if cart.numItems > 0:
+#         products = [item.product for item in cart.cartitem_set.all()]
+#         sale = find_best_auto_discount(products)
+#     else:
+#         sale = None
+
+#     satchmo_cart_view.send(cart,
+#                            cart=cart,
+#                            request=request)
+
+#     context = {
+#         'cart': cart,
+#         'error_message': error_message,
+#         'default_view_tax' : default_view_tax,
+#         'sale' : sale,
+#     }
+#     return render(request, 'shop/cart.html', context)
+
 
 def add(request, id=0, redirect_to='satchmo_cart'):
     """Add an item to the cart."""
@@ -141,7 +172,6 @@ def add(request, id=0, redirect_to='satchmo_cart'):
 
     cartplaces = config_value('SHOP', 'CART_PRECISION')
     roundfactor = config_value('SHOP', 'CART_ROUNDING')
-
 
     if formdata.has_key('productname'):
         productslug = formdata['productname']
@@ -212,6 +242,7 @@ def add(request, id=0, redirect_to='satchmo_cart'):
         url = urlresolvers.reverse(redirect_to)
         return HttpResponseRedirect(url)
 
+        
 def add_ajax(request, id=0, **kwargs):
     # Allow for legacy apps to still use this url
     if not request.META.has_key('HTTP_X_REQUESTED_WITH'):
@@ -219,35 +250,72 @@ def add_ajax(request, id=0, **kwargs):
     log.warning('satchmo_cart_add_ajax is deprecated, use satchmo_cart_add')
     return add(request, id)
 
-def add_multiple(request, redirect_to='satchmo_cart', products=None, template="shop/multiple_product_form.html"):
-    """Add multiple items to the cart.
-    """
-    if request.method == "POST":
+
+class AddMultipleView(FormView):
+    template_name = "shop/multiple_product_form.html"
+    form_class = forms.MultipleProductForm
+    success_url = urlresolvers.reverse_lazy('satchmo_cart')
+    products = None
+    
+    def form_valid(self, form):
+        cart = Cart.objects.from_request(self.request, create=True)
+        form.save(cart, self.request)
+        satchmo_cart_changed.send(cart, cart=cart, request=self.request)
+        return super(AddMultipleView, self).form_valid(form)
+
+    def get_form_kwargs(self):
+        kwargs = super(AddMultipleView, self).get_form_kwargs()
+        kwargs["products"] = self.products
+        return kwargs
+
+    def post(self, request, *args, **kwargs):
         log.debug('FORM: %s', request.POST)
-        formdata = request.POST.copy()
-        form = forms.MultipleProductForm(formdata, products=products)
+        return super(AddMultipleView, self).post(request, *args, **kwargs)
 
-        if form.is_valid():
-            cart = Cart.objects.from_request(request, create=True)
-            form.save(cart, request)
-            satchmo_cart_changed.send(cart, cart=cart, request=request)
+add_multiple = AddMultipleView.as_view()
+        
+# def add_multiple(request, redirect_to='satchmo_cart', products=None, template="shop/multiple_product_form.html"):
+#     """Add multiple items to the cart.
+#     """
+#     if request.method == "POST":
+#         log.debug('FORM: %s', request.POST)
+#         formdata = request.POST.copy()
+#         form = forms.MultipleProductForm(formdata, products=products)
 
-            url = urlresolvers.reverse(redirect_to)
-            return HttpResponseRedirect(url)
-    else:
-        form = forms.MultipleProductForm(products=products)
+#         if form.is_valid():
+#             cart = Cart.objects.from_request(request, create=True)
+#             form.save(cart, request)
+#             satchmo_cart_changed.send(cart, cart=cart, request=request)
 
-    return render(request, template, {'form' : form})
+#             url = urlresolvers.reverse(redirect_to)
+#             return HttpResponseRedirect(url)
+#     else:
+#         form = forms.MultipleProductForm(products=products)
 
-def agree_terms(request):
-    """Agree to terms"""
-    if request.method == "POST":
+#     return render(request, template, {'form' : form})
+
+
+class AgreeTermsView(DisplayView):
+    error_message = _('You must accept the terms and conditions.')    
+    success_url = urlresolvers.reverse_lazy('satchmo_checkout-step1')
+    
+    def post(self, request, *args, **kwargs):
         if request.POST.get('agree_terms', False):
-            url = urlresolvers.reverse('satchmo_checkout-step1')
-            return HttpResponseRedirect(url)
+            return HttpResponseRedirect(self.success_url)
+        return super(AgreeTermsView, self).post(request, *args, **kwargs)
 
-    return display(request, error_message=_('You must accept the terms and conditions.'))
+agree_terms = AgreeTermsView.as_view()
+        
+# def agree_terms(request):
+#     """Agree to terms"""
+#     if request.method == "POST":
+#         if request.POST.get('agree_terms', False):
+#             url = urlresolvers.reverse('satchmo_checkout-step1')
+#             return HttpResponseRedirect(url)
 
+#     return display(request, error_message=_('You must accept the terms and conditions.'))
+
+    
 def remove(request):
     """Remove an item from the cart."""
     if not request.POST:
@@ -273,6 +341,7 @@ def remove(request):
             url = urlresolvers.reverse('satchmo_cart')
             return HttpResponseRedirect(url)
 
+            
 def remove_ajax(request, template="shop/json.html"):
     """Remove an item from the cart. Returning JSON formatted results."""
     # Allow for legacy apps to still use this url
@@ -282,6 +351,7 @@ def remove_ajax(request, template="shop/json.html"):
     log.warning('satchmo_cart_remove_ajax is deprecated, use satchmo_cart_remove')
     return remove(request)
 
+    
 def set_quantity(request):
     """Set the quantity for a cart item.
 
@@ -322,6 +392,7 @@ def set_quantity_ajax(request, template="shop/json.html"):
 
     return set_quantity(request)
 
+    
 def product_from_post(productslug, formdata):
     product = Product.objects.get_by_site(slug=productslug)
     origproduct = product
@@ -392,6 +463,7 @@ def product_from_post(productslug, formdata):
 
     return product, details
 
+    
 def _product_error(request, product, msg):
     log.debug('Product Error: %s', msg)
 

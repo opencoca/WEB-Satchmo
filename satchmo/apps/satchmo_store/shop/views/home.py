@@ -1,12 +1,9 @@
-from django.views.generic import TemplateView, ListView
-from django.core.paginator import Paginator, InvalidPage
-from django.utils.translation import ugettext as _
+from django.views.generic import ListView
 
 from livesettings.functions import config_value
 
 from product.models import Product
 from product.views import display_featured
-from satchmo_utils.views import bad_or_missing
 
 
 class HomeListView(ListView):

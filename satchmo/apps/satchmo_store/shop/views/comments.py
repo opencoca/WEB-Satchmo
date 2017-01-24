@@ -1,11 +1,16 @@
 """Satchmo product rating views"""
 from django.conf import settings
 from django.utils.translation import ugettext_lazy as _
-from django.contrib.comments.models import Comment
-from django.contrib.comments.views.comments import post_comment
 from django.contrib.contenttypes.models import ContentType
 from django.http import HttpResponseRedirect, Http404
 from django.contrib.sites.models import Site
+
+if 'django_comments' in settings.INSTALLED_APPS:
+    from django_comments.models import Comment
+    from django_comments.views.comments import post_comment
+else:
+    from django.contrib.comments.models import Comment
+    from django.contrib.comments.views.comments import post_comment
 
 from logging import getLogger
 

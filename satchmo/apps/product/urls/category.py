@@ -1,8 +1,8 @@
 from django.conf.urls import url
 
-from product.views import category_view, category_index
+from product.views import CategoryView, CategoryIndexView
 
 urlpatterns = [
-    url(r'^(?P<parent_slugs>([-\w]+/)*)?(?P<slug>[-\w]+)/$', category_view, name='satchmo_category'),
-    url(r'^$', category_index, name='satchmo_category_index'),
+    url(r'^(?P<parent_slugs>([-\w]+/)*)?(?P<slug>[-\w]+)/$', CategoryView.as_view(), name='satchmo_category'),
+    url(r'^$', CategoryIndexView.as_view(), name='satchmo_category_index'),
 ]
