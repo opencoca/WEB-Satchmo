@@ -15,5 +15,5 @@ adminpatterns += [
     url(r'^inventory/import/$', adminviews.import_products, name='satchmo_admin_product_import'),
     # url(r'^inventory/report/$', adminviews.product_active_report, {}, 'satchmo_admin_product_report'),
     url(r'^admin/(?P<product_id>\d+)/variations/$', adminviews.variation_manager, name='satchmo_admin_variation_manager'),
-    url(r'^admin/variations/$', adminviews.variation_list, name='satchmo_admin_variation_list'),
+    url(r'^admin/variations/$', adminviews.VariationListView.as_view(), name='satchmo_admin_variation_list'),
 ]

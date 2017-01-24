@@ -1,9 +1,13 @@
 from decimal import Decimal
+
 from django.contrib.sites.models import Site
 from django.db.models import Q
+from django.template.loader import select_template
+
 from livesettings.functions import config_value
 from l10n.utils import moneyfmt
 from product.models import Option, ProductPriceLookup, OptionGroup, Discount, Product, split_option_unique_id
+from product.modules.configurable.models import sorted_tuple
 from satchmo_utils.numbers import round_decimal
 import datetime
 import logging
@@ -11,6 +15,7 @@ import types
 import string
 
 log = logging.getLogger('product.utils')
+
 
 def calc_discounted_by_percentage(price, percentage):
     if not percentage:
@@ -295,3 +300,39 @@ def validate_attribute_value(attribute, value, obj):
     AttributeOption.
     """
     return import_validator(attribute.validation)(value, obj)
+
+def find_product_template(product, producttypes=None):
+    """Searches for the correct override template given a product."""
+    if producttypes is None:
+        producttypes = product.get_subtypes()
+
+    templates = ["product/detail_%s.html" % x.lower() for x in producttypes]
+    templates.append('product/product.html')
+    log.debug("finding product template: %s", templates)
+    return select_template(templates)
+
+def optionids_from_post(configurableproduct, POST):
+    """Reads through the POST dictionary and tries to match keys to possible `OptionGroup` ids
+    from the passed `ConfigurableProduct`"""
+    chosen_options = []
+    for opt_grp in configurableproduct.option_group.all():
+        if POST.has_key(str(opt_grp.id)):
+            chosen_options.append('%s-%s' % (opt_grp.id, POST[str(opt_grp.id)]))
+    return sorted_tuple(chosen_options)
+    
+def display_featured(num_to_display=None, random_display=None):
+    """
+    Used by the index generic view to choose how the featured products are displayed.
+    Items can be displayed randomly or all in order
+    """
+    if num_to_display is None:
+        num_to_display = config_value('PRODUCT','NUM_DISPLAY')
+    if random_display is None:
+        random_display = config_value('PRODUCT','RANDOM_FEATURED')
+
+    q = Product.objects.featured_by_site()
+    if not random_display:
+        return q[:num_to_display]
+    else:
+        return q.order_by('?')[:num_to_display]
+    

@@ -1,15 +1,17 @@
-from datetime import datetime, timedelta
 from decimal import Decimal
+
 from django.contrib import messages
 from django.core import urlresolvers
-from django.http import HttpResponse, HttpResponseRedirect
+from django.http import HttpResponseRedirect
 from django.shortcuts import render
 from django.utils.translation import ugettext_lazy as _
+from django.views.generic import FormView
+from django.views.generic.detail import SingleObjectMixin
+
 from livesettings.functions import config_get_group
 from payment import active_gateways
 from payment.forms import PaymentMethodForm, CustomChargeForm
-from payment.views import contact
-from satchmo_store.shop.models import Order, OrderItem, OrderPayment
+from satchmo_store.shop.models import Order, OrderItem
 from satchmo_utils.dynamic import lookup_url
 from satchmo_utils.views import bad_or_missing
 import logging
@@ -23,6 +25,47 @@ def balance_remaining_order(request, order_id=None):
     request.session['orderID'] = order_id
     return balance_remaining(request)
 
+
+class BalanceRemainingView(SingleObjectMixin, FormView):
+    model = Order
+    template_name = "shop/checkout/balance_remaining.html"
+    form_class = PaymentMethodForm
+    context_object_name = "order"
+    
+    def get_object(self):
+        try:
+            return self.model.objects.get(pk=self.request.session.get('orderID'))
+        except self.model.DoesNotExist:
+            pass
+
+    def dispatch(self, request, *args, **kwargs):
+        self.object = self.get_object()
+        if not self.object:
+            return HttpResponseRedirect(urlresolvers.reverse('satchmo_checkout-step1'))
+        return super(BalanceRemainingView, self).dispatch(request, *args, **kwargs)
+            
+    def form_valid(self, form):
+        data = form.cleaned_data
+        modulename = data['paymentmethod']
+        if not modulename.startswith('PAYMENT_'):
+            modulename = 'PAYMENT_' + modulename
+        self.paymentmodule = config_get_group(modulename)
+        return super(BalanceRemainingView, self).form_valid(form)
+        
+    def get_success_url(self):
+        return lookup_url(self.paymentmodule, 'satchmo_checkout-step2')
+
+    def get_form_kwargs(self):
+        kwargs = super(BalanceRemainingView, self).get_form_kwargs()
+        kwargs["order"] = self.object
+        return kwargs
+
+    def get_context_data(self, **kwargs):
+        context = super(BalanceRemainingView, self).get_context_data(**kwargs)
+        context['paymentmethod_ct'] = len(active_gateways())
+        print context
+        return context
+    
 def balance_remaining(request):
     """Allow the user to pay the remaining balance."""
     order = None
