@@ -1,6 +1,6 @@
 from decimal import Decimal
 from livesettings.functions import config_get_group, config_value
-from satchmo_store.shop.models import Order, OrderItem, OrderItemDetail, OrderCart
+from satchmo_store.shop.models import Order, OrderItem, OrderItemDetail, OrderCart, NullCart
 from satchmo_store.shop.signals import satchmo_post_copy_item_to_order
 from shipping.utils import update_shipping
 from satchmo_store.mail import send_store_mail
@@ -127,7 +127,7 @@ def update_orderitems(new_order, cart, update=False):
     """Update the order with all cart items, first removing all items if this
     is an update.
     """
-    if not isinstance(cart, OrderCart):
+    if not isinstance(cart, OrderCart) and not isinstance(cart, NullCart):
         if update:
             new_order.remove_all_items()
         else:
