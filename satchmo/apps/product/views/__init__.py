@@ -108,10 +108,10 @@ class ProductView(DetailView):
     def get_template_names(self):
         template = find_product_template(self.product, producttypes=self.product.get_subtypes())
         return [template.template.name]
-        
-    def get_object(self, queryset=None):
-        return self.model.objects.get_by_site(active=True, slug=self.kwargs.get(self.slug_url_kwarg))
 
+    def get_queryset(self):
+        return self.model.objects.active_by_site()
+        
     def get_context_data(self, **kwargs):
         self.product = self.get_product_variation()
         default_view_tax = self.get_default_view_tax()
