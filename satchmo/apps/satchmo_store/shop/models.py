@@ -773,9 +773,7 @@ class Order(models.Model):
 
     def remove_all_items(self):
         """Delete all items belonging to this order."""
-        for item in self.orderitem_set.all():
-            item.delete()
-        self.save()
+        self.orderitem_set.all().delete()
 
     def _balance(self):
         if self.total is None:
@@ -802,14 +800,11 @@ class Order(models.Model):
 
     def _credit_card(self):
         """Return the credit card associated with this payment."""
-        from payment.models import CreditCardDetail
-        for payment in self.payments.order_by('-time_stamp'):
+        for _payment in self.payments.order_by('-time_stamp'):
             try:
-                if payment.creditcards.count() > 0:
-                    return payment.creditcards.get()
-            except CreditCardDetail.DoesNotExist:
+                return _payment.creditcards.all()[0]
+            except IndexError:
                 pass
-        return None
     credit_card = property(_credit_card)
 
     def _full_bill_street(self, delim="\n"):
@@ -906,7 +901,7 @@ class Order(models.Model):
         super(Order, self).save(**kwargs) # Call the "real" save() method.
 
     def invoice(self):
-        url = urlresolvers.reverse('satchmo_print_shipping', None, None, {'doc' : 'invoice', 'id' : self.id})
+        url = urlresolvers.reverse('satchmo_print_shipping', kwargs={'doc' : 'invoice', 'id' : self.id})
         return mark_safe(u'<a href="%s">%s</a>' % (url, ugettext('View')))
     invoice.allow_tags = True
 
@@ -916,7 +911,7 @@ class Order(models.Model):
     item_discount = property(_item_discount)
 
     def packingslip(self):
-        url = urlresolvers.reverse('satchmo_print_shipping', None, None, {'doc' : 'packingslip', 'id' : self.id})
+        url = urlresolvers.reverse('satchmo_print_shipping', kwargs={'doc' : 'packingslip', 'id' : self.id})
         return mark_safe(u'<a href="%s">%s</a>' % (url, ugettext('View')))
     packingslip.allow_tags = True
 
