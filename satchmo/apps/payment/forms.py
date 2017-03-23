@@ -16,7 +16,7 @@ from product.prices import PriceAdjustmentCalc, PriceAdjustment
 from product.utils import find_best_auto_discount
 from satchmo_store.contact.forms import ProxyContactForm, ContactInfoForm
 from satchmo_store.contact.models import Contact
-from satchmo_store.shop.models import Cart, Order
+from satchmo_store.shop.models import Cart, Order, OrderItem
 from satchmo_store.shop.signals import satchmo_shipping_price_query
 from satchmo_utils.dynamic import lookup_template
 from satchmo_utils.views import CreditCard
@@ -152,11 +152,33 @@ def _find_sale(cart):
 
     return sale
 
-class CustomChargeForm(forms.Form):
-    orderitem = forms.IntegerField(required=True, widget=forms.HiddenInput())
-    amount = forms.DecimalField(label=_('New price'), required=False)
-    shipping = forms.DecimalField(label=_('Shipping adjustment'), required=False)
+    
+# class CustomChargeForm(forms.Form):
+#     orderitem = forms.IntegerField(required=True, widget=forms.HiddenInput())
+#     amount = forms.DecimalField(label=_('New price'), required=False)
+#     shipping = forms.DecimalField(label=_('Shipping adjustment'), required=False)
+#     notes = forms.CharField(label=_('Notes'), required=False, initial="Your custom item is ready.")
+
+#     def __init__(self, *args, **kwargs):
+#         initial = kwargs.get('initial', {})
+#         form_initialdata.send('CustomChargeForm', form=self, initial=initial)
+#         kwargs['initial'] = initial
+#         super(CustomChargeForm, self).__init__(*args, **kwargs)
+#         form_init.send(CustomChargeForm, form=self)
+
+#     def clean(self, *args, **kwargs):
+#         super(CustomChargeForm, self).clean(*args, **kwargs)
+#         form_validate.send(CustomChargeForm, form=self)
+#         return self.cleaned_data
+
+
+class CustomChargeForm(forms.ModelForm):
+    shipping = forms.DecimalField(label=_('Extra Shipping'), required=False)
     notes = forms.CharField(label=_('Notes'), required=False, initial="Your custom item is ready.")
+        
+    class Meta:
+        model = OrderItem
+        fields = ('unit_price', 'line_item_price')
 
     def __init__(self, *args, **kwargs):
         initial = kwargs.get('initial', {})
@@ -164,20 +186,30 @@ class CustomChargeForm(forms.Form):
         kwargs['initial'] = initial
         super(CustomChargeForm, self).__init__(*args, **kwargs)
         form_init.send(CustomChargeForm, form=self)
-
+        
     def clean(self, *args, **kwargs):
         super(CustomChargeForm, self).clean(*args, **kwargs)
         form_validate.send(CustomChargeForm, form=self)
         return self.cleaned_data
-
+        
+    def save(self, commit=True): 
+        self.instance.line_item_price = self.cleaned_data.get('unit_price') * self.instance.quantity
+        obj = super(CustomChargeForm, self).save(commit=commit)
+        order = obj.order
+        if not order.shipping_cost:
+            order.shipping_cost = Decimal("0.00")
+        shipping = self.cleaned_data.get('shipping')
+        if shipping:
+            order.shipping_cost += shipping
+        order.recalculate_total()
+        notes = self.cleaned_data.get('notes') or "Updated total price"
+        order.add_status(notes=notes)
+        return obj        
+        
         
 class PaymentMethodForm(ProxyContactForm):
-    paymentmethod = forms.ChoiceField(
-            label=_('Payment method'),
-            choices=labelled_gateway_choices(),
-            widget=forms.RadioSelect,
-            required=True
-            )
+    paymentmethod = forms.ChoiceField(label=_('Payment method'), required=True,
+                                      choices=labelled_gateway_choices(), widget=forms.RadioSelect)
 
     def __init__(self, cart=None, order=None, *args, **kwargs):
         super(PaymentMethodForm, self).__init__(*args, **kwargs)

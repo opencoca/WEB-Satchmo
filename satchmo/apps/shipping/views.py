@@ -39,23 +39,16 @@ class DocumentBase(object):
     """
 
     def get_context(self, request, order_id, doc):
-        order = get_object_or_404(Order, pk=order_id)
-        shopDetails = Config.objects.get_current()
-        icon_uri = config_value('SHOP', 'LOGO_URI')
-        context = {
+        return {
+            'order' : get_object_or_404(Order, pk=order_id),
             'doc': doc,
-            'iconURI' : icon_uri,
-            'shopDetails' : shopDetails,
-            'order' : order,
+            'iconURI' : config_value('SHOP', 'LOGO_URI'),
+            'shopDetails' : Config.objects.get_current(),
             'default_view_tax': config_value('TAX','DEFAULT_VIEW_TAX')
         }
-        return context
 
     def __call__(self, request, order_id, doc):
-        return self.render(
-            request,
-            self.get_context(request, order_id, doc)
-        )
+        return self.render(request, self.get_context(request, order_id, doc))
 
 
 class FileTemplateMixin(object):

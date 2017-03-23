@@ -45,9 +45,9 @@ class CategoryView(DetailView):
     template_name = "product/category.html"
     context_object_name = "category"
 
-    def get_object(self):
-        return self.model.objects.get_by_site(slug=self.kwargs.get(self.slug_url_kwarg))
-
+    def get_queryset(self):
+        return self.model.objects.by_site()
+        
     def get_context_data(self, **kwargs):
         context = super(CategoryView, self).get_context_data(**kwargs)
         products = list(self.object.active_products())

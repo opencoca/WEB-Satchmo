@@ -11,14 +11,14 @@ log = logging.getLogger('payment.urls')
 ssl = get_satchmo_setting('SSL', default_value=False)
 
 urlpatterns = [
-     url(r'^$', contact.contact_info_view, {'SSL': ssl}, name='satchmo_checkout-step1'),
-     url(r'^success/$', checkout.success, {'SSL' : ssl}, name='satchmo_checkout-success'),
-     url(r'custom/charge/(?P<orderitem_id>\d+)/$', balance.charge_remaining, name='satchmo_charge_remaining'),
-     url(r'custom/charge/$', balance.charge_remaining_post, name="satchmo_charge_remaining_post"),
-     url(r'^balance/(?P<order_id>\d+)/$', balance.balance_remaining_order, {'SSL' : ssl}, name='satchmo_balance_remaining_order'),
-     url(r'^balance/$', balance.balance_remaining, {'SSL' : ssl}, name="satchmo_balance_remaining"),
-     url(r'^cron/$', cron.cron_rebill, name='satchmo_cron_rebill'),
-     url(r'^mustlogin/$', contact.authentication_required, {'SSL' : ssl}, name='satchmo_checkout_auth_required'),
+    url(r'^$', contact.contact_info_view, {'SSL': ssl}, name='satchmo_checkout-step1'),
+    url(r'^success/$', checkout.success, {'SSL' : ssl}, name='satchmo_checkout-success'),
+    url(r'custom/charge/(?P<orderitem_id>\d+)/$', balance.ChargeRemainingUpdateView.as_view(), name='satchmo_charge_remaining'),
+    #url(r'custom/charge/$', balance.charge_remaining_post, name="satchmo_charge_remaining_post"),
+    url(r'^balance/(?P<order_id>\d+)/$', balance.BalanceRemainingOrderView.as_view(), {'SSL' : ssl}, name='satchmo_balance_remaining_order'),
+    url(r'^balance/$', balance.BalanceRemainingView.as_view(), {'SSL' : ssl}, name="satchmo_balance_remaining"),
+    url(r'^cron/$', cron.cron_rebill, name='satchmo_cron_rebill'),
+    url(r'^mustlogin/$', contact.authentication_required, {'SSL' : ssl}, name='satchmo_checkout_auth_required'),
 ]
 
 # now add all enabled module payment settings

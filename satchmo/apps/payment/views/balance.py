@@ -5,7 +5,7 @@ from django.core import urlresolvers
 from django.http import HttpResponseRedirect
 from django.shortcuts import render
 from django.utils.translation import ugettext_lazy as _
-from django.views.generic import FormView
+from django.views.generic import FormView, UpdateView
 from django.views.generic.detail import SingleObjectMixin
 
 from livesettings.functions import config_get_group
@@ -17,14 +17,15 @@ from satchmo_utils.views import bad_or_missing
 import logging
 
 log = logging.getLogger('payment.views.balance')
-
-def balance_remaining_order(request, order_id=None):
-    """Load the order into the session, so we can charge the remaining amount"""
-    # this will create an "OrderCart" - a fake cart to allow us to check out
-    request.session['cart'] = 'order'
-    request.session['orderID'] = order_id
-    return balance_remaining(request)
-
+    
+    
+# def balance_remaining_order(request, order_id=None):
+#     """Load the order into the session, so we can charge the remaining amount"""
+#     # this will create an "OrderCart" - a fake cart to allow us to check out
+#     request.session['cart'] = 'order'
+#     request.session['orderID'] = order_id
+#     return balance_remaining(request)
+    
 
 class BalanceRemainingView(SingleObjectMixin, FormView):
     model = Order
@@ -45,8 +46,7 @@ class BalanceRemainingView(SingleObjectMixin, FormView):
         return super(BalanceRemainingView, self).dispatch(request, *args, **kwargs)
             
     def form_valid(self, form):
-        data = form.cleaned_data
-        modulename = data['paymentmethod']
+        modulename = form.cleaned_data['paymentmethod']
         if not modulename.startswith('PAYMENT_'):
             modulename = 'PAYMENT_' + modulename
         self.paymentmodule = config_get_group(modulename)
@@ -63,48 +63,78 @@ class BalanceRemainingView(SingleObjectMixin, FormView):
     def get_context_data(self, **kwargs):
         context = super(BalanceRemainingView, self).get_context_data(**kwargs)
         context['paymentmethod_ct'] = len(active_gateways())
-        print context
         return context
+
+
+class BalanceRemainingOrderView(BalanceRemainingView):
+    pk_url_kwarg = 'order_id'
     
-def balance_remaining(request):
-    """Allow the user to pay the remaining balance."""
-    order = None
-    orderid = request.session.get('orderID')
-    if orderid:
-        try:
-            order = Order.objects.get(pk=orderid)
-        except Order.DoesNotExist:
-            # TODO: verify user against current user
-            pass
-            
-    if not order:
-        url = urlresolvers.reverse('satchmo_checkout-step1')
-        return HttpResponseRedirect(url)
-
-    if request.method == "POST":
-        new_data = request.POST.copy()
-        form = PaymentMethodForm(data=new_data, order=order)
-        if form.is_valid():
-            data = form.cleaned_data
-            modulename = data['paymentmethod']
-            if not modulename.startswith('PAYMENT_'):
-                modulename = 'PAYMENT_' + modulename
-            
-            paymentmodule = config_get_group(modulename)
-            url = lookup_url(paymentmodule, 'satchmo_checkout-step2')
-            return HttpResponseRedirect(url)
+    def dispatch(self, request, *args, **kwargs):
+        request.session['cart'] = 'order'
+        request.session['orderID'] = kwargs.get(self.pk_url_kwarg)
+        return super(BalanceRemainingOrderView, self).dispatch(request, *args, **kwargs)
         
-    else:
-        form = PaymentMethodForm(order=order)
         
-    ctx = {
-        'form' : form, 
-        'order' : order,
-        'paymentmethod_ct': len(active_gateways())
-    }
-    return render(request, 'shop/checkout/balance_remaining.html', ctx)
+# def balance_remaining(request):
+#     """Allow the user to pay the remaining balance."""
+#     order = None
+#     orderid = request.session.get('orderID')
+#     if orderid:
+#         try:
+#             order = Order.objects.get(pk=orderid)
+#         except Order.DoesNotExist:
+#             # TODO: verify user against current user
+#             pass
+            
+#     if not order:
+#         url = urlresolvers.reverse('satchmo_checkout-step1')
+#         return HttpResponseRedirect(url)
+
+#     if request.method == "POST":
+#         new_data = request.POST.copy()
+#         form = PaymentMethodForm(data=new_data, order=order)
+#         if form.is_valid():
+#             data = form.cleaned_data
+#             modulename = data['paymentmethod']
+#             if not modulename.startswith('PAYMENT_'):
+#                 modulename = 'PAYMENT_' + modulename
+            
+#             paymentmodule = config_get_group(modulename)
+#             url = lookup_url(paymentmodule, 'satchmo_checkout-step2')
+#             return HttpResponseRedirect(url)
+        
+#     else:
+#         form = PaymentMethodForm(order=order)
+        
+#     ctx = {
+#         'form' : form, 
+#         'order' : order,
+#         'paymentmethod_ct': len(active_gateways())
+#     }
+#     return render(request, 'shop/checkout/balance_remaining.html', ctx)
 
 
+class ChargeRemainingUpdateView(UpdateView):
+    template_name = 'payment/admin/charge_remaining_confirm.html'
+    model = OrderItem
+    form_class = CustomChargeForm
+    pk_url_kwarg = 'orderitem_id'
+
+    def get_form_kwargs(self):
+        kwargs = super(ChargeRemainingUpdateView, self).get_form_kwargs()
+        kwargs["orderitem"] = self.object.pk
+        kwargs["amount"] = self.object.product.customproduct.full_price
+        return kwargs
+    
+    def get_success_url(self):
+        #return reverse('journal', kwargs={'year': self.object.date.year, 'month': self.object.date.month, 'day': self.object.date.day})
+        return '/admin/shop/order/%i' % self.object.order.pk
+        
+    def form_valid(self, form):
+        messages.add_message(self.request, messages.INFO, 'Charged for custom product and recalculated totals.')
+        return super(ChargeRemainingUpdateView, self).form_valid(form)
+        
+        
 def charge_remaining(request, orderitem_id):
     """Given an orderitem_id, this returns a confirmation form."""
     
