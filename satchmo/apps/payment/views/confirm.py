@@ -19,6 +19,7 @@ import logging
 
 log = logging.getLogger('payment.views')
 
+
 class ConfirmController(object):
     """Centralizes and manages data used by the confirm views.
     Generally, this is used by initializing, then calling
@@ -64,8 +65,7 @@ class ConfirmController(object):
             'EMPTY_CART': 'shop/checkout/empty_cart.html',
             '404': 'shop/404.html',
             }
-            
-                
+                            
     def confirm(self, force_post=False):
         """Handles confirming an order and processing the charges.
 
@@ -95,23 +95,19 @@ class ConfirmController(object):
 
         self.response = self.onForm(self)
         return status
-        
-        
+                
     def invalidate(self, dest):
         """Mark the confirmation invalid, and set the response"""
         self.valid = False
         self.response = dest
 
-
     def lookup_template(self, key):
         """Shortcut method to the the proper template from the `paymentModule`"""
         return lookup_template(self.paymentModule, self.templates[key])
 
-
     def lookup_url(self, view):
         """Shortcut method to the the proper url from the `paymentModule`"""
         return lookup_url(self.paymentModule, view)
-
         
     def _onForm(self, controller):
         """Show the confirmation page for the order.  Looks up the proper template for the
@@ -234,6 +230,7 @@ class ConfirmController(object):
         signals.confirm_sanity_check.send(self, controller=self)
         return True
 
+        
 def credit_confirm_info(request, payment_module, template=None):
     """A view which shows and requires credit card selection.  
     This is the simplest confirmation flow, with no overrides."""
@@ -245,10 +242,13 @@ def credit_confirm_info(request, payment_module, template=None):
     return controller.response
 credit_confirm_info = never_cache(credit_confirm_info)
 
+
 class FakeValue(object):
+
     def __init__(self, val):
         self.value = val
 
+        
 class FreeProcessor(object):
 
     def __init__(self, key):
@@ -260,6 +260,7 @@ class FreeProcessor(object):
 
         
 class FreeProcessorModule(object):
+
     def __init__(self, key):
         self.KEY = FakeValue(key)
         self.LABEL = FakeValue('Free Processor Module')
