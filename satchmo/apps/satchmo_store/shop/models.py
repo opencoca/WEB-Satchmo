@@ -12,6 +12,7 @@ from django.utils.encoding import force_unicode
 from django.utils.safestring import mark_safe
 from django.utils.translation import ugettext, ugettext_lazy as _
 from django.utils import timezone
+from django.core.exceptions import ObjectDoesNotExist
 
 from l10n.models import Country
 from l10n.utils import moneyfmt
@@ -802,8 +803,8 @@ class Order(models.Model):
         """Return the credit card associated with this payment."""
         for _payment in self.payments.order_by('-time_stamp'):
             try:
-                return _payment.creditcards.all()[0]
-            except IndexError:
+                return _payment.creditcard
+            except ObjectDoesNotExist:
                 pass
     credit_card = property(_credit_card)
 
@@ -1283,8 +1284,8 @@ class OrderPaymentBase(models.Model):
     def _credit_card(self):
         """Return the credit card associated with this payment."""
         try:
-            return self.creditcards.get()
-        except self.creditcards.model.DoesNotExist:
+            return self.creditcard
+        except ObjectDoesNotExist:
             return None
     credit_card = property(_credit_card)
 
