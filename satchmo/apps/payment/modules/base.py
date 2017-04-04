@@ -29,15 +29,15 @@ class BasePaymentProcessor(object):
         self.log_extra('authorize_and_release for order #%i, %s', order.id, amount)
         result = self.authorize_payment(testing=testing, order=order, amount=amount)
         if result.success:
-            auths = order.authorizations.filter(complete=False).order_by('-id')
-            if auths.count() > 0:
-                auth = auths[0]
-            self.log_extra('releasing successful authorize_and_release for order #%i [%s], %s.  AUTH',
-                order.id,  amount, auth.transaction_id)
-            return self.release_authorized_payment(order=order, auth=auth, testing=testing)
-        else:
-            self.log_extra('early authorization was not successful for: %s', order)
-            return result
+            try:
+                auth = order.authorizations.filter(complete=False).order_by('-id')[0]
+                self.log_extra('releasing successful authorize_and_release for order #%i [%s], %s.  AUTH',
+                    order.id,  amount, auth.transaction_id)
+                return self.release_authorized_payment(order=order, auth=auth, testing=testing)
+            except IndexError:
+                pass
+         self.log_extra('early authorization was not successful for: %s', order)
+         return result
 
     def authorize_payment(self, testing=False, order=None, amount=None):
         """Authorize a single payment, must be overridden to function"""
