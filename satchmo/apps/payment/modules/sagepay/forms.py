@@ -21,9 +21,12 @@ class SagePayShipForm(CreditPayShipForm):
         super(SagePayShipForm, self).__init__(request, paymentmodule, *args, **kwargs)
         cf = self.fields['card_holder']
         if (not cf.initial) or cf.initial == "":
-            user = request.user
-            if user and user.is_authenticated() and user.contact_set.count() > 0:
-                cf.initial = self.tempContact.full_name
+            try:
+                user = request.user
+                if user and user.is_authenticated() and user.contact:
+                    cf.initial = self.tempContact.full_name
+            except Contact.DoesNotExist:
+                pass
         self.requires_issue_number = REQUIRES_ISSUE_NUMBER
         num_years = config_value('PAYMENT', 'CC_NUM_YEARS')
         year_now = datetime.date.today().year

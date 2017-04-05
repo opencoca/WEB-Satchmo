@@ -423,7 +423,7 @@ class ShopTest(TestCase):
         self.assertRedirects(response, '/accounts/register/complete/',
             status_code=302, target_status_code=200)
         user = User.objects.get(email="sometester@example.com")
-        contact = user.contact_set.get()
+        contact = user.contact
         #TODO: Broken test case
         #self.assertEqual(contact, origcontact)
 
@@ -472,11 +472,11 @@ class ShopTest(TestCase):
         Contact will be attached to the existing User.
         """
         user = User.objects.create_user('teddy', 'sometester@example.com', 'guz90tyc')
-        self.assertEqual(user.contact_set.count(), 0)
+        self.assertEqual(Contact.objects.filter(user=user).count(), 0)
         self.client.login(username='teddy', password='guz90tyc')
         self.test_cart_adding()
         response = self.client.post(prefix + '/checkout/', get_step1_post_data(self.US))
-        self.assertEqual(user.contact_set.count(), 1)
+        self.assertEqual(Contact.objects.filter(user=user).count(), 1)
 
     def test_logout(self):
         """The logout view should remove the user and contact id from the
