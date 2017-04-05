@@ -136,6 +136,8 @@ class DownloadableProductTest(TestCase):
 
         # first, hit the url.
         response = self.client.get(self.pd_url)
+        print pd_process_url
+        print response
         if django.VERSION >= (1, 10):
             self.assertEqual(response['Location'], pd_process_url)
         else:
