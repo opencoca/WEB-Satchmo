@@ -111,7 +111,6 @@ def send_store_mail(subject, context, template='', recipients_list=None,
         subject = subject % c_dict
 
     c_dict.update(context)
-    #c = Context(c_dict)
 
     recipients = recipients_list or []
 
