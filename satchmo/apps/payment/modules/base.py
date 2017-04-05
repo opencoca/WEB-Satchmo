@@ -36,8 +36,8 @@ class BasePaymentProcessor(object):
                 return self.release_authorized_payment(order=order, auth=auth, testing=testing)
             except IndexError:
                 pass
-         self.log_extra('early authorization was not successful for: %s', order)
-         return result
+        self.log_extra('early authorization was not successful for: %s', order)
+        return result
 
     def authorize_payment(self, testing=False, order=None, amount=None):
         """Authorize a single payment, must be overridden to function"""

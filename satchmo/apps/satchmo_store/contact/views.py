@@ -26,7 +26,7 @@ class ContactDetailView(DetailView):
 
     def get_object(self):
         try:
-            return self.request.user.contact_set.get()
+            return self.request.user.contact
         except Contact.DoesNotExist:
             pass
 

@@ -31,6 +31,7 @@ from payment.utils import gift_certificate_processor
 
 class SuccessDetailView(DetailView):
     model = Order
+    template_name = "shop/checkout/success.html"
     context_object_name = "order"
     
     def get_object(self, queryset=None):
