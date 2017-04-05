@@ -119,5 +119,4 @@ def bad_or_missing(request, msg):
         return resp
     else:
         template = loader.get_template('shop/404.html')
-        context = RequestContext(request, {'message': msg})
-        return http.HttpResponseNotFound(template.render(context))
+        return http.HttpResponseNotFound(template.render({'message': msg}))

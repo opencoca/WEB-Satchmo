@@ -46,6 +46,10 @@ SECRET_KEY = ''
 
 LOGOUT_URL = '/accounts/logout/'
 
+ALLOWED_HOSTS = [
+    "satchmoserver",
+]
+
 MIDDLEWARE_CLASSES = (
     "django.middleware.common.CommonMiddleware",
     "django.contrib.sessions.middleware.SessionMiddleware",

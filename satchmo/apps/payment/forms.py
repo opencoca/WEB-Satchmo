@@ -2,7 +2,6 @@ from decimal import Decimal
 
 from django import forms
 from django.template import loader
-from django.template import RequestContext
 from django.utils.translation import ugettext_lazy as _
 
 from l10n.utils import moneyfmt
@@ -119,14 +118,14 @@ def _get_shipping_choices(request, paymentmodule, cart, contact, default_view_ta
                 shipping_dict[method.id]['taxedcost'] = total
                 shipping_dict[method.id]['tax'] = taxcost
 
-            c = RequestContext(request, {
+            c = {
                 'amount': finalcost,
                 'description' : method.description(),
                 'method' : method.method(),
                 'expected_delivery' : method.expectedDelivery(),
                 'default_view_tax' : default_view_tax,
                 'shipping_tax': shipping_tax,
-                'taxed_shipping_price': taxed_shipping_price})
+                'taxed_shipping_price': taxed_shipping_price}
             rendered[method.id] = t.render(c)
 
     #now sort by price, low to high

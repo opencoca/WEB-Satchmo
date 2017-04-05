@@ -1,5 +1,5 @@
 from django.conf import settings
-from django.template import loader, Context, TemplateDoesNotExist
+from django.template import loader, TemplateDoesNotExist
 from livesettings.functions import config_value
 from satchmo_store.shop.signals import rendering_store_mail, sending_store_mail
 
@@ -111,7 +111,7 @@ def send_store_mail(subject, context, template='', recipients_list=None,
         subject = subject % c_dict
 
     c_dict.update(context)
-    c = Context(c_dict)
+    #c = Context(c_dict)
 
     recipients = recipients_list or []
 
@@ -127,12 +127,12 @@ def send_store_mail(subject, context, template='', recipients_list=None,
     }
 
     # let listeners modify context
-    rendering_store_mail.send(sender, send_mail_args=send_mail_args, context=c,
+    rendering_store_mail.send(sender, send_mail_args=send_mail_args, context=c_dict,
                               **kwargs)
 
     # render text email, regardless of whether html email is used.
     t = loader.get_template(template)
-    body = t.render(c)
+    body = t.render(c_dict)
 
     # listeners may have set this entry
     if not 'message' in send_mail_args:
@@ -145,7 +145,7 @@ def send_store_mail(subject, context, template='', recipients_list=None,
         # call in the SocketError try block to handle errors for them.
         try:
             sending_store_mail.send(sender, send_mail_args=send_mail_args, \
-                                    context=c, **kwargs)
+                                    context=c_dict, **kwargs)
         except ShouldNotSendMail:
             return
 
