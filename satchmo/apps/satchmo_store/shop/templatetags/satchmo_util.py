@@ -5,7 +5,7 @@ from django.utils.safestring import mark_safe
 from l10n.l10n_settings import get_l10n_setting
 from product.models import Category
 from satchmo_utils.numbers import trunc_decimal
-from satchmo_utils.json import json_encode
+from satchmo_utils.satchmo_json import json_encode
 from threaded_multihost import threadlocals
 import logging
 import math
