@@ -8,12 +8,9 @@
 import types
 from django.db import models
 try:
-    from django.utils import simplejson as json
+    import json
 except ImportError:
-    try:
-        import simplejson as json
-    except ImportError:
-        from django.core.serializers.json import json
+    from django.utils import simplejson as json
 from django.core.serializers.json import DjangoJSONEncoder
 from decimal import Decimal
 
