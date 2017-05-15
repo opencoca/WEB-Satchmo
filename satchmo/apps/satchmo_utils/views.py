@@ -1,6 +1,7 @@
 from django import http
 from django.template import RequestContext
 from django.template import loader
+from django.shortcuts import render
 from django.utils.translation import ugettext as _
 
 ccInfo = (
