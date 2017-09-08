@@ -24,7 +24,7 @@ def product_ratings(context):
     """
     Display the ratings for a specific product.
     """
-    rendered = render_to_string('productratings/_product_ratings.html', context)
+    rendered = render_to_string('productratings/_product_ratings.html', context.flatten())
     return { 'rendered_product_ratings': rendered }
         
 
