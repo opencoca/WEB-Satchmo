@@ -61,4 +61,4 @@ class Command(BaseCommand):
                     foodRateInterstate = Decimal(food_inter),
                 ).save()
                 new += 1
-        print "Done: New: %d. End date changed: %d. Unchanged: %d" % (new, updated, unchanged)
+        print("Done: New: %d. End date changed: %d. Unchanged: %d" % (new, updated, unchanged))

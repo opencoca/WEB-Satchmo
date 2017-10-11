@@ -172,5 +172,5 @@ if __name__ == "__main__":
     processor = PaymentProcessor (trustcommerce_settings)
     processor.prepare_data(sampleOrder)
     results = processor.process()
-    print results
+    print(results)
 

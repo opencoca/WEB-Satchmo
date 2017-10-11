@@ -82,7 +82,6 @@ class ContactInfoFormLANGUAGETest(TestCase):
             }
         shop = Config.objects.get_current()
         form = ContactInfoForm(data=data, shop=shop, contact=contact)
-        #print "ERR: %s" % form.errors
         self.assertEqual(True, form.is_valid())
         contactid = form.save(contact=contact)
         self.assertEqual(contact.id, contactid)

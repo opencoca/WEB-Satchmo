@@ -1044,7 +1044,6 @@ class QuickOrderTest(TestCase):
             "qty__dj-rocks-l-b" : "2",
             "qty__PY-Rocks" : "1",
         })
-        #print response
         self.assertRedirects(response, url('satchmo_cart'),
             status_code=302, target_status_code=200)
         response = self.client.get(prefix+'/cart/')

@@ -29,25 +29,25 @@ class Command(NoArgsCommand):
         from django.contrib.auth.models import User
         #idempotency test
 
-        print "Checking for existing sample data."
+        print("Checking for existing sample data.")
         try:
             p = Product.objects.get(slug="dj-rocks")
-            print "It looks like you already have loaded the sample store data, quitting."
+            print("It looks like you already have loaded the sample store data, quitting.")
             import sys
             sys.exit(1)
         except Product.DoesNotExist:
             pass
 
-        print "Loading sample store data."
+        print("Loading sample store data.")
 
         #Load basic configuration information
 
-        print "Creating site..."
+        print("Creating site...")
         try:
             site = Site.objects.get(id=settings.SITE_ID)
-            print "Using existing site #%i" % settings.SITE_ID
+            print("Using existing site #%i" % settings.SITE_ID)
         except Site.DoesNotExist:
-            print "Creating Example Store Site"
+            print("Creating Example Store Site")
             site = Site(domain="localhost", name="Sample Store")
         site.domain = settings.SITE_DOMAIN
         site.name = settings.SITE_NAME
@@ -55,14 +55,14 @@ class Command(NoArgsCommand):
         try:
             store_country = Country.objects.get(iso3_code='USA')
         except Country.DoesNotExist:
-            print "\nError: Country data should be first loaded by:  python manage.py satchmo_load_l10n"
+            print("\nError: Country data should be first loaded by:  python manage.py satchmo_load_l10n")
             import sys
             sys.exit(1)
         config = Config(site=site, store_name=settings.SITE_NAME, country=store_country, sales_country=store_country)
         config.save()
         config.shipping_countries.add(store_country)
         config.save()
-        print "Creating Customers..."
+        print("Creating Customers...")
         # Import some customers
 
         customer = ContactRole.objects.get(pk='Customer')
@@ -82,7 +82,7 @@ class Command(NoArgsCommand):
         a2 = AddressBook(description="Work", street1="1245 Main Street", city="Stillwater", state="MN",
                      postal_code="55082", country=us, is_default_shipping=True, contact=c2)
         a2.save()
-        print "Creating Suppliers..."
+        print("Creating Suppliers...")
         #Import some suppliers
 
         supplier = ContactOrganizationRole.objects.get(pk='Supplier')
@@ -112,7 +112,7 @@ class Command(NoArgsCommand):
         #s2.save()
 
 
-        print "Creating Categories..."
+        print("Creating Categories...")
         #Create some categories
         cat1 = Category(site=site, name="Shirts",slug="shirts",description="Women's Shirts")
         cat1.save()
@@ -130,7 +130,7 @@ class Command(NoArgsCommand):
         cat7.save()
 
 
-        print "Creating products..."
+        print("Creating products...")
         #Create some items
         i1 = Product(site=site, name="Django Rocks shirt", slug="dj-rocks", description="Really cool shirt",
                  active=True, featured=True)
@@ -230,7 +230,7 @@ class Command(NoArgsCommand):
     #    pg5.option_group.add(optSet4)
     #    pg5.save()
 
-        print "Creating product variations..."
+        print("Creating product variations...")
         #Create the required sub_items
         pg1.create_all_variations()
         pg3.create_all_variations()
@@ -247,7 +247,7 @@ class Command(NoArgsCommand):
     #    Price(product=pv2, price='1.00').save()
     #    DownloadableProduct(product=pv2).save()
 
-        print "Create a test user..."
+        print("Create a test user...")
         #First see if our test user is still there, then use or create that user
         try:
             test_user = User.objects.get(username="csmith")

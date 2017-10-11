@@ -39,8 +39,8 @@ class Command(BaseCommand):
             import satchmo_store
         except ImportError:
             error_out("Satchmo is not installed correctly. Please verify satchmo is on your sys path.")
-        print "Using Django version %s" % django.get_version()
-        print "Using Satchmo version %s" % satchmo_store.get_version()
+        print("Using Django version %s" % django.get_version())
+        print("Using Satchmo version %s" % satchmo_store.get_version())
         #Check the Django version
         #Make sure we only get the X.Y.Z version info and not any other alpha or beta designations
         version_check = LooseVersion(".".join(map(str, django.VERSION)[:3]))

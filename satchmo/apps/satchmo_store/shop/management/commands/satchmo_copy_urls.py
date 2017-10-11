@@ -10,4 +10,4 @@ class Command(NoArgsCommand):
         url_src = os.path.join(satchmo_store.__path__[0],'urls.py')
         url_dest = os.path.join(os.getcwd(), 'satchmo-urls.py')
         shutil.copyfile(url_src, url_dest)
-        print "Copied %s to %s" % (url_src, url_dest)
+        print("Copied %s to %s" % (url_src, url_dest))
