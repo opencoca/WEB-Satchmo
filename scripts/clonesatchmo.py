@@ -153,19 +153,19 @@ if __name__ == '__main__':
     except ImportError:
         errors.append("The Python Imaging Library is not installed. Install from your distribution binaries.")
     if not errors:
-        print "Creating the Satchmo Application"
+        print("Creating the Satchmo Application")
         result, msg = create_satchmo_site(opts.site_name, skeleton_dir)
         if not result:
-            print msg
+            print(msg)
             sys.exit()
-        print "Customizing the files"
+        print("Customizing the files")
         customize_files(opts.site_name, opts.local_site_name)
-        print "Performing initial data synching"
+        print("Performing initial data synching")
         errors = setup_satchmo(opts.site_name, opts.local_site_name)
     if errors:
         for error in errors:
-            print "Error: %s" % error
+            print("Error: %s" % error)
         sys.exit()
     else:
-        print "Store installation complete."
-        print "You may run the server by typing: \n  cd %s \n  python manage.py runserver" % opts.site_name
+        print("Store installation complete.")
+        print("You may run the server by typing: \n  cd %s \n  python manage.py runserver" % opts.site_name)

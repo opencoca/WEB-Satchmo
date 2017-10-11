@@ -1,5 +1,5 @@
 from decimal import Decimal
-from django.template import loader, Context
+from django.template import loader
 from django.utils.http import urlencode
 from django.utils.translation import ugettext_lazy as _
 from django.utils import timezone
@@ -447,13 +447,11 @@ class PaymentProcessor(BasePaymentProcessor):
         self.log_extra('Processing subscription: %s', data['product'].slug)
 
         t = loader.get_template('shop/checkout/authorizenet/arb_create_subscription.xml')
-        ctx = Context(data)
-        request = t.render(ctx)
+        request = t.render(data)
 
         if self.settings.EXTRA_LOGGING.value:
             data['redact'] = True
-            ctx = Context(data)
-            redacted = t.render(ctx)
+            redacted = t.render(data)
             self.log_extra('Posting data to: %s\n%s', data['connection'], redacted)
 
         headers = {'Content-type':'text/xml'}
@@ -603,11 +601,11 @@ if __name__ == "__main__":
 
     authorize_settings = config_get_group('PAYMENT_AUTHORIZENET')
     if authorize_settings.LIVE.value:
-        print "Warning.  You are submitting a live order.  AUTHORIZE.NET system is set LIVE."
+        print("Warning.  You are submitting a live order.  AUTHORIZE.NET system is set LIVE.")
 
     processor = PaymentProcessor(authorize_settings)
     processor.prepare_data(sampleOrder)
     results = processor.process(testing=True)
-    print results
+    print(results)
 
 

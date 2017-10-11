@@ -351,12 +351,12 @@ if __name__ == "__main__":
 
     authorize_settings = config_get_group('PAYMENT_PAYFLOWPRO')
     if authorize_settings.LIVE.value:
-        print ("Warning.  You are submitting a live order.  PAYFLOWPRO system "
-               "is set LIVE.")
+        print("Warning.  You are submitting a live order.  PAYFLOWPRO system "
+              "is set LIVE.")
 
     processor = PaymentProcessor(authorize_settings)
     processor.prepare_data(sampleOrder)
     results = processor.process(testing=True)
-    print results
+    print(results)
 
 

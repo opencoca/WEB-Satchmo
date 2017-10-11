@@ -12,7 +12,7 @@ class Command(BaseCommand):
         verbosity = int(options.get('verbosity', 1))
         if len(sitenames) == 0:
             if verbosity>0:
-                print "Rebuilding pricing for all products for all sites"
+                print("Rebuilding pricing for all products for all sites")
                 sites = Site.objects.all()
         else:
             sites = []
@@ -20,39 +20,39 @@ class Command(BaseCommand):
                 try:
                     sites.append(Site.objects.get(domain__iexact=sitename))
                 except Site.DoesNotExist:
-                    print "Warning: Could not find site '%s'" % sitename
+                    print("Warning: Could not find site '%s'" % sitename)
 
         total = 0
         for site in sites:
             ct = 0
             if verbosity > 0:
-                print "Starting product pricing for %s" % site.domain
+                print("Starting product pricing for %s" % site.domain)
 
             if verbosity > 1:
-                print "Deleting old pricing"
+                print("Deleting old pricing")
 
             for lookup in ProductPriceLookup.objects.filter(siteid=site.id):
                 lookup.delete()
 
             products = Product.objects.active_by_site(site=site, variations=False)
             if verbosity > 0:
-                print "Adding %i products" % products.count()
+                print("Adding %i products" % products.count())
 
             for product in products:
                 if verbosity > 1:
-                    print "Processing product: %s" % product.slug
+                    print("Processing product: %s" % product.slug)
 
                 prices = ProductPriceLookup.objects.smart_create_for_product(product)
                 if verbosity > 1:
-                    print "Created %i prices" % len(prices)
+                    print("Created %i prices" % len(prices))
 
                 ct += len(prices)
 
             if verbosity > 0:
-                print "Added %i total prices for site" % ct
+                print("Added %i total prices for site" % ct)
 
             total += ct
 
         if verbosity > 0:
-            print "Added %i total prices" % total
+            print("Added %i total prices" % total)
 

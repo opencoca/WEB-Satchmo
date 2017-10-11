@@ -12,13 +12,13 @@ def posplit(fname, rules):
     sections = make_sections(fname)
     rules.set_header(sections[0])
     rules.set_pofile(fname)
-    print "SECTIONS: %s" % fname
+    print("SECTIONS: %s" % fname)
     ix = 0
     for section in sections[1:]:
         section.apply_rules(rules)
         section.do_copy()
         ix += 1
-        #print ix
+        #print(ix)
     
 def make_sections(fname):
     sections = []
@@ -83,20 +83,20 @@ class RuleSet(object):
         
     def open_pofile(self, dest):
         if not dest in self.files:
-            #print "making: %s" % dest
+            #print("making: %s" % dest)
             fname = os.path.join(dest, self.pofile)
             d, n = os.path.split(fname)
             if not os.path.exists(d):
-                print "Making directory: %s" % d
+                print("Making directory: %s" % d)
                 os.makedirs(d)
-            print "opening: %s" % fname
+            print("opening: %s" % fname)
             f = open(fname, 'w')
             f.write("\n".join(self.header.lines))
             f.write("\n\n")
             self.files[dest] = f
         else:
             pass
-            #print "reusing: %s" % dest
+            #print("reusing: %s" % dest)
         
         return self.files[dest]
 
@@ -111,7 +111,7 @@ class Rule(object):
         try:
             k, v = line.split('=')
         except:
-            print "error: '%s'" % line
+            print("error: '%s'" % line)
             raise
         opt = "STRIP"
         if v.find(':') > -1:
@@ -170,7 +170,7 @@ class Section(object):
                 else:
                     self.decisions[decision] = [target]
             else:
-                print "WARNING, no decision made for target: '%s'" % target
+                print("WARNING, no decision made for target: '%s'" % target)
                 sys.exit(3)
             
     def do_copy(self):
@@ -199,13 +199,13 @@ def main(args):
     opts, fnames = parser.parse_args(args)
     
     if not fnames:
-        print "Need at least one filename"
-        print USAGE
+        print("Need at least one filename")
+        print(USAGE)
         sys.exit(2)
         
     if not opts.conf:
-        print "Need a config file"
-        print USAGE
+        print("Need a config file")
+        print(USAGE)
         sys.exit(2)
         
     rules = RuleSet(opts.conf)

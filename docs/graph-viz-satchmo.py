@@ -154,6 +154,6 @@ if __name__ == "__main__":
    import sys
    try:
       app_label = sys.argv[1]
-      print generate_dot(app_label)
+      print(generate_dot(app_label))
    except IndexError:
-      print __doc__
+      print(__doc__)

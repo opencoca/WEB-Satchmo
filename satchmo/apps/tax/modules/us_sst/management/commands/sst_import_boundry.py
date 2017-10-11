@@ -162,10 +162,10 @@ class Command(BaseCommand):
                     total += 1
                     new += 1
                 except:
-                    print "Error loading the following row:"
+                    print("Error loading the following row:")
                     for k in CSV_MAP:
                         if k in d:
-                            print "%s: '%s'" % (k, d[k])
+                            print("%s: '%s'" % (k, d[k]))
                     raise
 
             if total % 100 == 0:
@@ -176,5 +176,5 @@ class Command(BaseCommand):
             # IF SER, then the tax module should report all sales taxes by that SER code.
             # Otherwise, report it by each applicable tax.
             # Total tax is still the same in both cases. Just the state wants it reported differently.
-        print ""
-        print "Done: New: %d. End date changed: %d. Unchanged: %d" % (new, updated, unchanged)
+        print("")
+        print("Done: New: %d. End date changed: %d. Unchanged: %d" % (new, updated, unchanged))

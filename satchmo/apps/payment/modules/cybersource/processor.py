@@ -208,11 +208,11 @@ if __name__ == "__main__":
 
     cybersource_settings = config_get_group('PAYMENT_CYBERSOURCE')
     if cybersource_settings.LIVE.value:
-        print "Warning.  You are submitting a live order.  CYBERSOURCE system is set LIVE."
+        print("Warning.  You are submitting a live order.  CYBERSOURCE system is set LIVE.")
 
     processor = PaymentProcessor(cybersource_settings)
     processor.prepare_data(sampleOrder)
     results = processor.process(testing=True)
-    print results
+    print(results)
 
 
