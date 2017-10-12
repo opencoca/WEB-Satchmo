@@ -7,7 +7,7 @@ v0.1.1
 import re
 from decimal import Decimal
 from django.core.cache import cache
-from django.template import loader, Context
+from django.template import loader
 from django.utils.safestring import mark_safe 
 from django.utils.translation import ugettext as _
 from livesettings.functions import config_get_group, config_value
@@ -146,11 +146,11 @@ class Shipper(BaseShipper):
             'ship_type': self.service_type_code,
             'shop_details':shop_details,
         }
-        c = Context({
-                'config': configuration,
-                'cart': cart,
-                'contact': contact
-            })
+        c = {
+            'config': configuration,
+            'cart': cart,
+            'contact': contact
+        }
         
         t = loader.get_template('shipping/canadapost/request.xml')
         request = t.render(c)

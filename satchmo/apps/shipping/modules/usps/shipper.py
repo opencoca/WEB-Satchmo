@@ -15,7 +15,7 @@ unique needs.
 # Note, make sure you use decimal math everywhere!
 from decimal import Decimal
 from django.core.cache import cache
-from django.template import Context, loader
+from django.template import loader
 from django.utils.translation import ugettext as _
 from l10n.models import Country
 from livesettings.functions import config_get_group, config_value
@@ -226,17 +226,17 @@ class Shipper(BaseShipper):
             'ship_type': mail_type,
             'shop_details': shop_details
         }
-        c = Context({
-                'config': configuration,
-                'cart': cart,
-                'contact': contact,
-                'is_international': self.is_intl,
-                'api': self.api,
-                'weight': weight,
-                'zip': zip_ending,
-                'country': ship_country,
-                'first_class_types': ['LETTER', 'FLAT', 'PARCEL']
-        })
+        c = {
+            'config': configuration,
+            'cart': cart,
+            'contact': contact,
+            'is_international': self.is_intl,
+            'api': self.api,
+            'weight': weight,
+            'zip': zip_ending,
+            'country': ship_country,
+            'first_class_types': ['LETTER', 'FLAT', 'PARCEL']
+        }
         t = loader.get_template(template)
         return t.render(c)
 

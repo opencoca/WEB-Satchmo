@@ -1,5 +1,4 @@
 from django import http
-from django.template import RequestContext
 from django.template import loader
 from django.shortcuts import render
 from django.utils.translation import ugettext as _
@@ -119,4 +118,4 @@ def bad_or_missing(request, msg):
         resp.content = {'message': msg}
         return resp
     else:
-        return render(request, 'shop/404.html', {'message': msg})
+        return render(request, 'shop/404.html', {'message': msg}, status=404)
