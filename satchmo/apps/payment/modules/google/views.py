@@ -1,6 +1,5 @@
 from django import http
 from django.shortcuts import render
-from django.template import Context
 from django.template.loader import get_template
 from django.utils.translation import ugettext as _
 from django.views.decorators.cache import never_cache
@@ -37,11 +36,11 @@ class GoogleCart(object):
         ssl = get_satchmo_setting('SSL', default_value=False)
         shopping_url = lookup_url(self.settings, 'satchmo_checkout-success', True, ssl)
         edit_url = lookup_url(self.settings, 'satchmo_cart', True, ssl)
-        ctx = Context({"order" : order,
-                       "continue_shopping_url" : shopping_url,
-                       "edit_cart_url" : edit_url,
-                       "currency" : self.settings.CURRENCY_CODE.value,
-                       })
+        ctx = {"order" : order,
+            "continue_shopping_url" : shopping_url,
+            "edit_cart_url" : edit_url,
+            "currency" : self.settings.CURRENCY_CODE.value,
+        }
         return template.render(ctx)
 
     def _signature(self, live):

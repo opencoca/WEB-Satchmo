@@ -1,4 +1,4 @@
-from django.template import Context, loader
+from django.template import loader
 from payment.modules.base import BasePaymentProcessor, ProcessorResult
 from satchmo_utils.numbers import trunc_decimal
 from django.utils.translation import ugettext_lazy as _
@@ -122,13 +122,13 @@ class PaymentProcessor(BasePaymentProcessor):
 
         # XML format is very simple, using ElementTree for generation would be overkill
         t = loader.get_template('shop/checkout/cybersource/request.xml')
-        c = Context({
+        c = {
             'config' : self.configuration,
             'merchantReferenceCode' : invoice,
             'billTo' : self.bill_to,
             'purchaseTotals' : self.purchase_totals,
             'card' : self.card,
-        })
+        }
         request = t.render(c)
         conn = urllib2.Request(url=self.connection, data=request)
         try:
